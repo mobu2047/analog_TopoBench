@@ -1,0 +1,23 @@
+matlab:
+  model_path: 'C:/Users/tiany/PycharmProjects/analog TopoBench/simulink/inverter_model.slx'
+  simulation_step: 0.001
+  stop_time: 0.02
+  start_in_accelerator: true
+  use_external_mode: false
+  extra_params: { Ts: 0.001 }
+  input_map:
+    Kp: 'Kp_val'
+    Ki: 'Ki_val'
+  output_map:
+    V_out: 'V_out'
+    V_ref: 'V_ref'
+    error: 'error'
+
+action_bounds:
+  Kp:
+    min: 0.0
+    max: 10.0
+  Ki:
+    min: 0.0
+    max: 100.0
+

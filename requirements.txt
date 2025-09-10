@@ -1,0 +1,7 @@
+numpy>=1.24
+PyYAML>=6.0
+structlog>=24.1
+# 可选：Gym 适配器
+gymnasium>=0.29 ; extra == "gym"
+# 注意：matlabengineforpython 需从 MATLAB 安装器获取，不在 PyPI
+
