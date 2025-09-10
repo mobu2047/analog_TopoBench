@@ -76,7 +76,7 @@ matlab:
   use_external_mode: false
   extra_params: { Ts: 0.001 }           # 可添加 Tau/V_ref_src 等；框架内部有默认
   input_map:  { Kp: 'Kp_val', Ki: 'Ki_val' }
-  output_map: { V_out: 'V_out', V_ref: 'V_ref', error: 'error' }
+  output_map: { Scope: 'V_out', V_ref: 'V_ref', error: 'error' }
 
 action_bounds:
   Kp: { min: 0.0, max: 10.0 }
@@ -87,8 +87,7 @@ action_bounds:
 
 ### 快速开始
 
-1) 确认 `model_path` 为绝对路径（Windows 建议使用正斜杠 `/`）
-
+1) 确认 `model_path` 为绝对路径
 2) 运行演示脚本
 ```bash
 # 交互模式：手动输入 Kp Ki
@@ -116,17 +115,6 @@ python test_simulator.py
 - 日志
   - 默认使用 `structlog` 输出结构化 JSON；若未安装，会降级为标准 logging，但仍支持 `log.info("msg", key=value)` 调用样式。
 
-### 常见问题（FAQ）
-
-- 报错 “Model path does not exist”
-  - `config.matlab.model_path` 非绝对路径或文件不存在。请使用绝对路径，Windows 使用 `/`。
-
-- 读取 `V_out` 失败或不存在
-  - 确认模型设置：`get_param(model,'ReturnWorkspaceOutputs')` 返回 `off`；To Workspace 变量名与 `output_map` 一致，保存格式为 `Array`。
-  - 记住：仅在 `run_step()` 后才能在 base workspace 看到输出变量。
-
-- MATLAB 弹出 Scope 窗口
-  - 框架尝试将所有 Scope 的 `OpenAtSimulationStart` 设为 `off`；如需可视化，请在模型中单独开启，或仿真结束后手动查看。
 
 ### 扩展：接入任意智能体
 

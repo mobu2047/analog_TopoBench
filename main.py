@@ -14,6 +14,8 @@ from typing import Any, Dict, List
 
 import numpy as np
 
+from inverter_ai_control.utils.visualization import plot_scope_dataset
+
 try:
     import matplotlib.pyplot as plt
     HAS_PLT = True
@@ -23,6 +25,8 @@ except Exception:
 from inverter_ai_control.utils.logger import get_logger
 from inverter_ai_control.utils.config_loader import load_config
 from inverter_ai_control.sim_env.matlab_simulator import MatlabSimulator
+from inverter_ai_control.core.runner import Runner
+from inverter_ai_control.utils.visualization import plot_scope_dataset
 
 
 log = get_logger(__name__)
@@ -133,22 +137,56 @@ def main() -> None:
 
     # 3) 解析命令行：选择交互或预设
     parser = argparse.ArgumentParser(description="MatlabSimulator demo (no agent)")
-    parser.add_argument("--interactive", action="store_true", help="交互模式：从命令行输入 Kp/Ki")
-    parser.add_argument("--steps", type=int, default=20, help="预设模式步数")
-    parser.add_argument("--kp-start", type=float, default=1.0, help="预设模式 Kp 起始")
-    parser.add_argument("--kp-end", type=float, default=1.2, help="预设模式 Kp 终止")
-    parser.add_argument("--ki", type=float, default=0.1, help="预设模式 Ki 常量")
+    parser.add_argument("--interactive", action="store_true", help="交互模式：根据 action_space 动态输入键值")
     args = parser.parse_args()
 
+    runner = Runner(sim, cfg)
     with sim:
-        # 按需注入初值（可从配置 action_bounds 推导或自定义）
-        sim.reset(initial_setpoints={"Kp": args.kp_start, "Ki": args.ki})
+        # 使用新管线复位；若配置中有 per_episode 动作，可在此传入
+        runner.reset()
 
         if args.interactive:
-            run_interactive(sim, cfg)
+            # 动态交互：根据 action_space 逐步输入
+            action_space = cfg.get("action_space", [])
+            bounds = dict(cfg.get("action_bounds", {}))
+            print("交互模式：输入键=值（以空格分隔），例如：Kp=1.0 Ki=0.1；输入 q 退出")
+            while True:
+                raw = input("> ").strip()
+                if raw.lower() in {"q", "quit", "exit"}:
+                    break
+                pairs = [p for p in raw.split() if "=" in p]
+                action: Dict[str, Any] = {}
+                for p in pairs:
+                    k, v = p.split("=", 1)
+                    try:
+                        action[k] = float(v)
+                    except ValueError:
+                        # 简单数组支持: rep_t=[0,0.00005,0.0001]
+                        if v.startswith("[") and v.endswith("]"):
+                            nums = [float(x) for x in v.strip("[]").split(",") if x]
+                            action[k] = nums
+                out = runner.step(action)
+                print(out["metrics"])  # 简要反馈
         else:
-            run_preset(sim, cfg, steps=args.steps, kp_start=args.kp_start, kp_end=args.kp_end, ki=args.ki)
-
+            # 目标方案：按配置 presets 执行
+            presets = cfg.get("presets", {})
+            episode_action = presets.get("episode", {})
+            if episode_action:
+                runner.reset(initial_action=episode_action)
+            steps = presets.get("steps", [])
+            import os, time
+            run_dir = os.path.join("runs", time.strftime("%Y%m%d-%H%M%S"))
+            os.makedirs(run_dir, exist_ok=True)
+            for i, step_action in enumerate(steps):
+                out = runner.step(step_action, whole_duration=True)
+                log.info("preset.step.metrics", step=i, metrics=out["metrics"]) 
+                # 保存/绘制 ScopeData
+                img_path = os.path.join(run_dir, f"scope_action_{i+1}.png")
+                try:
+                    plot_scope_dataset(sim, var_name="ScopeData", label_prefix=f"act{i+1}", save_path=img_path)
+                except Exception:
+                    log.warning("plot.scope.failed", step=i)
+                # plot_scope_dataset(sim, var_name="ScopeData", label_prefix=f"act{i + 1}")
 
 if __name__ == "__main__":
     main()

@@ -327,31 +327,21 @@ class MatlabSimulator:
             # 停止仿真并准备回到初始条件（注意：在“更新模型”之前必须保证工作区已有 PI 参数）
             self._eng.set_param(self._model_name, "SimulationCommand", "stop", nargout=0)
             self._eng.set_param(self._model_name, "StartTime", "0.0", nargout=0)
-            self._eng.set_param(self._model_name, "StopTime", "0.0", nargout=0)
+            self._eng.set_param(self._model_name, "StopTime", str(self._stop_time_s), nargout=0)
 
-            # 先写入必要的工作区变量（避免 update 阶段缺少变量导致报错）
+            # 完全解耦：仅按配置与调用者提供的变量写入，不推断/派生任何模型专属变量
+            # 由外部 Profile（配置）/Adapter 决定需要哪些变量，如 rep_t/L_load/Kp/Ki 等
             base_vars: Dict[str, Any] = dict(self._extra_params)
-            # 若未提供 Tau/V_ref_src，则给出合理默认并计算离散对象参数
-            if "Ts" not in base_vars:
-                base_vars["Ts"] = float(self._sample_time_s)
-            if "Tau" not in base_vars:
-                base_vars["Tau"] = 0.01
-            if "V_ref_src" not in base_vars:
-                base_vars["V_ref_src"] = 1.0
-            # 计算一阶离散对象参数（与生成脚本保持一致）
-            ts_val = float(base_vars["Ts"]) or float(self._sample_time_s)
-            tau_val = float(base_vars["Tau"]) if base_vars.get("Tau") is not None else 0.01
-            alpha = ts_val / (tau_val + ts_val)
-            base_vars["alpha"] = alpha
-            base_vars["plant_num"] = [alpha]
-            base_vars["plant_den"] = [1.0, (alpha - 1.0)]
-
+            # input_vars: Dict[str, Any] = dict(self._input_map)
             for var_name, var_value in base_vars.items():
                 self._assign_in_base(var_name, var_value)
+            # for var_name, var_value in input_vars.items():
+            #     self._eng.set_param(self._model_name+'/Series RLC Branch', var_name, var_value, nargout=0)
             if initial_setpoints:
                 for logical_key, value in dict(initial_setpoints).items():
                     target = self._input_map.get(logical_key, logical_key)
-                    self._assign_in_base(target, float(value))
+                    # 按类型处理：标量->1x1 double；数组->double 向量；字符串跳过
+                    self._assign_in_base(target, value)
 
             # 再执行一次模型更新，使初始条件与参数生效
             self._eng.set_param(self._model_name, "SimulationCommand", "update", nargout=0)
@@ -379,13 +369,13 @@ class MatlabSimulator:
             raise MatlabSimulationError("Engine/model is not connected. Initialize first.")
 
         try:
-            # 写入控制量/动作到工作区
+            # 写入控制量/动作到工作区（按类型处理，避免将数组强制转换为标量）
             for logical_key, value in dict(action).items():
                 target = self._input_map.get(logical_key, logical_key)
-                self._assign_in_base(target, float(value))
+                self._assign_in_base(target, value)
 
             # 设置 StopTime 以推进一个控制步长
-            next_t = self._current_time + self._sample_time_s
+            next_t = self._current_time + self._stop_time_s
             self._eng.set_param(self._model_name, "StopTime", f"{next_t}", nargout=0)
 
             # 运行仿真。按要求使用 eng.sim；让模型自身的 To Workspace 块写出结果
