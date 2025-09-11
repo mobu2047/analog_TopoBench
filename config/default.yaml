@@ -1,5 +1,5 @@
 matlab:
-  model_path: 'C:/Users/tiany/PycharmProjects/analog TopoBench/simulink/untitled.slx'
+  model_path: 'D:/ANALOGTOBENCH/analog_TopoBench/simulink/untitled.slx'
   simulation_step: 0.001
   stop_time: 0.1
   start_in_accelerator: true
