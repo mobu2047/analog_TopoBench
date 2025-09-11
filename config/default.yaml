@@ -1,5 +1,5 @@
 matlab:
-  model_path: 'D:/ANALOGTOBENCH/analog_TopoBench/simulink/untitled.slx'
+  model_path: 'C:/Users/tiany/PycharmProjects/analog TopoBench/simulink/untitled.slx'
   simulation_step: 0.001
   stop_time: 0.1
   start_in_accelerator: true
@@ -111,5 +111,5 @@ presets:
     # - {  rep_t: [0, 0.00005, 0.0001], rep_y: [-1,0,-1]  ,L_load: 0.001 }
     # - {  rep_t: [0, 0.00004, 0.00005], L_load: 0.002 }
 
-    - {  L_load: 0.002 }
-    - {  L_load: 0.003 }
+    - {  L_load: 10}
+    - {  L_load: 20 }

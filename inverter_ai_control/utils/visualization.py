@@ -14,42 +14,27 @@ import numpy as np
 def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[np.ndarray, np.ndarray]]:
     """将工作区的 ScopeData 转成 [(t, y), ...] 列表。
 
-    - 若数据集为空，返回空列表
-    - 每个元素对应 Scope 的一个通道（或一个已记录信号）
+    - 优先通过 MATLAB 函数接口（非 eval 字符串）读取，避免非 ASCII 引起的解析错误
+    - 先尝试 Dataset（numElements/getElement），失败则回退 timeseries（.Time/.Data）
     """
     eng = simulator._eng  # 使用现有 MATLAB 引擎
 
-    # 先做类型判断：Dataset（Simulink.SimulationData.Dataset）与 timeseries 处理不同
-    # 这么做的原因：直接 print 会得到 matlab.object，需要通过 getElement/Values 才能取出数值矩阵
+    # 变量是否存在
     try:
-        cls = str(eng.eval(f"class({var_name})", nargout=1))
+        scope = eng.workspace[var_name]
     except Exception:
-        # 变量不存在或不可见，直接返回空
         return []
 
-    # 情况1：Scope 使用 To Workspace 保存为 Dataset（推荐在模型端保持 Dataset，保留信号名等元信息）
-    if "Simulink.SimulationData.Dataset" in cls:
-        # 使用 MATLAB 的 numElements/getElement API，而不是 numel；后者对对象可能返回 1
-        try:
-            n = int(eng.eval(f"numElements({var_name})", nargout=1))
-        except Exception:
-            # 部分版本可用对象方法调用
-            n = int(eng.eval(f"{var_name}.numElements", nargout=1))
+    series: List[Tuple[np.ndarray, np.ndarray]] = []
 
-        series: List[Tuple[np.ndarray, np.ndarray]] = []
+    # 情况1：Dataset 读取（优先）
+    try:
+        n = int(eng.numElements(scope, nargout=1))
         for i in range(1, n + 1):
-            # 将 timeseries 的 Time/Data 写入 base workspace 临时变量，便于安全取回
-            # 使用 getElement(var, i) 避免依赖花括号索引语法在 Python 引擎中的差异
-            eng.eval(
-                f"__t__ = getElement({var_name},{i}).Values.Time; __y__ = getElement({var_name},{i}).Values.Data;",
-                nargout=0,
-            )
-
-            # 将 matlab.double 转为 numpy；保持时间为 1D
-            t = np.array(eng.workspace["__t__"], dtype=float).reshape(-1)
-            y_raw = np.array(eng.workspace["__y__"], dtype=float)
-
-            # 多通道数据：按列拆分成多条曲线；单通道保持 1D
+            el = eng.getElement(scope, float(i), nargout=1)
+            vals = eng.getfield(el, 'Values', nargout=1)
+            t = np.array(eng.getfield(vals, 'Time', nargout=1), dtype=float).reshape(-1)
+            y_raw = np.array(eng.getfield(vals, 'Data', nargout=1), dtype=float)
             if y_raw.ndim == 1:
                 series.append((t, y_raw.reshape(-1)))
             else:
@@ -57,12 +42,13 @@ def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[
                 for c in range(y2d.shape[1]):
                     series.append((t, y2d[:, c]))
         return series
+    except Exception:
+        pass
 
-    # 情况2：不是 Dataset，尝试按 timeseries（或等价结构）处理
+    # 情况2：timeseries 回退
     try:
-        eng.eval(f"__t__ = {var_name}.Time; __y__ = {var_name}.Data;", nargout=0)
-        t = np.array(eng.workspace["__t__"], dtype=float).reshape(-1)
-        y_raw = np.array(eng.workspace["__y__"], dtype=float)
+        t = np.array(eng.getfield(scope, 'Time', nargout=1), dtype=float).reshape(-1)
+        y_raw = np.array(eng.getfield(scope, 'Data', nargout=1), dtype=float)
         if y_raw.ndim == 1:
             return [(t, y_raw.reshape(-1))]
         else:
@@ -72,20 +58,83 @@ def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[
         return []
 
 
-def plot_scope_dataset(simulator, var_name: str = "ScopeData", label_prefix: str = "sig", save_path: Optional[str] = None):
+def _format_actions(actions: Optional[dict]) -> str:
+    if not actions:
+        return ""
+    parts = []
+    for k, v in actions.items():
+        if isinstance(v, (list, tuple, np.ndarray)):
+            arr = np.asarray(v).reshape(-1)
+            if arr.size <= 5:
+                parts.append(f"{k}=[" + ",".join(f"{x:.4g}" for x in arr) + "]")
+            else:
+                head = ",".join(f"{x:.4g}" for x in arr[:3])
+                tail = ",".join(f"{x:.4g}" for x in arr[-2:])
+                parts.append(f"{k}=[{head},...,{tail}](n={arr.size})")
+        elif isinstance(v, float):
+            parts.append(f"{k}={v:.6g}")
+        else:
+            parts.append(f"{k}={v}")
+    return "\n".join(parts)
+
+
+def plot_scope_dataset(
+    simulator,
+    var_name: str = "ScopeData",
+    label_prefix: str = "sig",
+    save_path: Optional[str] = None,
+    *,
+    actions: Optional[dict] = None,
+    xlabel: str = "Time [s]",
+    ylabel: str = "Voltage [V]",
+    sample_time: Optional[float] = None,
+    time_mode: str = "native",   # native | reconstruct | scale_by_ts
+    style: str = "line",         # line | stairs
+):
     import matplotlib.pyplot as plt
 
     series = extract_scope_dataset(simulator, var_name)
     if not series:
         print(f"[plot_scope_dataset] {var_name} 为空或无法识别。")
         return
-    plt.figure(figsize=(8, 4))
+    plt.figure(figsize=(9, 4.8))
+    ax = plt.gca()
     for idx, (t, y) in enumerate(series, start=1):
-        plt.plot(t, y, label=f"{label_prefix}{idx}")
-    plt.grid(True)
-    plt.legend()
-    plt.title(f"{var_name} signals")
-    plt.xlabel("time [s]")
+        # 根据需求修正时间轴：
+        # - reconstruct: 用等间隔 sample_time 重建 t
+        # - scale_by_ts: 若 t 为采样索引(0..N-1)，则乘以 sample_time
+        if time_mode == "reconstruct" and (sample_time is not None):
+            t = np.arange(len(y), dtype=float) * float(sample_time)
+        elif time_mode == "scale_by_ts" and (sample_time is not None):
+            t = np.asarray(t, dtype=float) * float(sample_time)
+        else:
+            t = np.asarray(t, dtype=float)
+
+        if style == "stairs":
+            ax.step(t, y, where="post", label=f"{label_prefix}{idx}")
+        else:
+            ax.plot(t, y, label=f"{label_prefix}{idx}")
+    ax.grid(True)
+    ax.legend()
+    ax.set_title(f"{var_name}")
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+
+    # 在图中叠加当前动作参数（如 Kp/Ki/rep_t/L_load 等）
+    text = _format_actions(actions)
+    if text:
+        ax.text(
+            0.01,
+            0.99,
+            text,
+            transform=ax.transAxes,
+            va="top",
+            ha="left",
+            fontsize=9,
+            family="monospace",
+            bbox=dict(facecolor="white", alpha=0.7, edgecolor="gray"),
+        )
+
     plt.tight_layout()
     if save_path:
         plt.savefig(save_path, dpi=160)
