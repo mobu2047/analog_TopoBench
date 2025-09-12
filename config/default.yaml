@@ -1,5 +1,5 @@
 matlab:
-  model_path: 'C:/Users/tiany/PycharmProjects/analog TopoBench/simulink/untitled.slx'
+  model_path: 'simulink/untitled.slx'  # 使用相对路径，默认相对于项目根目录运行路径
   simulation_step: 0.001
   stop_time: 0.1
   start_in_accelerator: true
