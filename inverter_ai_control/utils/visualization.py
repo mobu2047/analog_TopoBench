@@ -90,6 +90,7 @@ def plot_scope_dataset(
     sample_time: Optional[float] = None,
     time_mode: str = "native",   # native | reconstruct | scale_by_ts
     style: str = "line",         # line | stairs
+    legend_from_actions: bool = False,  # 是否用动作值作为图例标签
 ):
     import matplotlib.pyplot as plt
 
@@ -99,6 +100,21 @@ def plot_scope_dataset(
         return
     plt.figure(figsize=(9, 4.8))
     ax = plt.gca()
+    # 生成图例标签：优先使用动作的简短摘要
+    def _legend_label(idx: int) -> str:
+        if legend_from_actions and actions:
+            # 仅保留简短的标量键，数组标记为 [...]
+            items = []
+            for k, v in actions.items():
+                if isinstance(v, (int, float)):
+                    items.append(f"{k}={v:.4g}")
+                else:
+                    items.append(f"{k}=[...]")
+            label = ", ".join(items)
+            # 避免过长
+            return (label[:60] + "…") if len(label) > 60 else label
+        return f"{label_prefix}{idx}"
+
     for idx, (t, y) in enumerate(series, start=1):
         # 根据需求修正时间轴：
         # - reconstruct: 用等间隔 sample_time 重建 t
@@ -111,9 +127,9 @@ def plot_scope_dataset(
             t = np.asarray(t, dtype=float)
 
         if style == "stairs":
-            ax.step(t, y, where="post", label=f"{label_prefix}{idx}")
+            ax.step(t, y, where="post", label=_legend_label(idx))
         else:
-            ax.plot(t, y, label=f"{label_prefix}{idx}")
+            ax.plot(t, y, label=_legend_label(idx))
     ax.grid(True)
     ax.legend()
     ax.set_title(f"{var_name}")
