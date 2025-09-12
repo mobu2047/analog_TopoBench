@@ -1,8 +1,8 @@
-# Analog TopoBench - 电力电子拓扑仿真与AI控制平台
+# Analog TopoBench
 
 ## 项目概览
 
-Analog TopoBench 是一个分层解耦的 Python⇄Simulink 控制仿真框架，专为电力电子拓扑的智能控制而设计。框架支持强化学习（RL）、深度学习（DL）与 MCP/LLM Agent 的接入，核心原则是仿真层、智能体层、应用层彼此独立，通过清晰的数据接口（纯字典/数组）交互。
+Analog TopoBench 是一个分层解耦的 Python⇄Simulink 控制仿真框架，专为电力电子拓扑的智能控制而设计。框架后续计划支持强化学习（RL）、深度学习（DL）与 MCP/LLM Agent 的接入，核心原则是仿真层、智能体层、应用层彼此独立，通过清晰的数据接口交互。
 
 ### 核心特性
 
