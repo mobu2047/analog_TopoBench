@@ -1,0 +1,409 @@
+Source,SourcePath,SourcePort,Destination,DestinationPath,DestinationPort,Origin
+NOT1,untitled/NOT1,1,Goto,untitled/Goto,1,line
+GreaterThan1,untitled/GreaterThan1,1,Goto2,untitled/Goto2,1,line
+GreaterThan1,untitled/GreaterThan1,1,NOT1,untitled/NOT1,1,line
+Product,untitled/Product,1,GreaterThan1,untitled/GreaterThan1,2,line
+Sine Wave1,untitled/Sine Wave1,1,GreaterThan1,untitled/GreaterThan1,1,line
+Square Wave
+Generator,untitled/Square Wave
+Generator,1,Product,untitled/Product,1,line
+Square Wave
+Generator,untitled/Square Wave
+Generator,1,Scope1,untitled/Scope1,1,line
+Repeating
+Sequence,untitled/Repeating
+Sequence,1,Product,untitled/Product,2,line
+Voltage Measurement,untitled/Voltage Measurement,1,Scope,untitled/Scope,1,line
+NOT,untitled/NOT,1,Goto3,untitled/Goto3,1,line
+GreaterThan,untitled/GreaterThan,1,Goto1,untitled/Goto1,1,line
+GreaterThan,untitled/GreaterThan,1,NOT,untitled/NOT,1,line
+Constant,untitled/Constant,1,GreaterThan,untitled/GreaterThan,2,line
+Sine Wave,untitled/Sine Wave,1,GreaterThan,untitled/GreaterThan,1,line
+From3,untitled/From3,1,IGBT/Diode3,untitled/IGBT//Diode3,1,line
+From1,untitled/From1,1,IGBT/Diode,untitled/IGBT//Diode,1,line
+From2,untitled/From2,1,IGBT/Diode1,untitled/IGBT//Diode1,1,line
+From,untitled/From,1,IGBT/Diode2,untitled/IGBT//Diode2,1,line
+Constant,untitled/Constant,-1,GreaterThan,untitled/GreaterThan,1,pc
+DC Voltage Source,untitled/DC Voltage Source,-1,IGBT/Diode1,untitled/IGBT//Diode1,11314.0002441406,pc
+DC Voltage Source,untitled/DC Voltage Source,-1,IGBT/Diode3,untitled/IGBT//Diode3,11322.0002441406,pc
+DC Voltage Source,untitled/DC Voltage Source,-1,IGBT/Diode2,untitled/IGBT//Diode2,11317.0003662109,pc
+DC Voltage Source,untitled/DC Voltage Source,-1,IGBT/Diode,untitled/IGBT//Diode,11309.0003662109,pc
+DCVoltageSource,untitled/DC Voltage Source/DCVoltageSource,-1,-,untitled/DC Voltage Source/-,11403.0002441406,pc
+DCVoltageSource,untitled/DC Voltage Source/DCVoltageSource,-1,+,untitled/DC Voltage Source/+,11406.0002441406,pc
+Model,untitled/DC Voltage Source/Model,0,Goto,untitled/DC Voltage Source/Goto,-1,pc
+Model,untitled/DC Voltage Source/Model,-1,Goto,untitled/DC Voltage Source/Goto,0,pc
+DC,untitled/DC Voltage Source/Model/DC,-1,Out1,untitled/DC Voltage Source/Model/Out1,0,pc
+DC,untitled/DC Voltage Source/Model/DC,0,Out1,untitled/DC Voltage Source/Model/Out1,-1,pc
+-,untitled/DC Voltage Source/-,-1,DCVoltageSource,untitled/DC Voltage Source/DCVoltageSource,11396.0003662109,pc
++,untitled/DC Voltage Source/+,-1,DCVoltageSource,untitled/DC Voltage Source/DCVoltageSource,11397.0002441406,pc
+From,untitled/From,-1,IGBT/Diode2,untitled/IGBT//Diode2,0,pc
+From1,untitled/From1,-1,IGBT/Diode,untitled/IGBT//Diode,0,pc
+From2,untitled/From2,-1,IGBT/Diode1,untitled/IGBT//Diode1,0,pc
+From3,untitled/From3,-1,IGBT/Diode3,untitled/IGBT//Diode3,0,pc
+NOT1,untitled/NOT1,0,Goto,untitled/Goto,-1,pc
+GreaterThan,untitled/GreaterThan,0,Goto1,untitled/Goto1,-1,pc
+GreaterThan1,untitled/GreaterThan1,0,Goto2,untitled/Goto2,-1,pc
+NOT,untitled/NOT,0,Goto3,untitled/Goto3,-1,pc
+Sine Wave,untitled/Sine Wave,0,GreaterThan,untitled/GreaterThan,-1,pc
+Constant,untitled/Constant,0,GreaterThan,untitled/GreaterThan,-1,pc
+GreaterThan,untitled/GreaterThan,-1,Goto1,untitled/Goto1,0,pc
+GreaterThan,untitled/GreaterThan,-1,NOT,untitled/NOT,0,pc
+Sine Wave1,untitled/Sine Wave1,0,GreaterThan1,untitled/GreaterThan1,-1,pc
+Product,untitled/Product,0,GreaterThan1,untitled/GreaterThan1,-1,pc
+GreaterThan1,untitled/GreaterThan1,-1,Goto2,untitled/Goto2,0,pc
+GreaterThan1,untitled/GreaterThan1,-1,NOT1,untitled/NOT1,0,pc
+From1,untitled/From1,0,IGBT/Diode,untitled/IGBT//Diode,-1,pc
+IGBT/Diode,untitled/IGBT//Diode,-1,IGBT/Diode2,untitled/IGBT//Diode2,11317.0003662109,pc
+IGBT/Diode,untitled/IGBT//Diode,-1,DC Voltage Source,untitled/DC Voltage Source,11280.0003662109,pc
+IGBT/Diode,untitled/IGBT//Diode,-1,Series RLC Branch1,untitled/Series RLC Branch1,11344.0002441406,pc
+IGBT/Diode,untitled/IGBT//Diode,-1,IGBT/Diode3,untitled/IGBT//Diode3,11321.0002441406,pc
+g,untitled/IGBT//Diode/g,-1,Model,untitled/IGBT//Diode/Model,0,pc
+Model,untitled/IGBT//Diode/Model,1,Goto,untitled/IGBT//Diode/Goto,-1,pc
+IGBT/Diode,untitled/IGBT//Diode/IGBT//Diode,-1,C,untitled/IGBT//Diode/C,11439.0004882812,pc
+IGBT/Diode,untitled/IGBT//Diode/IGBT//Diode,-1,E,untitled/IGBT//Diode/E,11442.0004882812,pc
+g,untitled/IGBT//Diode/g,0,Model,untitled/IGBT//Diode/Model,-1,pc
+Uswitch,untitled/IGBT//Diode/Uswitch,0,Model,untitled/IGBT//Diode/Model,-1,pc
+Status,untitled/IGBT//Diode/Status,0,Model,untitled/IGBT//Diode/Model,-1,pc
+Model,untitled/IGBT//Diode/Model,-1,m,untitled/IGBT//Diode/m,0,pc
+Model,untitled/IGBT//Diode/Model,-1,Goto,untitled/IGBT//Diode/Goto,0,pc
+gate ,untitled/IGBT//Diode/Model/gate ,-1,Data Type Conversion,untitled/IGBT//Diode/Model/Data Type Conversion,0,pc
+Uswitch,untitled/IGBT//Diode/Model/Uswitch,-1,Mux,untitled/IGBT//Diode/Model/Mux,1,pc
+Uswitch,untitled/IGBT//Diode/Model/Uswitch,-1,1/Rsw,untitled/IGBT//Diode/Model/1//Rsw,0,pc
+status,untitled/IGBT//Diode/Model/status,-1,Switch,untitled/IGBT//Diode/Model/Switch,1,pc
+0 4,untitled/IGBT//Diode/Model/0 4,-1,Switch,untitled/IGBT//Diode/Model/Switch,2,pc
+Uswitch,untitled/IGBT//Diode/Model/Uswitch,0,1/Rsw,untitled/IGBT//Diode/Model/1//Rsw,-1,pc
+1/Rsw,untitled/IGBT//Diode/Model/1//Rsw,-1,Switch,untitled/IGBT//Diode/Model/Switch,0,pc
+gate ,untitled/IGBT//Diode/Model/gate ,0,Data Type Conversion,untitled/IGBT//Diode/Model/Data Type Conversion,-1,pc
+Data Type Conversion,untitled/IGBT//Diode/Model/Data Type Conversion,-1,gate,untitled/IGBT//Diode/Model/gate,0,pc
+Mux,untitled/IGBT//Diode/Model/Mux,0,Measurement list,untitled/IGBT//Diode/Model/Measurement list,-1,pc
+Measurement list,untitled/IGBT//Diode/Model/Measurement list,-1,m,untitled/IGBT//Diode/Model/m,0,pc
+In1,untitled/IGBT//Diode/Model/Measurement list/In1,-1,Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,0,pc
+Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,0,Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,-1,pc
+Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,1,Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,-1,pc
+Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,-1,Out1,untitled/IGBT//Diode/Model/Measurement list/Out1,0,pc
+In1,untitled/IGBT//Diode/Model/Measurement list/In1,0,Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,-1,pc
+Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,0,pc
+Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,1,pc
+Bus
+Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
+Creator1,0,Out1,untitled/IGBT//Diode/Model/Measurement list/Out1,-1,pc
+Switch,untitled/IGBT//Diode/Model/Switch,0,Mux,untitled/IGBT//Diode/Model/Mux,-1,pc
+Uswitch,untitled/IGBT//Diode/Model/Uswitch,0,Mux,untitled/IGBT//Diode/Model/Mux,-1,pc
+Mux,untitled/IGBT//Diode/Model/Mux,-1,Measurement list,untitled/IGBT//Diode/Model/Measurement list,0,pc
+1/Rsw,untitled/IGBT//Diode/Model/1//Rsw,0,Switch,untitled/IGBT//Diode/Model/Switch,-1,pc
+status,untitled/IGBT//Diode/Model/status,0,Switch,untitled/IGBT//Diode/Model/Switch,-1,pc
+0 4,untitled/IGBT//Diode/Model/0 4,0,Switch,untitled/IGBT//Diode/Model/Switch,-1,pc
+Switch,untitled/IGBT//Diode/Model/Switch,-1,Mux,untitled/IGBT//Diode/Model/Mux,0,pc
+Measurement list,untitled/IGBT//Diode/Model/Measurement list,0,m,untitled/IGBT//Diode/Model/m,-1,pc
+Data Type Conversion,untitled/IGBT//Diode/Model/Data Type Conversion,0,gate,untitled/IGBT//Diode/Model/gate,-1,pc
+Status,untitled/IGBT//Diode/Status,-1,Model,untitled/IGBT//Diode/Model,2,pc
+Uswitch,untitled/IGBT//Diode/Uswitch,-1,Model,untitled/IGBT//Diode/Model,1,pc
+Model,untitled/IGBT//Diode/Model,0,m,untitled/IGBT//Diode/m,-1,pc
+C,untitled/IGBT//Diode/C,-1,IGBT/Diode,untitled/IGBT//Diode/IGBT//Diode,11426.0002441406,pc
+E,untitled/IGBT//Diode/E,-1,IGBT/Diode,untitled/IGBT//Diode/IGBT//Diode,11427.0002441406,pc
+From2,untitled/From2,0,IGBT/Diode1,untitled/IGBT//Diode1,-1,pc
+IGBT/Diode1,untitled/IGBT//Diode1,-1,IGBT/Diode2,untitled/IGBT//Diode2,11318.0002441406,pc
+IGBT/Diode1,untitled/IGBT//Diode1,-1,Voltage Measurement,untitled/Voltage Measurement,11353.0002441406,pc
+IGBT/Diode1,untitled/IGBT//Diode1,-1,Series RLC Branch,untitled/Series RLC Branch,11340.0002441406,pc
+IGBT/Diode1,untitled/IGBT//Diode1,-1,IGBT/Diode3,untitled/IGBT//Diode3,11322.0002441406,pc
+IGBT/Diode1,untitled/IGBT//Diode1,-1,DC Voltage Source,untitled/DC Voltage Source,11279.0003662109,pc
+g,untitled/IGBT//Diode1/g,-1,Model,untitled/IGBT//Diode1/Model,0,pc
+Model,untitled/IGBT//Diode1/Model,1,Goto,untitled/IGBT//Diode1/Goto,-1,pc
+IGBT/Diode,untitled/IGBT//Diode1/IGBT//Diode,-1,C,untitled/IGBT//Diode1/C,11474.0007324219,pc
+IGBT/Diode,untitled/IGBT//Diode1/IGBT//Diode,-1,E,untitled/IGBT//Diode1/E,11477.0006103516,pc
+g,untitled/IGBT//Diode1/g,0,Model,untitled/IGBT//Diode1/Model,-1,pc
+Uswitch,untitled/IGBT//Diode1/Uswitch,0,Model,untitled/IGBT//Diode1/Model,-1,pc
+Status,untitled/IGBT//Diode1/Status,0,Model,untitled/IGBT//Diode1/Model,-1,pc
+Model,untitled/IGBT//Diode1/Model,-1,m,untitled/IGBT//Diode1/m,0,pc
+Model,untitled/IGBT//Diode1/Model,-1,Goto,untitled/IGBT//Diode1/Goto,0,pc
+gate ,untitled/IGBT//Diode1/Model/gate ,-1,Data Type Conversion,untitled/IGBT//Diode1/Model/Data Type Conversion,0,pc
+Uswitch,untitled/IGBT//Diode1/Model/Uswitch,-1,Mux,untitled/IGBT//Diode1/Model/Mux,1,pc
+Uswitch,untitled/IGBT//Diode1/Model/Uswitch,-1,1/Rsw,untitled/IGBT//Diode1/Model/1//Rsw,0,pc
+status,untitled/IGBT//Diode1/Model/status,-1,Switch,untitled/IGBT//Diode1/Model/Switch,1,pc
+0 4,untitled/IGBT//Diode1/Model/0 4,-1,Switch,untitled/IGBT//Diode1/Model/Switch,2,pc
+Uswitch,untitled/IGBT//Diode1/Model/Uswitch,0,1/Rsw,untitled/IGBT//Diode1/Model/1//Rsw,-1,pc
+1/Rsw,untitled/IGBT//Diode1/Model/1//Rsw,-1,Switch,untitled/IGBT//Diode1/Model/Switch,0,pc
+gate ,untitled/IGBT//Diode1/Model/gate ,0,Data Type Conversion,untitled/IGBT//Diode1/Model/Data Type Conversion,-1,pc
+Data Type Conversion,untitled/IGBT//Diode1/Model/Data Type Conversion,-1,gate,untitled/IGBT//Diode1/Model/gate,0,pc
+Mux,untitled/IGBT//Diode1/Model/Mux,0,Measurement list,untitled/IGBT//Diode1/Model/Measurement list,-1,pc
+Measurement list,untitled/IGBT//Diode1/Model/Measurement list,-1,m,untitled/IGBT//Diode1/Model/m,0,pc
+In1,untitled/IGBT//Diode1/Model/Measurement list/In1,-1,Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,0,pc
+Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,0,Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,-1,pc
+Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,1,Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,-1,pc
+Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,-1,Out1,untitled/IGBT//Diode1/Model/Measurement list/Out1,0,pc
+In1,untitled/IGBT//Diode1/Model/Measurement list/In1,0,Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,-1,pc
+Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,0,pc
+Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,1,pc
+Bus
+Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
+Creator1,0,Out1,untitled/IGBT//Diode1/Model/Measurement list/Out1,-1,pc
+Switch,untitled/IGBT//Diode1/Model/Switch,0,Mux,untitled/IGBT//Diode1/Model/Mux,-1,pc
+Uswitch,untitled/IGBT//Diode1/Model/Uswitch,0,Mux,untitled/IGBT//Diode1/Model/Mux,-1,pc
+Mux,untitled/IGBT//Diode1/Model/Mux,-1,Measurement list,untitled/IGBT//Diode1/Model/Measurement list,0,pc
+1/Rsw,untitled/IGBT//Diode1/Model/1//Rsw,0,Switch,untitled/IGBT//Diode1/Model/Switch,-1,pc
+status,untitled/IGBT//Diode1/Model/status,0,Switch,untitled/IGBT//Diode1/Model/Switch,-1,pc
+0 4,untitled/IGBT//Diode1/Model/0 4,0,Switch,untitled/IGBT//Diode1/Model/Switch,-1,pc
+Switch,untitled/IGBT//Diode1/Model/Switch,-1,Mux,untitled/IGBT//Diode1/Model/Mux,0,pc
+Measurement list,untitled/IGBT//Diode1/Model/Measurement list,0,m,untitled/IGBT//Diode1/Model/m,-1,pc
+Data Type Conversion,untitled/IGBT//Diode1/Model/Data Type Conversion,0,gate,untitled/IGBT//Diode1/Model/gate,-1,pc
+Status,untitled/IGBT//Diode1/Status,-1,Model,untitled/IGBT//Diode1/Model,2,pc
+Uswitch,untitled/IGBT//Diode1/Uswitch,-1,Model,untitled/IGBT//Diode1/Model,1,pc
+Model,untitled/IGBT//Diode1/Model,0,m,untitled/IGBT//Diode1/m,-1,pc
+C,untitled/IGBT//Diode1/C,-1,IGBT/Diode,untitled/IGBT//Diode1/IGBT//Diode,11461.0004882812,pc
+E,untitled/IGBT//Diode1/E,-1,IGBT/Diode,untitled/IGBT//Diode1/IGBT//Diode,11462.0004882812,pc
+From,untitled/From,0,IGBT/Diode2,untitled/IGBT//Diode2,-1,pc
+IGBT/Diode2,untitled/IGBT//Diode2,-1,IGBT/Diode,untitled/IGBT//Diode,11309.0003662109,pc
+IGBT/Diode2,untitled/IGBT//Diode2,-1,DC Voltage Source,untitled/DC Voltage Source,11280.0003662109,pc
+IGBT/Diode2,untitled/IGBT//Diode2,-1,Voltage Measurement,untitled/Voltage Measurement,11353.0002441406,pc
+IGBT/Diode2,untitled/IGBT//Diode2,-1,Series RLC Branch,untitled/Series RLC Branch,11340.0002441406,pc
+IGBT/Diode2,untitled/IGBT//Diode2,-1,IGBT/Diode1,untitled/IGBT//Diode1,11313.0002441406,pc
+g,untitled/IGBT//Diode2/g,-1,Model,untitled/IGBT//Diode2/Model,0,pc
+Model,untitled/IGBT//Diode2/Model,1,Goto,untitled/IGBT//Diode2/Goto,-1,pc
+IGBT/Diode,untitled/IGBT//Diode2/IGBT//Diode,-1,C,untitled/IGBT//Diode2/C,11508.0006103516,pc
+IGBT/Diode,untitled/IGBT//Diode2/IGBT//Diode,-1,E,untitled/IGBT//Diode2/E,11511.0008544922,pc
+g,untitled/IGBT//Diode2/g,0,Model,untitled/IGBT//Diode2/Model,-1,pc
+Uswitch,untitled/IGBT//Diode2/Uswitch,0,Model,untitled/IGBT//Diode2/Model,-1,pc
+Status,untitled/IGBT//Diode2/Status,0,Model,untitled/IGBT//Diode2/Model,-1,pc
+Model,untitled/IGBT//Diode2/Model,-1,m,untitled/IGBT//Diode2/m,0,pc
+Model,untitled/IGBT//Diode2/Model,-1,Goto,untitled/IGBT//Diode2/Goto,0,pc
+gate ,untitled/IGBT//Diode2/Model/gate ,-1,Data Type Conversion,untitled/IGBT//Diode2/Model/Data Type Conversion,0,pc
+Uswitch,untitled/IGBT//Diode2/Model/Uswitch,-1,Mux,untitled/IGBT//Diode2/Model/Mux,1,pc
+Uswitch,untitled/IGBT//Diode2/Model/Uswitch,-1,1/Rsw,untitled/IGBT//Diode2/Model/1//Rsw,0,pc
+status,untitled/IGBT//Diode2/Model/status,-1,Switch,untitled/IGBT//Diode2/Model/Switch,1,pc
+0 4,untitled/IGBT//Diode2/Model/0 4,-1,Switch,untitled/IGBT//Diode2/Model/Switch,2,pc
+Uswitch,untitled/IGBT//Diode2/Model/Uswitch,0,1/Rsw,untitled/IGBT//Diode2/Model/1//Rsw,-1,pc
+1/Rsw,untitled/IGBT//Diode2/Model/1//Rsw,-1,Switch,untitled/IGBT//Diode2/Model/Switch,0,pc
+gate ,untitled/IGBT//Diode2/Model/gate ,0,Data Type Conversion,untitled/IGBT//Diode2/Model/Data Type Conversion,-1,pc
+Data Type Conversion,untitled/IGBT//Diode2/Model/Data Type Conversion,-1,gate,untitled/IGBT//Diode2/Model/gate,0,pc
+Mux,untitled/IGBT//Diode2/Model/Mux,0,Measurement list,untitled/IGBT//Diode2/Model/Measurement list,-1,pc
+Measurement list,untitled/IGBT//Diode2/Model/Measurement list,-1,m,untitled/IGBT//Diode2/Model/m,0,pc
+In1,untitled/IGBT//Diode2/Model/Measurement list/In1,-1,Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,0,pc
+Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,0,Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,-1,pc
+Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,1,Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,-1,pc
+Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,-1,Out1,untitled/IGBT//Diode2/Model/Measurement list/Out1,0,pc
+In1,untitled/IGBT//Diode2/Model/Measurement list/In1,0,Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,-1,pc
+Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,0,pc
+Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,1,pc
+Bus
+Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
+Creator1,0,Out1,untitled/IGBT//Diode2/Model/Measurement list/Out1,-1,pc
+Switch,untitled/IGBT//Diode2/Model/Switch,0,Mux,untitled/IGBT//Diode2/Model/Mux,-1,pc
+Uswitch,untitled/IGBT//Diode2/Model/Uswitch,0,Mux,untitled/IGBT//Diode2/Model/Mux,-1,pc
+Mux,untitled/IGBT//Diode2/Model/Mux,-1,Measurement list,untitled/IGBT//Diode2/Model/Measurement list,0,pc
+1/Rsw,untitled/IGBT//Diode2/Model/1//Rsw,0,Switch,untitled/IGBT//Diode2/Model/Switch,-1,pc
+status,untitled/IGBT//Diode2/Model/status,0,Switch,untitled/IGBT//Diode2/Model/Switch,-1,pc
+0 4,untitled/IGBT//Diode2/Model/0 4,0,Switch,untitled/IGBT//Diode2/Model/Switch,-1,pc
+Switch,untitled/IGBT//Diode2/Model/Switch,-1,Mux,untitled/IGBT//Diode2/Model/Mux,0,pc
+Measurement list,untitled/IGBT//Diode2/Model/Measurement list,0,m,untitled/IGBT//Diode2/Model/m,-1,pc
+Data Type Conversion,untitled/IGBT//Diode2/Model/Data Type Conversion,0,gate,untitled/IGBT//Diode2/Model/gate,-1,pc
+Status,untitled/IGBT//Diode2/Status,-1,Model,untitled/IGBT//Diode2/Model,2,pc
+Uswitch,untitled/IGBT//Diode2/Uswitch,-1,Model,untitled/IGBT//Diode2/Model,1,pc
+Model,untitled/IGBT//Diode2/Model,0,m,untitled/IGBT//Diode2/m,-1,pc
+C,untitled/IGBT//Diode2/C,-1,IGBT/Diode,untitled/IGBT//Diode2/IGBT//Diode,11493.0015869141,pc
+E,untitled/IGBT//Diode2/E,-1,IGBT/Diode,untitled/IGBT//Diode2/IGBT//Diode,11494.0010986328,pc
+From3,untitled/From3,0,IGBT/Diode3,untitled/IGBT//Diode3,-1,pc
+IGBT/Diode3,untitled/IGBT//Diode3,-1,Series RLC Branch1,untitled/Series RLC Branch1,11344.0002441406,pc
+IGBT/Diode3,untitled/IGBT//Diode3,-1,IGBT/Diode,untitled/IGBT//Diode,11310.0002441406,pc
+IGBT/Diode3,untitled/IGBT//Diode3,-1,IGBT/Diode1,untitled/IGBT//Diode1,11314.0002441406,pc
+IGBT/Diode3,untitled/IGBT//Diode3,-1,DC Voltage Source,untitled/DC Voltage Source,11279.0003662109,pc
+g,untitled/IGBT//Diode3/g,-1,Model,untitled/IGBT//Diode3/Model,0,pc
+Model,untitled/IGBT//Diode3/Model,1,Goto,untitled/IGBT//Diode3/Goto,-1,pc
+IGBT/Diode,untitled/IGBT//Diode3/IGBT//Diode,-1,C,untitled/IGBT//Diode3/C,11652.0006103516,pc
+IGBT/Diode,untitled/IGBT//Diode3/IGBT//Diode,-1,E,untitled/IGBT//Diode3/E,11656.0008544922,pc
+g,untitled/IGBT//Diode3/g,0,Model,untitled/IGBT//Diode3/Model,-1,pc
+Uswitch,untitled/IGBT//Diode3/Uswitch,0,Model,untitled/IGBT//Diode3/Model,-1,pc
+Status,untitled/IGBT//Diode3/Status,0,Model,untitled/IGBT//Diode3/Model,-1,pc
+Model,untitled/IGBT//Diode3/Model,-1,m,untitled/IGBT//Diode3/m,0,pc
+Model,untitled/IGBT//Diode3/Model,-1,Goto,untitled/IGBT//Diode3/Goto,0,pc
+gate ,untitled/IGBT//Diode3/Model/gate ,-1,Data Type Conversion,untitled/IGBT//Diode3/Model/Data Type Conversion,0,pc
+Uswitch,untitled/IGBT//Diode3/Model/Uswitch,-1,Mux,untitled/IGBT//Diode3/Model/Mux,1,pc
+Uswitch,untitled/IGBT//Diode3/Model/Uswitch,-1,1/Rsw,untitled/IGBT//Diode3/Model/1//Rsw,0,pc
+status,untitled/IGBT//Diode3/Model/status,-1,Switch,untitled/IGBT//Diode3/Model/Switch,1,pc
+0 4,untitled/IGBT//Diode3/Model/0 4,-1,Switch,untitled/IGBT//Diode3/Model/Switch,2,pc
+Uswitch,untitled/IGBT//Diode3/Model/Uswitch,0,1/Rsw,untitled/IGBT//Diode3/Model/1//Rsw,-1,pc
+1/Rsw,untitled/IGBT//Diode3/Model/1//Rsw,-1,Switch,untitled/IGBT//Diode3/Model/Switch,0,pc
+gate ,untitled/IGBT//Diode3/Model/gate ,0,Data Type Conversion,untitled/IGBT//Diode3/Model/Data Type Conversion,-1,pc
+Data Type Conversion,untitled/IGBT//Diode3/Model/Data Type Conversion,-1,gate,untitled/IGBT//Diode3/Model/gate,0,pc
+Mux,untitled/IGBT//Diode3/Model/Mux,0,Measurement list,untitled/IGBT//Diode3/Model/Measurement list,-1,pc
+Measurement list,untitled/IGBT//Diode3/Model/Measurement list,-1,m,untitled/IGBT//Diode3/Model/m,0,pc
+In1,untitled/IGBT//Diode3/Model/Measurement list/In1,-1,Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,0,pc
+Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,0,Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,-1,pc
+Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,1,Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,-1,pc
+Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,-1,Out1,untitled/IGBT//Diode3/Model/Measurement list/Out1,0,pc
+In1,untitled/IGBT//Diode3/Model/Measurement list/In1,0,Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,-1,pc
+Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,0,pc
+Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,-1,Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,1,pc
+Bus
+Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
+Creator1,0,Out1,untitled/IGBT//Diode3/Model/Measurement list/Out1,-1,pc
+Switch,untitled/IGBT//Diode3/Model/Switch,0,Mux,untitled/IGBT//Diode3/Model/Mux,-1,pc
+Uswitch,untitled/IGBT//Diode3/Model/Uswitch,0,Mux,untitled/IGBT//Diode3/Model/Mux,-1,pc
+Mux,untitled/IGBT//Diode3/Model/Mux,-1,Measurement list,untitled/IGBT//Diode3/Model/Measurement list,0,pc
+1/Rsw,untitled/IGBT//Diode3/Model/1//Rsw,0,Switch,untitled/IGBT//Diode3/Model/Switch,-1,pc
+status,untitled/IGBT//Diode3/Model/status,0,Switch,untitled/IGBT//Diode3/Model/Switch,-1,pc
+0 4,untitled/IGBT//Diode3/Model/0 4,0,Switch,untitled/IGBT//Diode3/Model/Switch,-1,pc
+Switch,untitled/IGBT//Diode3/Model/Switch,-1,Mux,untitled/IGBT//Diode3/Model/Mux,0,pc
+Measurement list,untitled/IGBT//Diode3/Model/Measurement list,0,m,untitled/IGBT//Diode3/Model/m,-1,pc
+Data Type Conversion,untitled/IGBT//Diode3/Model/Data Type Conversion,0,gate,untitled/IGBT//Diode3/Model/gate,-1,pc
+Status,untitled/IGBT//Diode3/Status,-1,Model,untitled/IGBT//Diode3/Model,2,pc
+Uswitch,untitled/IGBT//Diode3/Uswitch,-1,Model,untitled/IGBT//Diode3/Model,1,pc
+Model,untitled/IGBT//Diode3/Model,0,m,untitled/IGBT//Diode3/m,-1,pc
+C,untitled/IGBT//Diode3/C,-1,IGBT/Diode,untitled/IGBT//Diode3/IGBT//Diode,11639.0015869141,pc
+E,untitled/IGBT//Diode3/E,-1,IGBT/Diode,untitled/IGBT//Diode3/IGBT//Diode,11640.0012207031,pc
+GreaterThan,untitled/GreaterThan,0,NOT,untitled/NOT,-1,pc
+NOT,untitled/NOT,-1,Goto3,untitled/Goto3,0,pc
+GreaterThan1,untitled/GreaterThan1,0,NOT1,untitled/NOT1,-1,pc
+NOT1,untitled/NOT1,-1,Goto,untitled/Goto,0,pc
+Square Wave
+Generator,untitled/Square Wave
+Generator,0,Product,untitled/Product,-1,pc
+Repeating
+Sequence,untitled/Repeating
+Sequence,0,Product,untitled/Product,-1,pc
+Product,untitled/Product,-1,GreaterThan1,untitled/GreaterThan1,1,pc
+Repeating
+Sequence,untitled/Repeating
+Sequence,-1,Product,untitled/Product,1,pc
+Clock,untitled/Repeating
+Sequence/Clock,-1,Sum,untitled/Repeating
+Sequence/Sum,0,pc
+Constant,untitled/Repeating
+Sequence/Constant,-1,Math
+Function,untitled/Repeating
+Sequence/Math
+Function,1,pc
+Math
+Function,untitled/Repeating
+Sequence/Math
+Function,0,Look-Up Table1,untitled/Repeating
+Sequence/Look-Up Table1,-1,pc
+Look-Up Table1,untitled/Repeating
+Sequence/Look-Up Table1,-1,Output,untitled/Repeating
+Sequence/Output,0,pc
+Sum,untitled/Repeating
+Sequence/Sum,0,Math
+Function,untitled/Repeating
+Sequence/Math
+Function,-1,pc
+Constant,untitled/Repeating
+Sequence/Constant,0,Math
+Function,untitled/Repeating
+Sequence/Math
+Function,-1,pc
+Math
+Function,untitled/Repeating
+Sequence/Math
+Function,-1,Look-Up Table1,untitled/Repeating
+Sequence/Look-Up Table1,0,pc
+Look-Up Table1,untitled/Repeating
+Sequence/Look-Up Table1,0,Output,untitled/Repeating
+Sequence/Output,-1,pc
+Output,untitled/Repeating
+Sequence/Output,-1,Out1,untitled/Repeating
+Sequence/Out1,0,pc
+Clock,untitled/Repeating
+Sequence/Clock,0,Sum,untitled/Repeating
+Sequence/Sum,-1,pc
+startTime,untitled/Repeating
+Sequence/startTime,0,Sum,untitled/Repeating
+Sequence/Sum,-1,pc
+Sum,untitled/Repeating
+Sequence/Sum,-1,Math
+Function,untitled/Repeating
+Sequence/Math
+Function,0,pc
+startTime,untitled/Repeating
+Sequence/startTime,-1,Sum,untitled/Repeating
+Sequence/Sum,1,pc
+Output,untitled/Repeating
+Sequence/Output,0,Out1,untitled/Repeating
+Sequence/Out1,-1,pc
+Voltage Measurement,untitled/Voltage Measurement,0,Scope,untitled/Scope,-1,pc
+Square Wave
+Generator,untitled/Square Wave
+Generator,0,Scope1,untitled/Scope1,-1,pc
+Series RLC Branch,untitled/Series RLC Branch,-1,IGBT/Diode2,untitled/IGBT//Diode2,11318.0002441406,pc
+Series RLC Branch,untitled/Series RLC Branch,-1,Voltage Measurement,untitled/Voltage Measurement,11353.0002441406,pc
+Series RLC Branch,untitled/Series RLC Branch,-1,IGBT/Diode1,untitled/IGBT//Diode1,11313.0002441406,pc
+Series RLC Branch,untitled/Series RLC Branch,-1,Series RLC Branch1,untitled/Series RLC Branch1,11343.0002441406,pc
+Series RLC Branch,untitled/Series RLC Branch,-1,Voltage Measurement,untitled/Voltage Measurement,11354.0002441406,pc
+Series RLC Branch1,untitled/Series RLC Branch1,-1,Series RLC Branch,untitled/Series RLC Branch,11341.0002441406,pc
+Series RLC Branch1,untitled/Series RLC Branch1,-1,Voltage Measurement,untitled/Voltage Measurement,11354.0002441406,pc
+Series RLC Branch1,untitled/Series RLC Branch1,-1,IGBT/Diode,untitled/IGBT//Diode,11310.0002441406,pc
+Series RLC Branch1,untitled/Series RLC Branch1,-1,IGBT/Diode3,untitled/IGBT//Diode3,11321.0002441406,pc
+Sine Wave,untitled/Sine Wave,-1,GreaterThan,untitled/GreaterThan,0,pc
+Sine Wave1,untitled/Sine Wave1,-1,GreaterThan1,untitled/GreaterThan1,0,pc
+Square Wave
+Generator,untitled/Square Wave
+Generator,-1,Product,untitled/Product,0,pc
+Square Wave
+Generator,untitled/Square Wave
+Generator,-1,Scope1,untitled/Scope1,0,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,Scope,untitled/Scope,0,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,IGBT/Diode2,untitled/IGBT//Diode2,11318.0002441406,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,Series RLC Branch,untitled/Series RLC Branch,11340.0002441406,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,IGBT/Diode1,untitled/IGBT//Diode1,11313.0002441406,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,Series RLC Branch,untitled/Series RLC Branch,11341.0002441406,pc
+Voltage Measurement,untitled/Voltage Measurement,-1,Series RLC Branch1,untitled/Series RLC Branch1,11343.0002441406,pc
+source,untitled/Voltage Measurement/source,0,Model,untitled/Voltage Measurement/Model,-1,pc
+Model,untitled/Voltage Measurement/Model,-1,do not delete
+this gain,untitled/Voltage Measurement/do not delete
+this gain,0,pc
+in,untitled/Voltage Measurement/Model/in,-1,out,untitled/Voltage Measurement/Model/out,0,pc
+in,untitled/Voltage Measurement/Model/in,0,out,untitled/Voltage Measurement/Model/out,-1,pc
+VoltageMeasurement,untitled/Voltage Measurement/VoltageMeasurement,-1,+,untitled/Voltage Measurement/+,11816.0012207031,pc
+VoltageMeasurement,untitled/Voltage Measurement/VoltageMeasurement,-1,-,untitled/Voltage Measurement/-,11819.0012207031,pc
+Model,untitled/Voltage Measurement/Model,0,do not delete
+this gain,untitled/Voltage Measurement/do not delete
+this gain,-1,pc
+do not delete
+this gain,untitled/Voltage Measurement/do not delete
+this gain,-1,v,untitled/Voltage Measurement/v,0,pc
+source,untitled/Voltage Measurement/source,-1,Model,untitled/Voltage Measurement/Model,0,pc
++,untitled/Voltage Measurement/+,-1,VoltageMeasurement,untitled/Voltage Measurement/VoltageMeasurement,11754.0007324219,pc
+-,untitled/Voltage Measurement/-,-1,VoltageMeasurement,untitled/Voltage Measurement/VoltageMeasurement,11755.0007324219,pc
+do not delete
+this gain,untitled/Voltage Measurement/do not delete
+this gain,0,v,untitled/Voltage Measurement/v,-1,pc
+Ground,untitled/powergui/Ground,-1,Terminator,untitled/powergui/Terminator,0,pc
+Ground,untitled/powergui/Ground,0,Terminator,untitled/powergui/Terminator,-1,pc
