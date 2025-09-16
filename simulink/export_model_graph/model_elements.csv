@@ -1,177 +1,28 @@
 Name,Path,BlockType,Orientation,LibraryLink,Left,Top,Right,Bottom,CenterX,CenterY
-Constant,untitled/Constant,Constant,right,,-80,505,-50,535,-65,520
-DC Voltage Source,untitled/DC Voltage Source,SubSystem,up,spsDCVoltageSourceLib/DC Voltage Source,330,375,350,410,340,392.5
-DCVoltageSource,untitled/DC Voltage Source/DCVoltageSource,PMComponent,right,,70,25,160,55,115,40
-Goto,untitled/DC Voltage Source/Goto,Goto,right,,130,94,200,116,165,105
-Model,untitled/DC Voltage Source/Model,SubSystem,right,spsSourcesModel/DC,20,82,60,128,40,105
-DC,untitled/DC Voltage Source/Model/DC,Constant,right,,20,21,50,49,35,35
-Out1,untitled/DC Voltage Source/Model/Out1,Outport,right,,70,28,100,42,85,35
--,untitled/DC Voltage Source/-,PMIOPort,right,,15,33,45,47,30,40
-+,untitled/DC Voltage Source/+,PMIOPort,left,,185,33,215,47,200,40
-From,untitled/From,From,right,,425,141,465,169,445,155
-From1,untitled/From1,From,right,,750,141,790,169,770,155
-From2,untitled/From2,From,right,,425,431,465,459,445,445
-From3,untitled/From3,From,right,,750,431,790,459,770,445
-Goto,untitled/Goto,Goto,right,,215,665,255,695,235,680
-Goto1,untitled/Goto1,Goto,right,,155,440,195,470,175,455
-Goto2,untitled/Goto2,Goto,right,,215,605,255,635,235,620
-Goto3,untitled/Goto3,Goto,right,,155,490,195,520,175,505
-GreaterThan,untitled/GreaterThan,RelationalOperator,right,,-5,452,25,483,10,467.5
-GreaterThan1,untitled/GreaterThan1,RelationalOperator,right,,95,602,125,633,110,617.5
-IGBT/Diode,untitled/IGBT//Diode,SubSystem,down,spsIGBTDiodeLib/IGBT//Diode,793,250,837,310,815,280
-g,untitled/IGBT//Diode/g,Inport,right,,25,103,55,117,40,110
-Goto,untitled/IGBT//Diode/Goto,Goto,right,,225,205,300,225,262.5,215
-IGBT/Diode,untitled/IGBT//Diode/IGBT//Diode,PMComponent,right,,105,21,190,49,147.5,35
-Model,untitled/IGBT//Diode/Model,SubSystem,right,spsIGBTDiodeModel/Discrete,105,81,190,259,147.5,170
-gate ,untitled/IGBT//Diode/Model/gate ,Inport,right,,15,33,45,47,30,40
-Uswitch,untitled/IGBT//Diode/Model/Uswitch,Inport,right,,25,113,55,127,40,120
-status,untitled/IGBT//Diode/Model/status,Inport,right,,215,148,245,162,230,155
-0 4,untitled/IGBT//Diode/Model/0 4,Constant,right,,220,180,240,200,230,190
-1/Rsw,untitled/IGBT//Diode/Model/1//Rsw,Gain,right,,185,105,215,135,200,120
-Data Type Conversion,untitled/IGBT//Diode/Model/Data Type Conversion,DataTypeConversion,right,,115,26,165,54,140,40
-Measurement list,untitled/IGBT//Diode/Model/Measurement list,SubSystem,right,,410,164,470,186,440,175
-In1,untitled/IGBT//Diode/Model/Measurement list/In1,Inport,right,,20,48,50,62,35,55
-Bus
-Creator1,untitled/IGBT//Diode/Model/Measurement list/Bus
-Creator1,BusCreator,right,,180,26,185,84,182.5,55
-Demux,untitled/IGBT//Diode/Model/Measurement list/Demux,Demux,right,,75,24,80,86,77.5,55
-Out1,untitled/IGBT//Diode/Model/Measurement list/Out1,Outport,right,,215,48,245,62,230,55
-Mux,untitled/IGBT//Diode/Model/Mux,Mux,right,,360,135,365,215,362.5,175
-Switch,untitled/IGBT//Diode/Model/Switch,Switch,right,,285,105,315,205,300,155
-m,untitled/IGBT//Diode/Model/m,Outport,right,,525,168,555,182,540,175
-gate,untitled/IGBT//Diode/Model/gate,Outport,right,,220,33,250,47,235,40
-Status,untitled/IGBT//Diode/Status,From,right,,15,216,80,244,47.5,230
-Uswitch,untitled/IGBT//Diode/Uswitch,From,right,,15,156,80,184,47.5,170
-m,untitled/IGBT//Diode/m,Terminator,right,,245,118,275,132,260,125
-C,untitled/IGBT//Diode/C,PMIOPort,right,,25,28,55,42,40,35
-E,untitled/IGBT//Diode/E,PMIOPort,left,,245,28,275,42,260,35
-IGBT/Diode1,untitled/IGBT//Diode1,SubSystem,down,spsIGBTDiodeLib/IGBT//Diode,518,475,562,535,540,505
-g,untitled/IGBT//Diode1/g,Inport,right,,25,103,55,117,40,110
-Goto,untitled/IGBT//Diode1/Goto,Goto,right,,225,205,300,225,262.5,215
-IGBT/Diode,untitled/IGBT//Diode1/IGBT//Diode,PMComponent,right,,105,21,190,49,147.5,35
-Model,untitled/IGBT//Diode1/Model,SubSystem,right,spsIGBTDiodeModel/Discrete,105,81,190,259,147.5,170
-gate ,untitled/IGBT//Diode1/Model/gate ,Inport,right,,15,33,45,47,30,40
-Uswitch,untitled/IGBT//Diode1/Model/Uswitch,Inport,right,,25,113,55,127,40,120
-status,untitled/IGBT//Diode1/Model/status,Inport,right,,215,148,245,162,230,155
-0 4,untitled/IGBT//Diode1/Model/0 4,Constant,right,,220,180,240,200,230,190
-1/Rsw,untitled/IGBT//Diode1/Model/1//Rsw,Gain,right,,185,105,215,135,200,120
-Data Type Conversion,untitled/IGBT//Diode1/Model/Data Type Conversion,DataTypeConversion,right,,115,26,165,54,140,40
-Measurement list,untitled/IGBT//Diode1/Model/Measurement list,SubSystem,right,,410,164,470,186,440,175
-In1,untitled/IGBT//Diode1/Model/Measurement list/In1,Inport,right,,20,48,50,62,35,55
-Bus
-Creator1,untitled/IGBT//Diode1/Model/Measurement list/Bus
-Creator1,BusCreator,right,,180,26,185,84,182.5,55
-Demux,untitled/IGBT//Diode1/Model/Measurement list/Demux,Demux,right,,75,24,80,86,77.5,55
-Out1,untitled/IGBT//Diode1/Model/Measurement list/Out1,Outport,right,,215,48,245,62,230,55
-Mux,untitled/IGBT//Diode1/Model/Mux,Mux,right,,360,135,365,215,362.5,175
-Switch,untitled/IGBT//Diode1/Model/Switch,Switch,right,,285,105,315,205,300,155
-m,untitled/IGBT//Diode1/Model/m,Outport,right,,525,168,555,182,540,175
-gate,untitled/IGBT//Diode1/Model/gate,Outport,right,,220,33,250,47,235,40
-Status,untitled/IGBT//Diode1/Status,From,right,,15,216,80,244,47.5,230
-Uswitch,untitled/IGBT//Diode1/Uswitch,From,right,,15,156,80,184,47.5,170
-m,untitled/IGBT//Diode1/m,Terminator,right,,245,118,275,132,260,125
-C,untitled/IGBT//Diode1/C,PMIOPort,right,,25,28,55,42,40,35
-E,untitled/IGBT//Diode1/E,PMIOPort,left,,245,28,275,42,260,35
-IGBT/Diode2,untitled/IGBT//Diode2,SubSystem,down,spsIGBTDiodeLib/IGBT//Diode,508,250,552,310,530,280
-g,untitled/IGBT//Diode2/g,Inport,right,,25,103,55,117,40,110
-Goto,untitled/IGBT//Diode2/Goto,Goto,right,,225,205,300,225,262.5,215
-IGBT/Diode,untitled/IGBT//Diode2/IGBT//Diode,PMComponent,right,,105,21,190,49,147.5,35
-Model,untitled/IGBT//Diode2/Model,SubSystem,right,spsIGBTDiodeModel/Discrete,105,81,190,259,147.5,170
-gate ,untitled/IGBT//Diode2/Model/gate ,Inport,right,,15,33,45,47,30,40
-Uswitch,untitled/IGBT//Diode2/Model/Uswitch,Inport,right,,25,113,55,127,40,120
-status,untitled/IGBT//Diode2/Model/status,Inport,right,,215,148,245,162,230,155
-0 4,untitled/IGBT//Diode2/Model/0 4,Constant,right,,220,180,240,200,230,190
-1/Rsw,untitled/IGBT//Diode2/Model/1//Rsw,Gain,right,,185,105,215,135,200,120
-Data Type Conversion,untitled/IGBT//Diode2/Model/Data Type Conversion,DataTypeConversion,right,,115,26,165,54,140,40
-Measurement list,untitled/IGBT//Diode2/Model/Measurement list,SubSystem,right,,410,164,470,186,440,175
-In1,untitled/IGBT//Diode2/Model/Measurement list/In1,Inport,right,,20,48,50,62,35,55
-Bus
-Creator1,untitled/IGBT//Diode2/Model/Measurement list/Bus
-Creator1,BusCreator,right,,180,26,185,84,182.5,55
-Demux,untitled/IGBT//Diode2/Model/Measurement list/Demux,Demux,right,,75,24,80,86,77.5,55
-Out1,untitled/IGBT//Diode2/Model/Measurement list/Out1,Outport,right,,215,48,245,62,230,55
-Mux,untitled/IGBT//Diode2/Model/Mux,Mux,right,,360,135,365,215,362.5,175
-Switch,untitled/IGBT//Diode2/Model/Switch,Switch,right,,285,105,315,205,300,155
-m,untitled/IGBT//Diode2/Model/m,Outport,right,,525,168,555,182,540,175
-gate,untitled/IGBT//Diode2/Model/gate,Outport,right,,220,33,250,47,235,40
-Status,untitled/IGBT//Diode2/Status,From,right,,15,216,80,244,47.5,230
-Uswitch,untitled/IGBT//Diode2/Uswitch,From,right,,15,156,80,184,47.5,170
-m,untitled/IGBT//Diode2/m,Terminator,right,,245,118,275,132,260,125
-C,untitled/IGBT//Diode2/C,PMIOPort,right,,25,28,55,42,40,35
-E,untitled/IGBT//Diode2/E,PMIOPort,left,,245,28,275,42,260,35
-IGBT/Diode3,untitled/IGBT//Diode3,SubSystem,down,spsIGBTDiodeLib/IGBT//Diode,803,475,847,535,825,505
-g,untitled/IGBT//Diode3/g,Inport,right,,25,103,55,117,40,110
-Goto,untitled/IGBT//Diode3/Goto,Goto,right,,225,205,300,225,262.5,215
-IGBT/Diode,untitled/IGBT//Diode3/IGBT//Diode,PMComponent,right,,105,21,190,49,147.5,35
-Model,untitled/IGBT//Diode3/Model,SubSystem,right,spsIGBTDiodeModel/Discrete,105,81,190,259,147.5,170
-gate ,untitled/IGBT//Diode3/Model/gate ,Inport,right,,15,33,45,47,30,40
-Uswitch,untitled/IGBT//Diode3/Model/Uswitch,Inport,right,,25,113,55,127,40,120
-status,untitled/IGBT//Diode3/Model/status,Inport,right,,215,148,245,162,230,155
-0 4,untitled/IGBT//Diode3/Model/0 4,Constant,right,,220,180,240,200,230,190
-1/Rsw,untitled/IGBT//Diode3/Model/1//Rsw,Gain,right,,185,105,215,135,200,120
-Data Type Conversion,untitled/IGBT//Diode3/Model/Data Type Conversion,DataTypeConversion,right,,115,26,165,54,140,40
-Measurement list,untitled/IGBT//Diode3/Model/Measurement list,SubSystem,right,,410,164,470,186,440,175
-In1,untitled/IGBT//Diode3/Model/Measurement list/In1,Inport,right,,20,48,50,62,35,55
-Bus
-Creator1,untitled/IGBT//Diode3/Model/Measurement list/Bus
-Creator1,BusCreator,right,,180,26,185,84,182.5,55
-Demux,untitled/IGBT//Diode3/Model/Measurement list/Demux,Demux,right,,75,24,80,86,77.5,55
-Out1,untitled/IGBT//Diode3/Model/Measurement list/Out1,Outport,right,,215,48,245,62,230,55
-Mux,untitled/IGBT//Diode3/Model/Mux,Mux,right,,360,135,365,215,362.5,175
-Switch,untitled/IGBT//Diode3/Model/Switch,Switch,right,,285,105,315,205,300,155
-m,untitled/IGBT//Diode3/Model/m,Outport,right,,525,168,555,182,540,175
-gate,untitled/IGBT//Diode3/Model/gate,Outport,right,,220,33,250,47,235,40
-Status,untitled/IGBT//Diode3/Status,From,right,,15,216,80,244,47.5,230
-Uswitch,untitled/IGBT//Diode3/Uswitch,From,right,,15,156,80,184,47.5,170
-m,untitled/IGBT//Diode3/m,Terminator,right,,245,118,275,132,260,125
-C,untitled/IGBT//Diode3/C,PMIOPort,right,,25,28,55,42,40,35
-E,untitled/IGBT//Diode3/E,PMIOPort,left,,245,28,275,42,260,35
-NOT,untitled/NOT,Logic,right,,80,489,110,521,95,505
-NOT1,untitled/NOT1,Logic,right,,160,664,190,696,175,680
-Product,untitled/Product,Product,right,,-25,617,5,648,-10,632.5
-Repeating
-Sequence,untitled/Repeating
-Sequence,SubSystem,right,simulink/Sources/Repeating
-Sequence,-95,665,-65,695,-80,680
-Clock,untitled/Repeating
-Sequence/Clock,Clock,right,,15,30,35,50,25,40
-Constant,untitled/Repeating
-Sequence/Constant,Constant,right,,125,91,180,119,152.5,105
-Look-Up Table1,untitled/Repeating
-Sequence/Look-Up Table1,Lookup_n-D,right,,330,53,365,77,347.5,65
+Carrier,SinglePhaseHBridge_Unipolar/Carrier,SubSystem,right,simulink/Sources/Repeating
+Sequence,110,385,140,415,125,400
+Clock,SinglePhaseHBridge_Unipolar/Carrier/Clock,Clock,right,,15,30,35,50,25,40
+Constant,SinglePhaseHBridge_Unipolar/Carrier/Constant,Constant,right,,125,91,180,119,152.5,105
+Look-Up Table1,SinglePhaseHBridge_Unipolar/Carrier/Look-Up Table1,Lookup_n-D,right,,330,53,365,77,347.5,65
 Math
-Function,untitled/Repeating
-Sequence/Math
+Function,SinglePhaseHBridge_Unipolar/Carrier/Math
 Function,Math,right,,230,47,260,78,245,62.5
-Output,untitled/Repeating
-Sequence/Output,SignalConversion,right,,450,41,470,89,460,65
-Sum,untitled/Repeating
-Sequence/Sum,Sum,right,,145,29,165,76,155,52.5
-startTime,untitled/Repeating
-Sequence/startTime,S-Function,right,,50,52,120,78,85,65
-Out1,untitled/Repeating
-Sequence/Out1,Outport,right,,550,55,570,75,560,65
-Scope,untitled/Scope,Scope,right,,685,144,715,176,700,160
-Scope1,untitled/Scope1,Scope,right,,-180,524,-150,556,-165,540
-Series RLC Branch,untitled/Series RLC Branch,PMComponent,right,spsSeriesRLCBranchLib/Series RLC Branch,605,366,685,404,645,385
-Series RLC Branch1,untitled/Series RLC Branch1,PMComponent,right,spsSeriesRLCBranchLib/Series RLC Branch,730,366,810,404,770,385
-Sine Wave,untitled/Sine Wave,Sin,right,,-80,425,-50,455,-65,440
-Sine Wave1,untitled/Sine Wave1,Sin,right,,30,565,60,595,45,580
-Square Wave
-Generator,untitled/Square Wave
-Generator,SignalGenerator,right,,-95,585,-65,615,-80,600
-Voltage Measurement,untitled/Voltage Measurement,SubSystem,up,spsVoltageMeasurementLib/Voltage Measurement,658,290,682,315,670,302.5
-Model,untitled/Voltage Measurement/Model,SubSystem,right,spsMeasurementModel/Complex,120,112,160,158,140,135
-in,untitled/Voltage Measurement/Model/in,Inport,right,,20,28,50,42,35,35
-out,untitled/Voltage Measurement/Model/out,Outport,right,,115,28,145,42,130,35
-VoltageMeasurement,untitled/Voltage Measurement/VoltageMeasurement,PMComponent,right,,95,21,190,49,142.5,35
-do not delete
-this gain,untitled/Voltage Measurement/do not delete
-this gain,Gain,right,,195,120,210,150,202.5,135
-source,untitled/Voltage Measurement/source,From,right,,15,124,85,146,50,135
-+,untitled/Voltage Measurement/+,PMIOPort,right,,15,28,45,42,30,35
--,untitled/Voltage Measurement/-,PMIOPort,left,,240,24,265,46,252.5,35
-v,untitled/Voltage Measurement/v,Outport,right,,245,124,265,146,255,135
-powergui,untitled/powergui,SubSystem,right,spspowerguiLib/powergui,80,230,161,269,120.5,249.5
-Ground,untitled/powergui/Ground,Ground,right,,405,20,425,40,415,30
-Terminator,untitled/powergui/Terminator,Terminator,right,,445,20,465,40,455,30
+Output,SinglePhaseHBridge_Unipolar/Carrier/Output,SignalConversion,right,,450,41,470,89,460,65
+Sum,SinglePhaseHBridge_Unipolar/Carrier/Sum,Sum,right,,145,29,165,76,155,52.5
+startTime,SinglePhaseHBridge_Unipolar/Carrier/startTime,S-Function,right,,50,52,120,78,85,65
+Out1,SinglePhaseHBridge_Unipolar/Carrier/Out1,Outport,right,,550,55,570,75,560,65
+Gain_1_over_L,SinglePhaseHBridge_Unipolar/Gain_1_over_L,Gain,right,,500,100,560,140,530,120
+Gain_R_over_L,SinglePhaseHBridge_Unipolar/Gain_R_over_L,Gain,right,,500,180,560,220,530,200
+Gain_Vdc,SinglePhaseHBridge_Unipolar/Gain_Vdc,Gain,right,,420,100,470,140,445,120
+Integrator_i,SinglePhaseHBridge_Unipolar/Integrator_i,Integrator,right,,660,130,680,170,670,150
+ModA,SinglePhaseHBridge_Unipolar/ModA,Sin,right,,60,60,120,90,90,75
+Neg,SinglePhaseHBridge_Unipolar/Neg,Gain,right,,150,55,180,95,165,75
+RelopA,SinglePhaseHBridge_Unipolar/RelopA,RelationalOperator,right,,220,62,260,93,240,77.5
+RelopB,SinglePhaseHBridge_Unipolar/RelopB,RelationalOperator,right,,220,152,260,183,240,167.5
+Scope,SinglePhaseHBridge_Unipolar/Scope,Scope,right,,820,110,870,190,845,150
+Sum_didt,SinglePhaseHBridge_Unipolar/Sum_didt,Sum,right,,600,130,620,170,610,150
+ToDoubleA,SinglePhaseHBridge_Unipolar/ToDoubleA,DataTypeConversion,right,,280,60,320,90,300,75
+ToDoubleB,SinglePhaseHBridge_Unipolar/ToDoubleB,DataTypeConversion,right,,280,150,320,180,300,165
+ToWs_iL,SinglePhaseHBridge_Unipolar/ToWs_iL,ToWorkspace,right,,740,160,790,190,765,175
+ToWs_vo,SinglePhaseHBridge_Unipolar/ToWs_vo,ToWorkspace,right,,740,100,790,130,765,115
+gA_minus_gB,SinglePhaseHBridge_Unipolar/gA_minus_gB,Sum,right,,360,100,380,140,370,120

@@ -1,0 +1,153 @@
+function single_phase_inverter()
+% 单相桥式逆变器仿真模型
+% 适用于MATLAB 2019a
+
+% 清理工作区并关闭所有图形窗口
+clear;
+close all;
+clc;
+
+% 创建新模型
+model_name = 'SinglePhaseInverter';
+new_system(model_name);
+open_system(model_name);
+
+% 设置仿真参数
+set_param(model_name, 'StopTime', '0.1', 'Solver', 'ode23t', ...
+    'MaxStep', '1e-5', 'StartTime', '0');
+
+% 添加组件到模型
+add_components(model_name);
+
+% 保存并运行模型
+save_system(model_name);
+sim(model_name);
+
+% 绘制结果
+plot_results();
+end
+
+function add_components(model_name)
+% 添加直流电压源
+dc_voltage = 200; % 直流电压(V)
+add_block('simulink/Commonly Used Blocks/Constant', [model_name '/DC Source']);
+set_param([model_name '/DC Source'], 'Value', num2str(dc_voltage));
+
+% 添加四个MOSFET开关（替代IGBT）
+add_block('simpowersystems/Power Electronics/MOSFET', [model_name '/MOSFET1']);
+add_block('simpowersystems/Power Electronics/MOSFET', [model_name '/MOSFET2']);
+add_block('simpowersystems/Power Electronics/MOSFET', [model_name '/MOSFET3']);
+add_block('simpowersystems/Power Electronics/MOSFET', [model_name '/MOSFET4']);
+
+% 添加PWM发生器
+add_block('simpowersystems/Extra Library/Control Blocks/PWM Generator', ...
+    [model_name '/PWM Generator'], 'GeneratorType', '2-arm bridge (4 pulses)', ...
+    'CarrierFrequency', '5000', 'ModulationIndex', '0.8', 'Frequency', '50');
+
+% 添加RL负载
+R = 10; % 电阻(Ω)
+L = 10e-3; % 电感(H)
+add_block('simpowersystems/Elements/Series RLC Branch', [model_name '/Resistor']);
+set_param([model_name '/Resistor'], 'BranchType', 'R', 'R', num2str(R));
+
+add_block('simpowersystems/Elements/Series RLC Branch', [model_name '/Inductor']);
+set_param([model_name '/Inductor'], 'BranchType', 'L', 'L', num2str(L));
+
+% 添加电压测量
+add_block('simpowersystems/Measurements/Voltage Measurement', [model_name '/Voltage Sensor']);
+
+% 添加电流测量
+add_block('simpowersystems/Measurements/Current Measurement', [model_name '/Current Sensor']);
+
+% 添加示波器
+add_block('simulink/Sinks/Scope', [model_name '/Scope']);
+
+% 添加接地
+add_block('simpowersystems/Elements/Ground', [model_name '/Ground']);
+
+% 添加To Workspace模块用于数据输出
+add_block('simulink/Sinks/To Workspace', [model_name '/To Workspace1']);
+set_param([model_name '/To Workspace1'], 'VariableName', 'voltage_out', 'SaveFormat', 'Array');
+add_block('simulink/Sinks/To Workspace', [model_name '/To Workspace2']);
+set_param([model_name '/To Workspace2'], 'VariableName', 'current_out', 'SaveFormat', 'Array');
+
+% 连接组件
+add_line(model_name, 'DC Source/1', 'MOSFET1/D');
+add_line(model_name, 'DC Source/1', 'MOSFET3/D');
+add_line(model_name, 'DC Source/1', 'Ground/1', 'autorouting', 'on');
+
+add_line(model_name, 'MOSFET1/S', 'MOSFET2/D');
+add_line(model_name, 'MOSFET3/S', 'MOSFET4/D');
+add_line(model_name, 'MOSFET2/S', 'Ground/1', 'autorouting', 'on');
+add_line(model_name, 'MOSFET4/S', 'Ground/1', 'autorouting', 'on');
+
+add_line(model_name, 'MOSFET1/S', 'Voltage Sensor/1');
+add_line(model_name, 'MOSFET3/S', 'Voltage Sensor/2');
+
+add_line(model_name, 'Voltage Sensor/1', 'Resistor/1');
+add_line(model_name, 'Voltage Sensor/2', 'Inductor/2');
+add_line(model_name, 'Resistor/2', 'Inductor/1');
+add_line(model_name, 'Inductor/1', 'Current Sensor/1');
+add_line(model_name, 'Current Sensor/2', 'Voltage Sensor/2');
+
+add_line(model_name, 'PWM Generator/1', 'MOSFET1/g');
+add_line(model_name, 'PWM Generator/2', 'MOSFET2/g');
+add_line(model_name, 'PWM Generator/3', 'MOSFET3/g');
+add_line(model_name, 'PWM Generator/4', 'MOSFET4/g');
+
+add_line(model_name, 'Voltage Sensor/1', 'To Workspace1/1');
+add_line(model_name, 'Current Sensor/1', 'To Workspace2/1');
+
+add_line(model_name, 'Voltage Sensor/1', 'Scope/1');
+add_line(model_name, 'Current Sensor/1', 'Scope/2');
+
+% 设置MOSFET参数
+set_param([model_name '/MOSFET1'], 'Ron', '1e-3', 'Lon', '1e-6');
+set_param([model_name '/MOSFET2'], 'Ron', '1e-3', 'Lon', '1e-6');
+set_param([model_name '/MOSFET3'], 'Ron', '1e-3', 'Lon', '1e-6');
+set_param([model_name '/MOSFET4'], 'Ron', '1e-3', 'Lon', '1e-6');
+end
+
+function plot_results()
+% 检查工作区中是否有输出数据
+if ~exist('voltage_out', 'var') || ~exist('current_out', 'var')
+    disp('没有找到仿真输出数据');
+    return;
+end
+
+% 获取时间向量（假设采样时间固定）
+time = (0:length(voltage_out)-1) * 1e-5; % 假设采样率为100kHz
+
+% 绘制输出电压和电流波形
+figure('Name', '单相桥式逆变器输出波形', 'Position', [100, 100, 800, 600]);
+subplot(2,1,1);
+plot(time, voltage_out, 'b', 'LineWidth', 1.5);
+title('输出电压波形');
+xlabel('时间 (s)');
+ylabel('电压 (V)');
+xlim([0, 0.1]);
+grid on;
+
+subplot(2,1,2);
+plot(time, current_out, 'r', 'LineWidth', 1.5);
+title('输出电流波形');
+xlabel('时间 (s)');
+ylabel('电流 (A)');
+xlim([0, 0.1]);
+grid on;
+
+% 计算FFT分析电压波形
+figure('Name', '输出电压频谱分析', 'Position', [200, 200, 800, 400]);
+Y = fft(voltage_out);
+L = length(voltage_out);
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = (1/(time(2)-time(1)))*(0:(L/2))/L;
+plot(f, P1, 'LineWidth', 1.5);
+title('输出电压频谱');
+xlabel('频率 (Hz)');
+ylabel('幅度');
+xlim([0 10000]); % 限制频率范围到10kHz
+grid on;
+end

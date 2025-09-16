@@ -1,6 +1,6 @@
 {
   "model": "model",
-  "timestamp": "2025-09-16 11:00:19",
+  "timestamp": "2025-09-16 15:35:04",
   "counts": {
     "elements": 151,
     "ports": 249,
@@ -4997,7 +4997,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode1",
       "DestinationPath": "untitled/IGBT//Diode1",
-      "DestinationPort": 11314.000244140625,
+      "DestinationPort": 312.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5006,7 +5006,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode3",
       "DestinationPath": "untitled/IGBT//Diode3",
-      "DestinationPort": 11322.000244140625,
+      "DestinationPort": 320.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5015,7 +5015,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode2",
       "DestinationPath": "untitled/IGBT//Diode2",
-      "DestinationPort": 11317.000366210938,
+      "DestinationPort": 315.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5024,7 +5024,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode",
-      "DestinationPort": 11309.000366210938,
+      "DestinationPort": 307.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5033,7 +5033,7 @@
       "SourcePort": -1,
       "Destination": "-",
       "DestinationPath": "untitled/DC Voltage Source/-",
-      "DestinationPort": 11403.000244140625,
+      "DestinationPort": 421.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5042,7 +5042,7 @@
       "SourcePort": -1,
       "Destination": "+",
       "DestinationPath": "untitled/DC Voltage Source/+",
-      "DestinationPort": 11406.000244140625,
+      "DestinationPort": 424.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5087,7 +5087,7 @@
       "SourcePort": -1,
       "Destination": "DCVoltageSource",
       "DestinationPath": "untitled/DC Voltage Source/DCVoltageSource",
-      "DestinationPort": 11396.000366210938,
+      "DestinationPort": 414.000244140625,
       "Origin": "pc"
     },
     {
@@ -5096,7 +5096,7 @@
       "SourcePort": -1,
       "Destination": "DCVoltageSource",
       "DestinationPath": "untitled/DC Voltage Source/DCVoltageSource",
-      "DestinationPort": 11397.000244140625,
+      "DestinationPort": 415.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5258,7 +5258,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode2",
       "DestinationPath": "untitled/IGBT//Diode2",
-      "DestinationPort": 11317.000366210938,
+      "DestinationPort": 315.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5267,7 +5267,7 @@
       "SourcePort": -1,
       "Destination": "DC Voltage Source",
       "DestinationPath": "untitled/DC Voltage Source",
-      "DestinationPort": 11280.000366210938,
+      "DestinationPort": 280.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5276,7 +5276,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch1",
       "DestinationPath": "untitled/Series RLC Branch1",
-      "DestinationPort": 11344.000244140625,
+      "DestinationPort": 343.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5285,7 +5285,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode3",
       "DestinationPath": "untitled/IGBT//Diode3",
-      "DestinationPort": 11321.000244140625,
+      "DestinationPort": 319.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5312,7 +5312,7 @@
       "SourcePort": -1,
       "Destination": "C",
       "DestinationPath": "untitled/IGBT//Diode/C",
-      "DestinationPort": 11439.00048828125,
+      "DestinationPort": 517.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5321,7 +5321,7 @@
       "SourcePort": -1,
       "Destination": "E",
       "DestinationPath": "untitled/IGBT//Diode/E",
-      "DestinationPort": 11442.00048828125,
+      "DestinationPort": 520.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5654,7 +5654,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode/IGBT//Diode",
-      "DestinationPort": 11426.000244140625,
+      "DestinationPort": 504.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5663,7 +5663,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode/IGBT//Diode",
-      "DestinationPort": 11427.000244140625,
+      "DestinationPort": 505.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5681,7 +5681,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode2",
       "DestinationPath": "untitled/IGBT//Diode2",
-      "DestinationPort": 11318.000244140625,
+      "DestinationPort": 316.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5690,7 +5690,7 @@
       "SourcePort": -1,
       "Destination": "Voltage Measurement",
       "DestinationPath": "untitled/Voltage Measurement",
-      "DestinationPort": 11353.000244140625,
+      "DestinationPort": 352.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5699,7 +5699,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch",
       "DestinationPath": "untitled/Series RLC Branch",
-      "DestinationPort": 11340.000244140625,
+      "DestinationPort": 339.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5708,7 +5708,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode3",
       "DestinationPath": "untitled/IGBT//Diode3",
-      "DestinationPort": 11322.000244140625,
+      "DestinationPort": 320.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5717,7 +5717,7 @@
       "SourcePort": -1,
       "Destination": "DC Voltage Source",
       "DestinationPath": "untitled/DC Voltage Source",
-      "DestinationPort": 11279.000366210938,
+      "DestinationPort": 279.0001220703125,
       "Origin": "pc"
     },
     {
@@ -5744,7 +5744,7 @@
       "SourcePort": -1,
       "Destination": "C",
       "DestinationPath": "untitled/IGBT//Diode1/C",
-      "DestinationPort": 11474.000732421875,
+      "DestinationPort": 624.0003662109375,
       "Origin": "pc"
     },
     {
@@ -5753,7 +5753,7 @@
       "SourcePort": -1,
       "Destination": "E",
       "DestinationPath": "untitled/IGBT//Diode1/E",
-      "DestinationPort": 11477.000610351562,
+      "DestinationPort": 627.0003662109375,
       "Origin": "pc"
     },
     {
@@ -6086,7 +6086,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode1/IGBT//Diode",
-      "DestinationPort": 11461.00048828125,
+      "DestinationPort": 611.0003662109375,
       "Origin": "pc"
     },
     {
@@ -6095,7 +6095,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode1/IGBT//Diode",
-      "DestinationPort": 11462.00048828125,
+      "DestinationPort": 612.0003662109375,
       "Origin": "pc"
     },
     {
@@ -6113,7 +6113,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode",
-      "DestinationPort": 11309.000366210938,
+      "DestinationPort": 307.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6122,7 +6122,7 @@
       "SourcePort": -1,
       "Destination": "DC Voltage Source",
       "DestinationPath": "untitled/DC Voltage Source",
-      "DestinationPort": 11280.000366210938,
+      "DestinationPort": 280.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6131,7 +6131,7 @@
       "SourcePort": -1,
       "Destination": "Voltage Measurement",
       "DestinationPath": "untitled/Voltage Measurement",
-      "DestinationPort": 11353.000244140625,
+      "DestinationPort": 352.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6140,7 +6140,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch",
       "DestinationPath": "untitled/Series RLC Branch",
-      "DestinationPort": 11340.000244140625,
+      "DestinationPort": 339.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6149,7 +6149,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode1",
       "DestinationPath": "untitled/IGBT//Diode1",
-      "DestinationPort": 11313.000244140625,
+      "DestinationPort": 311.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6176,7 +6176,7 @@
       "SourcePort": -1,
       "Destination": "C",
       "DestinationPath": "untitled/IGBT//Diode2/C",
-      "DestinationPort": 11508.000610351562,
+      "DestinationPort": 658.00048828125,
       "Origin": "pc"
     },
     {
@@ -6185,7 +6185,7 @@
       "SourcePort": -1,
       "Destination": "E",
       "DestinationPath": "untitled/IGBT//Diode2/E",
-      "DestinationPort": 11511.000854492188,
+      "DestinationPort": 661.000732421875,
       "Origin": "pc"
     },
     {
@@ -6518,7 +6518,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode2/IGBT//Diode",
-      "DestinationPort": 11493.001586914062,
+      "DestinationPort": 643.000732421875,
       "Origin": "pc"
     },
     {
@@ -6527,7 +6527,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode2/IGBT//Diode",
-      "DestinationPort": 11494.001098632812,
+      "DestinationPort": 644.000732421875,
       "Origin": "pc"
     },
     {
@@ -6545,7 +6545,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch1",
       "DestinationPath": "untitled/Series RLC Branch1",
-      "DestinationPort": 11344.000244140625,
+      "DestinationPort": 343.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6554,7 +6554,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode",
-      "DestinationPort": 11310.000244140625,
+      "DestinationPort": 308.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6563,7 +6563,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode1",
       "DestinationPath": "untitled/IGBT//Diode1",
-      "DestinationPort": 11314.000244140625,
+      "DestinationPort": 312.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6572,7 +6572,7 @@
       "SourcePort": -1,
       "Destination": "DC Voltage Source",
       "DestinationPath": "untitled/DC Voltage Source",
-      "DestinationPort": 11279.000366210938,
+      "DestinationPort": 279.0001220703125,
       "Origin": "pc"
     },
     {
@@ -6599,7 +6599,7 @@
       "SourcePort": -1,
       "Destination": "C",
       "DestinationPath": "untitled/IGBT//Diode3/C",
-      "DestinationPort": 11652.000610351562,
+      "DestinationPort": 802.00048828125,
       "Origin": "pc"
     },
     {
@@ -6608,7 +6608,7 @@
       "SourcePort": -1,
       "Destination": "E",
       "DestinationPath": "untitled/IGBT//Diode3/E",
-      "DestinationPort": 11656.000854492188,
+      "DestinationPort": 806.00048828125,
       "Origin": "pc"
     },
     {
@@ -6941,7 +6941,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode3/IGBT//Diode",
-      "DestinationPort": 11639.001586914062,
+      "DestinationPort": 789.0013427734375,
       "Origin": "pc"
     },
     {
@@ -6950,7 +6950,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode3/IGBT//Diode",
-      "DestinationPort": 11640.001220703125,
+      "DestinationPort": 790.0009765625,
       "Origin": "pc"
     },
     {
@@ -7175,7 +7175,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode2",
       "DestinationPath": "untitled/IGBT//Diode2",
-      "DestinationPort": 11318.000244140625,
+      "DestinationPort": 316.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7184,7 +7184,7 @@
       "SourcePort": -1,
       "Destination": "Voltage Measurement",
       "DestinationPath": "untitled/Voltage Measurement",
-      "DestinationPort": 11353.000244140625,
+      "DestinationPort": 352.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7193,7 +7193,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode1",
       "DestinationPath": "untitled/IGBT//Diode1",
-      "DestinationPort": 11313.000244140625,
+      "DestinationPort": 311.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7202,7 +7202,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch1",
       "DestinationPath": "untitled/Series RLC Branch1",
-      "DestinationPort": 11343.000244140625,
+      "DestinationPort": 342.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7211,7 +7211,7 @@
       "SourcePort": -1,
       "Destination": "Voltage Measurement",
       "DestinationPath": "untitled/Voltage Measurement",
-      "DestinationPort": 11354.000244140625,
+      "DestinationPort": 353.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7220,7 +7220,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch",
       "DestinationPath": "untitled/Series RLC Branch",
-      "DestinationPort": 11341.000244140625,
+      "DestinationPort": 340.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7229,7 +7229,7 @@
       "SourcePort": -1,
       "Destination": "Voltage Measurement",
       "DestinationPath": "untitled/Voltage Measurement",
-      "DestinationPort": 11354.000244140625,
+      "DestinationPort": 353.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7238,7 +7238,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode",
       "DestinationPath": "untitled/IGBT//Diode",
-      "DestinationPort": 11310.000244140625,
+      "DestinationPort": 308.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7247,7 +7247,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode3",
       "DestinationPath": "untitled/IGBT//Diode3",
-      "DestinationPort": 11321.000244140625,
+      "DestinationPort": 319.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7301,7 +7301,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode2",
       "DestinationPath": "untitled/IGBT//Diode2",
-      "DestinationPort": 11318.000244140625,
+      "DestinationPort": 316.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7310,7 +7310,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch",
       "DestinationPath": "untitled/Series RLC Branch",
-      "DestinationPort": 11340.000244140625,
+      "DestinationPort": 339.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7319,7 +7319,7 @@
       "SourcePort": -1,
       "Destination": "IGBT/Diode1",
       "DestinationPath": "untitled/IGBT//Diode1",
-      "DestinationPort": 11313.000244140625,
+      "DestinationPort": 311.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7328,7 +7328,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch",
       "DestinationPath": "untitled/Series RLC Branch",
-      "DestinationPort": 11341.000244140625,
+      "DestinationPort": 340.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7337,7 +7337,7 @@
       "SourcePort": -1,
       "Destination": "Series RLC Branch1",
       "DestinationPath": "untitled/Series RLC Branch1",
-      "DestinationPort": 11343.000244140625,
+      "DestinationPort": 342.0001220703125,
       "Origin": "pc"
     },
     {
@@ -7382,7 +7382,7 @@
       "SourcePort": -1,
       "Destination": "+",
       "DestinationPath": "untitled/Voltage Measurement/+",
-      "DestinationPort": 11816.001220703125,
+      "DestinationPort": 1139.0003662109375,
       "Origin": "pc"
     },
     {
@@ -7391,7 +7391,7 @@
       "SourcePort": -1,
       "Destination": "-",
       "DestinationPath": "untitled/Voltage Measurement/-",
-      "DestinationPort": 11819.001220703125,
+      "DestinationPort": 1142.0003662109375,
       "Origin": "pc"
     },
     {
@@ -7427,7 +7427,7 @@
       "SourcePort": -1,
       "Destination": "VoltageMeasurement",
       "DestinationPath": "untitled/Voltage Measurement/VoltageMeasurement",
-      "DestinationPort": 11754.000732421875,
+      "DestinationPort": 1131.0003662109375,
       "Origin": "pc"
     },
     {
@@ -7436,7 +7436,7 @@
       "SourcePort": -1,
       "Destination": "VoltageMeasurement",
       "DestinationPath": "untitled/Voltage Measurement/VoltageMeasurement",
-      "DestinationPort": 11755.000732421875,
+      "DestinationPort": 1132.0003662109375,
       "Origin": "pc"
     },
     {
@@ -7469,7 +7469,7 @@
   ],
   "lines": [
     {
-      "Handle": 11393.000366210938,
+      "Handle": 392.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -7489,7 +7489,7 @@
       ]
     },
     {
-      "Handle": 11392.00048828125,
+      "Handle": 391.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode",
       "DstPaths": [],
@@ -7505,7 +7505,7 @@
       ]
     },
     {
-      "Handle": 11391.000610351562,
+      "Handle": 390.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/Series RLC Branch1",
       "DstPaths": [],
@@ -7521,7 +7521,7 @@
       ]
     },
     {
-      "Handle": 11390.00048828125,
+      "Handle": 389.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/NOT1",
       "DstPaths": [
@@ -7539,7 +7539,7 @@
       ]
     },
     {
-      "Handle": 11389.000366210938,
+      "Handle": 388.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan1",
       "DstPaths": [
@@ -7557,7 +7557,7 @@
       ]
     },
     {
-      "Handle": 11388.00048828125,
+      "Handle": 387.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan1",
       "DstPaths": [
@@ -7579,7 +7579,7 @@
       ]
     },
     {
-      "Handle": 11387.000610351562,
+      "Handle": 386.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan1",
       "DstPaths": [
@@ -7598,7 +7598,7 @@
       ]
     },
     {
-      "Handle": 11386.000732421875,
+      "Handle": 385.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/Product",
       "DstPaths": [
@@ -7624,7 +7624,7 @@
       ]
     },
     {
-      "Handle": 11385.00048828125,
+      "Handle": 384.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Sine Wave1",
       "DstPaths": [
@@ -7650,7 +7650,7 @@
       ]
     },
     {
-      "Handle": 11384.000366210938,
+      "Handle": 383.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/Square Wave\nGenerator",
       "DstPaths": [
@@ -7672,7 +7672,7 @@
       ]
     },
     {
-      "Handle": 11383.00048828125,
+      "Handle": 382.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Square Wave\nGenerator",
       "DstPaths": [
@@ -7706,7 +7706,7 @@
       ]
     },
     {
-      "Handle": 11382.00048828125,
+      "Handle": 381.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Square Wave\nGenerator",
       "DstPaths": [
@@ -7725,7 +7725,7 @@
       ]
     },
     {
-      "Handle": 11381.00048828125,
+      "Handle": 380.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Repeating\nSequence",
       "DstPaths": [
@@ -7751,7 +7751,7 @@
       ]
     },
     {
-      "Handle": 11380.000610351562,
+      "Handle": 379.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/Voltage Measurement",
       "DstPaths": [
@@ -7773,7 +7773,7 @@
       ]
     },
     {
-      "Handle": 11379.00048828125,
+      "Handle": 378.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/NOT",
       "DstPaths": [
@@ -7791,7 +7791,7 @@
       ]
     },
     {
-      "Handle": 11378.000366210938,
+      "Handle": 377.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan",
       "DstPaths": [
@@ -7813,7 +7813,7 @@
       ]
     },
     {
-      "Handle": 11377.000610351562,
+      "Handle": 376.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan",
       "DstPaths": [
@@ -7835,7 +7835,7 @@
       ]
     },
     {
-      "Handle": 11376.000610351562,
+      "Handle": 375.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/GreaterThan",
       "DstPaths": [
@@ -7854,7 +7854,7 @@
       ]
     },
     {
-      "Handle": 11375.00048828125,
+      "Handle": 374.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Constant",
       "DstPaths": [
@@ -7880,7 +7880,7 @@
       ]
     },
     {
-      "Handle": 11374.00048828125,
+      "Handle": 373.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/Sine Wave",
       "DstPaths": [
@@ -7906,7 +7906,7 @@
       ]
     },
     {
-      "Handle": 11373.00048828125,
+      "Handle": 372.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/From3",
       "DstPaths": [
@@ -7928,7 +7928,7 @@
       ]
     },
     {
-      "Handle": 11372.00048828125,
+      "Handle": 371.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/From1",
       "DstPaths": [
@@ -7950,7 +7950,7 @@
       ]
     },
     {
-      "Handle": 11371.000610351562,
+      "Handle": 370.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/From2",
       "DstPaths": [
@@ -7972,7 +7972,7 @@
       ]
     },
     {
-      "Handle": 11370.00048828125,
+      "Handle": 369.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/From",
       "DstPaths": [
@@ -7994,7 +7994,7 @@
       ]
     },
     {
-      "Handle": 11369.00048828125,
+      "Handle": 368.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/Voltage Measurement",
       "DstPaths": [],
@@ -8018,7 +8018,7 @@
       ]
     },
     {
-      "Handle": 11368.000610351562,
+      "Handle": 367.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -8034,7 +8034,7 @@
       ]
     },
     {
-      "Handle": 11367.000610351562,
+      "Handle": 366.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/Series RLC Branch",
       "DstPaths": [],
@@ -8050,7 +8050,7 @@
       ]
     },
     {
-      "Handle": 11366.000610351562,
+      "Handle": 365.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -8066,7 +8066,7 @@
       ]
     },
     {
-      "Handle": 11365.000366210938,
+      "Handle": 364.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/Series RLC Branch",
       "DstPaths": [],
@@ -8082,7 +8082,7 @@
       ]
     },
     {
-      "Handle": 11364.000366210938,
+      "Handle": 363.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/Voltage Measurement",
       "DstPaths": [],
@@ -8110,7 +8110,7 @@
       ]
     },
     {
-      "Handle": 11363.000610351562,
+      "Handle": 362.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -8126,7 +8126,7 @@
       ]
     },
     {
-      "Handle": 11362.00048828125,
+      "Handle": 361.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode2",
       "DstPaths": [],
@@ -8142,7 +8142,7 @@
       ]
     },
     {
-      "Handle": 11361.00048828125,
+      "Handle": 360.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -8166,7 +8166,7 @@
       ]
     },
     {
-      "Handle": 11360.000732421875,
+      "Handle": 359.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode3",
       "DstPaths": [],
@@ -8186,7 +8186,7 @@
       ]
     },
     {
-      "Handle": 11359.00048828125,
+      "Handle": 358.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode1",
       "DstPaths": [],
@@ -8202,7 +8202,7 @@
       ]
     },
     {
-      "Handle": 11358.000366210938,
+      "Handle": 357.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -8226,7 +8226,7 @@
       ]
     },
     {
-      "Handle": 11357.000366210938,
+      "Handle": 356.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode",
       "DstPaths": [],
@@ -8246,7 +8246,7 @@
       ]
     },
     {
-      "Handle": 11356.000244140625,
+      "Handle": 355.0001220703125,
       "IsRoot": true,
       "SrcPath": "untitled/IGBT//Diode2",
       "DstPaths": [],
