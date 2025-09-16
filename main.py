@@ -183,7 +183,9 @@ def main() -> None:
                 # 保存/绘制 ScopeData
                 img_path = os.path.join(run_dir, f"scope_action_{i+1}.png")
                 try:
-                    plot_scope_dataset(sim, var_name="ScopeData", label_prefix=f"act{i+1}", save_path=img_path)
+                    # 传入本步的动作字典以用于图例，避免显示诸如 'act11' 的占位标签，直接显示真实动作值
+                    # 例如：当 step_action = {"L_load": 10} 时，图例将展示为 'L_load=10'
+                    plot_scope_dataset(sim, var_name="ScopeData", label_prefix ='', actions=step_action, save_path=img_path)
                 except Exception:
                     log.warning("plot.scope.failed", step=i)
                 # plot_scope_dataset(sim, var_name="ScopeData", label_prefix=f"act{i + 1}")

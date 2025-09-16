@@ -90,7 +90,7 @@ def plot_scope_dataset(
     sample_time: Optional[float] = None,
     time_mode: str = "native",   # native | reconstruct | scale_by_ts
     style: str = "line",         # line | stairs
-    legend_from_actions: bool = False,  # 是否用动作值作为图例标签
+    legend_from_actions: bool = True,  # 是否用动作值作为图例标签
 ):
     import matplotlib.pyplot as plt
 
@@ -113,7 +113,7 @@ def plot_scope_dataset(
             label = ", ".join(items)
             # 避免过长
             return (label[:60] + "…") if len(label) > 60 else label
-        return f"{label_prefix}{idx}"
+        return f"{label_prefix}{idx}" if label_prefix else f"signal{idx}" if label_prefix else f"signal{idx}" if label_prefix else f"signal{idx}"
 
     for idx, (t, y) in enumerate(series, start=1):
         # 根据需求修正时间轴：
@@ -136,20 +136,21 @@ def plot_scope_dataset(
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
 
-    # 在图中叠加当前动作参数（如 Kp/Ki/rep_t/L_load 等）
-    text = _format_actions(actions)
-    if text:
-        ax.text(
-            0.01,
-            0.99,
-            text,
-            transform=ax.transAxes,
-            va="top",
-            ha="left",
-            fontsize=9,
-            family="monospace",
-            bbox=dict(facecolor="white", alpha=0.7, edgecolor="gray"),
-        )
+    # 动作值已通过图例显示，不再需要右上角文本框
+    # 注释掉原来的文本框显示，避免重复显示动作值
+    # text = _format_actions(actions)
+    # if text:
+    #     ax.text(
+    #         0.99,
+    #         0.99,
+    #         text,
+    #         transform=ax.transAxes,
+    #         va="top",
+    #         ha="right",
+    #         fontsize=9,
+    #         family="monospace",
+    #         bbox=dict(facecolor="white", alpha=0.7, edgecolor="gray"),
+    #     )
 
     plt.tight_layout()
     if save_path:
