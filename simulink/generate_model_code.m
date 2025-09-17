@@ -1,14 +1,6 @@
 
     % 打开文件准备写入代码
-    fid = fopen('inverter_model.m', 'w');
     model_name = untitled;
-    
-    % 写入函数头
-    fprintf(fid, 'function create_inverter_model()\n');
-    fprintf(fid, '    %% 创建单相桥式逆变器模型\n');
-    fprintf(fid, '    model_name = ''%s_generated'';\n', model_name); % 修改模型名称避免冲突
-    fprintf(fid, '    new_system(model_name);\n');
-    fprintf(fid, '    open_system(model_name);\n\n');
 
   
     
