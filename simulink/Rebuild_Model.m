@@ -1,12 +1,12 @@
 function newModel = rebuild_model_from_export(inputPath, newModelName)
-% 重建 Simulink 模型（不依赖 sigLines）
-% - 直接使用导出的完整路径 SourcePath/DestinationPath 精确定位块
-% - 端口号缺失(-1/NaN)时，使用端口/块几何位置最近邻匹配到端口句柄
-% - 自动创建父系统，过滤库块内部子块，所有连线使用 autorouting
+% 重建 Simulink 模型（不依赖 sigLines ?
+% - 直接使用导出的完整路 ? SourcePath/DestinationPath 精确定位 ?
+% - 端口号缺 ?(-1/NaN)时，使用端口/块几何位置最近邻匹配到端口句 ?
+% - 自动创建父系统，过滤库块内部子块，所有连线使 ? autorouting
 
-	% -------- 1) 加载数据（MAT/JSON 自适应） --------
+	% -------- 1) 加载数据（MAT/JSON 自 ? 应 ? --------
 	if nargin < 1 || isempty(inputPath)
-		error('请提供前面导出的 MAT 或 JSON 文件路径。');
+		error('请提供前面导出的 MAT  ? JSON 文件路径 ?');
 	end
 	if nargin < 2 || isempty(newModelName)
 		newModelName = 'recovered_model';
@@ -14,14 +14,16 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 
 	data = load_or_decode_graph(inputPath);
 
-	% 基本变量（若缺失则置空安全值）
+	% 基本变量（若缺失则置空安全 ? ）
 	elements = safe_field(data, 'elements', struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{}));
 	ports    = safe_field(data, 'ports',    struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{}));
 	conns    = safe_connections(data);  % 现在包含 SourcePath/DestinationPath
 
-	assert(~isempty(elements), 'elements 为空，无法重建模型。');
+	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
 
-	% 原模型根名（用于 path 重定位）；新模型名
+    
+    
+	% 原模型根名（用于 path 重定位）；新模型 ?
 	origRoot = get_root_from_elements(elements);
 	newModel = char(newModelName);
 
@@ -31,22 +33,22 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	end
 	new_system(newModel); open_system(newModel);
 
-	% -------- 3) 预处理块并创建（父->子） --------
+	% -------- 3) 预处理块并创建（ ?->子） --------
 	elemTable = preprocess_elements(elements, origRoot, newModel);              % 计算新旧路径映射
-	elemTable = filter_descendants_of_library_blocks(elemTable);                % 过滤库内部子块
+	elemTable = filter_descendants_of_library_blocks(elemTable);                % 过滤库内部子 ?
 
 	% 先建 SubSystem
 	subRows = elemTable(strcmp(elemTable.BlockType, 'SubSystem'), :);
 	subRows = sortrows(subRows, 'Depth');
 	for i = 1:height(subRows), create_block_in_model(subRows(i,:), true); end
 
-	% 再建普通块
+	% 再建普 ? 块
 	blkRows = elemTable(~strcmp(elemTable.BlockType, 'SubSystem'), :);
 	blkRows = sortrows(blkRows, 'Depth');
 	for i = 1:height(blkRows), create_block_in_model(blkRows(i,:), false); end
 
-	% -------- 4) 建立连接（优先用完整路径；端口句柄回退几何匹配） --------
-	% 索引：原路径->新路径；新路径->中心坐标；原路径->导出端口集合
+	% -------- 4) 建立连接（优先用完整路径；端口句柄回 ?几何匹配 ? --------
+	% 索引：原路径->新路径；新路 ?->中心坐标；原路径->导出端口集合
 	orig2new = containers.Map('KeyType','char','ValueType','char');
 	centers  = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:height(elemTable)
@@ -58,7 +60,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	portsByOrig = index_ports_by_blockpath(ports);  % origPath -> 端口结构数组
 
 	for k = 1:numel(conns)
-		% 读取连接的完整原路径；若缺失则回退用名称匹配（极少出现）
+		% 读取连接的完整原路径；若缺失则回 ?用名称匹配（极少出现 ?
 		srcOrigPath = char(getfield_or_default(conns(k), 'SourcePath', ''));
 		dstOrigPath = char(getfield_or_default(conns(k), 'DestinationPath', ''));
 		srcName     = char(getfield_or_default(conns(k), 'Source', ''));
@@ -66,13 +68,13 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		SP          = getfield_or_default(conns(k), 'SourcePort', -1);
 		DP          = getfield_or_default(conns(k), 'DestinationPort', -1);
 
-		% 路径重映射到新模型
+		% 路径重映射到新模 ?
 		if ~isempty(srcOrigPath)
 			srcNewPath = sanitize_path(rebase_path(srcOrigPath, origRoot, newModel));
 		else
-			% 回退：按名称在 elemTable 中找第一条（不建议，但兼容旧数据）
+			% 回 ??：按名称 ? elemTable 中找第一条（不建议，但兼容旧数据 ?
 			idx = find(strcmp(elemTable.ShortName, string(srcName)), 1, 'first');
-			if isempty(idx), warning('找不到源块：%s。跳过该连接。', srcName); continue; end
+			if isempty(idx), warning('找不到源块：%s。跳过该连接 ?', srcName); continue; end
 			srcNewPath = char(elemTable.NewPath(idx));
 			srcOrigPath = char(elemTable.OrigPath(idx));
 		end
@@ -81,7 +83,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 			dstNewPath = sanitize_path(rebase_path(dstOrigPath, origRoot, newModel));
 		else
 			idx = find(strcmp(elemTable.ShortName, string(dstName)), 1, 'first');
-			if isempty(idx), warning('找不到目标块：%s。跳过该连接。', dstName); continue; end
+			if isempty(idx), warning('找不到目标块 ?%s。跳过该连接 ?', dstName); continue; end
 			dstNewPath = char(elemTable.NewPath(idx));
 			dstOrigPath = char(elemTable.OrigPath(idx));
 		end
@@ -89,34 +91,34 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		% 同父系统校验
 		ps = fileparts(srcNewPath); pd = fileparts(dstNewPath);
 		if ~strcmp(ps, pd)
-			% 一般不应跨系统；此处保底：取共同父系统并继续
+			%  ?般不应跨系统；此处保底：取共同父系统并继 ?
 			parentSys = common_parent_of_paths(srcNewPath, dstNewPath);
 		else
 			parentSys = ps;
 		end
 
-		% 计算中心，供几何回退匹配使用
+		% 计算中心，供几何回 ??匹配使用
 		if isKey(centers, dstNewPath), dstCenter = centers(dstNewPath); else, dstCenter = [inf inf]; end
 		if isKey(centers, srcNewPath), srcCenter = centers(srcNewPath); else, srcCenter = [inf inf]; end
 
-		% 解析源/目标端口句柄：优先端口号；无效则最近邻几何匹配（含保守端口）
+		% 解析 ?/目标端口句柄：优先端口号；无效则 ?近邻几何匹配（含保守端口 ?
 		try
 			srcH = resolve_port_handle_by_geom(srcNewPath, srcOrigPath, portsByOrig, 'src', dstCenter, SP);
 			dstH = resolve_port_handle_by_geom(dstNewPath, dstOrigPath, portsByOrig, 'dst', srcCenter, DP);
 		catch ME
-			warning('端口解析失败：%s(%g) -> %s(%g)。原因：%s', srcNewPath, SP, dstNewPath, DP, ME.message);
+			warning('端口解析失败 ?%s(%g) -> %s(%g)。原因：%s', srcNewPath, SP, dstNewPath, DP, ME.message);
 			continue;
 		end
 
-		% 执行连接（autorouting）
+		% 执行连接（autorouting ?
 		try
 			add_line(parentSys, srcH, dstH, 'autorouting','on');
 		catch ME
-			warning('连接失败：%s(%g) -> %s(%g)。原因：%s', srcNewPath, SP, dstNewPath, DP, ME.message);
+			warning('连接失败 ?%s(%g) -> %s(%g)。原因：%s', srcNewPath, SP, dstNewPath, DP, ME.message);
 		end
 	end
 
-	% 最后整理
+	%  ?后整 ?
 	set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
 end
@@ -124,7 +126,7 @@ end
 % ============================== 辅助函数 ==============================
 
 function data = load_or_decode_graph(inputPath)
-	% 加载 MAT 或 JSON，返回统一结构
+	% 加载 MAT  ? JSON，返回统 ?结构
 	[~,~,ext] = fileparts(inputPath);
 	switch lower(ext)
 		case '.mat'
@@ -142,7 +144,7 @@ function data = load_or_decode_graph(inputPath)
 			txt  = fileread(inputPath);
 			data = jsondecode(txt);
 		otherwise
-			error('不支持的文件类型：%s（请提供 .mat 或 .json）', ext);
+			error('不支持的文件类型 ?%s（请提供 .mat  ? .json ?', ext);
 	end
 end
 
@@ -182,18 +184,18 @@ function conns = safe_connections(data)
 end
 
 function root = get_root_from_elements(elements)
-	% 从 elements.Path 推断原根名
+	%  ? elements.Path 推断原根 ?
 	p = elements(1).Path;
 	slash = find(p=='/', 1, 'first');
 	if isempty(slash)
-		root = p;              % 已在根
+		root = p;              % 已在 ?
 	else
 		root = p(1:slash-1);   % 根名
 	end
 end
 
 function T = preprocess_elements(elements, origRoot, newModel)
-	% 生成用于创建的表格，并映射到新模型路径
+	% 生成用于创建的表格，并映射到新模型路 ?
 	N = numel(elements);
 	ShortName  = strings(N,1);
 	OrigPath   = strings(N,1);
@@ -235,7 +237,7 @@ function s = def_str(st, field, defaultV)
 end
 
 function newPath = rebase_path(origPath, origRoot, newRoot)
-	% 将原路径替换为新模型根路径；无法精确映射时取最后一级名挂到新根
+	% 将原路径替换为新模型根路径；无法精确映射时取 ?后一级名挂到新根
 	origPath = char(origPath);
 	origRoot = char(origRoot);
 	newRoot  = char(newRoot);
@@ -251,7 +253,7 @@ function newPath = rebase_path(origPath, origRoot, newRoot)
 end
 
 function T = filter_descendants_of_library_blocks(T)
-	% 剔除库引用块内部子块（例如 ".../DC Voltage Source/Model"）
+	% 剔除库引用块内部子块（例 ? ".../DC Voltage Source/Model" ?
 	libMask = T.LibraryLink ~= "";
 	libRoots = cellfun(@char, T.NewPath(libMask), 'UniformOutput', false);
 	if isempty(libRoots), return; end
@@ -270,13 +272,13 @@ function T = filter_descendants_of_library_blocks(T)
 end
 
 function p = sanitize_path(p)
-	% 去掉尾部斜杠，保持 Simulink 合法路径
+	% 去掉尾部斜杠，保 ? Simulink 合法路径
 	p = char(string(p));
 	while ~isempty(p) && p(end) == '/', p = p(1:end-1); end
 end
 
 function ensure_system_exists(sysPath)
-	% 逐级创建父系统
+	% 逐级创建父系 ?
 	sysPath = sanitize_path(sysPath);
 	if isempty(sysPath) || bdIsRoot(sysPath), return; end
 	if exist_block(sysPath), return; end
@@ -312,7 +314,7 @@ function parent = common_parent_of_paths(p1, p2)
 end
 
 function create_block_in_model(row, isSubsystem)
-	% 实际创建单个块，并设置位置/朝向（幂等）
+	% 实际创建单个块，并设置位 ?/朝向（幂等）
 	newPath = sanitize_path(char(row.NewPath));
 	parent  = sanitize_path(char(row.ParentPath));
 	btype   = char(row.BlockType);
@@ -345,20 +347,20 @@ function create_block_in_model(row, isSubsystem)
 						add_block('simulink/Sinks/Out1',  newPath, 'MakeNameUnique','off');
 					otherwise
 						add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
-						warning('块 %s 无库引用，使用 Subsystem 占位。', newPath);
+						warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
 				end
 			end
 		end
 		set_param(newPath, 'Position', pos, 'Orientation', ori);
 	catch ME
-		warning('创建块失败：%s（原因：%s）', newPath, ME.message);
+		warning('创建块失败：%s（原因：%s ?', newPath, ME.message);
 	end
 end
 
 % ---------- 连接阶段辅助 ----------
 
 function portsIdx = index_ports_by_blockpath(ports)
-	% 将导出的 ports 按 BlockPath（原路径）分组
+	% 将导出的 ports  ? BlockPath（原路径）分 ?
 	portsIdx = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:numel(ports)
 		bp = char(ports(i).BlockPath);
@@ -371,7 +373,7 @@ function portsIdx = index_ports_by_blockpath(ports)
 end
 
 function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, otherCenter, preferredNum)
-	% 基于“端口号优先 + 几何最近邻回退”解析端口句柄
+	% 基于“端口号优先 + 几何 ?近邻回 ??”解析端口句 ?
 	ph  = get_param(newPath, 'PortHandles');
 
 	% 1) 若端口号有效，且 Inport/Outport 数量足够，直接取
@@ -387,7 +389,7 @@ function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, othe
 		end
 	end
 
-	% 2) 收集所有可用端口句柄及其坐标（含保守端口）
+	% 2) 收集 ?有可用端口句柄及其坐标（含保守端口）
 	allH = []; allP = []; allT = {};
 	kinds = {'Outport','Inport','LConn','RConn','Conn'};
 	for i = 1:numel(kinds)
@@ -401,9 +403,9 @@ function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, othe
 			allT  = [allT; repmat({k}, numel(hh), 1)];
 		end
 	end
-	assert(~isempty(allH), '块 %s 无任何端口。', newPath);
+	assert(~isempty(allH), ' ? %s 无任何端口 ??', newPath);
 
-	% 3) 候选集合：源优先出端口，目标优先入端口；物理端口两侧均允许
+	% 3) 候 ? 集合：源优先出端口，目标优先入端口；物理端口两侧均允许
 	if strcmp(role,'src')
 		prefMask = ismember(allT, {'Outport','LConn','RConn','Conn'});
 	else
@@ -412,7 +414,7 @@ function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, othe
 	candH = allH(prefMask); candP = allP(prefMask, :);
 	if isempty(candH), candH = allH; candP = allP; end
 
-	% 4) 若有原端口坐标，选距离“对端中心”或该坐标最近的端口；否则用对端中心
+	% 4) 若有原端口坐标，选距离 ? 对端中心 ? 或该坐标最近的端口；否则用对端中心
 	target = [];
 	if isKey(portsIdx, origPath)
 		P = portsIdx(origPath);
@@ -429,7 +431,7 @@ function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, othe
 	end
 	if isempty(target), target = otherCenter; end
 
-	% 5) 最近邻选择
+	% 5)  ?近邻选择
 	d = hypot(candP(:,1)-target(1), candP(:,2)-target(2));
 	[~, iMin] = min(d);
 	h = candH(iMin);
@@ -442,5 +444,4 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
-
 newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
