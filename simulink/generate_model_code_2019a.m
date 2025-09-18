@@ -1,5 +1,6 @@
 
     model_name = 'SinglePhaseHBridge_Unipolar';
+    open_system(model_name);
     
     % 获取模型中的 ??有块
     blocks = find_system(model_name, 'SearchDepth', 1);
@@ -9,7 +10,7 @@
     for i = 1:length(blocks)
         disp(getfullname(blocks(i,1)));
     end
-% 获取模型中所有 ? 线”对象（信号线）
+% 获取模型中所�? ? 线�?�对象（信号线）
 % 说明：这 ??步覆盖普 ?? Simulink 信号线；但拿不到物理网络线（ ?? RLC 两端子线 ??
 all_blocks = find_system(model_name, 'SearchDepth',1,'FindAll','on', ...
     'LookUnderMasks','on', 'FollowLinks','on', 'type','line');
@@ -19,12 +20,12 @@ connectivity = {};
 % 去重：源块全名|源端 ?? => 目标块全名|目标端口
 conn_keys = containers.Map('KeyType','char','ValueType','logical');
 
-% 遍历每条“信号线”，并 ? 归遍历分支（避免漏 ?? LineChildren ??
+% 遍历每条“信号线”，�? ? 归遍历分支（避免�? ?? LineChildren ??
 for i = 1:length(all_blocks)
     block = all_blocks(i,1);               % 实际 ?? line 句柄，沿用你的变量名
 
     src_port = get_param(block, 'SrcPortHandle');
-    dst_ports = get_param(block, 'DstPortHandle'); % 保留你的原变量（后续我们用 ? 归统一收集 ??
+    dst_ports = get_param(block, 'DstPortHandle'); % 保留你的原变量（后续我们�? ? 归统�?收集 ??
     if src_port ~= -1
         src_block = get_param(src_port, 'Parent');
         src_block_name = get_param(src_block, 'Name');
@@ -53,7 +54,7 @@ for i = 1:length(all_blocks)
                         'Destination',      dst_block_name, ...
                         'DestinationPath',  dst_block_full, ...   % 新增：目标块完整路径
                         'DestinationPort',  dst_port_num, ...
-                        'Origin',           'line' ...            % 可 ? ：来源标记（普通信号线 ??
+                        'Origin',           'line' ...            % �? ? ：来源标记（普�?�信号线 ??
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ')']);
@@ -72,7 +73,7 @@ for i = 1:length(all_blocks_pc)
 
     % 遍历该块的每个端口连 ??
     for p = 1:numel(pc)
-        % 1) 作为“输出端口 ? 一侧：本块 -> 下游块（包含信号与物理端口）
+        % 1) 作为“输出端�? ? �?侧：本块 -> 下游块（包含信号与物理端口）
         if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
             src_block_full = getfullname(bh);
             src_block_name = get_param(bh, 'Name');
@@ -94,7 +95,7 @@ for i = 1:length(all_blocks_pc)
                         'Destination',      dst_block_name, ...
                         'DestinationPath',  dst_block_full, ...   % 新增
                         'DestinationPort',  dst_port_num, ...
-                        'Origin',           'pc' ...              % 可 ? ：来源标记（PortConnectivity ??
+                        'Origin',           'pc' ...              % �? ? ：来源标记（PortConnectivity ??
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
@@ -102,7 +103,7 @@ for i = 1:length(all_blocks_pc)
             end
         end
 
-        % 2) 作为“输入端口 ? 一侧：上游 ?? -> 本块（物理端口常为双向，这里也补齐）
+        % 2) 作为“输入端�? ? �?侧：上游 ?? -> 本块（物理端口常为双向，这里也补齐）
         if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
             src_bh          = pc(p).SrcBlock;
             src_block_full  = getfullname(src_bh);
@@ -128,7 +129,7 @@ for i = 1:length(all_blocks_pc)
                     'Destination',      dst_block_name, ...
                     'DestinationPath',  dst_block_full, ...      % 新增
                     'DestinationPort',  dst_port_num, ...
-                    'Origin',           'pc' ...                 % 可 ? ：来源标记（PortConnectivity ??
+                    'Origin',           'pc' ...                 % �? ? ：来源标记（PortConnectivity ??
                 );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                   dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
@@ -150,7 +151,7 @@ end
 % 拿到 ?? ?? block 句柄（包含掩 ??/链接/变体 ??
 all_blocks_for_pos = all_blocks_pc;
 
-% 结果容器：元件 ? 端口（可 ? ）、连线（可 ? ）
+% 结果容器：元�? ? 端口（可 ? ）�?�连线（�? ? �?
 elements = struct('Path',{},'Name',{},'BlockType',{},'Orientation',{}, ...
                   'Position',{},'Center',{},'LibraryLink',{});
 ports    = struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{});
@@ -192,7 +193,7 @@ for i = 1:numel(all_blocks_for_pos)
     pc = get_param(bh,'PortConnectivity');  % 端口连接与几何信 ??
     for p = 1:numel(pc)
         pnum = get_port_num(pc(p));         % 兼容 PortNumber/Port
-        ppos = get_port_position(pc(p), bh);% 优先 ?? pc(p).Position，必要时回 ??到句 ??
+        ppos = get_port_position(pc(p), bh);% 优先 ?? pc(p).Position，必要时�? ??到句 ??
         ptyp = '';
         if isfield(pc(p),'Type') && ~isempty(pc(p).Type)
             ptyp = pc(p).Type;              % inport/outport/conserving等；若为空再粗略判断
@@ -216,7 +217,7 @@ for i = 1:numel(all_blocks_for_pos)
 end
 
 % ========== C) 常规信号线的折线坐标（可选） ==========
-% why: 普 ?? Simulink 信号线有 line 对象，能直接 ?? polyline 点；物理线若没有，则 ?? B) 的端点重 ??
+% why: �? ?? Simulink 信号线有 line 对象，能直接 ?? polyline 点；物理线若没有，则 ?? B) 的端点重 ??
 all_lines = all_blocks;
 for i = 1:numel(all_lines)
     lh = all_lines(i);
@@ -248,7 +249,7 @@ end
 % 你现在拥有：
 % elements  ->  ??有元件的几何信息（位 ??/中心/朝向/库链接）
 % ports     ->  ??有端口的像素坐标（可用于重建物理连接 ??
-% sigLines  ->  ??有常规 ? 信号线”的折线点集
+% sigLines  ->  ??有常�? ? 信号线�?�的折线点集
 % 可按 ??保存 ?? MAT/JSON，或 ?? connectivity 表进 ?? join
 % =========
 %% ========= 导出模型几何与连接信息（JSON / MAT / CSV，含完整路径 ?? =========
@@ -277,7 +278,7 @@ if ~exist('connectivity','var') || isempty(connectivity)
     connectivity = {};
 end
 
-% 连接 ?? cell 转成 struct 数组，统 ??字段以 ? 包含完整路径 ? 为 ??
+% 连接 ?? cell 转成 struct 数组，统 ??字段�? ? 包含完整路径 ? �? ??
 if iscell(connectivity)
     if isempty(connectivity)
         conn = struct('Source',{},'SourcePath',{},'SourcePort',{}, ...
@@ -290,14 +291,14 @@ else
     conn = connectivity;
 end
 
-% 3) 规范化字段与数 ? （补全缺失字段；端口号 NaN -> -1 ??
+% 3) 规范化字段与�? ? （补全缺失字段；端口�? NaN -> -1 ??
 wantedFields = {'Source','SourcePath','SourcePort','Destination','DestinationPath','DestinationPort','Origin'};
 if isempty(conn)
     % 空连接表也需要确保字段存在，便于 JSON/CSV 写出
     conn = cell2struct(cell(size(wantedFields)), wantedFields, 2);
     conn(1) = []; % 置空但保留字段定 ??
 else
-    % 为所有连接补齐字段，保持 ??致 ??
+    % 为所有连接补齐字段，保持 ??�? ??
     for i = 1:numel(conn)
         % 字段缺失则补 ??
         for f = 1:numel(wantedFields)
@@ -351,7 +352,7 @@ end
 
 % 5) 另存 MAT（保留原始结构，便于后续 MATLAB 直接加载 ??
 mat_path = fullfile(out_dir, sprintf('%s_graph.mat', model_tag));
-save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.3');
+save(mat_path,'elements','ports','sigLines','conn','connectivity','-v7.3');
 
 % 6) 再导出三 ?? CSV（展 ??关键几何字段，便于快速查看）
 % 6.1 元件 CSV：展 ?? Position/Center
@@ -396,10 +397,10 @@ if ~isempty(conn)
     writetable(T_c, fullfile(out_dir, sprintf('%s_connections.csv', model_tag)));
 end
 
-fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
+fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', mat_path, out_dir);
 
 % =========
-% 工具函数： ? 归收集“某条线及其 ??有分支 ? 的目标端口（仅对普通信号线有效 ??
+% 工具函数�? ? 归收集�?�某条线及其 ??有分�? ? 的目标端口（仅对普�?�信号线有效 ??
 % =========
 function [dstBlks, dstPorts, visited_lines] = collect_all_dsts(line_h, visited_lines)
     if any(visited_lines == line_h)
@@ -446,7 +447,7 @@ function pos = get_port_position(pcEntry, blockHandle)
         pos = pcEntry.Position; % [x y]
         return;
     end
-    % 回 ??： ? 过端口句柄拿位置（兼容 Inport/Outport/LConn/RConn 等）
+    % �? ??�? ? 过端口句柄拿位置（兼�? Inport/Outport/LConn/RConn 等）
     pos = [NaN NaN];
     try
         pnum = get_port_num(pcEntry);
