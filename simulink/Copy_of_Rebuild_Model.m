@@ -21,6 +21,8 @@ function newModel = Copy_of_Rebuild_Model(inputPath, newModelName)
 
 	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
 
+    
+    
 	% 原模型根名（用于 path 重定位）；新模型 ?
 	origRoot = get_root_from_elements(elements);
 	newModel = char(newModelName);
@@ -316,6 +318,7 @@ function create_block_in_model(row, isSubsystem)
 	newPath = sanitize_path(char(row.NewPath));
 	parent  = sanitize_path(char(row.ParentPath));
 	btype   = char(row.BlockType);
+    name    = char(row.ShortName);
 	ori     = char(row.Orientation);
 	pos     = [row.Left row.Top row.Right row.Bottom];
 	lib     = char(row.LibraryLink);
@@ -343,9 +346,13 @@ function create_block_in_model(row, isSubsystem)
 						add_block('simulink/Sources/In1', newPath, 'MakeNameUnique','off');
 					case 'Outport'
 						add_block('simulink/Sinks/Out1',  newPath, 'MakeNameUnique','off');
-					otherwise
-						add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
-						warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
+                    otherwise 
+                        temp_block = find_system('simulink', 'BlockType', btype, 'Name', regexprep(name, '\d+$', ''));
+                        add_block(char(temp_block(1,1)),newPath,'MakeNameUnique','off')
+                        
+                    %otherwise
+						%add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
+						%warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
 				end
 			end
 		end
@@ -442,4 +449,4 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
-%newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
+%newModel = Copy_of_Rebuild_Model(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
