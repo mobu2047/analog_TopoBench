@@ -1,4 +1,4 @@
-function newModel = Copy_of_Rebuild_Model(inputPath, newModelName)
+function newModel = rebuild_model_from_export(inputPath, newModelName)
 % 重建 Simulink 模型（不依赖 sigLines ?
 % - 直接使用导出的完整路 ? SourcePath/DestinationPath 精确定位 ?
 % - 端口号缺 ?(-1/NaN)时，使用端口/块几何位置最近邻匹配到端口句 ?
@@ -318,7 +318,6 @@ function create_block_in_model(row, isSubsystem)
 	newPath = sanitize_path(char(row.NewPath));
 	parent  = sanitize_path(char(row.ParentPath));
 	btype   = char(row.BlockType);
-    name    = char(row.ShortName);
 	ori     = char(row.Orientation);
 	pos     = [row.Left row.Top row.Right row.Bottom];
 	lib     = char(row.LibraryLink);
@@ -346,13 +345,13 @@ function create_block_in_model(row, isSubsystem)
 						add_block('simulink/Sources/In1', newPath, 'MakeNameUnique','off');
 					case 'Outport'
 						add_block('simulink/Sinks/Out1',  newPath, 'MakeNameUnique','off');
-                    otherwise 
-                        temp_block = find_system('simulink', 'BlockType', btype, 'Name', regexprep(name, '\d+$', ''));
-                        add_block(char(temp_block(1,1)),newPath,'MakeNameUnique','off')
+                    case ~isempty(row(0,"BlockType"))&~isempty(row(0,"ShortName"))
+                        temp_block = find_system('simulink', row(1,"BlockType"), 'Constant', 'Name', row(1,"ShortName"));
+                        add_block()
                         
-                    %otherwise
-						%add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
-						%warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
+                    otherwise
+						add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
+						warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
 				end
 			end
 		end
@@ -449,4 +448,4 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
-%newModel = Copy_of_Rebuild_Model(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
+newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
