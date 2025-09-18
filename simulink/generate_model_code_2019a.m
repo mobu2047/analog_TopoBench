@@ -333,26 +333,26 @@ else
 end
 
 % 4) 组织总对象并 ?? JSON（完整信息，包含完整路径 ??
-%graph = struct();
-%graph.model       = char(model_root);
-%graph.timestamp   = char(datetime('now','Format','yyyy-MM-dd HH:mm:ss'));
-%graph.counts      = struct('elements',numel(elements),'ports',numel(ports), ...
-                          % 'connections',numel(conn),'lines',numel(sigLines));
-%graph.elements    = elements;
-%graph.ports       = ports;
-%graph.connections = conn;
-%graph.lines       = sigLines;
+graph = struct();
+graph.model       = char(model_root);
+graph.timestamp   = char(datetime('now','Format','yyyy-MM-dd HH:mm:ss'));
+graph.counts      = struct('elements',numel(elements),'ports',numel(ports), ...
+                          'connections',numel(conn),'lines',numel(sigLines));
+graph.elements    = elements;
+graph.ports       = ports;
+graph.connections = conn;
+graph.lines       = sigLines;
 
-%json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
-%txt = jsonencode(graph, 'PrettyPrint', true);   % MATLAB 会将 NaN 编码 ?? null
-%fid = fopen(json_path,'w');
-%assert(fid~=-1, '无法创建文件: %s', json_path);
-%fwrite(fid, txt, 'char');
-%fclose(fid);
+json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
+txt = jsonencode(graph, 'ConvertInfAndNaN', true);   % MATLAB 会将 NaN 编码 ?? null
+fid = fopen(json_path,'w');
+assert(fid~=-1, '无法创建文件: %s', json_path);
+fwrite(fid, txt, 'char');
+fclose(fid);
 
 % 5) 另存 MAT（保留原始结构，便于后续 MATLAB 直接加载 ??
 mat_path = fullfile(out_dir, sprintf('%s_graph.mat', model_tag));
-save(mat_path,'elements','ports','sigLines','conn','connectivity','-v7.3');
+save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.3');
 
 % 6) 再导出三 ?? CSV（展 ??关键几何字段，便于快速查看）
 % 6.1 元件 CSV：展 ?? Position/Center
@@ -397,7 +397,7 @@ if ~isempty(conn)
     writetable(T_c, fullfile(out_dir, sprintf('%s_connections.csv', model_tag)));
 end
 
-fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', mat_path, out_dir);
+fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
 
 % =========
 % 工具函数�? ? 归收集�?�某条线及其 ??有分�? ? 的目标端口（仅对普�?�信号线有效 ??
