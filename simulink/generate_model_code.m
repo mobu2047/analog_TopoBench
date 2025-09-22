@@ -155,8 +155,11 @@ all_blocks_for_pos = all_blocks_pc;
 
 % 结果容器：元件、端口（可选）、连线（可选）
 elements = struct('Path',{},'Name',{},'BlockType',{},'Orientation',{}, ...
-                  'Position',{},'Center',{},'LibraryLink',{});
-ports    = struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{});
+                  'Position',{},'Center',{},'LibraryLink',{}, ...
+                  'Mirror',{},'Rotation',{}, ...
+                  'GotoTag',{},'GotoVisibility',{},'FromTag',{});  % 新增：几何镜像/旋转与Goto/From标签/可见性
+ports    = struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{}, ...
+                  'RelPos',{},'Side',{});      % 新增：端口相对坐标与侧别
 sigLines = struct('Handle',{},'IsRoot',{},'SrcPath',{},'DstPaths',{},'Points',{});
 
 % ========== A) 元件位置 ==========
@@ -171,6 +174,21 @@ for i = 1:numel(all_blocks_for_pos)
     pos   = get_param(bh,'Position');               % [L T R B]
     ctr   = [(pos(1)+pos(3))/2, (pos(2)+pos(4))/2]; % 中心点
     lib   = '';
+    % 新增：尽可能读取镜像/旋转信息（并非所有块都有这些属性）
+    mir   = '';
+    rot   = '';
+    try, mir = get_param(bh,'BlockMirror'); end
+    try, rot = get_param(bh,'BlockRotation'); end
+    % 新增：若为 Goto/From，记录其标签，便于重建时消除默认标签冲突
+    gtag = '';
+    gvis = '';
+    ftag = '';
+    if strcmpi(btype,'Goto')
+        try, gtag = get_param(bh,'GotoTag'); end
+        try, gvis = get_param(bh,'TagVisibility'); catch, gvis = ''; end
+    elseif strcmpi(btype,'From')
+        try, ftag = get_param(bh,'GotoTag'); end % From 块同样使用 GotoTag 字段
+    end
     if strcmp(get_param(bh,'LinkStatus'),'resolved')
         lib = get_param(bh,'ReferenceBlock');       % 来自库的引用路径
     end
@@ -182,7 +200,12 @@ for i = 1:numel(all_blocks_for_pos)
         'Orientation', ori, ...
         'Position',    pos, ...
         'Center',      ctr, ...
-        'LibraryLink', lib ...
+        'LibraryLink', lib, ...
+        'Mirror',      mir, ...
+        'Rotation',    rot, ...
+        'GotoTag',     gtag, ...
+        'GotoVisibility', gvis, ...
+        'FromTag',     ftag ...
     );
 end
 
@@ -208,12 +231,30 @@ for i = 1:numel(all_blocks_for_pos)
                 ptyp = 'port';
             end
         end
+        % 新增：端口相对块的归一化坐标与侧别，提升重建时物理端口匹配的稳健性
+        rel = [NaN NaN];
+        side = '';
+        try
+            if ~any(isnan(ppos))
+                w = max(1, (pos(3)-pos(1))); h = max(1, (pos(4)-pos(2)));
+                rel = [(ppos(1)-pos(1))/w, (ppos(2)-pos(2))/h];
+                % 根据与边界的距离判断侧别
+                dL = abs(ppos(1)-pos(1)); dR = abs(ppos(1)-pos(3));
+                dT = abs(ppos(2)-pos(2)); dB = abs(ppos(2)-pos(4));
+                [~,iSide] = min([dL,dR,dT,dB]);
+                side = {'left','right','top','bottom'}
+                side = side{iSide};
+            end
+        catch
+        end
 
         ports(end+1) = struct( ...          %#ok<AGROW>
             'BlockPath',  path, ...
             'PortNumber', pnum, ...
             'PortType',   ptyp, ...
-            'Position',   ppos ...
+            'Position',   ppos, ...
+            'RelPos',     rel, ...
+            'Side',       side ...
         );
     end
 end
@@ -364,12 +405,17 @@ if ~isempty(elements)
     types  = {elements.BlockType}';
     oris   = {elements.Orientation}';
     libs   = {elements.LibraryLink}';
+    mirs   = {elements.Mirror}';
+    rots   = {elements.Rotation}';
+    gtags  = {elements.GotoTag}';
+    gvises = {elements.GotoVisibility}';
+    ftags  = {elements.FromTag}';
     posMat = vertcat(elements.Position);     % Nx4: [L T R B]
     ctrMat = vertcat(elements.Center);       % Nx2: [Cx Cy]
-    T_e = table(names, paths, types, oris, libs, ...
+    T_e = table(names, paths, types, oris, libs, mirs, rots, gtags, gvises, ftags, ...
         posMat(:,1), posMat(:,2), posMat(:,3), posMat(:,4), ...
         ctrMat(:,1), ctrMat(:,2), ...
-        'VariableNames', {'Name','Path','BlockType','Orientation','LibraryLink', ...
+        'VariableNames', {'Name','Path','BlockType','Orientation','LibraryLink','Mirror','Rotation','GotoTag','GotoVisibility','FromTag', ...
                           'Left','Top','Right','Bottom','CenterX','CenterY'});
     writetable(T_e, fullfile(out_dir, sprintf('%s_elements.csv', model_tag)));
 end
@@ -380,8 +426,10 @@ if ~isempty(ports)
     pnums  = [ports.PortNumber]';
     ptypes = {ports.PortType}';
     ppos   = vertcat(ports.Position);        % Nx2: [x y]
-    T_p = table(bpaths, pnums, ptypes, ppos(:,1), ppos(:,2), ...
-        'VariableNames', {'BlockPath','PortNumber','PortType','X','Y'});
+    prel   = vertcat(ports.RelPos);          % Nx2: [rx ry]
+    sides  = {ports.Side}';
+    T_p = table(bpaths, pnums, ptypes, ppos(:,1), ppos(:,2), prel(:,1), prel(:,2), sides, ...
+        'VariableNames', {'BlockPath','PortNumber','PortType','X','Y','RelX','RelY','Side'});
     writetable(T_p, fullfile(out_dir, sprintf('%s_ports.csv', model_tag)));
 end
 
