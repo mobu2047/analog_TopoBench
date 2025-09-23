@@ -1,283 +1,283 @@
-BlockPath,PortNumber,PortType,X,Y
-untitled/Constant,NaN,1,-45,520
-untitled/DC Voltage Source,NaN,LConn1,340,414
-untitled/DC Voltage Source,NaN,RConn1,340,371
-untitled/DC Voltage Source/DCVoltageSource,NaN,LConn1,66,40
-untitled/DC Voltage Source/DCVoltageSource,NaN,RConn1,164,40
-untitled/DC Voltage Source/Goto,NaN,1,125,105
-untitled/DC Voltage Source/Model,NaN,1,65,105
-untitled/DC Voltage Source/Model/DC,NaN,1,55,35
-untitled/DC Voltage Source/Model/Out1,NaN,1,65,35
-untitled/DC Voltage Source/-,NaN,RConn1,49,40
-untitled/DC Voltage Source/+,NaN,RConn1,181,40
-untitled/From,NaN,1,470,155
-untitled/From1,NaN,1,795,155
-untitled/From2,NaN,1,470,445
-untitled/From3,NaN,1,795,445
-untitled/Goto,NaN,1,210,680
-untitled/Goto1,NaN,1,150,455
-untitled/Goto2,NaN,1,210,620
-untitled/Goto3,NaN,1,150,505
-untitled/GreaterThan,NaN,1,-10,460
-untitled/GreaterThan,NaN,2,-10,475
-untitled/GreaterThan,NaN,1,30,470
-untitled/GreaterThan1,NaN,1,90,610
-untitled/GreaterThan1,NaN,2,90,625
-untitled/GreaterThan1,NaN,1,130,620
-untitled/IGBT//Diode,NaN,1,825,245
-untitled/IGBT//Diode,NaN,LConn1,805,246
-untitled/IGBT//Diode,NaN,RConn1,815,314
-untitled/IGBT//Diode/g,NaN,1,60,110
-untitled/IGBT//Diode/Goto,NaN,1,220,215
-untitled/IGBT//Diode/IGBT//Diode,NaN,LConn1,101,35
-untitled/IGBT//Diode/IGBT//Diode,NaN,RConn1,194,35
-untitled/IGBT//Diode/Model,NaN,1,100,110
-untitled/IGBT//Diode/Model,NaN,2,100,170
-untitled/IGBT//Diode/Model,NaN,3,100,230
-untitled/IGBT//Diode/Model,NaN,1,195,125
-untitled/IGBT//Diode/Model,NaN,2,195,215
-untitled/IGBT//Diode/Model/gate ,NaN,1,50,40
-untitled/IGBT//Diode/Model/Uswitch,NaN,1,60,120
-untitled/IGBT//Diode/Model/status,NaN,1,250,155
-untitled/IGBT//Diode/Model/0 4,NaN,1,245,190
-untitled/IGBT//Diode/Model/1//Rsw,NaN,1,180,120
-untitled/IGBT//Diode/Model/1//Rsw,NaN,1,220,120
-untitled/IGBT//Diode/Model/Data Type Conversion,NaN,1,110,40
-untitled/IGBT//Diode/Model/Data Type Conversion,NaN,1,170,40
-untitled/IGBT//Diode/Model/Measurement list,NaN,1,405,175
-untitled/IGBT//Diode/Model/Measurement list,NaN,1,475,175
-untitled/IGBT//Diode/Model/Measurement list/In1,NaN,1,55,55
+BlockPath,PortNumber,PortType,X,Y,RelX,RelY,Side
+untitled/Constant,NaN,1,-45,520,-24.5,25,bottom
+untitled/DC Voltage Source,NaN,LConn1,340,414,-5.25,19.7,left
+untitled/DC Voltage Source,NaN,RConn1,340,371,-5.25,17.55,left
+untitled/DC Voltage Source/DCVoltageSource,NaN,LConn1,66,40,-18.95,1,bottom
+untitled/DC Voltage Source/DCVoltageSource,NaN,RConn1,164,40,-14.05,1,bottom
+untitled/DC Voltage Source/Goto,NaN,1,125,105,-16,4.25,bottom
+untitled/DC Voltage Source/Model,NaN,1,65,105,-19,4.25,bottom
+untitled/DC Voltage Source/Model/DC,NaN,1,55,35,-19.5,0.75,bottom
+untitled/DC Voltage Source/Model/Out1,NaN,1,65,35,-19,0.75,bottom
+untitled/DC Voltage Source/-,NaN,RConn1,49,40,-19.8,1,bottom
+untitled/DC Voltage Source/+,NaN,RConn1,181,40,-13.2,1,bottom
+untitled/From,NaN,1,470,155,1.25,6.75,right
+untitled/From1,NaN,1,795,155,17.5,6.75,bottom
+untitled/From2,NaN,1,470,445,1.25,21.25,right
+untitled/From3,NaN,1,795,445,17.5,21.25,right
+untitled/Goto,NaN,1,210,680,-11.75,33,left
+untitled/Goto1,NaN,1,150,455,-14.75,21.75,left
+untitled/Goto2,NaN,1,210,620,-11.75,30,left
+untitled/Goto3,NaN,1,150,505,-14.75,24.25,left
+untitled/GreaterThan,NaN,1,-10,460,-22.75,22,bottom
+untitled/GreaterThan,NaN,2,-10,475,-22.75,22.75,bottom
+untitled/GreaterThan,NaN,1,30,470,-20.75,22.5,left
+untitled/GreaterThan1,NaN,1,90,610,-17.75,29.5,left
+untitled/GreaterThan1,NaN,2,90,625,-17.75,30.25,left
+untitled/GreaterThan1,NaN,1,130,620,-15.75,30,left
+untitled/IGBT//Diode,NaN,1,825,245,19,11.25,bottom
+untitled/IGBT//Diode,NaN,LConn1,805,246,18,11.3,bottom
+untitled/IGBT//Diode,NaN,RConn1,815,314,18.5,14.7,bottom
+untitled/IGBT//Diode/g,NaN,1,60,110,-19.25,4.5,bottom
+untitled/IGBT//Diode/Goto,NaN,1,220,215,-11.25,9.75,bottom
+untitled/IGBT//Diode/IGBT//Diode,NaN,LConn1,101,35,-17.2,0.75,bottom
+untitled/IGBT//Diode/IGBT//Diode,NaN,RConn1,194,35,-12.55,0.75,bottom
+untitled/IGBT//Diode/Model,NaN,1,100,110,-17.25,4.5,bottom
+untitled/IGBT//Diode/Model,NaN,2,100,170,-17.25,7.5,bottom
+untitled/IGBT//Diode/Model,NaN,3,100,230,-17.25,10.5,bottom
+untitled/IGBT//Diode/Model,NaN,1,195,125,-12.5,5.25,bottom
+untitled/IGBT//Diode/Model,NaN,2,195,215,-12.5,9.75,bottom
+untitled/IGBT//Diode/Model/gate ,NaN,1,50,40,-19.75,1,bottom
+untitled/IGBT//Diode/Model/Uswitch,NaN,1,60,120,-19.25,5,bottom
+untitled/IGBT//Diode/Model/status,NaN,1,250,155,-9.75,6.75,bottom
+untitled/IGBT//Diode/Model/0 4,NaN,1,245,190,-10,8.5,bottom
+untitled/IGBT//Diode/Model/1//Rsw,NaN,1,180,120,-13.25,5,bottom
+untitled/IGBT//Diode/Model/1//Rsw,NaN,1,220,120,-11.25,5,bottom
+untitled/IGBT//Diode/Model/Data Type Conversion,NaN,1,110,40,-16.75,1,bottom
+untitled/IGBT//Diode/Model/Data Type Conversion,NaN,1,170,40,-13.75,1,bottom
+untitled/IGBT//Diode/Model/Measurement list,NaN,1,405,175,-2,7.75,left
+untitled/IGBT//Diode/Model/Measurement list,NaN,1,475,175,1.5,7.75,right
+untitled/IGBT//Diode/Model/Measurement list/In1,NaN,1,55,55,-19.5,1.75,bottom
 untitled/IGBT//Diode/Model/Measurement list/Bus
-Creator1,NaN,1,175,40
+Creator1,NaN,1,175,40,-13.5,1,bottom
 untitled/IGBT//Diode/Model/Measurement list/Bus
-Creator1,NaN,2,175,70
+Creator1,NaN,2,175,70,-13.5,2.5,bottom
 untitled/IGBT//Diode/Model/Measurement list/Bus
-Creator1,NaN,1,190,55
-untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,1,70,55
-untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,1,85,40
-untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,2,85,70
-untitled/IGBT//Diode/Model/Measurement list/Out1,NaN,1,210,55
-untitled/IGBT//Diode/Model/Mux,NaN,1,355,155
-untitled/IGBT//Diode/Model/Mux,NaN,2,355,195
-untitled/IGBT//Diode/Model/Mux,NaN,1,370,175
-untitled/IGBT//Diode/Model/Switch,NaN,1,280,120
-untitled/IGBT//Diode/Model/Switch,NaN,2,280,155
-untitled/IGBT//Diode/Model/Switch,NaN,3,280,190
-untitled/IGBT//Diode/Model/Switch,NaN,1,320,155
-untitled/IGBT//Diode/Model/m,NaN,1,520,175
-untitled/IGBT//Diode/Model/gate,NaN,1,215,40
-untitled/IGBT//Diode/Status,NaN,1,85,230
-untitled/IGBT//Diode/Uswitch,NaN,1,85,170
-untitled/IGBT//Diode/m,NaN,1,240,125
-untitled/IGBT//Diode/C,NaN,RConn1,59,35
-untitled/IGBT//Diode/E,NaN,RConn1,241,35
-untitled/IGBT//Diode1,NaN,1,550,470
-untitled/IGBT//Diode1,NaN,LConn1,530,471
-untitled/IGBT//Diode1,NaN,RConn1,540,539
-untitled/IGBT//Diode1/g,NaN,1,60,110
-untitled/IGBT//Diode1/Goto,NaN,1,220,215
-untitled/IGBT//Diode1/IGBT//Diode,NaN,LConn1,101,35
-untitled/IGBT//Diode1/IGBT//Diode,NaN,RConn1,194,35
-untitled/IGBT//Diode1/Model,NaN,1,100,110
-untitled/IGBT//Diode1/Model,NaN,2,100,170
-untitled/IGBT//Diode1/Model,NaN,3,100,230
-untitled/IGBT//Diode1/Model,NaN,1,195,125
-untitled/IGBT//Diode1/Model,NaN,2,195,215
-untitled/IGBT//Diode1/Model/gate ,NaN,1,50,40
-untitled/IGBT//Diode1/Model/Uswitch,NaN,1,60,120
-untitled/IGBT//Diode1/Model/status,NaN,1,250,155
-untitled/IGBT//Diode1/Model/0 4,NaN,1,245,190
-untitled/IGBT//Diode1/Model/1//Rsw,NaN,1,180,120
-untitled/IGBT//Diode1/Model/1//Rsw,NaN,1,220,120
-untitled/IGBT//Diode1/Model/Data Type Conversion,NaN,1,110,40
-untitled/IGBT//Diode1/Model/Data Type Conversion,NaN,1,170,40
-untitled/IGBT//Diode1/Model/Measurement list,NaN,1,405,175
-untitled/IGBT//Diode1/Model/Measurement list,NaN,1,475,175
-untitled/IGBT//Diode1/Model/Measurement list/In1,NaN,1,55,55
+Creator1,NaN,1,190,55,-12.75,1.75,bottom
+untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,1,70,55,-18.75,1.75,bottom
+untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,1,85,40,-18,1,bottom
+untitled/IGBT//Diode/Model/Measurement list/Demux,NaN,2,85,70,-18,2.5,bottom
+untitled/IGBT//Diode/Model/Measurement list/Out1,NaN,1,210,55,-11.75,1.75,bottom
+untitled/IGBT//Diode/Model/Mux,NaN,1,355,155,-4.5,6.75,left
+untitled/IGBT//Diode/Model/Mux,NaN,2,355,195,-4.5,8.75,left
+untitled/IGBT//Diode/Model/Mux,NaN,1,370,175,-3.75,7.75,left
+untitled/IGBT//Diode/Model/Switch,NaN,1,280,120,-8.25,5,bottom
+untitled/IGBT//Diode/Model/Switch,NaN,2,280,155,-8.25,6.75,bottom
+untitled/IGBT//Diode/Model/Switch,NaN,3,280,190,-8.25,8.5,bottom
+untitled/IGBT//Diode/Model/Switch,NaN,1,320,155,-6.25,6.75,bottom
+untitled/IGBT//Diode/Model/m,NaN,1,520,175,3.75,7.75,right
+untitled/IGBT//Diode/Model/gate,NaN,1,215,40,-11.5,1,bottom
+untitled/IGBT//Diode/Status,NaN,1,85,230,-18,10.5,bottom
+untitled/IGBT//Diode/Uswitch,NaN,1,85,170,-18,7.5,bottom
+untitled/IGBT//Diode/m,NaN,1,240,125,-10.25,5.25,bottom
+untitled/IGBT//Diode/C,NaN,RConn1,59,35,-19.3,0.75,bottom
+untitled/IGBT//Diode/E,NaN,RConn1,241,35,-10.2,0.75,bottom
+untitled/IGBT//Diode1,NaN,1,550,470,5.25,22.5,right
+untitled/IGBT//Diode1,NaN,LConn1,530,471,4.25,22.55,right
+untitled/IGBT//Diode1,NaN,RConn1,540,539,4.75,25.95,right
+untitled/IGBT//Diode1/g,NaN,1,60,110,-19.25,4.5,bottom
+untitled/IGBT//Diode1/Goto,NaN,1,220,215,-11.25,9.75,bottom
+untitled/IGBT//Diode1/IGBT//Diode,NaN,LConn1,101,35,-17.2,0.75,bottom
+untitled/IGBT//Diode1/IGBT//Diode,NaN,RConn1,194,35,-12.55,0.75,bottom
+untitled/IGBT//Diode1/Model,NaN,1,100,110,-17.25,4.5,bottom
+untitled/IGBT//Diode1/Model,NaN,2,100,170,-17.25,7.5,bottom
+untitled/IGBT//Diode1/Model,NaN,3,100,230,-17.25,10.5,bottom
+untitled/IGBT//Diode1/Model,NaN,1,195,125,-12.5,5.25,bottom
+untitled/IGBT//Diode1/Model,NaN,2,195,215,-12.5,9.75,bottom
+untitled/IGBT//Diode1/Model/gate ,NaN,1,50,40,-19.75,1,bottom
+untitled/IGBT//Diode1/Model/Uswitch,NaN,1,60,120,-19.25,5,bottom
+untitled/IGBT//Diode1/Model/status,NaN,1,250,155,-9.75,6.75,bottom
+untitled/IGBT//Diode1/Model/0 4,NaN,1,245,190,-10,8.5,bottom
+untitled/IGBT//Diode1/Model/1//Rsw,NaN,1,180,120,-13.25,5,bottom
+untitled/IGBT//Diode1/Model/1//Rsw,NaN,1,220,120,-11.25,5,bottom
+untitled/IGBT//Diode1/Model/Data Type Conversion,NaN,1,110,40,-16.75,1,bottom
+untitled/IGBT//Diode1/Model/Data Type Conversion,NaN,1,170,40,-13.75,1,bottom
+untitled/IGBT//Diode1/Model/Measurement list,NaN,1,405,175,-2,7.75,left
+untitled/IGBT//Diode1/Model/Measurement list,NaN,1,475,175,1.5,7.75,right
+untitled/IGBT//Diode1/Model/Measurement list/In1,NaN,1,55,55,-19.5,1.75,bottom
 untitled/IGBT//Diode1/Model/Measurement list/Bus
-Creator1,NaN,1,175,40
+Creator1,NaN,1,175,40,-13.5,1,bottom
 untitled/IGBT//Diode1/Model/Measurement list/Bus
-Creator1,NaN,2,175,70
+Creator1,NaN,2,175,70,-13.5,2.5,bottom
 untitled/IGBT//Diode1/Model/Measurement list/Bus
-Creator1,NaN,1,190,55
-untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,1,70,55
-untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,1,85,40
-untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,2,85,70
-untitled/IGBT//Diode1/Model/Measurement list/Out1,NaN,1,210,55
-untitled/IGBT//Diode1/Model/Mux,NaN,1,355,155
-untitled/IGBT//Diode1/Model/Mux,NaN,2,355,195
-untitled/IGBT//Diode1/Model/Mux,NaN,1,370,175
-untitled/IGBT//Diode1/Model/Switch,NaN,1,280,120
-untitled/IGBT//Diode1/Model/Switch,NaN,2,280,155
-untitled/IGBT//Diode1/Model/Switch,NaN,3,280,190
-untitled/IGBT//Diode1/Model/Switch,NaN,1,320,155
-untitled/IGBT//Diode1/Model/m,NaN,1,520,175
-untitled/IGBT//Diode1/Model/gate,NaN,1,215,40
-untitled/IGBT//Diode1/Status,NaN,1,85,230
-untitled/IGBT//Diode1/Uswitch,NaN,1,85,170
-untitled/IGBT//Diode1/m,NaN,1,240,125
-untitled/IGBT//Diode1/C,NaN,RConn1,59,35
-untitled/IGBT//Diode1/E,NaN,RConn1,241,35
-untitled/IGBT//Diode2,NaN,1,540,245
-untitled/IGBT//Diode2,NaN,LConn1,520,246
-untitled/IGBT//Diode2,NaN,RConn1,530,314
-untitled/IGBT//Diode2/g,NaN,1,60,110
-untitled/IGBT//Diode2/Goto,NaN,1,220,215
-untitled/IGBT//Diode2/IGBT//Diode,NaN,LConn1,101,35
-untitled/IGBT//Diode2/IGBT//Diode,NaN,RConn1,194,35
-untitled/IGBT//Diode2/Model,NaN,1,100,110
-untitled/IGBT//Diode2/Model,NaN,2,100,170
-untitled/IGBT//Diode2/Model,NaN,3,100,230
-untitled/IGBT//Diode2/Model,NaN,1,195,125
-untitled/IGBT//Diode2/Model,NaN,2,195,215
-untitled/IGBT//Diode2/Model/gate ,NaN,1,50,40
-untitled/IGBT//Diode2/Model/Uswitch,NaN,1,60,120
-untitled/IGBT//Diode2/Model/status,NaN,1,250,155
-untitled/IGBT//Diode2/Model/0 4,NaN,1,245,190
-untitled/IGBT//Diode2/Model/1//Rsw,NaN,1,180,120
-untitled/IGBT//Diode2/Model/1//Rsw,NaN,1,220,120
-untitled/IGBT//Diode2/Model/Data Type Conversion,NaN,1,110,40
-untitled/IGBT//Diode2/Model/Data Type Conversion,NaN,1,170,40
-untitled/IGBT//Diode2/Model/Measurement list,NaN,1,405,175
-untitled/IGBT//Diode2/Model/Measurement list,NaN,1,475,175
-untitled/IGBT//Diode2/Model/Measurement list/In1,NaN,1,55,55
+Creator1,NaN,1,190,55,-12.75,1.75,bottom
+untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,1,70,55,-18.75,1.75,bottom
+untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,1,85,40,-18,1,bottom
+untitled/IGBT//Diode1/Model/Measurement list/Demux,NaN,2,85,70,-18,2.5,bottom
+untitled/IGBT//Diode1/Model/Measurement list/Out1,NaN,1,210,55,-11.75,1.75,bottom
+untitled/IGBT//Diode1/Model/Mux,NaN,1,355,155,-4.5,6.75,left
+untitled/IGBT//Diode1/Model/Mux,NaN,2,355,195,-4.5,8.75,left
+untitled/IGBT//Diode1/Model/Mux,NaN,1,370,175,-3.75,7.75,left
+untitled/IGBT//Diode1/Model/Switch,NaN,1,280,120,-8.25,5,bottom
+untitled/IGBT//Diode1/Model/Switch,NaN,2,280,155,-8.25,6.75,bottom
+untitled/IGBT//Diode1/Model/Switch,NaN,3,280,190,-8.25,8.5,bottom
+untitled/IGBT//Diode1/Model/Switch,NaN,1,320,155,-6.25,6.75,bottom
+untitled/IGBT//Diode1/Model/m,NaN,1,520,175,3.75,7.75,right
+untitled/IGBT//Diode1/Model/gate,NaN,1,215,40,-11.5,1,bottom
+untitled/IGBT//Diode1/Status,NaN,1,85,230,-18,10.5,bottom
+untitled/IGBT//Diode1/Uswitch,NaN,1,85,170,-18,7.5,bottom
+untitled/IGBT//Diode1/m,NaN,1,240,125,-10.25,5.25,bottom
+untitled/IGBT//Diode1/C,NaN,RConn1,59,35,-19.3,0.75,bottom
+untitled/IGBT//Diode1/E,NaN,RConn1,241,35,-10.2,0.75,bottom
+untitled/IGBT//Diode2,NaN,1,540,245,4.75,11.25,right
+untitled/IGBT//Diode2,NaN,LConn1,520,246,3.75,11.3,right
+untitled/IGBT//Diode2,NaN,RConn1,530,314,4.25,14.7,right
+untitled/IGBT//Diode2/g,NaN,1,60,110,-19.25,4.5,bottom
+untitled/IGBT//Diode2/Goto,NaN,1,220,215,-11.25,9.75,bottom
+untitled/IGBT//Diode2/IGBT//Diode,NaN,LConn1,101,35,-17.2,0.75,bottom
+untitled/IGBT//Diode2/IGBT//Diode,NaN,RConn1,194,35,-12.55,0.75,bottom
+untitled/IGBT//Diode2/Model,NaN,1,100,110,-17.25,4.5,bottom
+untitled/IGBT//Diode2/Model,NaN,2,100,170,-17.25,7.5,bottom
+untitled/IGBT//Diode2/Model,NaN,3,100,230,-17.25,10.5,bottom
+untitled/IGBT//Diode2/Model,NaN,1,195,125,-12.5,5.25,bottom
+untitled/IGBT//Diode2/Model,NaN,2,195,215,-12.5,9.75,bottom
+untitled/IGBT//Diode2/Model/gate ,NaN,1,50,40,-19.75,1,bottom
+untitled/IGBT//Diode2/Model/Uswitch,NaN,1,60,120,-19.25,5,bottom
+untitled/IGBT//Diode2/Model/status,NaN,1,250,155,-9.75,6.75,bottom
+untitled/IGBT//Diode2/Model/0 4,NaN,1,245,190,-10,8.5,bottom
+untitled/IGBT//Diode2/Model/1//Rsw,NaN,1,180,120,-13.25,5,bottom
+untitled/IGBT//Diode2/Model/1//Rsw,NaN,1,220,120,-11.25,5,bottom
+untitled/IGBT//Diode2/Model/Data Type Conversion,NaN,1,110,40,-16.75,1,bottom
+untitled/IGBT//Diode2/Model/Data Type Conversion,NaN,1,170,40,-13.75,1,bottom
+untitled/IGBT//Diode2/Model/Measurement list,NaN,1,405,175,-2,7.75,left
+untitled/IGBT//Diode2/Model/Measurement list,NaN,1,475,175,1.5,7.75,right
+untitled/IGBT//Diode2/Model/Measurement list/In1,NaN,1,55,55,-19.5,1.75,bottom
 untitled/IGBT//Diode2/Model/Measurement list/Bus
-Creator1,NaN,1,175,40
+Creator1,NaN,1,175,40,-13.5,1,bottom
 untitled/IGBT//Diode2/Model/Measurement list/Bus
-Creator1,NaN,2,175,70
+Creator1,NaN,2,175,70,-13.5,2.5,bottom
 untitled/IGBT//Diode2/Model/Measurement list/Bus
-Creator1,NaN,1,190,55
-untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,1,70,55
-untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,1,85,40
-untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,2,85,70
-untitled/IGBT//Diode2/Model/Measurement list/Out1,NaN,1,210,55
-untitled/IGBT//Diode2/Model/Mux,NaN,1,355,155
-untitled/IGBT//Diode2/Model/Mux,NaN,2,355,195
-untitled/IGBT//Diode2/Model/Mux,NaN,1,370,175
-untitled/IGBT//Diode2/Model/Switch,NaN,1,280,120
-untitled/IGBT//Diode2/Model/Switch,NaN,2,280,155
-untitled/IGBT//Diode2/Model/Switch,NaN,3,280,190
-untitled/IGBT//Diode2/Model/Switch,NaN,1,320,155
-untitled/IGBT//Diode2/Model/m,NaN,1,520,175
-untitled/IGBT//Diode2/Model/gate,NaN,1,215,40
-untitled/IGBT//Diode2/Status,NaN,1,85,230
-untitled/IGBT//Diode2/Uswitch,NaN,1,85,170
-untitled/IGBT//Diode2/m,NaN,1,240,125
-untitled/IGBT//Diode2/C,NaN,RConn1,59,35
-untitled/IGBT//Diode2/E,NaN,RConn1,241,35
-untitled/IGBT//Diode3,NaN,1,835,470
-untitled/IGBT//Diode3,NaN,LConn1,815,471
-untitled/IGBT//Diode3,NaN,RConn1,825,539
-untitled/IGBT//Diode3/g,NaN,1,60,110
-untitled/IGBT//Diode3/Goto,NaN,1,220,215
-untitled/IGBT//Diode3/IGBT//Diode,NaN,LConn1,101,35
-untitled/IGBT//Diode3/IGBT//Diode,NaN,RConn1,194,35
-untitled/IGBT//Diode3/Model,NaN,1,100,110
-untitled/IGBT//Diode3/Model,NaN,2,100,170
-untitled/IGBT//Diode3/Model,NaN,3,100,230
-untitled/IGBT//Diode3/Model,NaN,1,195,125
-untitled/IGBT//Diode3/Model,NaN,2,195,215
-untitled/IGBT//Diode3/Model/gate ,NaN,1,50,40
-untitled/IGBT//Diode3/Model/Uswitch,NaN,1,60,120
-untitled/IGBT//Diode3/Model/status,NaN,1,250,155
-untitled/IGBT//Diode3/Model/0 4,NaN,1,245,190
-untitled/IGBT//Diode3/Model/1//Rsw,NaN,1,180,120
-untitled/IGBT//Diode3/Model/1//Rsw,NaN,1,220,120
-untitled/IGBT//Diode3/Model/Data Type Conversion,NaN,1,110,40
-untitled/IGBT//Diode3/Model/Data Type Conversion,NaN,1,170,40
-untitled/IGBT//Diode3/Model/Measurement list,NaN,1,405,175
-untitled/IGBT//Diode3/Model/Measurement list,NaN,1,475,175
-untitled/IGBT//Diode3/Model/Measurement list/In1,NaN,1,55,55
+Creator1,NaN,1,190,55,-12.75,1.75,bottom
+untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,1,70,55,-18.75,1.75,bottom
+untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,1,85,40,-18,1,bottom
+untitled/IGBT//Diode2/Model/Measurement list/Demux,NaN,2,85,70,-18,2.5,bottom
+untitled/IGBT//Diode2/Model/Measurement list/Out1,NaN,1,210,55,-11.75,1.75,bottom
+untitled/IGBT//Diode2/Model/Mux,NaN,1,355,155,-4.5,6.75,left
+untitled/IGBT//Diode2/Model/Mux,NaN,2,355,195,-4.5,8.75,left
+untitled/IGBT//Diode2/Model/Mux,NaN,1,370,175,-3.75,7.75,left
+untitled/IGBT//Diode2/Model/Switch,NaN,1,280,120,-8.25,5,bottom
+untitled/IGBT//Diode2/Model/Switch,NaN,2,280,155,-8.25,6.75,bottom
+untitled/IGBT//Diode2/Model/Switch,NaN,3,280,190,-8.25,8.5,bottom
+untitled/IGBT//Diode2/Model/Switch,NaN,1,320,155,-6.25,6.75,bottom
+untitled/IGBT//Diode2/Model/m,NaN,1,520,175,3.75,7.75,right
+untitled/IGBT//Diode2/Model/gate,NaN,1,215,40,-11.5,1,bottom
+untitled/IGBT//Diode2/Status,NaN,1,85,230,-18,10.5,bottom
+untitled/IGBT//Diode2/Uswitch,NaN,1,85,170,-18,7.5,bottom
+untitled/IGBT//Diode2/m,NaN,1,240,125,-10.25,5.25,bottom
+untitled/IGBT//Diode2/C,NaN,RConn1,59,35,-19.3,0.75,bottom
+untitled/IGBT//Diode2/E,NaN,RConn1,241,35,-10.2,0.75,bottom
+untitled/IGBT//Diode3,NaN,1,835,470,19.5,22.5,right
+untitled/IGBT//Diode3,NaN,LConn1,815,471,18.5,22.55,right
+untitled/IGBT//Diode3,NaN,RConn1,825,539,19,25.95,right
+untitled/IGBT//Diode3/g,NaN,1,60,110,-19.25,4.5,bottom
+untitled/IGBT//Diode3/Goto,NaN,1,220,215,-11.25,9.75,bottom
+untitled/IGBT//Diode3/IGBT//Diode,NaN,LConn1,101,35,-17.2,0.75,bottom
+untitled/IGBT//Diode3/IGBT//Diode,NaN,RConn1,194,35,-12.55,0.75,bottom
+untitled/IGBT//Diode3/Model,NaN,1,100,110,-17.25,4.5,bottom
+untitled/IGBT//Diode3/Model,NaN,2,100,170,-17.25,7.5,bottom
+untitled/IGBT//Diode3/Model,NaN,3,100,230,-17.25,10.5,bottom
+untitled/IGBT//Diode3/Model,NaN,1,195,125,-12.5,5.25,bottom
+untitled/IGBT//Diode3/Model,NaN,2,195,215,-12.5,9.75,bottom
+untitled/IGBT//Diode3/Model/gate ,NaN,1,50,40,-19.75,1,bottom
+untitled/IGBT//Diode3/Model/Uswitch,NaN,1,60,120,-19.25,5,bottom
+untitled/IGBT//Diode3/Model/status,NaN,1,250,155,-9.75,6.75,bottom
+untitled/IGBT//Diode3/Model/0 4,NaN,1,245,190,-10,8.5,bottom
+untitled/IGBT//Diode3/Model/1//Rsw,NaN,1,180,120,-13.25,5,bottom
+untitled/IGBT//Diode3/Model/1//Rsw,NaN,1,220,120,-11.25,5,bottom
+untitled/IGBT//Diode3/Model/Data Type Conversion,NaN,1,110,40,-16.75,1,bottom
+untitled/IGBT//Diode3/Model/Data Type Conversion,NaN,1,170,40,-13.75,1,bottom
+untitled/IGBT//Diode3/Model/Measurement list,NaN,1,405,175,-2,7.75,left
+untitled/IGBT//Diode3/Model/Measurement list,NaN,1,475,175,1.5,7.75,right
+untitled/IGBT//Diode3/Model/Measurement list/In1,NaN,1,55,55,-19.5,1.75,bottom
 untitled/IGBT//Diode3/Model/Measurement list/Bus
-Creator1,NaN,1,175,40
+Creator1,NaN,1,175,40,-13.5,1,bottom
 untitled/IGBT//Diode3/Model/Measurement list/Bus
-Creator1,NaN,2,175,70
+Creator1,NaN,2,175,70,-13.5,2.5,bottom
 untitled/IGBT//Diode3/Model/Measurement list/Bus
-Creator1,NaN,1,190,55
-untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,1,70,55
-untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,1,85,40
-untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,2,85,70
-untitled/IGBT//Diode3/Model/Measurement list/Out1,NaN,1,210,55
-untitled/IGBT//Diode3/Model/Mux,NaN,1,355,155
-untitled/IGBT//Diode3/Model/Mux,NaN,2,355,195
-untitled/IGBT//Diode3/Model/Mux,NaN,1,370,175
-untitled/IGBT//Diode3/Model/Switch,NaN,1,280,120
-untitled/IGBT//Diode3/Model/Switch,NaN,2,280,155
-untitled/IGBT//Diode3/Model/Switch,NaN,3,280,190
-untitled/IGBT//Diode3/Model/Switch,NaN,1,320,155
-untitled/IGBT//Diode3/Model/m,NaN,1,520,175
-untitled/IGBT//Diode3/Model/gate,NaN,1,215,40
-untitled/IGBT//Diode3/Status,NaN,1,85,230
-untitled/IGBT//Diode3/Uswitch,NaN,1,85,170
-untitled/IGBT//Diode3/m,NaN,1,240,125
-untitled/IGBT//Diode3/C,NaN,RConn1,59,35
-untitled/IGBT//Diode3/E,NaN,RConn1,241,35
-untitled/NOT,NaN,1,75,505
-untitled/NOT,NaN,1,115,505
-untitled/NOT1,NaN,1,155,680
-untitled/NOT1,NaN,1,195,680
-untitled/Product,NaN,1,-30,625
-untitled/Product,NaN,2,-30,640
-untitled/Product,NaN,1,10,635
+Creator1,NaN,1,190,55,-12.75,1.75,bottom
+untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,1,70,55,-18.75,1.75,bottom
+untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,1,85,40,-18,1,bottom
+untitled/IGBT//Diode3/Model/Measurement list/Demux,NaN,2,85,70,-18,2.5,bottom
+untitled/IGBT//Diode3/Model/Measurement list/Out1,NaN,1,210,55,-11.75,1.75,bottom
+untitled/IGBT//Diode3/Model/Mux,NaN,1,355,155,-4.5,6.75,left
+untitled/IGBT//Diode3/Model/Mux,NaN,2,355,195,-4.5,8.75,left
+untitled/IGBT//Diode3/Model/Mux,NaN,1,370,175,-3.75,7.75,left
+untitled/IGBT//Diode3/Model/Switch,NaN,1,280,120,-8.25,5,bottom
+untitled/IGBT//Diode3/Model/Switch,NaN,2,280,155,-8.25,6.75,bottom
+untitled/IGBT//Diode3/Model/Switch,NaN,3,280,190,-8.25,8.5,bottom
+untitled/IGBT//Diode3/Model/Switch,NaN,1,320,155,-6.25,6.75,bottom
+untitled/IGBT//Diode3/Model/m,NaN,1,520,175,3.75,7.75,right
+untitled/IGBT//Diode3/Model/gate,NaN,1,215,40,-11.5,1,bottom
+untitled/IGBT//Diode3/Status,NaN,1,85,230,-18,10.5,bottom
+untitled/IGBT//Diode3/Uswitch,NaN,1,85,170,-18,7.5,bottom
+untitled/IGBT//Diode3/m,NaN,1,240,125,-10.25,5.25,bottom
+untitled/IGBT//Diode3/C,NaN,RConn1,59,35,-19.3,0.75,bottom
+untitled/IGBT//Diode3/E,NaN,RConn1,241,35,-10.2,0.75,bottom
+untitled/NOT,NaN,1,75,505,-18.5,24.25,left
+untitled/NOT,NaN,1,115,505,-16.5,24.25,left
+untitled/NOT1,NaN,1,155,680,-14.5,33,left
+untitled/NOT1,NaN,1,195,680,-12.5,33,left
+untitled/Product,NaN,1,-30,625,-23.75,30.25,left
+untitled/Product,NaN,2,-30,640,-23.75,31,left
+untitled/Product,NaN,1,10,635,-21.75,30.75,left
 untitled/Repeating
-Sequence,NaN,1,-60,680
+Sequence,NaN,1,-60,680,-25.25,33,left
 untitled/Repeating
-Sequence/Clock,NaN,1,40,40
+Sequence/Clock,NaN,1,40,40,-20.25,1,bottom
 untitled/Repeating
-Sequence/Constant,NaN,1,185,105
+Sequence/Constant,NaN,1,185,105,-13,4.25,bottom
 untitled/Repeating
-Sequence/Look-Up Table1,NaN,1,325,65
+Sequence/Look-Up Table1,NaN,1,325,65,-6,2.25,bottom
 untitled/Repeating
-Sequence/Look-Up Table1,NaN,1,370,65
+Sequence/Look-Up Table1,NaN,1,370,65,-3.75,2.25,bottom
 untitled/Repeating
 Sequence/Math
-Function,NaN,1,225,55
+Function,NaN,1,225,55,-11,1.75,bottom
 untitled/Repeating
 Sequence/Math
-Function,NaN,2,225,70
+Function,NaN,2,225,70,-11,2.5,bottom
 untitled/Repeating
 Sequence/Math
-Function,NaN,1,265,65
+Function,NaN,1,265,65,-9,2.25,bottom
 untitled/Repeating
-Sequence/Output,NaN,1,445,65
+Sequence/Output,NaN,1,445,65,0,2.25,left
 untitled/Repeating
-Sequence/Output,NaN,1,475,65
+Sequence/Output,NaN,1,475,65,1.5,2.25,right
 untitled/Repeating
-Sequence/Sum,NaN,1,140,40
+Sequence/Sum,NaN,1,140,40,-15.25,1,bottom
 untitled/Repeating
-Sequence/Sum,NaN,2,140,65
+Sequence/Sum,NaN,2,140,65,-15.25,2.25,bottom
 untitled/Repeating
-Sequence/Sum,NaN,1,170,55
+Sequence/Sum,NaN,1,170,55,-13.75,1.75,bottom
 untitled/Repeating
-Sequence/startTime,NaN,1,125,65
+Sequence/startTime,NaN,1,125,65,-16,2.25,bottom
 untitled/Repeating
-Sequence/Out1,NaN,1,545,65
-untitled/Scope,NaN,1,680,160
-untitled/Scope1,NaN,1,-185,540
-untitled/Series RLC Branch,NaN,LConn1,601,385
-untitled/Series RLC Branch,NaN,RConn1,689,385
-untitled/Series RLC Branch1,NaN,LConn1,726,385
-untitled/Series RLC Branch1,NaN,RConn1,814,385
-untitled/Sine Wave,NaN,1,-45,440
-untitled/Sine Wave1,NaN,1,65,580
+Sequence/Out1,NaN,1,545,65,5,2.25,bottom
+untitled/Scope,NaN,1,680,160,11.75,7,bottom
+untitled/Scope1,NaN,1,-185,540,-31.5,26,bottom
+untitled/Series RLC Branch,NaN,LConn1,601,385,7.8,18.25,right
+untitled/Series RLC Branch,NaN,RConn1,689,385,12.2,18.25,right
+untitled/Series RLC Branch1,NaN,LConn1,726,385,14.05,18.25,right
+untitled/Series RLC Branch1,NaN,RConn1,814,385,18.45,18.25,bottom
+untitled/Sine Wave,NaN,1,-45,440,-24.5,21,bottom
+untitled/Sine Wave1,NaN,1,65,580,-19,28,left
 untitled/Square Wave
-Generator,NaN,1,-60,600
-untitled/Voltage Measurement,NaN,1,670,285
-untitled/Voltage Measurement,NaN,LConn1,665,319
-untitled/Voltage Measurement,NaN,LConn2,675,319
-untitled/Voltage Measurement/Model,NaN,1,115,135
-untitled/Voltage Measurement/Model,NaN,1,165,135
-untitled/Voltage Measurement/Model/in,NaN,1,55,35
-untitled/Voltage Measurement/Model/out,NaN,1,110,35
-untitled/Voltage Measurement/VoltageMeasurement,NaN,LConn1,91,35
-untitled/Voltage Measurement/VoltageMeasurement,NaN,RConn1,194,35
+Generator,NaN,1,-60,600,-25.25,29,left
+untitled/Voltage Measurement,NaN,1,670,285,11.25,13.25,right
+untitled/Voltage Measurement,NaN,LConn1,665,319,11,14.95,right
+untitled/Voltage Measurement,NaN,LConn2,675,319,11.5,14.95,right
+untitled/Voltage Measurement/Model,NaN,1,115,135,-16.5,5.75,bottom
+untitled/Voltage Measurement/Model,NaN,1,165,135,-14,5.75,bottom
+untitled/Voltage Measurement/Model/in,NaN,1,55,35,-19.5,0.75,bottom
+untitled/Voltage Measurement/Model/out,NaN,1,110,35,-16.75,0.75,bottom
+untitled/Voltage Measurement/VoltageMeasurement,NaN,LConn1,91,35,-17.7,0.75,bottom
+untitled/Voltage Measurement/VoltageMeasurement,NaN,RConn1,194,35,-12.55,0.75,bottom
 untitled/Voltage Measurement/do not delete
-this gain,NaN,1,190,135
+this gain,NaN,1,190,135,-12.75,5.75,bottom
 untitled/Voltage Measurement/do not delete
-this gain,NaN,1,215,135
-untitled/Voltage Measurement/source,NaN,1,90,135
-untitled/Voltage Measurement/+,NaN,RConn1,49,35
-untitled/Voltage Measurement/-,NaN,RConn1,236,35
-untitled/Voltage Measurement/v,NaN,1,240,135
-untitled/powergui/Ground,NaN,1,430,30
-untitled/powergui/Terminator,NaN,1,440,30
+this gain,NaN,1,215,135,-11.5,5.75,bottom
+untitled/Voltage Measurement/source,NaN,1,90,135,-17.75,5.75,bottom
+untitled/Voltage Measurement/+,NaN,RConn1,49,35,-19.8,0.75,bottom
+untitled/Voltage Measurement/-,NaN,RConn1,236,35,-10.45,0.75,bottom
+untitled/Voltage Measurement/v,NaN,1,240,135,-10.25,5.75,bottom
+untitled/powergui/Ground,NaN,1,430,30,-0.75,0.5,top
+untitled/powergui/Terminator,NaN,1,440,30,-0.25,0.5,left

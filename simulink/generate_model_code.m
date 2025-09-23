@@ -46,6 +46,10 @@ for i = 1:length(all_blocks)
                 dst_block_full = getfullname(dst_block);
                 dst_port_num = get_param(dst_port_handles(j), 'PortNumber');
 
+                % 新增：记录端口种类与“在各自类型数组中的索引”（稳定且可复现）
+                [src_kind, src_index] = kind_and_index_by_handle(src_block, src_port);
+                [dst_kind, dst_index] = kind_and_index_by_handle(dst_block, dst_port_handles(j));
+
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
                 if ~isKey(conn_keys, key)
                     conn_keys(key) = true;
@@ -53,9 +57,13 @@ for i = 1:length(all_blocks)
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增：源块完整路径
                         'SourcePort',       src_port_num, ...
+                        'SourcePortKind',   src_kind, ...        % 新增：源端口种类（Outport/Inport/...）
+                        'SourcePortIndex',  src_index, ...       % 新增：在该种类数组中的索引
                         'Destination',      dst_block_name, ...
                         'DestinationPath',  dst_block_full, ...   % 新增：目标块完整路径
                         'DestinationPort',  dst_port_num, ...
+                        'DestinationPortKind',  dst_kind, ...    % 新增
+                        'DestinationPortIndex', dst_index, ...   % 新增
                         'Origin',           'line' ...            % 可选：来源标记（普通信号线）
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
@@ -80,12 +88,17 @@ for i = 1:length(all_blocks_pc)
             src_block_full = getfullname(bh);
             src_block_name = get_param(bh, 'Name');
             src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
+            % 新增：端口种类与在该种类数组的索引
+            [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p));
 
             for d = 1:numel(pc(p).DstBlock)
                 dst_bh         = pc(p).DstBlock(d);
                 dst_block_full = getfullname(dst_bh);
                 dst_block_name = get_param(dst_bh, 'Name');
-                dst_port_num   = pc(p).DstPort(d);
+                % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
+                dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
+                dst_port_num   = get_port_num(dst_pc_entry);  % 若取得为空则返回 NaN→后续统一为 -1
+                [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry);
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
                 if ~isKey(conn_keys, key)
@@ -94,9 +107,13 @@ for i = 1:length(all_blocks_pc)
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增
                         'SourcePort',       src_port_num, ...
+                        'SourcePortKind',   src_kind2, ...
+                        'SourcePortIndex',  src_index2, ...
                         'Destination',      dst_block_name, ...
                         'DestinationPath',  dst_block_full, ...   % 新增
                         'DestinationPort',  dst_port_num, ...
+                        'DestinationPortKind',  dst_kind2, ...
+                        'DestinationPortIndex', dst_index2, ...
                         'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
@@ -116,10 +133,12 @@ for i = 1:length(all_blocks_pc)
             else
                 src_port_num = -1;
             end
+            [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p));
 
             dst_block_full  = getfullname(bh);
             dst_block_name  = get_param(bh, 'Name');
             dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
+            [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p));
 
             key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
             if ~isKey(conn_keys, key)
@@ -128,9 +147,13 @@ for i = 1:length(all_blocks_pc)
                     'Source',           src_block_name, ...
                     'SourcePath',       src_block_full, ...      % 新增
                     'SourcePort',       src_port_num, ...
+                    'SourcePortKind',   src_kind3, ...
+                    'SourcePortIndex',  src_index3, ...
                     'Destination',      dst_block_name, ...
                     'DestinationPath',  dst_block_full, ...      % 新增
                     'DestinationPort',  dst_port_num, ...
+                    'DestinationPortKind',  dst_kind3, ...
+                    'DestinationPortIndex', dst_index3, ...
                     'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
                 );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
@@ -221,7 +244,7 @@ for i = 1:numel(all_blocks_for_pos)
         ppos = get_port_position(pc(p), bh);% 优先用 pc(p).Position，必要时回退到句柄
         ptyp = '';
         if isfield(pc(p),'Type') && ~isempty(pc(p).Type)
-            ptyp = pc(p).Type;              % inport/outport/conserving等；若为空再粗略判断
+            ptyp = pc(p).Type;              % inport/outport/conserving 等
         else
             if ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock~=-1)
                 ptyp = 'outport';
@@ -230,6 +253,33 @@ for i = 1:numel(all_blocks_for_pos)
             else
                 ptyp = 'port';
             end
+        end
+        % 进一步：用 PortHandles 精确识别 LConn/RConn/Conn（某些库下 pc(p).Type 为空）
+        try
+            ph = get_param(bh,'PortHandles');
+            typeNames = {'LConn','RConn','Conn','Inport','Outport'};  % 物理在前
+            candPos = []; candType = {};
+            for tt = 1:numel(typeNames)
+                nm = typeNames{tt};
+                if isfield(ph, nm) && ~isempty(ph.(nm))
+                    hh = ph.(nm)(:);
+                    pp = arrayfun(@(x) get_param(x,'Position'), hh, 'UniformOutput', false);
+                    if ~isempty(pp)
+                        candPos = [candPos; vertcat(pp{:})]; %#ok<AGROW>
+                        candType = [candType; repmat({lower(nm)}, numel(pp), 1)]; %#ok<AGROW>
+                    end
+                end
+            end
+            if ~any(isnan(ppos)) && ~isempty(candPos)
+                d = hypot(candPos(:,1)-ppos(1), candPos(:,2)-ppos(2));
+                [~, kmin] = min(d);
+                detected = candType{kmin};
+                % 若原类型为空/port/inout，则用检测结果覆盖
+                if isempty(ptyp) || strcmpi(ptyp,'port') || strcmpi(ptyp,'inout')
+                    ptyp = detected;
+                end
+            end
+        catch
         end
         % 新增：端口相对块的归一化坐标与侧别，提升重建时物理端口匹配的稳健性
         rel = [NaN NaN];
@@ -438,12 +488,17 @@ if ~isempty(conn)
     srcs    = {conn.Source}';
     srcps   = {conn.SourcePath}';
     sps     = [conn.SourcePort]';
+    spk     = getfield_or_default_cell(conn,'SourcePortKind');
+    spi     = getfield_or_default_num(conn,'SourcePortIndex');
     dsts    = {conn.Destination}';
     dstps   = {conn.DestinationPath}';
     dps     = [conn.DestinationPort]';
+    dpk     = getfield_or_default_cell(conn,'DestinationPortKind');
+    dpi     = getfield_or_default_num(conn,'DestinationPortIndex');
     origins = {conn.Origin}';
-    T_c = table(srcs, srcps, sps, dsts, dstps, dps, origins, ...
-        'VariableNames', {'Source','SourcePath','SourcePort','Destination','DestinationPath','DestinationPort','Origin'});
+    T_c = table(srcs, srcps, sps, spk, spi, dsts, dstps, dps, dpk, dpi, origins, ...
+        'VariableNames', {'Source','SourcePath','SourcePort','SourcePortKind','SourcePortIndex', ...
+                          'Destination','DestinationPath','DestinationPort','DestinationPortKind','DestinationPortIndex','Origin'});
     writetable(T_c, fullfile(out_dir, sprintf('%s_connections.csv', model_tag)));
 end
 
@@ -488,6 +543,144 @@ function n = get_port_num(pcEntry)
     else
         % 某些特殊端口（如物理端口）可能没有编号，这里返回 NaN 以示区分
         n = NaN;
+    end
+end
+
+function [kind, idx] = kind_and_index_by_handle(blockH, portH)
+    % 通过 PortHandles 反查端口属于哪一类及在该类数组的索引
+    kind = '';
+    idx  = -1;
+    try
+        ph = get_param(blockH,'PortHandles');
+        fields = {'Outport','Inport','LConn','RConn','Conn'};
+        for i = 1:numel(fields)
+            f = fields{i};
+            if isfield(ph,f) && ~isempty(ph.(f))
+                k = find(ph.(f) == portH, 1);
+                if ~isempty(k)
+                    kind = lower(f);
+                    idx  = k;
+                    return;
+                end
+            end
+        end
+    catch
+    end
+end
+
+function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
+    % 通过 pcEntry 和 PortHandles 推断端口种类与索引（用于 pc 来源）
+    kind = '';
+    idx  = -1;
+    try
+        ph = get_param(blockH,'PortHandles');
+        % 优先使用 Type
+        if isfield(pcEntry,'Type') && ~isempty(pcEntry.Type)
+            switch lower(pcEntry.Type)
+                case {'inport','outport','lconn','rconn','conn','conserving'}
+                    f = map_type_to_field(lower(pcEntry.Type));
+                    if isfield(ph,f) && ~isempty(ph.(f))
+                        kind = lower(f); idx = 1; % 无法精确时返回 1 占位
+                        return;
+                    end
+            end
+        end
+        % 回退：根据坐标匹配最近端口句柄，并返回其种类与索引
+        if isfield(pcEntry,'Position') && ~isempty(pcEntry.Position)
+            candH = []; candP = []; candF = {};
+            fields = {'Outport','Inport','LConn','RConn','Conn'};
+            for i = 1:numel(fields)
+                f = fields{i};
+                if isfield(ph,f) && ~isempty(ph.(f))
+                    hh = ph.(f)(:);
+                    pp = arrayfun(@(x) get_param(x,'Position'), hh, 'UniformOutput', false);
+                    candH = [candH; hh]; %#ok<AGROW>
+                    candP = [candP; vertcat(pp{:})]; %#ok<AGROW>
+                    candF = [candF; repmat({f}, numel(hh),1)]; %#ok<AGROW>
+                end
+            end
+            if ~isempty(candH)
+                d = hypot(candP(:,1)-pcEntry.Position(1), candP(:,2)-pcEntry.Position(2));
+                [~,k] = min(d);
+                f = candF{k};
+                kind = lower(f);
+                idx  = find(get_param(blockH,'PortHandles').(f) == candH(k), 1);
+            end
+        end
+    catch
+    end
+end
+
+function f = map_type_to_field(tp)
+    switch tp
+        case {'lconn','rconn','conn'}
+            f = upper(tp);
+        case 'conserving'
+            f = 'Conn';
+        case 'inport'
+            f = 'Inport';
+        case 'outport'
+            f = 'Outport';
+        otherwise
+            f = 'Conn';
+    end
+end
+
+function pcEntry = get_pc_entry_for_port(blockH, portNum)
+    % 在目标块的 PortConnectivity 中找到与端口号匹配的条目
+    pcEntry = struct();
+    try
+        pcAll = get_param(blockH,'PortConnectivity');
+        for k = 1:numel(pcAll)
+            if isfield(pcAll(k),'PortNumber') && isequal(pcAll(k).PortNumber, portNum)
+                pcEntry = pcAll(k); return;
+            elseif isfield(pcAll(k),'Port') && isequal(pcAll(k).Port, portNum)
+                pcEntry = pcAll(k); return;
+            end
+        end
+    catch
+        pcEntry = struct();
+    end
+end
+
+function pcEntry = find_pc_entry_by_srcblock(dstBlockH, srcBlockH)
+    % 在目标块的 PortConnectivity 中找到“上游块==srcBlockH”的条目
+    pcEntry = struct();
+    try
+        pcAll = get_param(dstBlockH,'PortConnectivity');
+        for k = 1:numel(pcAll)
+            if isfield(pcAll(k),'SrcBlock') && ~isempty(pcAll(k).SrcBlock) && pcAll(k).SrcBlock ~= -1
+                if pcAll(k).SrcBlock == srcBlockH
+                    pcEntry = pcAll(k); return;
+                end
+            end
+        end
+    catch
+        pcEntry = struct();
+    end
+end
+
+function c = getfield_or_default_cell(S, field)
+    if isstruct(S)
+        try
+            c = {S.(field)}';
+        catch
+            n = numel(S); c = repmat({''}, n, 1);
+        end
+    else
+        c = {};
+    end
+end
+
+function v = getfield_or_default_num(S, field)
+    if isstruct(S)
+        try
+            v = [S.(field)]';
+        catch
+            n = numel(S); v = -1*ones(n,1);
+        end
+    else
+        v = [];
     end
 end
 
