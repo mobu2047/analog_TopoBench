@@ -1,7 +1,7 @@
 
     % 打开文件准备写入代码
  model_name = 'untitled3';
-open_system(model_name);
+ open_system(model_name);
   
     
     % 获取模型中的所有块

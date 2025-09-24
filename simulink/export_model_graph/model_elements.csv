@@ -1,229 +1,198 @@
 Name,Path,BlockType,Orientation,LibraryLink,Mirror,Rotation,GotoTag,GotoVisibility,FromTag,Left,Top,Right,Bottom,CenterX,CenterY
-"Constant","untitled3/Constant",Constant,right,,off,0,,,,-785,170,-755,200,-770,185
-"DC Voltage Source","untitled3/DC Voltage Source",SubSystem,up,powerlib/Electrical
+Constant,untitled3/Constant,Constant,right,,off,0,,,,-785,170,-755,200,-770,185
+DC Voltage Source,untitled3/DC Voltage Source,SubSystem,up,powerlib/Electrical
 Sources/DC Voltage Source,off,270,,,,10,200,30,235,20,217.5
-"DCVoltageSource","untitled3/DC Voltage Source/DCVoltageSource",PMComponent,right,,off,0,,,,70,25,160,55,115,40
-"Goto","untitled3/DC Voltage Source/Goto",Goto,right,,off,0,T32_2973_1866969797167,global,,130,94,200,116,165,105
-"Model","untitled3/DC Voltage Source/Model",SubSystem,right,spsSourcesModel/DC,off,0,,,,20,82,60,128,40,105
-"DC","untitled3/DC Voltage Source/Model/DC",Constant,right,,off,0,,,,20,21,50,49,35,35
-"Out1","untitled3/DC Voltage Source/Model/Out1",Outport,right,,off,0,,,,70,28,100,42,85,35
-"-","untitled3/DC Voltage Source/-",PMIOPort,right,,off,0,,,,15,33,45,47,30,40
-"+","untitled3/DC Voltage Source/+",PMIOPort,left,,on,-0,,,,185,33,215,47,200,40
-"From","untitled3/From",From,right,,off,0,,,A1,-30,-4,10,24,-10,10
-"From1","untitled3/From1",From,right,,off,0,,,A2,315,-39,355,-11,335,-25
-"From2","untitled3/From2",From,right,,off,0,,,A4,365,-84,405,-56,385,-70
-"From3","untitled3/From3",From,right,,off,0,,,A3,-95,-114,-55,-86,-75,-100
-"Goto","untitled3/Goto",Goto,right,,off,0,A1,local,,-170,155,-130,185,-150,170
-"Goto1","untitled3/Goto1",Goto,right,,off,0,A4,local,,-195,475,-155,505,-175,490
-"Goto2","untitled3/Goto2",Goto,right,,off,0,A3,local,,-250,400,-210,430,-230,415
-"Goto3","untitled3/Goto3",Goto,right,,off,0,A2,local,,-180,330,-140,360,-160,345
-"IGBT","untitled3/IGBT",SubSystem,down,powerlib/Power
+DCVoltageSource,untitled3/DC Voltage Source/DCVoltageSource,PMComponent,right,,off,0,,,,70,25,160,55,115,40
+Goto,untitled3/DC Voltage Source/Goto,Goto,right,,off,0,T32_2973_1866969797167,global,,130,94,200,116,165,105
+Model,untitled3/DC Voltage Source/Model,SubSystem,right,spsSourcesModel/DC,off,0,,,,20,82,60,128,40,105
+DC,untitled3/DC Voltage Source/Model/DC,Constant,right,,off,0,,,,20,21,50,49,35,35
+Out1,untitled3/DC Voltage Source/Model/Out1,Outport,right,,off,0,,,,70,28,100,42,85,35
+-,untitled3/DC Voltage Source/-,PMIOPort,right,,off,0,,,,15,33,45,47,30,40
++,untitled3/DC Voltage Source/+,PMIOPort,left,,on,-0,,,,185,33,215,47,200,40
+From,untitled3/From,From,right,,off,0,,,A1,-30,-4,10,24,-10,10
+From1,untitled3/From1,From,right,,off,0,,,A2,315,-39,355,-11,335,-25
+From2,untitled3/From2,From,right,,off,0,,,A4,365,-84,405,-56,385,-70
+From3,untitled3/From3,From,right,,off,0,,,A3,-95,-114,-55,-86,-75,-100
+Goto,untitled3/Goto,Goto,right,,off,0,A1,local,,-170,155,-130,185,-150,170
+Goto1,untitled3/Goto1,Goto,right,,off,0,A4,local,,-195,475,-155,505,-175,490
+Goto2,untitled3/Goto2,Goto,right,,off,0,A3,local,,-250,400,-210,430,-230,415
+Goto3,untitled3/Goto3,Goto,right,,off,0,A2,local,,-180,330,-140,360,-160,345
+IGBT,untitled3/IGBT,SubSystem,down,powerlib/Power
 Electronics/IGBT,off,90,,,,108,110,152,170,130,140
-"g","untitled3/IGBT/g",Inport,right,,off,0,,,,35,103,65,117,50,110
-"Goto","untitled3/IGBT/Goto",Goto,right,,off,0,T19_1721_580771034503,global,,250,210,325,230,287.5,220
-"IGBT","untitled3/IGBT/IGBT",PMComponent,right,,off,0,,,,115,16,215,44,165,30
-"ISWITCH","untitled3/IGBT/ISWITCH",Terminator,right,,off,0,,,,260,90,330,110,295,100
-"ITAIL","untitled3/IGBT/ITAIL",Terminator,right,,off,0,,,,250,250,325,270,287.5,260
-"Model","untitled3/IGBT/Model",SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
-"gate ","untitled3/IGBT/Model/gate ",Inport,right,,off,0,,,,100,23,130,37,115,30
-"Uswitch","untitled3/IGBT/Model/Uswitch",Inport,right,,off,0,,,,20,163,50,177,35,170
-"status","untitled3/IGBT/Model/status",Inport,right,,off,0,,,,20,218,50,232,35,225
-"Data Type Conversion","untitled3/IGBT/Model/Data Type Conversion",DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
-"Demux","untitled3/IGBT/Model/Demux",Demux,right,,off,0,,,,85,206,90,244,87.5,225
-"Ground","untitled3/IGBT/Model/Ground",Ground,right,,off,0,,,,330,90,360,120,345,105
-"Measurement list","untitled3/IGBT/Model/Measurement list",SubSystem,right,,off,0,,,,355,204,415,226,385,215
-"In1","untitled3/IGBT/Model/Measurement list/In1",Inport,right,,off,0,,,,20,48,50,62,35,55
-"Bus
-Creator1","untitled3/IGBT/Model/Measurement list/Bus
-Creator1",BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
-"Demux","untitled3/IGBT/Model/Measurement list/Demux",Demux,right,,off,0,,,,75,24,80,86,77.5,55
-"Out1","untitled3/IGBT/Model/Measurement list/Out1",Outport,right,,off,0,,,,215,48,245,62,230,55
-"Mux","untitled3/IGBT/Model/Mux",Mux,right,,off,0,,,,320,175,325,255,322.5,215
-"Ron","untitled3/IGBT/Model/Ron",Gain,right,,off,0,,,,185,220,215,250,200,235
-"Sum","untitled3/IGBT/Model/Sum",Sum,right,,off,0,,,,265,208,285,262,275,235
-"ddd","untitled3/IGBT/Model/ddd",Terminator,right,,off,0,,,,85,160,105,180,95,170
-"qqq","untitled3/IGBT/Model/qqq",Constant,right,,off,0,,,,100,277,125,303,112.5,290
-"iSwitch","untitled3/IGBT/Model/iSwitch",Outport,right,,off,0,,,,395,153,425,167,410,160
-"m","untitled3/IGBT/Model/m",Outport,right,,off,0,,,,435,208,465,222,450,215
-"vf","untitled3/IGBT/Model/vf",Outport,right,,off,0,,,,280,284,310,296,295,290
-"gate","untitled3/IGBT/Model/gate",Outport,right,,off,0,,,,320,23,350,37,335,30
-"iTail","untitled3/IGBT/Model/iTail",Outport,right,,off,0,,,,405,90,420,120,412.5,105
-"Status","untitled3/IGBT/Status",From,right,,off,0,,,T21_1956_858010979571,20,236,85,264,52.5,250
-"Uswitch","untitled3/IGBT/Uswitch",Ground,right,,off,0,,,,20,166,85,194,52.5,180
-"VF","untitled3/IGBT/VF",Goto,right,,off,0,T17_1468_202122676544,global,,250,169,320,191,285,180
-"C","untitled3/IGBT/C",PMIOPort,right,,off,0,,,,35,23,65,37,50,30
-"E","untitled3/IGBT/E",PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
-"m","untitled3/IGBT/m",Outport,right,,off,0,,,,280,133,310,147,295,140
-"IGBT1","untitled3/IGBT1",SubSystem,down,powerlib/Power
+g,untitled3/IGBT/g,Inport,right,,off,0,,,,35,103,65,117,50,110
+Goto,untitled3/IGBT/Goto,Goto,right,,off,0,T19_1721_580771034503,global,,250,210,325,230,287.5,220
+IGBT,untitled3/IGBT/IGBT,PMComponent,right,,off,0,,,,115,16,215,44,165,30
+ISWITCH,untitled3/IGBT/ISWITCH,Terminator,right,,off,0,,,,260,90,330,110,295,100
+ITAIL,untitled3/IGBT/ITAIL,Terminator,right,,off,0,,,,250,250,325,270,287.5,260
+Model,untitled3/IGBT/Model,SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
+gate ,untitled3/IGBT/Model/gate ,Inport,right,,off,0,,,,100,23,130,37,115,30
+Uswitch,untitled3/IGBT/Model/Uswitch,Inport,right,,off,0,,,,20,163,50,177,35,170
+status,untitled3/IGBT/Model/status,Inport,right,,off,0,,,,20,218,50,232,35,225
+Data Type Conversion,untitled3/IGBT/Model/Data Type Conversion,DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
+Demux,untitled3/IGBT/Model/Demux,Demux,right,,off,0,,,,85,206,90,244,87.5,225
+Ground,untitled3/IGBT/Model/Ground,Ground,right,,off,0,,,,330,90,360,120,345,105
+Measurement list,untitled3/IGBT/Model/Measurement list,SubSystem,right,,off,0,,,,355,204,415,226,385,215
+In1,untitled3/IGBT/Model/Measurement list/In1,Inport,right,,off,0,,,,20,48,50,62,35,55
+Bus
+Creator1,untitled3/IGBT/Model/Measurement list/Bus
+Creator1,BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
+Demux,untitled3/IGBT/Model/Measurement list/Demux,Demux,right,,off,0,,,,75,24,80,86,77.5,55
+Out1,untitled3/IGBT/Model/Measurement list/Out1,Outport,right,,off,0,,,,215,48,245,62,230,55
+Mux,untitled3/IGBT/Model/Mux,Mux,right,,off,0,,,,320,175,325,255,322.5,215
+Ron,untitled3/IGBT/Model/Ron,Gain,right,,off,0,,,,185,220,215,250,200,235
+Sum,untitled3/IGBT/Model/Sum,Sum,right,,off,0,,,,265,208,285,262,275,235
+ddd,untitled3/IGBT/Model/ddd,Terminator,right,,off,0,,,,85,160,105,180,95,170
+qqq,untitled3/IGBT/Model/qqq,Constant,right,,off,0,,,,100,277,125,303,112.5,290
+iSwitch,untitled3/IGBT/Model/iSwitch,Outport,right,,off,0,,,,395,153,425,167,410,160
+m,untitled3/IGBT/Model/m,Outport,right,,off,0,,,,435,208,465,222,450,215
+vf,untitled3/IGBT/Model/vf,Outport,right,,off,0,,,,280,284,310,296,295,290
+gate,untitled3/IGBT/Model/gate,Outport,right,,off,0,,,,320,23,350,37,335,30
+iTail,untitled3/IGBT/Model/iTail,Outport,right,,off,0,,,,405,90,420,120,412.5,105
+Status,untitled3/IGBT/Status,From,right,,off,0,,,T21_1956_858010979571,20,236,85,264,52.5,250
+Uswitch,untitled3/IGBT/Uswitch,Ground,right,,off,0,,,,20,166,85,194,52.5,180
+VF,untitled3/IGBT/VF,Goto,right,,off,0,T17_1468_202122676544,global,,250,169,320,191,285,180
+C,untitled3/IGBT/C,PMIOPort,right,,off,0,,,,35,23,65,37,50,30
+E,untitled3/IGBT/E,PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
+m,untitled3/IGBT/m,Outport,right,,off,0,,,,280,133,310,147,295,140
+IGBT1,untitled3/IGBT1,SubSystem,down,powerlib/Power
 Electronics/IGBT,off,90,,,,438,110,482,170,460,140
-"g","untitled3/IGBT1/g",Inport,right,,off,0,,,,35,103,65,117,50,110
-"Goto","untitled3/IGBT1/Goto",Goto,right,,off,0,T20_1770_627084005684,global,,250,210,325,230,287.5,220
-"IGBT","untitled3/IGBT1/IGBT",PMComponent,right,,off,0,,,,115,16,215,44,165,30
-"ISWITCH","untitled3/IGBT1/ISWITCH",Terminator,right,,off,0,,,,260,90,330,110,295,100
-"ITAIL","untitled3/IGBT1/ITAIL",Terminator,right,,off,0,,,,250,250,325,270,287.5,260
-"Model","untitled3/IGBT1/Model",SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
-"gate ","untitled3/IGBT1/Model/gate ",Inport,right,,off,0,,,,100,23,130,37,115,30
-"Uswitch","untitled3/IGBT1/Model/Uswitch",Inport,right,,off,0,,,,20,163,50,177,35,170
-"status","untitled3/IGBT1/Model/status",Inport,right,,off,0,,,,20,218,50,232,35,225
-"Data Type Conversion","untitled3/IGBT1/Model/Data Type Conversion",DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
-"Demux","untitled3/IGBT1/Model/Demux",Demux,right,,off,0,,,,85,206,90,244,87.5,225
-"Ground","untitled3/IGBT1/Model/Ground",Ground,right,,off,0,,,,330,90,360,120,345,105
-"Measurement list","untitled3/IGBT1/Model/Measurement list",SubSystem,right,,off,0,,,,355,204,415,226,385,215
-"In1","untitled3/IGBT1/Model/Measurement list/In1",Inport,right,,off,0,,,,20,48,50,62,35,55
-"Bus
-Creator1","untitled3/IGBT1/Model/Measurement list/Bus
-Creator1",BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
-"Demux","untitled3/IGBT1/Model/Measurement list/Demux",Demux,right,,off,0,,,,75,24,80,86,77.5,55
-"Out1","untitled3/IGBT1/Model/Measurement list/Out1",Outport,right,,off,0,,,,215,48,245,62,230,55
-"Mux","untitled3/IGBT1/Model/Mux",Mux,right,,off,0,,,,320,175,325,255,322.5,215
-"Ron","untitled3/IGBT1/Model/Ron",Gain,right,,off,0,,,,185,220,215,250,200,235
-"Sum","untitled3/IGBT1/Model/Sum",Sum,right,,off,0,,,,265,208,285,262,275,235
-"ddd","untitled3/IGBT1/Model/ddd",Terminator,right,,off,0,,,,85,160,105,180,95,170
-"qqq","untitled3/IGBT1/Model/qqq",Constant,right,,off,0,,,,100,277,125,303,112.5,290
-"iSwitch","untitled3/IGBT1/Model/iSwitch",Outport,right,,off,0,,,,395,153,425,167,410,160
-"m","untitled3/IGBT1/Model/m",Outport,right,,off,0,,,,435,208,465,222,450,215
-"vf","untitled3/IGBT1/Model/vf",Outport,right,,off,0,,,,280,284,310,296,295,290
-"gate","untitled3/IGBT1/Model/gate",Outport,right,,off,0,,,,320,23,350,37,335,30
-"iTail","untitled3/IGBT1/Model/iTail",Outport,right,,off,0,,,,405,90,420,120,412.5,105
-"Status","untitled3/IGBT1/Status",From,right,,off,0,,,T22_2005_932525501580,20,236,85,264,52.5,250
-"Uswitch","untitled3/IGBT1/Uswitch",Ground,right,,off,0,,,,20,166,85,194,52.5,180
-"VF","untitled3/IGBT1/VF",Goto,right,,off,0,T18_1517_210567590850,global,,250,169,320,191,285,180
-"C","untitled3/IGBT1/C",PMIOPort,right,,off,0,,,,35,23,65,37,50,30
-"E","untitled3/IGBT1/E",PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
-"m","untitled3/IGBT1/m",Outport,right,,off,0,,,,280,133,310,147,295,140
-"IGBT2","untitled3/IGBT2",SubSystem,down,powerlib/Power
+g,untitled3/IGBT1/g,Inport,right,,off,0,,,,35,103,65,117,50,110
+Goto,untitled3/IGBT1/Goto,Goto,right,,off,0,T20_1770_627084005684,global,,250,210,325,230,287.5,220
+IGBT,untitled3/IGBT1/IGBT,PMComponent,right,,off,0,,,,115,16,215,44,165,30
+ISWITCH,untitled3/IGBT1/ISWITCH,Terminator,right,,off,0,,,,260,90,330,110,295,100
+ITAIL,untitled3/IGBT1/ITAIL,Terminator,right,,off,0,,,,250,250,325,270,287.5,260
+Model,untitled3/IGBT1/Model,SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
+gate ,untitled3/IGBT1/Model/gate ,Inport,right,,off,0,,,,100,23,130,37,115,30
+Uswitch,untitled3/IGBT1/Model/Uswitch,Inport,right,,off,0,,,,20,163,50,177,35,170
+status,untitled3/IGBT1/Model/status,Inport,right,,off,0,,,,20,218,50,232,35,225
+Data Type Conversion,untitled3/IGBT1/Model/Data Type Conversion,DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
+Demux,untitled3/IGBT1/Model/Demux,Demux,right,,off,0,,,,85,206,90,244,87.5,225
+Ground,untitled3/IGBT1/Model/Ground,Ground,right,,off,0,,,,330,90,360,120,345,105
+Measurement list,untitled3/IGBT1/Model/Measurement list,SubSystem,right,,off,0,,,,355,204,415,226,385,215
+In1,untitled3/IGBT1/Model/Measurement list/In1,Inport,right,,off,0,,,,20,48,50,62,35,55
+Bus
+Creator1,untitled3/IGBT1/Model/Measurement list/Bus
+Creator1,BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
+Demux,untitled3/IGBT1/Model/Measurement list/Demux,Demux,right,,off,0,,,,75,24,80,86,77.5,55
+Out1,untitled3/IGBT1/Model/Measurement list/Out1,Outport,right,,off,0,,,,215,48,245,62,230,55
+Mux,untitled3/IGBT1/Model/Mux,Mux,right,,off,0,,,,320,175,325,255,322.5,215
+Ron,untitled3/IGBT1/Model/Ron,Gain,right,,off,0,,,,185,220,215,250,200,235
+Sum,untitled3/IGBT1/Model/Sum,Sum,right,,off,0,,,,265,208,285,262,275,235
+ddd,untitled3/IGBT1/Model/ddd,Terminator,right,,off,0,,,,85,160,105,180,95,170
+qqq,untitled3/IGBT1/Model/qqq,Constant,right,,off,0,,,,100,277,125,303,112.5,290
+iSwitch,untitled3/IGBT1/Model/iSwitch,Outport,right,,off,0,,,,395,153,425,167,410,160
+m,untitled3/IGBT1/Model/m,Outport,right,,off,0,,,,435,208,465,222,450,215
+vf,untitled3/IGBT1/Model/vf,Outport,right,,off,0,,,,280,284,310,296,295,290
+gate,untitled3/IGBT1/Model/gate,Outport,right,,off,0,,,,320,23,350,37,335,30
+iTail,untitled3/IGBT1/Model/iTail,Outport,right,,off,0,,,,405,90,420,120,412.5,105
+Status,untitled3/IGBT1/Status,From,right,,off,0,,,T22_2005_932525501580,20,236,85,264,52.5,250
+Uswitch,untitled3/IGBT1/Uswitch,Ground,right,,off,0,,,,20,166,85,194,52.5,180
+VF,untitled3/IGBT1/VF,Goto,right,,off,0,T18_1517_210567590850,global,,250,169,320,191,285,180
+C,untitled3/IGBT1/C,PMIOPort,right,,off,0,,,,35,23,65,37,50,30
+E,untitled3/IGBT1/E,PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
+m,untitled3/IGBT1/m,Outport,right,,off,0,,,,280,133,310,147,295,140
+IGBT2,untitled3/IGBT2,SubSystem,down,powerlib/Power
 Electronics/IGBT,off,90,,,,108,270,152,330,130,300
-"g","untitled3/IGBT2/g",Inport,right,,off,0,,,,35,103,65,117,50,110
-"Goto","untitled3/IGBT2/Goto",Goto,right,,off,0,T20_1771_626748834316,global,,250,210,325,230,287.5,220
-"IGBT","untitled3/IGBT2/IGBT",PMComponent,right,,off,0,,,,115,16,215,44,165,30
-"ISWITCH","untitled3/IGBT2/ISWITCH",Terminator,right,,off,0,,,,260,90,330,110,295,100
-"ITAIL","untitled3/IGBT2/ITAIL",Terminator,right,,off,0,,,,250,250,325,270,287.5,260
-"Model","untitled3/IGBT2/Model",SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
-"gate ","untitled3/IGBT2/Model/gate ",Inport,right,,off,0,,,,100,23,130,37,115,30
-"Uswitch","untitled3/IGBT2/Model/Uswitch",Inport,right,,off,0,,,,20,163,50,177,35,170
-"status","untitled3/IGBT2/Model/status",Inport,right,,off,0,,,,20,218,50,232,35,225
-"Data Type Conversion","untitled3/IGBT2/Model/Data Type Conversion",DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
-"Demux","untitled3/IGBT2/Model/Demux",Demux,right,,off,0,,,,85,206,90,244,87.5,225
-"Ground","untitled3/IGBT2/Model/Ground",Ground,right,,off,0,,,,330,90,360,120,345,105
-"Measurement list","untitled3/IGBT2/Model/Measurement list",SubSystem,right,,off,0,,,,355,204,415,226,385,215
-"In1","untitled3/IGBT2/Model/Measurement list/In1",Inport,right,,off,0,,,,20,48,50,62,35,55
-"Bus
-Creator1","untitled3/IGBT2/Model/Measurement list/Bus
-Creator1",BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
-"Demux","untitled3/IGBT2/Model/Measurement list/Demux",Demux,right,,off,0,,,,75,24,80,86,77.5,55
-"Out1","untitled3/IGBT2/Model/Measurement list/Out1",Outport,right,,off,0,,,,215,48,245,62,230,55
-"Mux","untitled3/IGBT2/Model/Mux",Mux,right,,off,0,,,,320,175,325,255,322.5,215
-"Ron","untitled3/IGBT2/Model/Ron",Gain,right,,off,0,,,,185,220,215,250,200,235
-"Sum","untitled3/IGBT2/Model/Sum",Sum,right,,off,0,,,,265,208,285,262,275,235
-"ddd","untitled3/IGBT2/Model/ddd",Terminator,right,,off,0,,,,85,160,105,180,95,170
-"qqq","untitled3/IGBT2/Model/qqq",Constant,right,,off,0,,,,100,277,125,303,112.5,290
-"iSwitch","untitled3/IGBT2/Model/iSwitch",Outport,right,,off,0,,,,395,153,425,167,410,160
-"m","untitled3/IGBT2/Model/m",Outport,right,,off,0,,,,435,208,465,222,450,215
-"vf","untitled3/IGBT2/Model/vf",Outport,right,,off,0,,,,280,284,310,296,295,290
-"gate","untitled3/IGBT2/Model/gate",Outport,right,,off,0,,,,320,23,350,37,335,30
-"iTail","untitled3/IGBT2/Model/iTail",Outport,right,,off,0,,,,405,90,420,120,412.5,105
-"Status","untitled3/IGBT2/Status",From,right,,off,0,,,T22_2006_931871247035,20,236,85,264,52.5,250
-"Uswitch","untitled3/IGBT2/Uswitch",Ground,right,,off,0,,,,20,166,85,194,52.5,180
-"VF","untitled3/IGBT2/VF",Goto,right,,off,0,T18_1518_210703823007,global,,250,169,320,191,285,180
-"C","untitled3/IGBT2/C",PMIOPort,right,,off,0,,,,35,23,65,37,50,30
-"E","untitled3/IGBT2/E",PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
-"m","untitled3/IGBT2/m",Outport,right,,off,0,,,,280,133,310,147,295,140
-"IGBT3","untitled3/IGBT3",SubSystem,down,powerlib/Power
+g,untitled3/IGBT2/g,Inport,right,,off,0,,,,35,103,65,117,50,110
+Goto,untitled3/IGBT2/Goto,Goto,right,,off,0,T20_1771_626748834316,global,,250,210,325,230,287.5,220
+IGBT,untitled3/IGBT2/IGBT,PMComponent,right,,off,0,,,,115,16,215,44,165,30
+ISWITCH,untitled3/IGBT2/ISWITCH,Terminator,right,,off,0,,,,260,90,330,110,295,100
+ITAIL,untitled3/IGBT2/ITAIL,Terminator,right,,off,0,,,,250,250,325,270,287.5,260
+Model,untitled3/IGBT2/Model,SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
+gate ,untitled3/IGBT2/Model/gate ,Inport,right,,off,0,,,,100,23,130,37,115,30
+Uswitch,untitled3/IGBT2/Model/Uswitch,Inport,right,,off,0,,,,20,163,50,177,35,170
+status,untitled3/IGBT2/Model/status,Inport,right,,off,0,,,,20,218,50,232,35,225
+Data Type Conversion,untitled3/IGBT2/Model/Data Type Conversion,DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
+Demux,untitled3/IGBT2/Model/Demux,Demux,right,,off,0,,,,85,206,90,244,87.5,225
+Ground,untitled3/IGBT2/Model/Ground,Ground,right,,off,0,,,,330,90,360,120,345,105
+Measurement list,untitled3/IGBT2/Model/Measurement list,SubSystem,right,,off,0,,,,355,204,415,226,385,215
+In1,untitled3/IGBT2/Model/Measurement list/In1,Inport,right,,off,0,,,,20,48,50,62,35,55
+Bus
+Creator1,untitled3/IGBT2/Model/Measurement list/Bus
+Creator1,BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
+Demux,untitled3/IGBT2/Model/Measurement list/Demux,Demux,right,,off,0,,,,75,24,80,86,77.5,55
+Out1,untitled3/IGBT2/Model/Measurement list/Out1,Outport,right,,off,0,,,,215,48,245,62,230,55
+Mux,untitled3/IGBT2/Model/Mux,Mux,right,,off,0,,,,320,175,325,255,322.5,215
+Ron,untitled3/IGBT2/Model/Ron,Gain,right,,off,0,,,,185,220,215,250,200,235
+Sum,untitled3/IGBT2/Model/Sum,Sum,right,,off,0,,,,265,208,285,262,275,235
+ddd,untitled3/IGBT2/Model/ddd,Terminator,right,,off,0,,,,85,160,105,180,95,170
+qqq,untitled3/IGBT2/Model/qqq,Constant,right,,off,0,,,,100,277,125,303,112.5,290
+iSwitch,untitled3/IGBT2/Model/iSwitch,Outport,right,,off,0,,,,395,153,425,167,410,160
+m,untitled3/IGBT2/Model/m,Outport,right,,off,0,,,,435,208,465,222,450,215
+vf,untitled3/IGBT2/Model/vf,Outport,right,,off,0,,,,280,284,310,296,295,290
+gate,untitled3/IGBT2/Model/gate,Outport,right,,off,0,,,,320,23,350,37,335,30
+iTail,untitled3/IGBT2/Model/iTail,Outport,right,,off,0,,,,405,90,420,120,412.5,105
+Status,untitled3/IGBT2/Status,From,right,,off,0,,,T22_2006_931871247035,20,236,85,264,52.5,250
+Uswitch,untitled3/IGBT2/Uswitch,Ground,right,,off,0,,,,20,166,85,194,52.5,180
+VF,untitled3/IGBT2/VF,Goto,right,,off,0,T18_1518_210703823007,global,,250,169,320,191,285,180
+C,untitled3/IGBT2/C,PMIOPort,right,,off,0,,,,35,23,65,37,50,30
+E,untitled3/IGBT2/E,PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
+m,untitled3/IGBT2/m,Outport,right,,off,0,,,,280,133,310,147,295,140
+IGBT3,untitled3/IGBT3,SubSystem,down,powerlib/Power
 Electronics/IGBT,off,90,,,,438,270,482,330,460,300
-"g","untitled3/IGBT3/g",Inport,right,,off,0,,,,35,103,65,117,50,110
-"Goto","untitled3/IGBT3/Goto",Goto,right,,off,0,T20_1772_626450526947,global,,250,210,325,230,287.5,220
-"IGBT","untitled3/IGBT3/IGBT",PMComponent,right,,off,0,,,,115,16,215,44,165,30
-"ISWITCH","untitled3/IGBT3/ISWITCH",Terminator,right,,off,0,,,,260,90,330,110,295,100
-"ITAIL","untitled3/IGBT3/ITAIL",Terminator,right,,off,0,,,,250,250,325,270,287.5,260
-"Model","untitled3/IGBT3/Model",SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
-"gate ","untitled3/IGBT3/Model/gate ",Inport,right,,off,0,,,,100,23,130,37,115,30
-"Uswitch","untitled3/IGBT3/Model/Uswitch",Inport,right,,off,0,,,,20,163,50,177,35,170
-"status","untitled3/IGBT3/Model/status",Inport,right,,off,0,,,,20,218,50,232,35,225
-"Data Type Conversion","untitled3/IGBT3/Model/Data Type Conversion",DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
-"Demux","untitled3/IGBT3/Model/Demux",Demux,right,,off,0,,,,85,206,90,244,87.5,225
-"Ground","untitled3/IGBT3/Model/Ground",Ground,right,,off,0,,,,330,90,360,120,345,105
-"Measurement list","untitled3/IGBT3/Model/Measurement list",SubSystem,right,,off,0,,,,355,204,415,226,385,215
-"In1","untitled3/IGBT3/Model/Measurement list/In1",Inport,right,,off,0,,,,20,48,50,62,35,55
-"Bus
-Creator1","untitled3/IGBT3/Model/Measurement list/Bus
-Creator1",BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
-"Demux","untitled3/IGBT3/Model/Measurement list/Demux",Demux,right,,off,0,,,,75,24,80,86,77.5,55
-"Out1","untitled3/IGBT3/Model/Measurement list/Out1",Outport,right,,off,0,,,,215,48,245,62,230,55
-"Mux","untitled3/IGBT3/Model/Mux",Mux,right,,off,0,,,,320,175,325,255,322.5,215
-"Ron","untitled3/IGBT3/Model/Ron",Gain,right,,off,0,,,,185,220,215,250,200,235
-"Sum","untitled3/IGBT3/Model/Sum",Sum,right,,off,0,,,,265,208,285,262,275,235
-"ddd","untitled3/IGBT3/Model/ddd",Terminator,right,,off,0,,,,85,160,105,180,95,170
-"qqq","untitled3/IGBT3/Model/qqq",Constant,right,,off,0,,,,100,277,125,303,112.5,290
-"iSwitch","untitled3/IGBT3/Model/iSwitch",Outport,right,,off,0,,,,395,153,425,167,410,160
-"m","untitled3/IGBT3/Model/m",Outport,right,,off,0,,,,435,208,465,222,450,215
-"vf","untitled3/IGBT3/Model/vf",Outport,right,,off,0,,,,280,284,310,296,295,290
-"gate","untitled3/IGBT3/Model/gate",Outport,right,,off,0,,,,320,23,350,37,335,30
-"iTail","untitled3/IGBT3/Model/iTail",Outport,right,,off,0,,,,405,90,420,120,412.5,105
-"Status","untitled3/IGBT3/Status",From,right,,off,0,,,T22_2007_931250505216,20,236,85,264,52.5,250
-"Uswitch","untitled3/IGBT3/Uswitch",Ground,right,,off,0,,,,20,166,85,194,52.5,180
-"VF","untitled3/IGBT3/VF",Goto,right,,off,0,T18_1519_210881015163,global,,250,169,320,191,285,180
-"C","untitled3/IGBT3/C",PMIOPort,right,,off,0,,,,35,23,65,37,50,30
-"E","untitled3/IGBT3/E",PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
-"m","untitled3/IGBT3/m",Outport,right,,off,0,,,,280,133,310,147,295,140
-"NOT","untitled3/NOT",Logic,right,,off,0,,,,-430,304,-400,336,-415,320
-"NOT1","untitled3/NOT1",Logic,right,,off,0,,,,-395,489,-365,521,-380,505
-"Product","untitled3/Product",Product,right,,off,0,,,,-560,212,-530,243,-545,227.5
-"Product1","untitled3/Product1",Product,right,,off,0,,,,-500,392,-470,423,-485,407.5
-"Repeating
-Sequence","untitled3/Repeating
-Sequence",SubSystem,right,simulink/Sources/Repeating
+g,untitled3/IGBT3/g,Inport,right,,off,0,,,,35,103,65,117,50,110
+Goto,untitled3/IGBT3/Goto,Goto,right,,off,0,T20_1772_626450526947,global,,250,210,325,230,287.5,220
+IGBT,untitled3/IGBT3/IGBT,PMComponent,right,,off,0,,,,115,16,215,44,165,30
+ISWITCH,untitled3/IGBT3/ISWITCH,Terminator,right,,off,0,,,,260,90,330,110,295,100
+ITAIL,untitled3/IGBT3/ITAIL,Terminator,right,,off,0,,,,250,250,325,270,287.5,260
+Model,untitled3/IGBT3/Model,SubSystem,right,spsIGBTModel/SPID,off,0,,,,115,76,215,284,165,180
+gate ,untitled3/IGBT3/Model/gate ,Inport,right,,off,0,,,,100,23,130,37,115,30
+Uswitch,untitled3/IGBT3/Model/Uswitch,Inport,right,,off,0,,,,20,163,50,177,35,170
+status,untitled3/IGBT3/Model/status,Inport,right,,off,0,,,,20,218,50,232,35,225
+Data Type Conversion,untitled3/IGBT3/Model/Data Type Conversion,DataTypeConversion,right,,off,0,,,,205,16,255,44,230,30
+Demux,untitled3/IGBT3/Model/Demux,Demux,right,,off,0,,,,85,206,90,244,87.5,225
+Ground,untitled3/IGBT3/Model/Ground,Ground,right,,off,0,,,,330,90,360,120,345,105
+Measurement list,untitled3/IGBT3/Model/Measurement list,SubSystem,right,,off,0,,,,355,204,415,226,385,215
+In1,untitled3/IGBT3/Model/Measurement list/In1,Inport,right,,off,0,,,,20,48,50,62,35,55
+Bus
+Creator1,untitled3/IGBT3/Model/Measurement list/Bus
+Creator1,BusCreator,right,,off,0,,,,180,26,185,84,182.5,55
+Demux,untitled3/IGBT3/Model/Measurement list/Demux,Demux,right,,off,0,,,,75,24,80,86,77.5,55
+Out1,untitled3/IGBT3/Model/Measurement list/Out1,Outport,right,,off,0,,,,215,48,245,62,230,55
+Mux,untitled3/IGBT3/Model/Mux,Mux,right,,off,0,,,,320,175,325,255,322.5,215
+Ron,untitled3/IGBT3/Model/Ron,Gain,right,,off,0,,,,185,220,215,250,200,235
+Sum,untitled3/IGBT3/Model/Sum,Sum,right,,off,0,,,,265,208,285,262,275,235
+ddd,untitled3/IGBT3/Model/ddd,Terminator,right,,off,0,,,,85,160,105,180,95,170
+qqq,untitled3/IGBT3/Model/qqq,Constant,right,,off,0,,,,100,277,125,303,112.5,290
+iSwitch,untitled3/IGBT3/Model/iSwitch,Outport,right,,off,0,,,,395,153,425,167,410,160
+m,untitled3/IGBT3/Model/m,Outport,right,,off,0,,,,435,208,465,222,450,215
+vf,untitled3/IGBT3/Model/vf,Outport,right,,off,0,,,,280,284,310,296,295,290
+gate,untitled3/IGBT3/Model/gate,Outport,right,,off,0,,,,320,23,350,37,335,30
+iTail,untitled3/IGBT3/Model/iTail,Outport,right,,off,0,,,,405,90,420,120,412.5,105
+Status,untitled3/IGBT3/Status,From,right,,off,0,,,T22_2007_931250505216,20,236,85,264,52.5,250
+Uswitch,untitled3/IGBT3/Uswitch,Ground,right,,off,0,,,,20,166,85,194,52.5,180
+VF,untitled3/IGBT3/VF,Goto,right,,off,0,T18_1519_210881015163,global,,250,169,320,191,285,180
+C,untitled3/IGBT3/C,PMIOPort,right,,off,0,,,,35,23,65,37,50,30
+E,untitled3/IGBT3/E,PMIOPort,left,,on,-0,,,,280,23,310,37,295,30
+m,untitled3/IGBT3/m,Outport,right,,off,0,,,,280,133,310,147,295,140
+NOT,untitled3/NOT,Logic,right,,off,0,,,,-430,304,-400,336,-415,320
+NOT1,untitled3/NOT1,Logic,right,,off,0,,,,-395,489,-365,521,-380,505
+Product,untitled3/Product,Product,right,,off,0,,,,-560,212,-530,243,-545,227.5
+Product1,untitled3/Product1,Product,right,,off,0,,,,-500,392,-470,423,-485,407.5
+Repeating
+Sequence,untitled3/Repeating
+Sequence,SubSystem,right,simulink/Sources/Repeating
 Sequence,off,0,,,,-770,445,-740,475,-755,460
-"Clock","untitled3/Repeating
-Sequence/Clock",Clock,right,,off,0,,,,15,30,35,50,25,40
-"Constant","untitled3/Repeating
-Sequence/Constant",Constant,right,,off,0,,,,125,91,180,119,152.5,105
-"Look-Up Table1","untitled3/Repeating
-Sequence/Look-Up Table1",Lookup_n-D,right,,off,0,,,,330,53,365,77,347.5,65
-"Math
-Function","untitled3/Repeating
+Clock,untitled3/Repeating
+Sequence/Clock,Clock,right,,off,0,,,,15,30,35,50,25,40
+Constant,untitled3/Repeating
+Sequence/Constant,Constant,right,,off,0,,,,125,91,180,119,152.5,105
+Look-Up Table1,untitled3/Repeating
+Sequence/Look-Up Table1,Lookup_n-D,right,,off,0,,,,330,53,365,77,347.5,65
+Math
+Function,untitled3/Repeating
 Sequence/Math
-Function",Math,right,,off,0,,,,230,47,260,78,245,62.5
-"Output","untitled3/Repeating
-Sequence/Output",SignalConversion,right,,off,0,,,,450,41,470,89,460,65
-"Sum","untitled3/Repeating
-Sequence/Sum",Sum,right,,off,0,,,,145,29,165,76,155,52.5
-"startTime","untitled3/Repeating
-Sequence/startTime",S-Function,right,,off,0,,,,50,52,120,78,85,65
-"Out1","untitled3/Repeating
-Sequence/Out1",Outport,right,,off,0,,,,550,55,570,75,560,65
-"Series RLC Load","untitled3/Series RLC Load",PMComponent,right,powerlib/Elements/Series RLC Load,off,0,,,,160,198,240,232,200,215
-"Series RLC Load1","untitled3/Series RLC Load1",PMComponent,right,powerlib/Elements/Series RLC Load,off,0,,,,325,198,405,232,365,215
-"Square Wave
-Generator","untitled3/Square Wave
-Generator",SignalGenerator,right,,off,0,,,,-770,375,-740,405,-755,390
-"powergui","untitled3/powergui",SubSystem,right,,off,0,,,,-685,-20,-604,19,-644.5,-0.5
-"EquivalentModel1","untitled3/powergui/EquivalentModel1",SubSystem,right,,off,0,,,,15,70,143,105,79,87.5
-"Gates","untitled3/powergui/EquivalentModel1/Gates",SubSystem,right,,off,0,,,,15,112,80,138,47.5,125
-"From1","untitled3/powergui/EquivalentModel1/Gates/From1",From,right,,off,0,,,T19_1721_580771034503,15,21,85,49,50,35
-"From2","untitled3/powergui/EquivalentModel1/Gates/From2",From,right,,off,0,,,T20_1770_627084005684,15,66,85,94,50,80
-"From3","untitled3/powergui/EquivalentModel1/Gates/From3",From,right,,off,0,,,T20_1771_626748834316,15,111,85,139,50,125
-"From4","untitled3/powergui/EquivalentModel1/Gates/From4",From,right,,off,0,,,T20_1772_626450526947,15,156,85,184,50,170
-"Mux","untitled3/powergui/EquivalentModel1/Gates/Mux",Mux,right,,off,0,,,,325,272,330,613,327.5,442.5
-"gates","untitled3/powergui/EquivalentModel1/Gates/gates",Outport,right,,off,0,,,,390,433,420,447,405,440
-"Sources","untitled3/powergui/EquivalentModel1/Sources",SubSystem,right,,off,0,,,,15,52,80,78,47.5,65
-"From1","untitled3/powergui/EquivalentModel1/Sources/From1",From,right,,off,0,,,T32_2973_1866969797167,15,21,85,49,50,35
-"From2","untitled3/powergui/EquivalentModel1/Sources/From2",From,right,,off,0,,,T17_1468_202122676544,15,66,85,94,50,80
-"From3","untitled3/powergui/EquivalentModel1/Sources/From3",From,right,,off,0,,,T18_1517_210567590850,15,111,85,139,50,125
-"From4","untitled3/powergui/EquivalentModel1/Sources/From4",From,right,,off,0,,,T18_1518_210703823007,15,156,85,184,50,170
-"From5","untitled3/powergui/EquivalentModel1/Sources/From5",From,right,,off,0,,,T18_1519_210881015163,15,201,85,229,50,215
-"Mux","untitled3/powergui/EquivalentModel1/Sources/Mux",Mux,right,,off,0,,,,325,270,330,610,327.5,440
-"u","untitled3/powergui/EquivalentModel1/Sources/u",Outport,right,,off,0,,,,385,433,415,447,400,440
-"State-Space","untitled3/powergui/EquivalentModel1/State-Space",S-Function,right,,off,0,,,,125,35,230,155,177.5,95
-"Status","untitled3/powergui/EquivalentModel1/Status",SubSystem,right,,off,0,,,,285,113,350,137,317.5,125
-"v&i","untitled3/powergui/EquivalentModel1/Status/v&i",Inport,right,,off,0,,,,15,373,45,387,30,380
-"Demux","untitled3/powergui/EquivalentModel1/Status/Demux",Demux,right,,off,0,,,,100,193,105,572,102.5,382.5
-"Goto1","untitled3/powergui/EquivalentModel1/Status/Goto1",Goto,right,,off,0,T21_1956_858010979571,global,,325,21,395,49,360,35
-"Goto2","untitled3/powergui/EquivalentModel1/Status/Goto2",Goto,right,,off,0,T22_2005_932525501580,global,,325,66,395,94,360,80
-"Goto3","untitled3/powergui/EquivalentModel1/Status/Goto3",Goto,right,,off,0,T22_2006_931871247035,global,,325,111,395,139,360,125
-"Goto4","untitled3/powergui/EquivalentModel1/Status/Goto4",Goto,right,,off,0,T22_2007_931250505216,global,,325,156,395,184,360,170
-"Yout","untitled3/powergui/EquivalentModel1/Yout",SubSystem,right,,off,0,,,,285,53,350,77,317.5,65
-"v,i","untitled3/powergui/EquivalentModel1/Yout/v,i",Inport,right,,off,0,,,,15,373,45,387,30,380
-"Demux","untitled3/powergui/EquivalentModel1/Yout/Demux",Demux,right,,off,0,,,,100,191,105,569,102.5,380
-"Terminator_1","untitled3/powergui/EquivalentModel1/Yout/Terminator_1",Terminator,right,,off,0,,,,125,370,140,390,132.5,380
-"Ground","untitled3/powergui/Ground",Ground,right,,off,0,,,,405,20,425,40,415,30
-"Terminator","untitled3/powergui/Terminator",Terminator,right,,off,0,,,,445,20,465,40,455,30
+Function,Math,right,,off,0,,,,230,47,260,78,245,62.5
+Output,untitled3/Repeating
+Sequence/Output,SignalConversion,right,,off,0,,,,450,41,470,89,460,65
+Sum,untitled3/Repeating
+Sequence/Sum,Sum,right,,off,0,,,,145,29,165,76,155,52.5
+startTime,untitled3/Repeating
+Sequence/startTime,S-Function,right,,off,0,,,,50,52,120,78,85,65
+Out1,untitled3/Repeating
+Sequence/Out1,Outport,right,,off,0,,,,550,55,570,75,560,65
+Series RLC Load,untitled3/Series RLC Load,PMComponent,right,powerlib/Elements/Series RLC Load,off,0,,,,160,198,240,232,200,215
+Series RLC Load1,untitled3/Series RLC Load1,PMComponent,right,powerlib/Elements/Series RLC Load,off,0,,,,325,198,405,232,365,215
+Square Wave
+Generator,untitled3/Square Wave
+Generator,SignalGenerator,right,,off,0,,,,-770,375,-740,405,-755,390

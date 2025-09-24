@@ -51,6 +51,8 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	% -------- 4) 建立连接（优先用完整路径；端口句柄回 ?几何匹配 ? --------
 	% 索引：原路径->新路径；新路 ?->中心坐标；原路径->导出端口集合
 	orig2new = containers.Map('KeyType','char','ValueType','char');
+    
+    
 	centers  = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:height(elemTable)
 		orig2new(char(elemTable.OrigPath{i})) = char(elemTable.NewPath{i});
