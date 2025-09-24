@@ -1,14 +1,14 @@
 
     % 打开文件准备写入代码
-    model_name = untitled3;
+ model_name = 'untitled3';
 
   
     
     % 获取模型中的所有块
-    blocks = find_system(model_name, 'SearchDepth', 1);
+ blocks = find_system(model_name, 'SearchDepth', 1);
     
     % 跳过模型本身
-    blocks = blocks(2:end);
+ blocks = blocks(2:end);
     for i = 1:length(blocks)
         disp(getfullname(blocks(i,1)));
     end
@@ -437,7 +437,7 @@ graph.connections = conn;
 graph.lines       = sigLines;
 
 json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
-txt = jsonencode(graph, 'PrettyPrint', true);   % MATLAB 会将 NaN 编码为 null
+txt = jsonencode(graph, 'ConvertInfAndNaN', true);   % MATLAB 会将 NaN 编码为 null
 fid = fopen(json_path,'w');
 assert(fid~=-1, '无法创建文件: %s', json_path);
 fwrite(fid, txt, 'char');
