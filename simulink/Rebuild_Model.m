@@ -199,24 +199,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		S = tasksSignal(t);
 		try
 			srcH = resolve_port_handle_by_kind_index(S.srcNew, S.SPK, S.SPI);
-			if isempty(srcH)
-				% 若 Kind 为空但端口号有效，直接按 Outport(SP) 选择
-				if S.SP>=1
-					srcH = resolve_port_handle_by_kind_index(S.srcNew, 'outport', S.SP);
-				end
-				if isempty(srcH)
-					srcH = resolve_port_handle_by_geom(S.srcNew, S.srcOrig, portsByOrig, 'src', S.dstCenter, S.SP, {'Outport'});
-				end
-			end
 			dstH = resolve_port_handle_by_kind_index(S.dstNew, S.DPK, S.DPI);
-			if isempty(dstH)
-				if S.DP>=1
-					dstH = resolve_port_handle_by_kind_index(S.dstNew, 'inport', S.DP);
-				end
-				if isempty(dstH)
-					dstH = resolve_port_handle_by_geom(S.dstNew, S.dstOrig, portsByOrig, 'dst', S.srcCenter, S.DP, {'Inport'});
-				end
-			end
 			%debug_print_addline(S.parentSys, srcH, dstH, 'signal');
 			if ~port_has_existing_line(dstH)
 				%fprintf('[signal:add] parent=%s srcH=%d dstH=%d\n', S.parentSys, srcH, dstH);
@@ -232,32 +215,8 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		P = tasksPhysical(t);
 		try
 			srcH = resolve_port_handle_by_kind_index(P.srcNew, P.SPK, P.SPI);
-			if isempty(srcH)
-				% 若来源端无 Kind，尝试按 Conn(SP) 直接取
-				if P.SP>=1
-					srcH = resolve_port_handle_by_kind_index(P.srcNew, 'conn', P.SP);
-				end
-				if isempty(srcH)
-					srcH = resolve_port_handle_by_geom(P.srcNew, P.srcOrig, portsByOrig, 'src', P.dstCenter, P.SP, {'LConn','RConn','Conn'});
-				end
-			end
 			dstH = resolve_port_handle_by_kind_index(P.dstNew, P.DPK, P.DPI);
-			if isempty(dstH)
-				if P.DP>=1
-					dstH = resolve_port_handle_by_kind_index(P.dstNew, 'conn', P.DP);
-				end
-				if isempty(dstH)
-					dstH = resolve_port_handle_by_geom(P.dstNew, P.dstOrig, portsByOrig, 'dst', P.srcCenter, P.DP, {'LConn','RConn','Conn'});
-				end
-			end
-			% 句柄有效性检查
-			if ~(ishandle(srcH) && ishandle(dstH))
-				try
-					sn = get_param(P.srcNew,'Name'); dn = get_param(P.dstNew,'Name');
-				catch, sn = P.srcNew; dn = P.dstNew; end
-				warning('物理端口句柄无效：%s -> %s。跳过该连线。', sn, dn);
-				continue;
-			end
+			
 			% 以句柄所在父系统求公共父系统，避免系统不匹配
 			psrc = get_param(srcH,'Parent'); pdst = get_param(dstH,'Parent');
 			parentUse = common_parent_of_paths(psrc, pdst);
@@ -276,37 +235,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	disp(['模型已重建：' newModel]);
 end
 % ============================== 辅助函数 ==============================
-function debug_print_addline(parentSys, srcH, dstH, domain)
-	% 打印 add_line 前的详细端口信息，便于诊断
-	try
-		srcBlk = get_param(get_param(srcH,'Parent'),'Name');
-		dstBlk = get_param(get_param(dstH,'Parent'),'Name');
-		srcPos = get_param(srcH,'Position');
-		dstPos = get_param(dstH,'Position');
-		srcType = infer_port_handle_type(srcH);
-		dstType = infer_port_handle_type(dstH);
-		fprintf('[%s] add_line @%s: %s(%s,%s) -> %s(%s,%s)\n', domain, parentSys, ...
-			srcBlk, srcType, mat2str(srcPos), dstBlk, dstType, mat2str(dstPos));
-	catch
-		% 静默
-	end
-end
 
-function t = infer_port_handle_type(h)
-	% 从端口句柄反推类型标签
-	t = 'port';
-	try
-		ph = get_param(get_param(h,'Parent'),'PortHandles');
-		fields = {'Outport','Inport','LConn','RConn','Conn'};
-		for i=1:numel(fields)
-			f = fields{i};
-			if isfield(ph,f) && any(ph.(f)==h)
-				t = f; return;
-			end
-		end
-	catch
-	end
-end
 
 function h = resolve_port_handle_by_kind_index(blockPath, kind, idx)
 	% 若导出的端口种类/索引存在，直接返回对应句柄；否则返回 []
@@ -347,10 +276,11 @@ function [newPath,outOrig,inLib,libRootNew,libRootOrig] = redirect_to_lib_root_i
     outOrig = origPath;
 end
 
-% ============================== 辅助函数 ==============================
 function tasks = dedup_physical_tasks(tasks)
 	% 按 srcNew/dstNew/DPK/DPI 维度去重，若 DPK/DPI 缺失则仅用 srcNew/dstNew 键
-	if isempty(tasks), return; end
+	if isempty(tasks), return; 
+    
+    end
 	seen = containers.Map('KeyType','char','ValueType','logical');
 	keep = true(1,numel(tasks));
 	for i = 1:numel(tasks)
@@ -369,7 +299,9 @@ function k = build_phys_key(t)
 		dpk = char(t.DPK);
 	catch
 		dpk = '';
-	end
+
+    end
+     
 	try
 		dpi = t.DPI;
 	catch
@@ -656,7 +588,6 @@ function create_block_in_model(row, isSubsystem)
 	end
 end
 
-% ---------- 连接阶段辅助 ----------
 
 function portsIdx = index_ports_by_blockpath(ports)
 	% 将导出的 ports  ? BlockPath（原路径）分 ?
@@ -726,6 +657,8 @@ end
 function [ptype, known] = get_export_port_type(portsIdx, origPath, pnum, role)
 	% 从导出信息推断端口类型（inport/outport/conserving/port），若可识别返回 known=true
 	ptype = '';
+
+    
 	known = false;
 	try
 		if isKey(portsIdx, origPath)
@@ -762,95 +695,6 @@ function [ptype, known] = get_export_port_type(portsIdx, origPath, pnum, role)
 	end
 end
 
-function h = resolve_port_handle_by_geom(newPath, origPath, portsIdx, role, otherCenter, preferredNum, preferKinds)
-	% 基于“端口号优先 + 几何 ?近邻回 ??”解析端口句 ?
-	ph  = get_param(newPath, 'PortHandles');
-
-	% 1) 若端口号有效，且 Inport/Outport 数量足够，直接取
-	if isfinite(preferredNum) && preferredNum>=1
-		try
-			if strcmp(role,'src') && isfield(ph,'Outport') && numel(ph.Outport) >= preferredNum
-				h = ph.Outport(preferredNum); return;
-			end
-			if strcmp(role,'dst') && isfield(ph,'Inport') && numel(ph.Inport) >= preferredNum
-				h = ph.Inport(preferredNum);  return;
-			end
-		catch
-		end
-	end
-
-	% 2) 收集 所有可用端口句柄及其坐标（含保守端口）
-	allH = []; allP = []; allT = {};
-	kinds = {'Outport','Inport','LConn','RConn','Conn'};
-	for i = 1:numel(kinds)
-		k = kinds{i};
-		if isfield(ph, k) && ~isempty(ph.(k))
-			hh = ph.(k)(:);
-			pp = arrayfun(@(x) get_param(x,'Position'), hh, 'UniformOutput', false);
-			pp = vertcat(pp{:});
-			allH  = [allH; hh];
-			allP  = [allP; pp];
-			allT  = [allT; repmat({k}, numel(hh), 1)];
-		end
-	end
-	assert(~isempty(allH), ' ? %s 无任何端口 ??', newPath);
-
-	% 3) 候选集合：按照preferKinds筛选
-	if nargin < 7 || isempty(preferKinds)
-		if strcmp(role,'src')
-			preferKinds = {'Outport','LConn','RConn','Conn'};
-		else
-			preferKinds = {'Inport','LConn','RConn','Conn'};
-		end
-	end
-	prefMask = ismember(allT, preferKinds);
-	candH = allH(prefMask); candP = allP(prefMask, :);
-	if isempty(candH), candH = allH; candP = allP; end
-
-	% 3.1) 侧别优先：若导出端口有 Side，则仅保留与该侧别一致的候选
-	preferSide = '';
-	if isKey(portsIdx, origPath)
-		Pall = portsIdx(origPath);
-		try
-			ss = {Pall.Side}; ss = ss(~cellfun('isempty',ss));
-			if ~isempty(ss)
-				preferSide = ss{1};
-			end
-		catch
-		end
-	end
-	if ~isempty(preferSide)
-		try
-			bpos = get_param(newPath,'Position');
-			candSide = arrayfun(@(i) local_side_of_point(candP(i,:), bpos), 1:size(candP,1), 'UniformOutput', false)';
-			maskSide = strcmpi(candSide, preferSide);
-			if any(maskSide)
-				candH = candH(maskSide); candP = candP(maskSide,:);
-			end
-		catch
-			% 忽略侧别错误
-		end
-	end
-
-	% 4) 严格选择：不使用“就近保底”
-	if isempty(candH)
-		error('未找到符合类型的端口: %s', newPath);
-	end
-	if numel(candH) > 1
-		error('端口不唯一（%d 个候选），已关闭就近保底: %s', numel(candH), newPath);
-	end
-
-	% 唯一候选
-	h = candH(1);
-end
-
-function s = local_side_of_point(pt, bpos)
-	% 基于块边界判断一个点位于 left/right/top/bottom 哪一侧
-	dL = abs(pt(1)-bpos(1)); dR = abs(pt(1)-bpos(3));
-	dT = abs(pt(2)-bpos(2)); dB = abs(pt(2)-bpos(4));
-	[~,k] = min([dL,dR,dT,dB]);
-	if k==1, s='left'; elseif k==2, s='right'; elseif k==3, s='top'; else, s='bottom'; end
-end
 
 function val = getfield_or_default(S, field, def)
 	if isfield(S, field) && ~isempty(S.(field))
