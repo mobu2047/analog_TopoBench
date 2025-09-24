@@ -232,8 +232,8 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		catch ME
 			warning('物理连线失败 ?%s(%g) -> %s(%g)。原因：%s', P.srcNew, P.SP, P.dstNew, P.DP, ME.message);
 		end
-	end
-
+    end
+    add_block('powerlib/powergui', 'recovered_model/powergui');
 	set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
 end
