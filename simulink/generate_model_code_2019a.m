@@ -1,7 +1,7 @@
 
     % 打开文件准备写入代码
  model_name = 'untitled3';
-
+open_system(model_name);
   
     
     % 获取模型中的所有块
@@ -503,7 +503,7 @@ if ~isempty(conn)
 end
 
 fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
-
+close_system(model_name);
 % =========
 % 工具函数：递归收集“某条线及其所有分支”的目标端口（仅对普通信号线有效）
 % =========
