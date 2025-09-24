@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = untitled1;
+    model_name = untitled;
 
   
     
