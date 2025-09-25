@@ -21,7 +21,6 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	conns    = safe_connections(data);  % 现在包含 SourcePath/DestinationPath
 
 	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
-
     
     
 	% 原模型根名（用于 path 重定位）；新模型 ?
@@ -30,6 +29,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 
 	% -------- 2) 创建空白模型 --------
 	if bdIsLoaded(newModel)
+        
 		close_system(newModel, 0);
 	end
 	new_system(newModel); open_system(newModel);

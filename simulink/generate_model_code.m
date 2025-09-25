@@ -436,6 +436,47 @@ graph.ports       = ports;
 graph.connections = conn;
 graph.lines       = sigLines;
 
+% ==================（可选）导出模型与块参数配置，解耦于几何/连线==================
+% why:
+% - 仅几何与连线不足以“直接仿真”；还需模型求解器与各块对话参数
+% - 保持与现有导出逻辑解耦：用独立段收集参数，按需开关；但不新建脚本
+% how:
+% - 模型参数：挑常用仿真/求解器关键项（若存在则抓取）
+% - 块参数：使用 DialogParameters 列表逐项 get_param，规避编译态/句柄类字段
+% - 值一律序列化为字符串，便于 set_param 回放
+ENABLE_PARAM_EXPORT = true;  % 置为 false 可完全跳过参数导出，不影响其他导出
+% 集中式参数过滤配置（解耦）：白/黑名单 + 属性过滤
+PARAM_FILTER = get_param_filter_config();
+params = struct('model', struct(), 'blocks', struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{}));
+if ENABLE_PARAM_EXPORT
+    try
+        % 识别“真实模型根名”，避免使用占位 model_root 导致 get_param 失败
+        % why: bdroot 返回当前模型名；当默认 model_root 与实际不一致时会导出空参数
+        root_for_params = '';
+        try
+            if exist('all_blocks_pc','var') && ~isempty(all_blocks_pc)
+                root_for_params = char(bdroot(all_blocks_pc(1)));
+            end
+        catch
+        end
+        if isempty(root_for_params)
+            try, root_for_params = char(bdroot); catch, root_for_params = char(model_root); end
+        end
+
+        % 收集模型级参数（求解器/时间步等），以“存在即记录”为准
+        params.model = collect_model_params(root_for_params, PARAM_FILTER);
+
+        % 收集块级对话参数
+        params.blocks = collect_block_params(all_blocks_pc, PARAM_FILTER);
+
+        % 注入到 graph（用于单文件复原），并覆盖 graph.model 为真实根名
+        graph.parameters = params;
+        graph.model = char(root_for_params);
+    catch ME
+        warning('参数导出遇到问题，将跳过参数注入：%s', ME.message);
+    end
+end
+
 json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
 txt = jsonencode(graph, 'PrettyPrint', true);   % MATLAB 会将 NaN 编码为 null
 fid = fopen(json_path,'w');
@@ -446,6 +487,22 @@ fclose(fid);
 % 5) 另存 MAT（保留原始结构，便于后续 MATLAB 直接加载）
 mat_path = fullfile(out_dir, sprintf('%s_graph.mat', model_tag));
 save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.3');
+
+% 若启用了参数导出，同时独立落盘（便于单独检查/比对/版本化）
+if ENABLE_PARAM_EXPORT
+    try
+        params_json_path = fullfile(out_dir, sprintf('%s_params.json', model_tag));
+        ptxt = jsonencode(params, 'PrettyPrint', true);
+        fidp = fopen(params_json_path,'w');
+        assert(fidp~=-1, '无法创建文件: %s', params_json_path);
+        fwrite(fidp, ptxt, 'char'); fclose(fidp);
+
+        % 友好 CSV：模型参数一张表，块参数一张长表
+        write_params_csvs(out_dir, model_tag, params);
+    catch ME
+        warning('参数单独导出失败：%s', ME.message);
+    end
+end
 
 % 6) 再导出三份 CSV（展开关键几何字段，便于快速查看）
 % 6.1 元件 CSV：展开 Position/Center
@@ -503,6 +560,10 @@ if ~isempty(conn)
 end
 
 fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
+
+if ENABLE_PARAM_EXPORT
+    fprintf('参数已导出至：%s\n', out_dir);
+end
 
 % =========
 % 工具函数：递归收集“某条线及其所有分支”的目标端口（仅对普通信号线有效）
@@ -711,5 +772,231 @@ function pos = get_port_position(pcEntry, blockHandle)
         end
     catch
         % 忽略个别不兼容端口；保持 [NaN NaN]
+    end
+end
+
+% =========
+% 工具函数（参数采集与落盘）
+% =========
+function m = collect_model_params(model_root, PARAM_FILTER)
+    % why: 采集常用求解器/时域/数据导入导出等关键项，避免遗漏直接仿真所需配置
+    % how: 针对一组候选参数名，存在即记录；值统一转为字符串，便于 set_param 回放
+    % 允许通过配置追加/裁剪
+    defaultCand = {'StartTime','StopTime','SolverType','Solver','FixedStep','AbsTol','RelTol', ...
+            'StrictBusMsg','MinStepSize','MaxStepSize','MaxConsecutiveZCs','SignalLogging','ReturnWorkspaceOutputs', ...
+            'DataTypeOverride','MinMaxOverflowLogging','AlgebraicLoopMsg','SimCompilerOptimization','InlineParams'};
+    cand = merge_name_list(defaultCand, PARAM_FILTER.model.white, PARAM_FILTER.model.black);
+    m = struct();
+    try
+        root = char(model_root);
+        % model 对象参数空间
+        for i = 1:numel(cand)
+            pname = cand{i};
+            try
+                val = get_param(root, pname);
+                if param_allowed_by_attr([] , pname, val, PARAM_FILTER.model.attr_black)
+                    m.(pname) = param_value_to_string(val);
+                end
+            catch
+            end
+        end
+    catch
+    end
+end
+
+function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
+    % why: 使用 DialogParameters 能覆盖大多数可配置项（含 Mask 参数），避免抓取只读/句柄字段
+    blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
+    for i = 1:numel(all_blocks_pc)
+        bh = all_blocks_pc(i);
+        try
+            path  = getfullname(bh);
+            btype = get_param(bh,'BlockType');
+            mtype = '';
+            try, mtype = get_param(bh,'MaskType'); catch, mtype = ''; end
+            dp = struct();
+            % DialogParameters: struct，其中字段名为可设置的对话框参数
+            dlg = struct();
+            try, dlg = get_param(bh,'DialogParameters'); catch, dlg = struct(); end
+            if ~isempty(dlg)
+                names = fieldnames(dlg);
+                for k = 1:numel(names)
+                    pname = names{k};
+                    % 跳过几何/连线等几何重复项
+                    if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
+                        continue;
+                    end
+                    % 名称级过滤（白/黑名单）
+                    if ~name_allowed(pname, PARAM_FILTER.block.white, PARAM_FILTER.block.black)
+                        continue;
+                    end
+                    try
+                        % 属性级过滤：ObjectParameters 可提供属性（read-only/no-set/deprecated 等）
+                        if param_allowed_on_block(bh, pname, PARAM_FILTER.block.attr_black)
+                            val = get_param(bh, pname);
+                            dp.(pname) = param_value_to_string(val);
+                        end
+                    catch
+                        % 有些链接库参数可能只读或受变体控制，忽略即可
+                    end
+                end
+            end
+
+            % 补充：Mask 值（若存在且 DialogParameters 未覆盖）
+            try
+                mnames = get_param(bh,'MaskNames');
+                mvals  = get_param(bh,'MaskValues');
+                if iscell(mnames) && iscell(mvals) && numel(mnames)==numel(mvals)
+                    for t = 1:numel(mnames)
+                        key = char(mnames{t});
+                        % 名称级过滤
+                        if ~isfield(dp, key) && name_allowed(key, PARAM_FILTER.mask.white, PARAM_FILTER.mask.black)
+                            dp.(key) = param_value_to_string(mvals{t});
+                        end
+                    end
+                end
+            catch
+            end
+
+            blocks(end+1) = struct('Path',path,'BlockType',btype,'MaskType',mtype,'DialogParams',dp); %#ok<AGROW>
+        catch
+        end
+    end
+end
+
+function s = param_value_to_string(v)
+    % why: set_param 统一以字符串设置；不同类型统一序列化为稳定字符串
+    try
+        if isstring(v)
+            s = char(v);
+        elseif ischar(v)
+            s = v;
+        elseif isnumeric(v)
+            s = mat2str(v);
+        elseif islogical(v)
+            s = char(string(v));  % 'true'/'false'；多数对话参数也接受 'on'/'off' 字符
+        elseif iscell(v)
+            % 将 cell 内部逐项转字符串再 JSON；便于人读与回放
+            s = char(jsonencode(v));
+        elseif isstruct(v)
+            s = char(jsonencode(v));
+        else
+            % Fallback：使用 disp 输出为字符串
+            s = strtrim(evalc('disp(v)'));
+        end
+    catch
+        s = '';
+    end
+end
+
+% =========
+% 过滤配置与判定（集中配置，保持解耦）
+% =========
+function CFG = get_param_filter_config()
+    % why: 将“哪些参数需要/不需要”集中配置，避免散落在导出逻辑中
+    % 用户可在此白/黑名单扩展，无需触碰采集主流程
+    CFG = struct();
+
+    % 名称白名单（优先保留）与黑名单（强制忽略）
+    CFG.block.white = {'SampleTime','InitialCondition','Gain','Numerator','Denominator','UpperSaturationLimit','LowerSaturationLimit','OutDataTypeStr'};
+    CFG.block.black = {'Position','Orientation','LineHandles','PortConnectivity','ForegroundColor','BackgroundColor','ShowName','NamePlacement','Priority','Tag'};
+
+    CFG.mask.white  = {};  % 默认全部允许，除非命中黑名单
+    CFG.mask.black  = {'ForegroundColor','BackgroundColor'}; % 掩模UI类
+
+    CFG.model.white = {};  % 使用 defaultCand 已覆盖常见项
+    CFG.model.black = {};  % 需要可在此屏蔽
+
+    % 属性黑名单：命中这些属性的参数不导出
+    % 常见：read-only, no-set, no-query, deprecated, simulated-only, run-time-only 等
+    CFG.block.attr_black = {'read-only','no-set','deprecated'};
+    CFG.model.attr_black = {'read-only','no-set','deprecated'};
+end
+
+function allowed = name_allowed(name, whites, blacks)
+    nm = char(name);
+    if any(strcmpi(nm, blacks)), allowed = false; return; end
+    if isempty(whites), allowed = true; return; end
+    allowed = any(strcmpi(nm, whites));
+end
+
+function ok = param_allowed_on_block(blockH, pname, attr_black)
+    % 通过 ObjectParameters 属性过滤（若可查询）
+    ok = true;
+    try
+        op = get_param(blockH, 'ObjectParameters');
+        if isfield(op, pname) && isfield(op.(pname), 'Attributes')
+            attrs = lower(string(op.(pname).Attributes));
+            for i = 1:numel(attr_black)
+                if any(attrs == lower(string(attr_black{i})))
+                    ok = false; return;
+                end
+            end
+        end
+    catch
+    end
+end
+
+function ok = param_allowed_by_attr(~, pname, ~, attr_black)
+    % 模型级：无 block 句柄，仅留扩展点保留同样接口
+    ok = true; %#ok<INUSD>
+    try
+        a = lower(string(attr_black)); %#ok<NASGU>
+    catch
+    end
+end
+
+function merged = merge_name_list(defaults, whites, blacks)
+    % 组合默认候选 + 白名单，然后去掉黑名单
+    lst = defaults;
+    if ~isempty(whites)
+        for i = 1:numel(whites)
+            if ~any(strcmpi(lst, whites{i}))
+                lst{end+1} = whites{i}; %#ok<AGROW>
+            end
+        end
+    end
+    keep = true(1, numel(lst));
+    for i = 1:numel(lst)
+        if any(strcmpi(lst{i}, blacks))
+            keep(i) = false;
+        end
+    end
+    merged = lst(keep);
+end
+
+function write_params_csvs(out_dir, model_tag, params)
+    % 模型参数表
+    try
+        if isfield(params,'model') && ~isempty(fieldnames(params.model))
+            pnames = fieldnames(params.model);
+            pvals  = cell(numel(pnames),1);
+            for i = 1:numel(pnames), pvals{i} = params.model.(pnames{i}); end
+            Tm = table(pnames, pvals, 'VariableNames', {'Param','Value'});
+            writetable(Tm, fullfile(out_dir, sprintf('%s_model_params.csv', model_tag)));
+        end
+    catch
+    end
+
+    % 块参数长表
+    try
+        if isfield(params,'blocks') && ~isempty(params.blocks)
+            rows_path = {}; rows_type = {}; rows_p = {}; rows_v = {};
+            for i = 1:numel(params.blocks)
+                bp = params.blocks(i);
+                names = fieldnames(bp.DialogParams);
+                for k = 1:numel(names)
+                    rows_path{end+1,1} = bp.Path; %#ok<AGROW>
+                    rows_type{end+1,1} = bp.BlockType; %#ok<AGROW>
+                    rows_p{end+1,1}    = names{k}; %#ok<AGROW>
+                    rows_v{end+1,1}    = bp.DialogParams.(names{k}); %#ok<AGROW>
+                end
+            end
+            if ~isempty(rows_path)
+                Tb = table(rows_path, rows_type, rows_p, rows_v, 'VariableNames', {'Path','BlockType','Param','Value'});
+                writetable(Tb, fullfile(out_dir, sprintf('%s_block_params.csv', model_tag)));
+            end
+        end
+    catch
     end
 end

@@ -18,6 +18,9 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	elements = safe_field(data, 'elements', struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{},'Mirror',{},'Rotation',{},'GotoTag',{},'GotoVisibility',{},'FromTag',{}));
 	ports    = safe_field(data, 'ports',    struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{},'RelPos',{},'Side',{}));
 	conns    = safe_connections(data);  % 现在包含 SourcePath/DestinationPath
+    params   = safe_field(data, 'parameters', struct());  % 新增：模型与块参数（可选）
+    % 侧文件回退：若模型级为空，则尝试加载同目录 params.json/csv
+    params   = ensure_params_loaded(params, inputPath);
 
 	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
 
@@ -231,6 +234,13 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		end
 	end
 
+	% -------- 5) 回放参数（模型与块） --------
+	try
+		apply_parameters_to_model(newModel, elemTable, params);
+	catch ME
+		warning('参数回放失败，将以默认参数运行：%s', ME.message);
+	end
+
 	set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
 end
@@ -254,7 +264,8 @@ function h = resolve_port_handle_by_kind_index(blockPath, kind, idx)
 		if isfield(ph, field) && numel(ph.(field)) >= idx
 			h = ph.(field)(idx);
 		end
-	catch
+    catch
+
 		h = [];
 	end
 end
@@ -303,6 +314,9 @@ function k = build_phys_key(t)
     end
      
 	try
+
+
+
 		dpi = t.DPI;
 	catch
 		dpi = -1;
@@ -343,6 +357,89 @@ function v = safe_field(S, name, defaultV)
 	else
 		v = defaultV;
 	end
+end
+
+function params = ensure_params_loaded(params, inputPath)
+    % 若 params.model 为空 struct，则尝试从边车文件加载（与导出侧保持解耦）
+    try
+        needModel = true;
+        try, needModel = isempty(fieldnames(params)) || ~isfield(params,'model') || isempty(fieldnames(params.model)); catch, needModel = true; end
+        if ~needModel, return; end
+
+        [pdir, pbase, ~] = fileparts(inputPath);
+        % 查找 *_params.json（优先）
+        jsonPath = fullfile(pdir, sprintf('%s_params.json', pbase));
+        if exist(jsonPath, 'file')
+            try
+                txt = fileread(jsonPath); J = jsondecode(txt);
+                if isstruct(J)
+                    if ~isfield(params,'blocks') && isfield(J,'blocks'), params.blocks = J.blocks; end
+                    if (~isfield(params,'model') || isempty(fieldnames(params.model))) && isfield(J,'model')
+                        params.model = J.model;
+                    end
+                    return;
+                end
+            catch
+            end
+        end
+
+        % 次选：model/block params CSV（仅在 json 不存在时尝试）
+        mcsv = fullfile(pdir, sprintf('%s_model_params.csv', pbase));
+        if exist(mcsv,'file')
+            try
+                Tm = readtable(mcsv);
+                pm = struct();
+                for i = 1:height(Tm)
+                    pm.(char(Tm.Param{i})) = char(string(Tm.Value{i}));
+                end
+                params.model = pm;
+            catch
+            end
+        end
+
+        bcsv = fullfile(pdir, sprintf('%s_block_params.csv', pbase));
+        if exist(bcsv,'file') && (~isfield(params,'blocks') || isempty(params.blocks))
+            try
+                Tb = readtable(bcsv);
+                params.blocks = rebuild_blocks_from_long_table(Tb);
+            catch
+            end
+        end
+    catch
+    end
+end
+
+function blocks = rebuild_blocks_from_long_table(Tb)
+    blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
+    try
+        if isempty(Tb), return; end
+        % 聚合：每个 Path 聚成一条记录
+        [G, keys] = findgroups(Tb.Path);
+        for k = 1:max(G)
+            idx = find(G==k);
+            if isempty(idx), continue; end
+            path = char(keys{k});
+            btype = '';
+            try, btype = char(Tb.BlockType{idx(1)}); catch, btype = ''; end
+            dp = struct();
+            for j = idx(:)'
+                try
+                    dp.(char(Tb.Param{j})) = char(string(Tb.Value{j}));
+                catch
+                end
+            end
+            blocks(end+1) = struct('Path',path,'BlockType',btype,'MaskType','', 'DialogParams',dp); %#ok<AGROW>
+        end
+    catch
+    end
+end
+function s = def_or_empty_struct(S, field)
+    % 工具：如果字段存在则返回之；否则返回空 struct
+    if isstruct(S) && isfield(S, field) && ~isempty(S.(field))
+        s = S.(field);
+    else
+        s = struct();
+    end
 end
 
 function conns = safe_connections(data)
@@ -425,6 +522,87 @@ function T = preprocess_elements(elements, origRoot, newModel)
     T = table(ShortName, OrigPath, NewPath, ParentPath, BlockType, Orientation, ...
               Left, Top, Right, Bottom, LibraryLink, Mirror, Rotation, GotoTag, GotoVisibility, FromTag, Depth);
 end
+
+% ========================= 参数回放相关函数 =========================
+function apply_parameters_to_model(newModel, elemTable, params)
+    % why: 复原模型求解器/时间步等全局参数，以及各块的对话参数，使“直接仿真”成为可能
+    % how: 仅在导出时存在参数时才尝试回放；set_param 全部使用字符串值
+
+    if nargin < 3 || isempty(params), return; end
+    try
+        if isfield(params,'model') && ~isempty(params.blocks)
+            apply_model_params(newModel, params.blocks);
+        end
+    catch
+    end
+
+    try
+        if isfield(params,'blocks') && ~isempty(params.blocks)
+            apply_block_params(elemTable, params.blocks);
+        end
+    catch
+    end
+end
+
+function apply_model_params(newModel, modelParams)
+    fns = fieldnames(modelParams);
+    for i = 1:numel(fns)
+        pname = fns{i};
+        try
+            set_param(newModel, pname, char(modelParams.(pname)));
+        catch
+            % 某些版本/产品未安装时参数不可用，忽略
+        end
+    end
+end
+
+function apply_block_params(elemTable, blockParams)
+    % 构建“原路径->新路径”查找，便于使用导出 Path 进行回放
+    mapOrigToNew = containers.Map('KeyType','char','ValueType','char');
+    for i = 1:height(elemTable)
+        mapOrigToNew(char(elemTable.OrigPath{i})) = char(elemTable.NewPath{i});
+    end
+
+    for i = 1:numel(blockParams)
+        try
+            bp = blockParams(i);
+            origPath = char(bp.Path);
+            if isKey(mapOrigToNew, origPath)
+                newPath = mapOrigToNew(origPath);
+            else
+                % 回退：用短名匹配首个同名块
+                idx = find(strcmp(elemTable.ShortName, string(get_basename(origPath))), 1, 'first');
+                if isempty(idx), continue; end
+                newPath = char(elemTable.NewPath(idx));
+            end
+
+            % 逐参数 set_param
+            if isfield(bp,'DialogParams') && ~isempty(bp.DialogParams)
+                names = fieldnames(bp.DialogParams);
+                for k = 1:numel(names)
+                    pname = names{k};
+                    % 跳过几何类参数
+                    if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
+                        continue;
+                    end
+                    pval  = bp.DialogParams.(pname);
+                    try
+                        set_param(newPath, pname, char(pval));
+                    catch
+                        % 掩模/变体导致不可设置时跳过
+                    end
+                end
+            end
+        catch
+        end
+    end
+end
+
+function b = get_basename(p)
+    [~, b] = fileparts(char(p));
+end
+
+%=========================参数回放函数结束=========================
 
 function s = def_str(st, field, defaultV)
 	if nargin < 3, defaultV = ""; end
