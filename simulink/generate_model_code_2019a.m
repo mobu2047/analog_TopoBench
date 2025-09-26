@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
- model_name = 'untitled3';
+ model_name = 'untitled1';
  open_system(model_name);
   
     
