@@ -19,8 +19,12 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	elements = safe_field(data, 'elements', struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{},'Mirror',{},'Rotation',{},'GotoTag',{},'GotoVisibility',{},'FromTag',{}));
 	ports    = safe_field(data, 'ports',    struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{},'RelPos',{},'Side',{}));
 	conns    = safe_connections(data);  % 现在包含 SourcePath/DestinationPath
+    params   = safe_field(data, 'parameters', struct());  % 新增：模型与块参数（可选）
+    % 侧文件回退：若模型级为空，则尝试加载同目录 params.json/csv
+    params   = ensure_params_loaded(params, inputPath);
 
 	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
+
     
     
 	% 原模型根名（用于 path 重定位）；新模型 ?
@@ -29,7 +33,6 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 
 	% -------- 2) 创建空白模型 --------
 	if bdIsLoaded(newModel)
-        
 		close_system(newModel, 0);
 	end
 	new_system(newModel); open_system(newModel);
@@ -51,8 +54,6 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	% -------- 4) 建立连接（优先用完整路径；端口句柄回 ?几何匹配 ? --------
 	% 索引：原路径->新路径；新路 ?->中心坐标；原路径->导出端口集合
 	orig2new = containers.Map('KeyType','char','ValueType','char');
-    
-    
 	centers  = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:height(elemTable)
 		orig2new(char(elemTable.OrigPath{i})) = char(elemTable.NewPath{i});
@@ -173,23 +174,39 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	end
 
 	% -------- 4A.1) 利用正反向物理边互补 Kind/Index（用反向的 SPK/SPI 作为本边的 DPK/DPI） --------
+	% why: 之前以“块对”为键仅保存一条记录，若同一对块存在多条物理边，会被最后一条覆盖，
+	%      导致还原时所有 DPI 被错误地统一到同一个索引（常见为 3）。
+	% how: 为每个块对维护一个按出现顺序的端口信息队列，并在互补时逐条消费，确保一一对应。
 	pair2srcKind = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:numel(tasksPhysical)
 		SPK_i = tasksPhysical(i).SPK; SPI_i = tasksPhysical(i).SPI;
 		if ~isempty(SPK_i) && ~(isstring(SPK_i) && strlength(SPK_i)==0) && SPI_i>=1
 			k = [char(tasksPhysical(i).srcNew) '->' char(tasksPhysical(i).dstNew)];
-			pair2srcKind(k) = struct('k',SPK_i,'i',SPI_i);
+			% 初始化为结构体数组队列，避免后续被覆盖
+			if ~isKey(pair2srcKind, k)
+				pair2srcKind(k) = struct('k',{},'i',{});
+			end
+			lst = pair2srcKind(k);
+			lst(end+1) = struct('k',SPK_i,'i',SPI_i); %#ok<AGROW>
+			pair2srcKind(k) = lst;
 		end
-    end
-    i = 0;
+	end
+	% 按反向键消费队列，实现一一匹配，避免 DPI 被同值覆盖
 	for i = 1:numel(tasksPhysical)
 		needDP = (isempty(tasksPhysical(i).DPK) || (isstring(tasksPhysical(i).DPK) && strlength(tasksPhysical(i).DPK)==0) || tasksPhysical(i).DPI<1);
 		if needDP
 			rk = [char(tasksPhysical(i).dstNew) '->' char(tasksPhysical(i).srcNew)];
 			if isKey(pair2srcKind, rk)
-				info = pair2srcKind(rk);
-				tasksPhysical(i).DPK = info.k;
-				tasksPhysical(i).DPI = info.i;
+				lst = pair2srcKind(rk);
+				if ~isempty(lst)
+					info = lst(1);
+					% 互补：反向边的源端口即为本边的目标端口
+					tasksPhysical(i).DPK = info.k;
+					tasksPhysical(i).DPI = info.i;
+					% 消费已使用项，保持与多边一一对应
+					lst = lst(2:end);
+					pair2srcKind(rk) = lst;
+				end
 			end
 		end
 	end
@@ -232,8 +249,15 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		catch ME
 			warning('物理连线失败 ?%s(%g) -> %s(%g)。原因：%s', P.srcNew, P.SP, P.dstNew, P.DP, ME.message);
 		end
-    end
-    add_block('powerlib/powergui', 'recovered_model/powergui');
+	end
+
+	% -------- 5) 回放参数（模型与块） --------
+	try
+		apply_parameters_to_model(newModel, elemTable, params);
+	catch ME
+		warning('参数回放失败，将以默认参数运行：%s', ME.message);
+	end
+
 	set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
 end
@@ -257,7 +281,8 @@ function h = resolve_port_handle_by_kind_index(blockPath, kind, idx)
 		if isfield(ph, field) && numel(ph.(field)) >= idx
 			h = ph.(field)(idx);
 		end
-	catch
+    catch
+
 		h = [];
 	end
 end
@@ -306,6 +331,9 @@ function k = build_phys_key(t)
     end
      
 	try
+
+
+
 		dpi = t.DPI;
 	catch
 		dpi = -1;
@@ -346,6 +374,89 @@ function v = safe_field(S, name, defaultV)
 	else
 		v = defaultV;
 	end
+end
+
+function params = ensure_params_loaded(params, inputPath)
+    % 若 params.model 为空 struct，则尝试从边车文件加载（与导出侧保持解耦）
+    try
+        needModel = true;
+        try, needModel = isempty(fieldnames(params)) || ~isfield(params,'model') || isempty(fieldnames(params.model)); catch, needModel = true; end
+        if ~needModel, return; end
+
+        [pdir, pbase, ~] = fileparts(inputPath);
+        % 查找 *_params.json（优先）
+        jsonPath = fullfile(pdir, sprintf('%s_params.json', pbase));
+        if exist(jsonPath, 'file')
+            try
+                txt = fileread(jsonPath); J = jsondecode(txt);
+                if isstruct(J)
+                    if ~isfield(params,'blocks') && isfield(J,'blocks'), params.blocks = J.blocks; end
+                    if (~isfield(params,'model') || isempty(fieldnames(params.model))) && isfield(J,'model')
+                        params.model = J.model;
+                    end
+                    return;
+                end
+            catch
+            end
+        end
+
+        % 次选：model/block params CSV（仅在 json 不存在时尝试）
+        mcsv = fullfile(pdir, sprintf('%s_model_params.csv', pbase));
+        if exist(mcsv,'file')
+            try
+                Tm = readtable(mcsv);
+                pm = struct();
+                for i = 1:height(Tm)
+                    pm.(char(Tm.Param{i})) = char(string(Tm.Value{i}));
+                end
+                params.model = pm;
+            catch
+            end
+        end
+
+        bcsv = fullfile(pdir, sprintf('%s_block_params.csv', pbase));
+        if exist(bcsv,'file') && (~isfield(params,'blocks') || isempty(params.blocks))
+            try
+                Tb = readtable(bcsv);
+                params.blocks = rebuild_blocks_from_long_table(Tb);
+            catch
+            end
+        end
+    catch
+    end
+end
+
+function blocks = rebuild_blocks_from_long_table(Tb)
+    blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
+    try
+        if isempty(Tb), return; end
+        % 聚合：每个 Path 聚成一条记录
+        [G, keys] = findgroups(Tb.Path);
+        for k = 1:max(G)
+            idx = find(G==k);
+            if isempty(idx), continue; end
+            path = char(keys{k});
+            btype = '';
+            try, btype = char(Tb.BlockType{idx(1)}); catch, btype = ''; end
+            dp = struct();
+            for j = idx(:)'
+                try
+                    dp.(char(Tb.Param{j})) = char(string(Tb.Value{j}));
+                catch
+                end
+            end
+            blocks(end+1) = struct('Path',path,'BlockType',btype,'MaskType','', 'DialogParams',dp); %#ok<AGROW>
+        end
+    catch
+    end
+end
+function s = def_or_empty_struct(S, field)
+    % 工具：如果字段存在则返回之；否则返回空 struct
+    if isstruct(S) && isfield(S, field) && ~isempty(S.(field))
+        s = S.(field);
+    else
+        s = struct();
+    end
 end
 
 function conns = safe_connections(data)
@@ -428,6 +539,87 @@ function T = preprocess_elements(elements, origRoot, newModel)
     T = table(ShortName, OrigPath, NewPath, ParentPath, BlockType, Orientation, ...
               Left, Top, Right, Bottom, LibraryLink, Mirror, Rotation, GotoTag, GotoVisibility, FromTag, Depth);
 end
+
+% ========================= 参数回放相关函数 =========================
+function apply_parameters_to_model(newModel, elemTable, params)
+    % why: 复原模型求解器/时间步等全局参数，以及各块的对话参数，使“直接仿真”成为可能
+    % how: 仅在导出时存在参数时才尝试回放；set_param 全部使用字符串值
+
+    if nargin < 3 || isempty(params), return; end
+    try
+        if isfield(params,'model') && ~isempty(params.blocks)
+            apply_model_params(newModel, params.blocks);
+        end
+    catch
+    end
+
+    try
+        if isfield(params,'blocks') && ~isempty(params.blocks)
+            apply_block_params(elemTable, params.blocks);
+        end
+    catch
+    end
+end
+
+function apply_model_params(newModel, modelParams)
+    fns = fieldnames(modelParams);
+    for i = 1:numel(fns)
+        pname = fns{i};
+        try
+            set_param(newModel, pname, char(modelParams.(pname)));
+        catch
+            % 某些版本/产品未安装时参数不可用，忽略
+        end
+    end
+end
+
+function apply_block_params(elemTable, blockParams)
+    % 构建“原路径->新路径”查找，便于使用导出 Path 进行回放
+    mapOrigToNew = containers.Map('KeyType','char','ValueType','char');
+    for i = 1:height(elemTable)
+        mapOrigToNew(char(elemTable.OrigPath{i})) = char(elemTable.NewPath{i});
+    end
+
+    for i = 1:numel(blockParams)
+        try
+            bp = blockParams(i);
+            origPath = char(bp.Path);
+            if isKey(mapOrigToNew, origPath)
+                newPath = mapOrigToNew(origPath);
+            else
+                % 回退：用短名匹配首个同名块
+                idx = find(strcmp(elemTable.ShortName, string(get_basename(origPath))), 1, 'first');
+                if isempty(idx), continue; end
+                newPath = char(elemTable.NewPath(idx));
+            end
+
+            % 逐参数 set_param
+            if isfield(bp,'DialogParams') && ~isempty(bp.DialogParams)
+                names = fieldnames(bp.DialogParams);
+                for k = 1:numel(names)
+                    pname = names{k};
+                    % 跳过几何类参数
+                    if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
+                        continue;
+                    end
+                    pval  = bp.DialogParams.(pname);
+                    try
+                        set_param(newPath, pname, char(pval));
+                    catch
+                        % 掩模/变体导致不可设置时跳过
+                    end
+                end
+            end
+        catch
+        end
+    end
+end
+
+function b = get_basename(p)
+    [~, b] = fileparts(char(p));
+end
+
+%=========================参数回放函数结束=========================
 
 function s = def_str(st, field, defaultV)
 	if nargin < 3, defaultV = ""; end
@@ -706,3 +898,4 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
+%newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');

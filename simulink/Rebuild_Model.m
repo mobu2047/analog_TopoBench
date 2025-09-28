@@ -173,23 +173,39 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 	end
 
 	% -------- 4A.1) 利用正反向物理边互补 Kind/Index（用反向的 SPK/SPI 作为本边的 DPK/DPI） --------
+	% why: 之前以“块对”为键仅保存一条记录，若同一对块存在多条物理边，会被最后一条覆盖，
+	%      导致还原时所有 DPI 被错误地统一到同一个索引（常见为 3）。
+	% how: 为每个块对维护一个按出现顺序的端口信息队列，并在互补时逐条消费，确保一一对应。
 	pair2srcKind = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:numel(tasksPhysical)
 		SPK_i = tasksPhysical(i).SPK; SPI_i = tasksPhysical(i).SPI;
 		if ~isempty(SPK_i) && ~(isstring(SPK_i) && strlength(SPK_i)==0) && SPI_i>=1
 			k = [char(tasksPhysical(i).srcNew) '->' char(tasksPhysical(i).dstNew)];
-			pair2srcKind(k) = struct('k',SPK_i,'i',SPI_i);
+			% 初始化为结构体数组队列，避免后续被覆盖
+			if ~isKey(pair2srcKind, k)
+				pair2srcKind(k) = struct('k',{},'i',{});
+			end
+			lst = pair2srcKind(k);
+			lst(end+1) = struct('k',SPK_i,'i',SPI_i); %#ok<AGROW>
+			pair2srcKind(k) = lst;
 		end
-    end
-    i = 0;
+	end
+	% 按反向键消费队列，实现一一匹配，避免 DPI 被同值覆盖
 	for i = 1:numel(tasksPhysical)
 		needDP = (isempty(tasksPhysical(i).DPK) || (isstring(tasksPhysical(i).DPK) && strlength(tasksPhysical(i).DPK)==0) || tasksPhysical(i).DPI<1);
 		if needDP
 			rk = [char(tasksPhysical(i).dstNew) '->' char(tasksPhysical(i).srcNew)];
 			if isKey(pair2srcKind, rk)
-				info = pair2srcKind(rk);
-				tasksPhysical(i).DPK = info.k;
-				tasksPhysical(i).DPI = info.i;
+				lst = pair2srcKind(rk);
+				if ~isempty(lst)
+					info = lst(1);
+					% 互补：反向边的源端口即为本边的目标端口
+					tasksPhysical(i).DPK = info.k;
+					tasksPhysical(i).DPI = info.i;
+					% 消费已使用项，保持与多边一一对应
+					lst = lst(2:end);
+					pair2srcKind(rk) = lst;
+				end
 			end
 		end
 	end
