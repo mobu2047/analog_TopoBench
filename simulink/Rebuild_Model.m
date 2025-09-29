@@ -257,7 +257,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		warning('参数回放失败，将以默认参数运行：%s', ME.message);
 	end
 
-	set_param(newModel, 'SimulationCommand', 'update');
+	%set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
 end
 % ============================== 辅助函数 ==============================

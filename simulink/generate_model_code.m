@@ -89,16 +89,17 @@ for i = 1:length(all_blocks_pc)
             src_block_name = get_param(bh, 'Name');
             src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
             % 新增：端口种类与在该种类数组的索引
-            [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p));
+            [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p), 0);
 
             for d = 1:numel(pc(p).DstBlock)
                 dst_bh         = pc(p).DstBlock(d);
+                port           = pc(p).DstPort(d);
                 dst_block_full = getfullname(dst_bh);
                 dst_block_name = get_param(dst_bh, 'Name');
                 % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
                 dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
-                dst_port_num   = get_port_num(dst_pc_entry);  % 若取得为空则返回 NaN→后续统一为 -1
-                [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry);
+                dst_port_num   = get_port_num(dst_pc_entry); % 若取得为空则返回 NaN→后续统一为 -1
+                [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
                 %if ~isKey(conn_keys, key)
@@ -133,12 +134,13 @@ for i = 1:length(all_blocks_pc)
             else
                 src_port_num = -1;
             end
-            [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p));
+            [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p),0);
 
             dst_block_full  = getfullname(bh);
+            port            = pc(p).DstPort;
             dst_block_name  = get_param(bh, 'Name');
             dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
-            [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p));
+            [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
 
             key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
             %if ~isKey(conn_keys, key)
@@ -599,29 +601,36 @@ function [kind, idx] = kind_and_index_by_handle(blockH, portH)
                     idx  = k;
                     return;
                 end
+            endap_type_to_field
             end
         end
-    catch
     end
 end
 
-function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
+function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
     % 通过 pcEntry 和 PortHandles 推断端口种类与索引（用于 pc 来源）
     kind = '';
     idx  = -1;
     try
         ph = get_param(blockH,'PortHandles');
         % 优先使用 Type
-        if isfield(pcEntry,'Type') && ~isempty(pcEntry.Type)
-            switch lower(pcEntry.Type)
-                case {'inport','outport','lconn','rconn','conn','conserving'}
-                    f = map_type_to_field(lower(pcEntry.Type));
-                    if isfield(ph,f) && ~isempty(ph.(f))
-                        kind = lower(f); idx = 1; % 无法精确时返回 1 占位
-                        return;
-                    end
+        if ~isempty(ph.RConn)
+            for i=1:numel(ph.RConn)
+                if port == ph.RConn(i)
+                    kind = 'rconn';
+                    idx  = i;
+                end
             end
         end
+        if ~isempty(ph.LConn)
+           for i=1:numel(ph.LConn)
+                if port == ph.LConn(i)
+                    kind = 'lconn';
+                    idx  = i;
+                end
+           end
+        end
+        
         % 回退：根据坐标匹配最近端口句柄，并返回其种类与索引
         if isfield(pcEntry,'Position') && ~isempty(pcEntry.Position)
             candH = []; candP = []; candF = {};
@@ -648,20 +657,6 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
     end
 end
 
-function f = map_type_to_field(tp)
-    switch tp
-        case {'lconn','rconn','conn'}
-            f = upper(tp);
-        case 'conserving'
-            f = 'Conn';
-        case 'inport'
-            f = 'Inport';
-        case 'outport'
-            f = 'Outport';
-        otherwise
-            f = 'Conn';
-    end
-end
 
 function pcEntry = get_pc_entry_for_port(blockH, portNum)
     % 在目标块的 PortConnectivity 中找到与端口号匹配的条目
@@ -940,4 +935,3 @@ function merged = merge_name_list(defaults, whites, blacks)
     end
     merged = lst(keep);
 end
-
