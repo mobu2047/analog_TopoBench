@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = untitled1;
+    model_name = untitled11;
 
   
     
@@ -51,7 +51,7 @@ for i = 1:length(all_blocks)
                 [dst_kind, dst_index] = kind_and_index_by_handle(dst_block, dst_port_handles(j));
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                %if ~isKey(conn_keys, key)
+                if ~isKey(conn_keys, key)
                     %conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
@@ -68,7 +68,7 @@ for i = 1:length(all_blocks)
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ')']);
-               %end
+               end
             end
         end
     end
@@ -102,8 +102,8 @@ for i = 1:length(all_blocks_pc)
                 [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                %if ~isKey(conn_keys, key)
-                    %conn_keys(key) = true;
+                if ~isKey(conn_keys, key)
+                    conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增
@@ -119,7 +119,7 @@ for i = 1:length(all_blocks_pc)
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
-                %end
+                end
             end
         end
 
@@ -143,8 +143,8 @@ for i = 1:length(all_blocks_pc)
             [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
 
             key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-            %if ~isKey(conn_keys, key)
-                %conn_keys(key) = true;
+            if ~isKey(conn_keys, key)
+                conn_keys(key) = true;
                 connectivity{end+1} = struct( ...
                     'Source',           src_block_name, ...
                     'SourcePath',       src_block_full, ...      % 新增
@@ -160,7 +160,7 @@ for i = 1:length(all_blocks_pc)
                 );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                   dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
-            %end
+            end
         end
     end
 end
@@ -656,7 +656,6 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
     catch
     end
 end
-
 
 function pcEntry = get_pc_entry_for_port(blockH, portNum)
     % 在目标块的 PortConnectivity 中找到与端口号匹配的条目
