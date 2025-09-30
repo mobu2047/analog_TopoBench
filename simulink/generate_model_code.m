@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = untitled11;
+    model_name = untitled1;
 
   
     
@@ -52,7 +52,7 @@ for i = 1:length(all_blocks)
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
                 if ~isKey(conn_keys, key)
-                    %conn_keys(key) = true;
+                    conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增：源块完整路径
@@ -601,7 +601,6 @@ function [kind, idx] = kind_and_index_by_handle(blockH, portH)
                     idx  = k;
                     return;
                 end
-            endap_type_to_field
             end
         end
     end
