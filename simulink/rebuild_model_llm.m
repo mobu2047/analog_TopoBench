@@ -54,10 +54,6 @@ function create_block_in_model(row, isSubsystem)
                     otherwise 
                         temp_block = find_system('simulink', 'BlockType', btype, 'Name', regexprep(name, '\d+$', ''));
                         add_block(char(temp_block(1,1)),newPath,'MakeNameUnique','off')
-                        
-                    %otherwise
-						%add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
-						%warning(' ? %s 无库引用，使 ? Subsystem 占位 ?', newPath);
 				end
 			end
 		end

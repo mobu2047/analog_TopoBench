@@ -1,11 +1,11 @@
 {
   "model": "",
-  "timestamp": "2025-10-09 11:13:33",
+  "timestamp": "2025-10-09 16:35:14",
   "counts": {
     "elements": 60,
     "ports": 187,
     "connections": 580,
-    "lines": 134
+    "lines": 135
   },
   "elements": [
     {
@@ -11493,7 +11493,7 @@
   ],
   "lines": [
     {
-      "Handle": 3218.0040283203125,
+      "Handle": 658.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement1",
       "DstPaths": [
@@ -11519,7 +11519,7 @@
       ]
     },
     {
-      "Handle": 3217.0032958984375,
+      "Handle": 657.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement1",
       "DstPaths": [
@@ -11537,7 +11537,7 @@
       ]
     },
     {
-      "Handle": 3216.00341796875,
+      "Handle": 656.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -11555,7 +11555,7 @@
       ]
     },
     {
-      "Handle": 3215.00390625,
+      "Handle": 655.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -11581,7 +11581,7 @@
       ]
     },
     {
-      "Handle": 3214.003662109375,
+      "Handle": 654.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -11607,7 +11607,7 @@
       ]
     },
     {
-      "Handle": 3213.0025634765625,
+      "Handle": 653.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -11633,7 +11633,7 @@
       ]
     },
     {
-      "Handle": 3212.0028076171875,
+      "Handle": 652.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -11651,7 +11651,7 @@
       ]
     },
     {
-      "Handle": 3211.0035400390625,
+      "Handle": 651.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -11677,7 +11677,7 @@
       ]
     },
     {
-      "Handle": 3210.0025634765625,
+      "Handle": 650.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/From2",
       "DstPaths": [
@@ -11703,7 +11703,7 @@
       ]
     },
     {
-      "Handle": 3209.0023193359375,
+      "Handle": 649.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Sine Wave",
       "DstPaths": [
@@ -11725,7 +11725,7 @@
       ]
     },
     {
-      "Handle": 3208.0023193359375,
+      "Handle": 648.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Controlled Voltage Source",
       "DstPaths": [
@@ -11747,7 +11747,7 @@
       ]
     },
     {
-      "Handle": 3207.00244140625,
+      "Handle": 647.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Controlled Voltage Source",
       "DstPaths": [
@@ -11769,7 +11769,7 @@
       ]
     },
     {
-      "Handle": 3206.0028076171875,
+      "Handle": 646.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement3",
       "DstPaths": [
@@ -11787,7 +11787,7 @@
       ]
     },
     {
-      "Handle": 3205.002685546875,
+      "Handle": 645.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [
@@ -11813,7 +11813,7 @@
       ]
     },
     {
-      "Handle": 3204.002197265625,
+      "Handle": 644.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11833,7 +11833,7 @@
       ]
     },
     {
-      "Handle": 3203.002685546875,
+      "Handle": 643.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch3",
       "DstPaths": [],
@@ -11853,7 +11853,7 @@
       ]
     },
     {
-      "Handle": 3202.003173828125,
+      "Handle": 642.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch1",
       "DstPaths": [],
@@ -11869,7 +11869,7 @@
       ]
     },
     {
-      "Handle": 3201.002685546875,
+      "Handle": 641.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [
@@ -11903,7 +11903,7 @@
       ]
     },
     {
-      "Handle": 3200.002197265625,
+      "Handle": 640.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11923,7 +11923,7 @@
       ]
     },
     {
-      "Handle": 3199.0032958984375,
+      "Handle": 639.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch2",
       "DstPaths": [],
@@ -11943,7 +11943,7 @@
       ]
     },
     {
-      "Handle": 3198.0025634765625,
+      "Handle": 638.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch",
       "DstPaths": [],
@@ -11959,7 +11959,7 @@
       ]
     },
     {
-      "Handle": 3197.0028076171875,
+      "Handle": 637.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load12",
       "DstPaths": [
@@ -11977,7 +11977,7 @@
       ]
     },
     {
-      "Handle": 3196.00244140625,
+      "Handle": 636.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load11",
       "DstPaths": [
@@ -11995,7 +11995,7 @@
       ]
     },
     {
-      "Handle": 3195.0025634765625,
+      "Handle": 635.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12011,7 +12011,7 @@
       ]
     },
     {
-      "Handle": 3194.002685546875,
+      "Handle": 634.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch1",
       "DstPaths": [],
@@ -12031,7 +12031,7 @@
       ]
     },
     {
-      "Handle": 3193.0025634765625,
+      "Handle": 633.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [],
@@ -12047,7 +12047,7 @@
       ]
     },
     {
-      "Handle": 3192.0029296875,
+      "Handle": 632.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12063,7 +12063,7 @@
       ]
     },
     {
-      "Handle": 3191.002197265625,
+      "Handle": 631.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch",
       "DstPaths": [],
@@ -12083,7 +12083,7 @@
       ]
     },
     {
-      "Handle": 3190.002197265625,
+      "Handle": 630.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement1",
       "DstPaths": [],
@@ -12099,7 +12099,7 @@
       ]
     },
     {
-      "Handle": 3189.002685546875,
+      "Handle": 629.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [
@@ -12125,7 +12125,7 @@
       ]
     },
     {
-      "Handle": 3188.003662109375,
+      "Handle": 628.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement1",
       "DstPaths": [
@@ -12151,7 +12151,7 @@
       ]
     },
     {
-      "Handle": 3187.0029296875,
+      "Handle": 627.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load7",
       "DstPaths": [
@@ -12169,7 +12169,7 @@
       ]
     },
     {
-      "Handle": 3186.0023193359375,
+      "Handle": 626.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [
@@ -12187,7 +12187,7 @@
       ]
     },
     {
-      "Handle": 3185.001953125,
+      "Handle": 625.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [
@@ -12213,7 +12213,7 @@
       ]
     },
     {
-      "Handle": 3184.002197265625,
+      "Handle": 624.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/From1",
       "DstPaths": [
@@ -12239,7 +12239,7 @@
       ]
     },
     {
-      "Handle": 3183.001953125,
+      "Handle": 623.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load7",
       "DstPaths": [
@@ -12265,7 +12265,7 @@
       ]
     },
     {
-      "Handle": 3182.001953125,
+      "Handle": 622.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/From",
       "DstPaths": [
@@ -12291,7 +12291,7 @@
       ]
     },
     {
-      "Handle": 3181.0020751953125,
+      "Handle": 621.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement",
       "DstPaths": [
@@ -12313,7 +12313,7 @@
       ]
     },
     {
-      "Handle": 3180.00244140625,
+      "Handle": 620.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load5",
       "DstPaths": [
@@ -12331,7 +12331,7 @@
       ]
     },
     {
-      "Handle": 3179.0020751953125,
+      "Handle": 619.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -12353,7 +12353,7 @@
       ]
     },
     {
-      "Handle": 3178.001708984375,
+      "Handle": 618.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -12371,7 +12371,7 @@
       ]
     },
     {
-      "Handle": 3177.001953125,
+      "Handle": 617.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -12393,7 +12393,7 @@
       ]
     },
     {
-      "Handle": 3176.002197265625,
+      "Handle": 616.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -12413,7 +12413,7 @@
       ]
     },
     {
-      "Handle": 3175.002197265625,
+      "Handle": 615.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load3",
       "DstPaths": [
@@ -12431,7 +12431,7 @@
       ]
     },
     {
-      "Handle": 3174.002197265625,
+      "Handle": 614.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Mux",
       "DstPaths": [
@@ -12457,7 +12457,7 @@
       ]
     },
     {
-      "Handle": 3173.00244140625,
+      "Handle": 613.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Constant",
       "DstPaths": [
@@ -12483,7 +12483,7 @@
       ]
     },
     {
-      "Handle": 3172.002685546875,
+      "Handle": 612.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Relay",
       "DstPaths": [
@@ -12509,7 +12509,7 @@
       ]
     },
     {
-      "Handle": 3171.00244140625,
+      "Handle": 611.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Delay",
       "DstPaths": [
@@ -12535,7 +12535,7 @@
       ]
     },
     {
-      "Handle": 3170.0020751953125,
+      "Handle": 610.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [
@@ -12565,7 +12565,7 @@
       ]
     },
     {
-      "Handle": 3169.0023193359375,
+      "Handle": 609.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12581,7 +12581,7 @@
       ]
     },
     {
-      "Handle": 3168.0020751953125,
+      "Handle": 608.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [],
@@ -12593,15 +12593,11 @@
         [
           -850,
           380
-        ],
-        [
-          -850,
-          448
         ]
       ]
     },
     {
-      "Handle": 3167.0018310546875,
+      "Handle": 607.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load",
       "DstPaths": [],
@@ -12612,12 +12608,12 @@
         ],
         [
           -680,
-          412
+          385
         ]
       ]
     },
     {
-      "Handle": 3166.002197265625,
+      "Handle": 606.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12641,7 +12637,7 @@
       ]
     },
     {
-      "Handle": 3165.0025634765625,
+      "Handle": 605.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load2",
       "DstPaths": [],
@@ -12657,7 +12653,7 @@
       ]
     },
     {
-      "Handle": 3164.0018310546875,
+      "Handle": 604.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [],
@@ -12677,7 +12673,7 @@
       ]
     },
     {
-      "Handle": 3163.001953125,
+      "Handle": 603.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load4",
       "DstPaths": [],
@@ -12693,7 +12689,7 @@
       ]
     },
     {
-      "Handle": 3162.002685546875,
+      "Handle": 602.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement",
       "DstPaths": [],
@@ -12709,7 +12705,7 @@
       ]
     },
     {
-      "Handle": 3161.0023193359375,
+      "Handle": 601.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [],
@@ -12729,7 +12725,7 @@
       ]
     },
     {
-      "Handle": 3160.00244140625,
+      "Handle": 600.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [],
@@ -12745,7 +12741,7 @@
       ]
     },
     {
-      "Handle": 3159.001953125,
+      "Handle": 599.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load6",
       "DstPaths": [],
@@ -12761,7 +12757,7 @@
       ]
     },
     {
-      "Handle": 3158.001953125,
+      "Handle": 598.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12781,7 +12777,7 @@
       ]
     },
     {
-      "Handle": 3157.002197265625,
+      "Handle": 597.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12797,7 +12793,7 @@
       ]
     },
     {
-      "Handle": 3156.001708984375,
+      "Handle": 596.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12817,7 +12813,7 @@
       ]
     },
     {
-      "Handle": 3154.001708984375,
+      "Handle": 594.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12837,7 +12833,7 @@
       ]
     },
     {
-      "Handle": 3155.0013427734375,
+      "Handle": 595.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12853,29 +12849,13 @@
       ]
     },
     {
-      "Handle": 3153.001708984375,
+      "Handle": 593.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
       "Points": [
         [
           -1200,
-          448
-        ],
-        [
-          -850,
-          448
-        ]
-      ]
-    },
-    {
-      "Handle": 3151.0020751953125,
-      "IsRoot": false,
-      "SrcPath": "",
-      "DstPaths": [],
-      "Points": [
-        [
-          -850,
           448
         ],
         [
@@ -12889,7 +12869,47 @@
       ]
     },
     {
-      "Handle": 3150.0020751953125,
+      "Handle": 592.000244140625,
+      "IsRoot": false,
+      "SrcPath": "",
+      "DstPaths": [],
+      "Points": [
+        [
+          -680,
+          385
+        ],
+        [
+          -680,
+          412
+        ]
+      ]
+    },
+    {
+      "Handle": 591.00048828125,
+      "IsRoot": false,
+      "SrcPath": "",
+      "DstPaths": [],
+      "Points": [
+        [
+          -850,
+          380
+        ],
+        [
+          -850,
+          375
+        ],
+        [
+          -680,
+          375
+        ],
+        [
+          -680,
+          385
+        ]
+      ]
+    },
+    {
+      "Handle": 590.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12900,12 +12920,12 @@
         ],
         [
           -850,
-          448
+          380
         ]
       ]
     },
     {
-      "Handle": 3149.001708984375,
+      "Handle": 589.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [],
@@ -12925,7 +12945,7 @@
       ]
     },
     {
-      "Handle": 3148.0013427734375,
+      "Handle": 588.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load9",
       "DstPaths": [],
@@ -12941,7 +12961,7 @@
       ]
     },
     {
-      "Handle": 3147.0013427734375,
+      "Handle": 587.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12965,7 +12985,7 @@
       ]
     },
     {
-      "Handle": 3146.0015869140625,
+      "Handle": 586.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -12981,7 +13001,7 @@
       ]
     },
     {
-      "Handle": 3145.0018310546875,
+      "Handle": 585.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -13005,7 +13025,7 @@
       ]
     },
     {
-      "Handle": 3144.00146484375,
+      "Handle": 584.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13021,7 +13041,7 @@
       ]
     },
     {
-      "Handle": 3143.0010986328125,
+      "Handle": 583.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -13049,7 +13069,7 @@
       ]
     },
     {
-      "Handle": 3142.0018310546875,
+      "Handle": 582.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13065,7 +13085,7 @@
       ]
     },
     {
-      "Handle": 3141.0018310546875,
+      "Handle": 581.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13081,7 +13101,7 @@
       ]
     },
     {
-      "Handle": 3140.00146484375,
+      "Handle": 580.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [],
@@ -13101,7 +13121,7 @@
       ]
     },
     {
-      "Handle": 3139.00146484375,
+      "Handle": 579.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [],
@@ -13121,7 +13141,7 @@
       ]
     },
     {
-      "Handle": 3138.001708984375,
+      "Handle": 578.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load3",
       "DstPaths": [],
@@ -13137,7 +13157,7 @@
       ]
     },
     {
-      "Handle": 3137.0025634765625,
+      "Handle": 577.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load5",
       "DstPaths": [],
@@ -13153,7 +13173,7 @@
       ]
     },
     {
-      "Handle": 3136.0023193359375,
+      "Handle": 576.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [],
@@ -13169,7 +13189,7 @@
       ]
     },
     {
-      "Handle": 3135.001708984375,
+      "Handle": 575.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [],
@@ -13193,7 +13213,7 @@
       ]
     },
     {
-      "Handle": 3134.001953125,
+      "Handle": 574.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load6",
       "DstPaths": [],
@@ -13209,7 +13229,7 @@
       ]
     },
     {
-      "Handle": 3133.001953125,
+      "Handle": 573.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13229,7 +13249,7 @@
       ]
     },
     {
-      "Handle": 3132.001953125,
+      "Handle": 572.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13249,7 +13269,7 @@
       ]
     },
     {
-      "Handle": 3131.001953125,
+      "Handle": 571.0003662109375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13265,7 +13285,7 @@
       ]
     },
     {
-      "Handle": 3130.0013427734375,
+      "Handle": 570.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13285,7 +13305,7 @@
       ]
     },
     {
-      "Handle": 3129.0010986328125,
+      "Handle": 569.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13301,7 +13321,7 @@
       ]
     },
     {
-      "Handle": 3128.0018310546875,
+      "Handle": 568.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13317,7 +13337,7 @@
       ]
     },
     {
-      "Handle": 3127.001953125,
+      "Handle": 567.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13333,7 +13353,7 @@
       ]
     },
     {
-      "Handle": 3125.001708984375,
+      "Handle": 565.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load9",
       "DstPaths": [],
@@ -13349,7 +13369,7 @@
       ]
     },
     {
-      "Handle": 3126.0013427734375,
+      "Handle": 566.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [],
@@ -13373,7 +13393,7 @@
       ]
     },
     {
-      "Handle": 3124.0013427734375,
+      "Handle": 564.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13393,7 +13413,7 @@
       ]
     },
     {
-      "Handle": 3123.001953125,
+      "Handle": 563.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13409,7 +13429,7 @@
       ]
     },
     {
-      "Handle": 3122.00146484375,
+      "Handle": 562.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -13437,7 +13457,7 @@
       ]
     },
     {
-      "Handle": 3121.0010986328125,
+      "Handle": 561.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -13453,7 +13473,7 @@
       ]
     },
     {
-      "Handle": 3120.0018310546875,
+      "Handle": 560.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units1",
       "DstPaths": [],
@@ -13473,7 +13493,7 @@
       ]
     },
     {
-      "Handle": 3119.00146484375,
+      "Handle": 559.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -13493,7 +13513,7 @@
       ]
     },
     {
-      "Handle": 3118.0013427734375,
+      "Handle": 558.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13517,7 +13537,7 @@
       ]
     },
     {
-      "Handle": 3117.0018310546875,
+      "Handle": 557.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -13537,7 +13557,7 @@
       ]
     },
     {
-      "Handle": 3116.00146484375,
+      "Handle": 556.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -13557,7 +13577,7 @@
       ]
     },
     {
-      "Handle": 3115.0010986328125,
+      "Handle": 555.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13573,7 +13593,7 @@
       ]
     },
     {
-      "Handle": 3114.001708984375,
+      "Handle": 554.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -13593,7 +13613,7 @@
       ]
     },
     {
-      "Handle": 3113.00146484375,
+      "Handle": 553.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units1",
       "DstPaths": [],
@@ -13621,7 +13641,7 @@
       ]
     },
     {
-      "Handle": 3112.0018310546875,
+      "Handle": 552.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13639,7 +13659,7 @@
       ]
     },
     {
-      "Handle": 3111.00146484375,
+      "Handle": 551.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13657,7 +13677,7 @@
       ]
     },
     {
-      "Handle": 3110.00146484375,
+      "Handle": 550.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13679,7 +13699,7 @@
       ]
     },
     {
-      "Handle": 3109.0015869140625,
+      "Handle": 549.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13697,7 +13717,7 @@
       ]
     },
     {
-      "Handle": 3108.001220703125,
+      "Handle": 548.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13716,7 +13736,7 @@
       ]
     },
     {
-      "Handle": 3107.0018310546875,
+      "Handle": 547.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13740,7 +13760,7 @@
       ]
     },
     {
-      "Handle": 3106.00146484375,
+      "Handle": 546.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -13769,7 +13789,7 @@
       ]
     },
     {
-      "Handle": 3105.0010986328125,
+      "Handle": 545.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -13789,7 +13809,7 @@
       ]
     },
     {
-      "Handle": 3104.0018310546875,
+      "Handle": 544.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13809,7 +13829,7 @@
       ]
     },
     {
-      "Handle": 3103.001708984375,
+      "Handle": 543.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -13825,7 +13845,7 @@
       ]
     },
     {
-      "Handle": 3102.001708984375,
+      "Handle": 542.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -13845,7 +13865,7 @@
       ]
     },
     {
-      "Handle": 3101.0025634765625,
+      "Handle": 541.00048828125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13865,7 +13885,7 @@
       ]
     },
     {
-      "Handle": 3100.002197265625,
+      "Handle": 540.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -13881,7 +13901,7 @@
       ]
     },
     {
-      "Handle": 3099.0018310546875,
+      "Handle": 539.000244140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -13897,7 +13917,7 @@
       ]
     },
     {
-      "Handle": 3098.002197265625,
+      "Handle": 538.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -13917,7 +13937,7 @@
       ]
     },
     {
-      "Handle": 3097.001953125,
+      "Handle": 537.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -13933,7 +13953,7 @@
       ]
     },
     {
-      "Handle": 3096.001708984375,
+      "Handle": 536.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -13951,7 +13971,7 @@
       ]
     },
     {
-      "Handle": 3095.001708984375,
+      "Handle": 535.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -13969,7 +13989,7 @@
       ]
     },
     {
-      "Handle": 3094.001708984375,
+      "Handle": 534.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -13987,7 +14007,7 @@
       ]
     },
     {
-      "Handle": 3093.001708984375,
+      "Handle": 533.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -14013,7 +14033,7 @@
       ]
     },
     {
-      "Handle": 3092.001708984375,
+      "Handle": 532.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector2",
       "DstPaths": [
@@ -14039,7 +14059,7 @@
       ]
     },
     {
-      "Handle": 3091.001953125,
+      "Handle": 531.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector1",
       "DstPaths": [
@@ -14065,7 +14085,7 @@
       ]
     },
     {
-      "Handle": 3090.0015869140625,
+      "Handle": 530.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector",
       "DstPaths": [
@@ -14091,7 +14111,7 @@
       ]
     },
     {
-      "Handle": 3089.0020751953125,
+      "Handle": 529.00048828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -14113,7 +14133,7 @@
       ]
     },
     {
-      "Handle": 3088.001708984375,
+      "Handle": 528.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -14139,7 +14159,7 @@
       ]
     },
     {
-      "Handle": 3087.00146484375,
+      "Handle": 527.0003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -14157,7 +14177,7 @@
       ]
     },
     {
-      "Handle": 3086.001220703125,
+      "Handle": 526.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -14179,7 +14199,7 @@
       ]
     },
     {
-      "Handle": 3085.001220703125,
+      "Handle": 525.000244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -14198,7 +14218,7 @@
       ]
     },
     {
-      "Handle": 3084.000732421875,
+      "Handle": 524.0001220703125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [

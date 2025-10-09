@@ -260,6 +260,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 
 	%set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
+    save_system(newModel)
 end
 % ============================== 辅助函数 ==============================
 
