@@ -1,44 +1,44 @@
 
-    % ´ò¿ªÎÄ¼ş×¼±¸Ğ´Èë´úÂë
+    % æ‰“å¼€æ–‡ä»¶å‡†å¤‡å†™å…¥ä»£ç 
     model_name = untitled1;
 
   
     
-    % »ñÈ¡Ä£ĞÍÖĞµÄËùÓĞ¿é
+    % è·å–æ¨¡å‹ä¸­çš„æ‰€æœ‰å—
     blocks = find_system(model_name, 'SearchDepth', 1);
     
-    % Ìø¹ıÄ£ĞÍ±¾Éí
+    % è·³è¿‡æ¨¡å‹æœ¬èº«
     blocks = blocks(2:end);
     for i = 1:length(blocks)
         disp(getfullname(blocks(i,1)));
     end
-% »ñÈ¡Ä£ĞÍÖĞËùÓĞ¡°Ïß¡±¶ÔÏó£¨ĞÅºÅÏß£©
-% ËµÃ÷£ºÕâÒ»²½¸²¸ÇÆÕÍ¨ Simulink ĞÅºÅÏß£»µ«ÄÃ²»µ½ÎïÀíÍøÂçÏß£¨Èç RLC Á½¶Ë×ÓÏß£©
+% è·å–æ¨¡å‹ä¸­æ‰€æœ‰â€œçº¿â€å¯¹è±¡ï¼ˆä¿¡å·çº¿ï¼‰
+% è¯´æ˜ï¼šè¿™ä¸€æ­¥è¦†ç›–æ™®é€š Simulink ä¿¡å·çº¿ï¼›ä½†æ‹¿ä¸åˆ°ç‰©ç†ç½‘ç»œçº¿ï¼ˆå¦‚ RLC ä¸¤ç«¯å­çº¿ï¼‰
 all_blocks = find_system(model_name, 'SearchDepth',1,'FindAll','on', ...
      'FollowLinks','on', 'type','line');
 
-% ´´½¨Ò»¸ö¿ÕµÄ½á¹¹Ìå»òµ¥Ôª¸ñÊı×éÀ´´æ´¢Á¬½Ó¹ØÏµ
+% åˆ›å»ºä¸€ä¸ªç©ºçš„ç»“æ„ä½“æˆ–å•å…ƒæ ¼æ•°ç»„æ¥å­˜å‚¨è¿æ¥å…³ç³»
 connectivity = {};
-% È¥ÖØ£ºÔ´¿éÈ«Ãû|Ô´¶Ë¿Ú => Ä¿±ê¿éÈ«Ãû|Ä¿±ê¶Ë¿Ú
-%conn_keys = containers.Map('KeyType','char','ValueType','logical');
+% å»é‡ï¼šæºå—å…¨å|æºç«¯å£ => ç›®æ ‡å—å…¨å|ç›®æ ‡ç«¯å£
+conn_keys = containers.Map('KeyType','char','ValueType','logical');
 
-% ±éÀúÃ¿Ìõ¡°ĞÅºÅÏß¡±£¬²¢µİ¹é±éÀú·ÖÖ§£¨±ÜÃâÂ©µô LineChildren£©
+% éå†æ¯æ¡â€œä¿¡å·çº¿â€ï¼Œå¹¶é€’å½’éå†åˆ†æ”¯ï¼ˆé¿å…æ¼æ‰ LineChildrenï¼‰
 for i = 1:length(all_blocks)
-    block = all_blocks(i,1);               % Êµ¼ÊÊÇ line ¾ä±ú£¬ÑØÓÃÄãµÄ±äÁ¿Ãû
+    block = all_blocks(i,1);               % å®é™…æ˜¯ line å¥æŸ„ï¼Œæ²¿ç”¨ä½ çš„å˜é‡å
 
     src_port = get_param(block, 'SrcPortHandle');
-    dst_ports = get_param(block, 'DstPortHandle'); % ±£ÁôÄãµÄÔ­±äÁ¿£¨ºóĞøÎÒÃÇÓÃµİ¹éÍ³Ò»ÊÕ¼¯£©
+    dst_ports = get_param(block, 'DstPortHandle'); % ä¿ç•™ä½ çš„åŸå˜é‡ï¼ˆåç»­æˆ‘ä»¬ç”¨é€’å½’ç»Ÿä¸€æ”¶é›†ï¼‰
     if src_port ~= -1
         src_block = get_param(src_port, 'Parent');
         src_block_name = get_param(src_block, 'Name');
         src_block_full = getfullname(src_block);
         src_port_num = get_param(src_port, 'PortNumber');
 
-        % µİ¹é»ñÈ¡¸ÃÏß¼°È«²¿·ÖÖ§µÄÄ¿±ê¶Ë¿Ú
+        % é€’å½’è·å–è¯¥çº¿åŠå…¨éƒ¨åˆ†æ”¯çš„ç›®æ ‡ç«¯å£
         visited_lines = [];
         [dst_blk_handles, dst_port_handles, visited_lines] = collect_all_dsts(block, visited_lines);
 
-        % ´¦ÀíËùÓĞÄ¿±ê
+        % å¤„ç†æ‰€æœ‰ç›®æ ‡
         for j = 1:length(dst_port_handles)
             if dst_port_handles(j) ~= -1
                 dst_block = dst_blk_handles(j);
@@ -46,7 +46,7 @@ for i = 1:length(all_blocks)
                 dst_block_full = getfullname(dst_block);
                 dst_port_num = get_param(dst_port_handles(j), 'PortNumber');
 
-                % ĞÂÔö£º¼ÇÂ¼¶Ë¿ÚÖÖÀàÓë¡°ÔÚ¸÷×ÔÀàĞÍÊı×éÖĞµÄË÷Òı¡±£¨ÎÈ¶¨ÇÒ¿É¸´ÏÖ£©
+                % æ–°å¢ï¼šè®°å½•ç«¯å£ç§ç±»ä¸â€œåœ¨å„è‡ªç±»å‹æ•°ç»„ä¸­çš„ç´¢å¼•â€ï¼ˆç¨³å®šä¸”å¯å¤ç°ï¼‰
                 [src_kind, src_index] = kind_and_index_by_handle(src_block, src_port);
                 [dst_kind, dst_index] = kind_and_index_by_handle(dst_block, dst_port_handles(j));
 
@@ -55,16 +55,16 @@ for i = 1:length(all_blocks)
                     conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
-                        'SourcePath',       src_block_full, ...   % ĞÂÔö£ºÔ´¿éÍêÕûÂ·¾¶
+                        'SourcePath',       src_block_full, ...   % æ–°å¢ï¼šæºå—å®Œæ•´è·¯å¾„
                         'SourcePort',       src_port_num, ...
-                        'SourcePortKind',   src_kind, ...        % ĞÂÔö£ºÔ´¶Ë¿ÚÖÖÀà£¨Outport/Inport/...£©
-                        'SourcePortIndex',  src_index, ...       % ĞÂÔö£ºÔÚ¸ÃÖÖÀàÊı×éÖĞµÄË÷Òı
+                        'SourcePortKind',   src_kind, ...        % æ–°å¢ï¼šæºç«¯å£ç§ç±»ï¼ˆOutport/Inport/...ï¼‰
+                        'SourcePortIndex',  src_index, ...       % æ–°å¢ï¼šåœ¨è¯¥ç§ç±»æ•°ç»„ä¸­çš„ç´¢å¼•
                         'Destination',      dst_block_name, ...
-                        'DestinationPath',  dst_block_full, ...   % ĞÂÔö£ºÄ¿±ê¿éÍêÕûÂ·¾¶
+                        'DestinationPath',  dst_block_full, ...   % æ–°å¢ï¼šç›®æ ‡å—å®Œæ•´è·¯å¾„
                         'DestinationPort',  dst_port_num, ...
-                        'DestinationPortKind',  dst_kind, ...    % ĞÂÔö
-                        'DestinationPortIndex', dst_index, ...   % ĞÂÔö
-                        'Origin',           'line' ...            % ¿ÉÑ¡£ºÀ´Ô´±ê¼Ç£¨ÆÕÍ¨ĞÅºÅÏß£©
+                        'DestinationPortKind',  dst_kind, ...    % æ–°å¢
+                        'DestinationPortIndex', dst_index, ...   % æ–°å¢
+                        'Origin',           'line' ...            % å¯é€‰ï¼šæ¥æºæ ‡è®°ï¼ˆæ™®é€šä¿¡å·çº¿ï¼‰
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ')']);
@@ -74,21 +74,21 @@ for i = 1:length(all_blocks)
     end
 end
 
-% ========= ĞÂÔö£º»ùÓÚ PortConnectivity µÄÉ¨Ãè =========
-all_blocks_pc = find_system(model_name, 'FindAll','on','FollowLinks','on','Type','block');  % ²»ÏŞÖÆ²ã¼¶£¬È·±£ÑÚÄ£/Á´½ÓÏÂµÄ¶Ë¿ÚÒ²Í³¼Æ
+% ========= æ–°å¢ï¼šåŸºäº PortConnectivity çš„æ‰«æ =========
+all_blocks_pc = find_system(model_name, 'FindAll','on','FollowLinks','on','Type','block');  % ä¸é™åˆ¶å±‚çº§ï¼Œç¡®ä¿æ©æ¨¡/é“¾æ¥ä¸‹çš„ç«¯å£ä¹Ÿç»Ÿè®¡
 
 for i = 1:length(all_blocks_pc)
     bh = all_blocks_pc(i);
-    pc = get_param(bh, 'PortConnectivity');  % Ã¿¸ö¶Ë¿ÚµÄÉÏÏÂÓÎÁ¬½ÓĞÅÏ¢£¨Í¬Ê±Ö§³ÖÎïÀíÁ¬½ÓÓëĞÅºÅÏß£©
+    pc = get_param(bh, 'PortConnectivity');  % æ¯ä¸ªç«¯å£çš„ä¸Šä¸‹æ¸¸è¿æ¥ä¿¡æ¯ï¼ˆåŒæ—¶æ”¯æŒç‰©ç†è¿æ¥ä¸ä¿¡å·çº¿ï¼‰
 
-    % ±éÀú¸Ã¿éµÄÃ¿¸ö¶Ë¿ÚÁ¬½Ó
+    % éå†è¯¥å—çš„æ¯ä¸ªç«¯å£è¿æ¥
     for p = 1:numel(pc)
-        % 1) ×÷Îª¡°Êä³ö¶Ë¿Ú¡±Ò»²à£º±¾¿é -> ÏÂÓÎ¿é£¨°üº¬ĞÅºÅÓëÎïÀí¶Ë¿Ú£©
+        % 1) ä½œä¸ºâ€œè¾“å‡ºç«¯å£â€ä¸€ä¾§ï¼šæœ¬å— -> ä¸‹æ¸¸å—ï¼ˆåŒ…å«ä¿¡å·ä¸ç‰©ç†ç«¯å£ï¼‰
         if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
             src_block_full = getfullname(bh);
             src_block_name = get_param(bh, 'Name');
-            src_port_num   = get_port_num(pc(p));   % µ±Ç°¶Ë¿ÚºÅ£¨±¾¿éÒ»²à£©
-            % ĞÂÔö£º¶Ë¿ÚÖÖÀàÓëÔÚ¸ÃÖÖÀàÊı×éµÄË÷Òı
+            src_port_num   = get_port_num(pc(p));   % å½“å‰ç«¯å£å·ï¼ˆæœ¬å—ä¸€ä¾§ï¼‰
+            % æ–°å¢ï¼šç«¯å£ç§ç±»ä¸åœ¨è¯¥ç§ç±»æ•°ç»„çš„ç´¢å¼•
             [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p), 0);
 
             for d = 1:numel(pc(p).DstBlock)
@@ -96,9 +96,9 @@ for i = 1:length(all_blocks_pc)
                 port           = pc(p).DstPort(d);
                 dst_block_full = getfullname(dst_bh);
                 dst_block_name = get_param(dst_bh, 'Name');
-                % Ä¿±ê¶Ë¿ÚºÅÔÚÎïÀíÓò³£ÎŞÒâÒå£¬ÕâÀï¸ÄÎª¡°ÔÚÄ¿±ê¿éPCÖĞ·´²é SrcBlock==bh µÄÌõÄ¿¡±
+                % ç›®æ ‡ç«¯å£å·åœ¨ç‰©ç†åŸŸå¸¸æ— æ„ä¹‰ï¼Œè¿™é‡Œæ”¹ä¸ºâ€œåœ¨ç›®æ ‡å—PCä¸­åæŸ¥ SrcBlock==bh çš„æ¡ç›®â€
                 dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
-                dst_port_num   = get_port_num(dst_pc_entry); % ÈôÈ¡µÃÎª¿ÕÔò·µ»Ø NaN¡úºóĞøÍ³Ò»Îª -1
+                dst_port_num   = get_port_num(dst_pc_entry); % è‹¥å–å¾—ä¸ºç©ºåˆ™è¿”å› NaNâ†’åç»­ç»Ÿä¸€ä¸º -1
                 [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
@@ -106,16 +106,16 @@ for i = 1:length(all_blocks_pc)
                     conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
-                        'SourcePath',       src_block_full, ...   % ĞÂÔö
+                        'SourcePath',       src_block_full, ...   % æ–°å¢
                         'SourcePort',       src_port_num, ...
                         'SourcePortKind',   src_kind2, ...
                         'SourcePortIndex',  src_index2, ...
                         'Destination',      dst_block_name, ...
-                        'DestinationPath',  dst_block_full, ...   % ĞÂÔö
+                        'DestinationPath',  dst_block_full, ...   % æ–°å¢
                         'DestinationPort',  dst_port_num, ...
                         'DestinationPortKind',  dst_kind2, ...
                         'DestinationPortIndex', dst_index2, ...
-                        'Origin',           'pc' ...              % ¿ÉÑ¡£ºÀ´Ô´±ê¼Ç£¨PortConnectivity£©
+                        'Origin',           'pc' ...              % å¯é€‰ï¼šæ¥æºæ ‡è®°ï¼ˆPortConnectivityï¼‰
                     );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
@@ -123,12 +123,12 @@ for i = 1:length(all_blocks_pc)
             end
         end
 
-        % 2) ×÷Îª¡°ÊäÈë¶Ë¿Ú¡±Ò»²à£ºÉÏÓÎ¿é -> ±¾¿é£¨ÎïÀí¶Ë¿Ú³£ÎªË«Ïò£¬ÕâÀïÒ²²¹Æë£©
+        % 2) ä½œä¸ºâ€œè¾“å…¥ç«¯å£â€ä¸€ä¾§ï¼šä¸Šæ¸¸å— -> æœ¬å—ï¼ˆç‰©ç†ç«¯å£å¸¸ä¸ºåŒå‘ï¼Œè¿™é‡Œä¹Ÿè¡¥é½ï¼‰
         if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
             src_bh          = pc(p).SrcBlock;
             src_block_full  = getfullname(src_bh);
             src_block_name  = get_param(src_bh, 'Name');
-            % ÉÏÓÎ¿éµÄ¶Ë¿ÚºÅÓ¦È¡ SrcPort£»Ã»ÓĞÔòÖÃÎª -1 ÒÔ±ãºóĞøÊ¶±ğ
+            % ä¸Šæ¸¸å—çš„ç«¯å£å·åº”å– SrcPortï¼›æ²¡æœ‰åˆ™ç½®ä¸º -1 ä»¥ä¾¿åç»­è¯†åˆ«
             if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
                 src_port_num = pc(p).SrcPort;
             else
@@ -139,7 +139,7 @@ for i = 1:length(all_blocks_pc)
             dst_block_full  = getfullname(bh);
             port            = pc(p).DstPort;
             dst_block_name  = get_param(bh, 'Name');
-            dst_port_num    = get_port_num(pc(p));  % ±¾¿éÒ»²à¶Ë¿ÚºÅ
+            dst_port_num    = get_port_num(pc(p));  % æœ¬å—ä¸€ä¾§ç«¯å£å·
             [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
 
             key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
@@ -147,16 +147,16 @@ for i = 1:length(all_blocks_pc)
                 conn_keys(key) = true;
                 connectivity{end+1} = struct( ...
                     'Source',           src_block_name, ...
-                    'SourcePath',       src_block_full, ...      % ĞÂÔö
+                    'SourcePath',       src_block_full, ...      % æ–°å¢
                     'SourcePort',       src_port_num, ...
                     'SourcePortKind',   src_kind3, ...
                     'SourcePortIndex',  src_index3, ...
                     'Destination',      dst_block_name, ...
-                    'DestinationPath',  dst_block_full, ...      % ĞÂÔö
+                    'DestinationPath',  dst_block_full, ...      % æ–°å¢
                     'DestinationPort',  dst_port_num, ...
                     'DestinationPortKind',  dst_kind3, ...
                     'DestinationPortIndex', dst_index3, ...
-                    'Origin',           'pc' ...                 % ¿ÉÑ¡£ºÀ´Ô´±ê¼Ç£¨PortConnectivity£©
+                    'Origin',           'pc' ...                 % å¯é€‰ï¼šæ¥æºæ ‡è®°ï¼ˆPortConnectivityï¼‰
                 );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                   dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
@@ -164,47 +164,47 @@ for i = 1:length(all_blocks_pc)
         end
     end
 end
-% ÏÖÔÚ connectivity µ¥Ôª¸ñÊı×é°üº¬ÁËËùÓĞµÄÔ´-Ä¿±êÁ¬½Ó¶Ô£¨ĞÅºÅÏß + ÎïÀíÍøÂçÏß£©
+% ç°åœ¨ connectivity å•å…ƒæ ¼æ•°ç»„åŒ…å«äº†æ‰€æœ‰çš„æº-ç›®æ ‡è¿æ¥å¯¹ï¼ˆä¿¡å·çº¿ + ç‰©ç†ç½‘ç»œçº¿ï¼‰
 for i = 1:length(connectivity)
     disp(connectivity{1,i});
 end
 % ============================================================
-% ²É¼¯ËùÓĞÔª¼ş£¨block£©µÄÎ»ÖÃĞÅÏ¢£¨ÏñËØ×ø±ê£¬Ô­µãÎª»­²¼×óÉÏ£©
-% why: ºóĞø¿ÉÊÓ»¯/µ¼³öĞèÒª¼¸ºÎĞÅÏ¢£»±£³ÖÓëÁ¬½Ó±íÍ¬Ò»¸ùÄ£ĞÍ
+% é‡‡é›†æ‰€æœ‰å…ƒä»¶ï¼ˆblockï¼‰çš„ä½ç½®ä¿¡æ¯ï¼ˆåƒç´ åæ ‡ï¼ŒåŸç‚¹ä¸ºç”»å¸ƒå·¦ä¸Šï¼‰
+% why: åç»­å¯è§†åŒ–/å¯¼å‡ºéœ€è¦å‡ ä½•ä¿¡æ¯ï¼›ä¿æŒä¸è¿æ¥è¡¨åŒä¸€æ ¹æ¨¡å‹
 % ============================================================
 
 
 
-% ÄÃµ½ËùÓĞ block ¾ä±ú£¨°üº¬ÑÚÄ£/Á´½Ó/±äÌå£©
+% æ‹¿åˆ°æ‰€æœ‰ block å¥æŸ„ï¼ˆåŒ…å«æ©æ¨¡/é“¾æ¥/å˜ä½“ï¼‰
 all_blocks_for_pos = all_blocks_pc;
 
-% ½á¹ûÈİÆ÷£ºÔª¼ş¡¢¶Ë¿Ú£¨¿ÉÑ¡£©¡¢Á¬Ïß£¨¿ÉÑ¡£©
+% ç»“æœå®¹å™¨ï¼šå…ƒä»¶ã€ç«¯å£ï¼ˆå¯é€‰ï¼‰ã€è¿çº¿ï¼ˆå¯é€‰ï¼‰
 elements = struct('Path',{},'Name',{},'BlockType',{},'Orientation',{}, ...
                   'Position',{},'Center',{},'LibraryLink',{}, ...
                   'Mirror',{},'Rotation',{}, ...
-                  'GotoTag',{},'GotoVisibility',{},'FromTag',{});  % ĞÂÔö£º¼¸ºÎ¾µÏñ/Ğı×ªÓëGoto/From±êÇ©/¿É¼ûĞÔ
+                  'GotoTag',{},'GotoVisibility',{},'FromTag',{});  % æ–°å¢ï¼šå‡ ä½•é•œåƒ/æ—‹è½¬ä¸Goto/Fromæ ‡ç­¾/å¯è§æ€§
 ports    = struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{}, ...
-                  'RelPos',{},'Side',{});      % ĞÂÔö£º¶Ë¿ÚÏà¶Ô×ø±êÓë²à±ğ
+                  'RelPos',{},'Side',{});      % æ–°å¢ï¼šç«¯å£ç›¸å¯¹åæ ‡ä¸ä¾§åˆ«
 sigLines = struct('Handle',{},'IsRoot',{},'SrcPath',{},'DstPaths',{},'Points',{});
 
-% ========== A) Ôª¼şÎ»ÖÃ ==========
+% ========== A) å…ƒä»¶ä½ç½® ==========
 for i = 1:numel(all_blocks_for_pos)
     bh = all_blocks_for_pos(i);
 
-    % Ôª¼ş»ù´¡ĞÅÏ¢
+    % å…ƒä»¶åŸºç¡€ä¿¡æ¯
     path  = getfullname(bh);
     name  = get_param(bh,'Name');
-    btype = get_param(bh,'BlockType');              % Ä³Ğ©ÑÚÄ£¿é¿ÉÄÜÎª¿Õ×Ö·û´®
+    btype = get_param(bh,'BlockType');              % æŸäº›æ©æ¨¡å—å¯èƒ½ä¸ºç©ºå­—ç¬¦ä¸²
     ori   = get_param(bh,'Orientation');            % right/left/up/down
     pos   = get_param(bh,'Position');               % [L T R B]
-    ctr   = [(pos(1)+pos(3))/2, (pos(2)+pos(4))/2]; % ÖĞĞÄµã
+    ctr   = [(pos(1)+pos(3))/2, (pos(2)+pos(4))/2]; % ä¸­å¿ƒç‚¹
     lib   = '';
-    % ĞÂÔö£º¾¡¿ÉÄÜ¶ÁÈ¡¾µÏñ/Ğı×ªĞÅÏ¢£¨²¢·ÇËùÓĞ¿é¶¼ÓĞÕâĞ©ÊôĞÔ£©
+    % æ–°å¢ï¼šå°½å¯èƒ½è¯»å–é•œåƒ/æ—‹è½¬ä¿¡æ¯ï¼ˆå¹¶éæ‰€æœ‰å—éƒ½æœ‰è¿™äº›å±æ€§ï¼‰
     mir   = '';
     rot   = '';
     try, mir = get_param(bh,'BlockMirror'); end
     try, rot = get_param(bh,'BlockRotation'); end
-    % ĞÂÔö£ºÈôÎª Goto/From£¬¼ÇÂ¼Æä±êÇ©£¬±ãÓÚÖØ½¨Ê±Ïû³ıÄ¬ÈÏ±êÇ©³åÍ»
+    % æ–°å¢ï¼šè‹¥ä¸º Goto/Fromï¼Œè®°å½•å…¶æ ‡ç­¾ï¼Œä¾¿äºé‡å»ºæ—¶æ¶ˆé™¤é»˜è®¤æ ‡ç­¾å†²çª
     gtag = '';
     gvis = '';
     ftag = '';
@@ -212,10 +212,10 @@ for i = 1:numel(all_blocks_for_pos)
         try, gtag = get_param(bh,'GotoTag'); end
         try, gvis = get_param(bh,'TagVisibility'); catch, gvis = ''; end
     elseif strcmpi(btype,'From')
-        try, ftag = get_param(bh,'GotoTag'); end % From ¿éÍ¬ÑùÊ¹ÓÃ GotoTag ×Ö¶Î
+        try, ftag = get_param(bh,'GotoTag'); end % From å—åŒæ ·ä½¿ç”¨ GotoTag å­—æ®µ
     end
     if strcmp(get_param(bh,'LinkStatus'),'resolved')
-        lib = get_param(bh,'ReferenceBlock');       % À´×Ô¿âµÄÒıÓÃÂ·¾¶
+        lib = get_param(bh,'ReferenceBlock');       % æ¥è‡ªåº“çš„å¼•ç”¨è·¯å¾„
     end
 
     elements(end+1) = struct( ...                   %#ok<AGROW>
@@ -234,19 +234,19 @@ for i = 1:numel(all_blocks_for_pos)
     );
 end
 
-% ========== B) ¶Ë¿ÚÎ»ÖÃ£¨¿ÉÑ¡£¬µ«Ç¿ÁÒ½¨ÒéÒ»Æğ´æ£© ==========
-% why: ¼´Ê¹Ä³Ğ©¡°ÎïÀíÍøÂçÏß¡±Ã»ÓĞ³£¹æ line ¶ÔÏó£¬Ò²ÄÜÓÃ¶Ë¿Ú×ø±êÖØ½¨±ß
+% ========== B) ç«¯å£ä½ç½®ï¼ˆå¯é€‰ï¼Œä½†å¼ºçƒˆå»ºè®®ä¸€èµ·å­˜ï¼‰ ==========
+% why: å³ä½¿æŸäº›â€œç‰©ç†ç½‘ç»œçº¿â€æ²¡æœ‰å¸¸è§„ line å¯¹è±¡ï¼Œä¹Ÿèƒ½ç”¨ç«¯å£åæ ‡é‡å»ºè¾¹
 for i = 1:numel(all_blocks_for_pos)
     bh = all_blocks_for_pos(i);
     path = getfullname(bh);
 
-    pc = get_param(bh,'PortConnectivity');  % ¶Ë¿ÚÁ¬½ÓÓë¼¸ºÎĞÅÏ¢
+    pc = get_param(bh,'PortConnectivity');  % ç«¯å£è¿æ¥ä¸å‡ ä½•ä¿¡æ¯
     for p = 1:numel(pc)
-        pnum = get_port_num(pc(p));         % ¼æÈİ PortNumber/Port
-        ppos = get_port_position(pc(p), bh);% ÓÅÏÈÓÃ pc(p).Position£¬±ØÒªÊ±»ØÍËµ½¾ä±ú
+        pnum = get_port_num(pc(p));         % å…¼å®¹ PortNumber/Port
+        ppos = get_port_position(pc(p), bh);% ä¼˜å…ˆç”¨ pc(p).Positionï¼Œå¿…è¦æ—¶å›é€€åˆ°å¥æŸ„
         ptyp = '';
         if isfield(pc(p),'Type') && ~isempty(pc(p).Type)
-            ptyp = pc(p).Type;              % inport/outport/conserving µÈ
+            ptyp = pc(p).Type;              % inport/outport/conserving ç­‰
         else
             if ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock~=-1)
                 ptyp = 'outport';
@@ -256,10 +256,10 @@ for i = 1:numel(all_blocks_for_pos)
                 ptyp = 'port';
             end
         end
-        % ½øÒ»²½£ºÓÃ PortHandles ¾«È·Ê¶±ğ LConn/RConn/Conn£¨Ä³Ğ©¿âÏÂ pc(p).Type Îª¿Õ£©
+        % è¿›ä¸€æ­¥ï¼šç”¨ PortHandles ç²¾ç¡®è¯†åˆ« LConn/RConn/Connï¼ˆæŸäº›åº“ä¸‹ pc(p).Type ä¸ºç©ºï¼‰
         try
             ph = get_param(bh,'PortHandles');
-            typeNames = {'LConn','RConn','Conn','Inport','Outport'};  % ÎïÀíÔÚÇ°
+            typeNames = {'LConn','RConn','Conn','Inport','Outport'};  % ç‰©ç†åœ¨å‰
             candPos = []; candType = {};
             for tt = 1:numel(typeNames)
                 nm = typeNames{tt};
@@ -276,21 +276,21 @@ for i = 1:numel(all_blocks_for_pos)
                 d = hypot(candPos(:,1)-ppos(1), candPos(:,2)-ppos(2));
                 [~, kmin] = min(d);
                 detected = candType{kmin};
-                % ÈôÔ­ÀàĞÍÎª¿Õ/port/inout£¬ÔòÓÃ¼ì²â½á¹û¸²¸Ç
+                % è‹¥åŸç±»å‹ä¸ºç©º/port/inoutï¼Œåˆ™ç”¨æ£€æµ‹ç»“æœè¦†ç›–
                 if isempty(ptyp) || strcmpi(ptyp,'port') || strcmpi(ptyp,'inout')
                     ptyp = detected;
                 end
             end
         catch
         end
-        % ĞÂÔö£º¶Ë¿ÚÏà¶Ô¿éµÄ¹éÒ»»¯×ø±êÓë²à±ğ£¬ÌáÉıÖØ½¨Ê±ÎïÀí¶Ë¿ÚÆ¥ÅäµÄÎÈ½¡ĞÔ
+        % æ–°å¢ï¼šç«¯å£ç›¸å¯¹å—çš„å½’ä¸€åŒ–åæ ‡ä¸ä¾§åˆ«ï¼Œæå‡é‡å»ºæ—¶ç‰©ç†ç«¯å£åŒ¹é…çš„ç¨³å¥æ€§
         rel = [NaN NaN];
         side = '';
         try
             if ~any(isnan(ppos))
                 w = max(1, (pos(3)-pos(1))); h = max(1, (pos(4)-pos(2)));
                 rel = [(ppos(1)-pos(1))/w, (ppos(2)-pos(2))/h];
-                % ¸ù¾İÓë±ß½çµÄ¾àÀëÅĞ¶Ï²à±ğ
+                % æ ¹æ®ä¸è¾¹ç•Œçš„è·ç¦»åˆ¤æ–­ä¾§åˆ«
                 dL = abs(ppos(1)-pos(1)); dR = abs(ppos(1)-pos(3));
                 dT = abs(ppos(2)-pos(2)); dB = abs(ppos(2)-pos(4));
                 [~,iSide] = min([dL,dR,dT,dB]);
@@ -311,15 +311,15 @@ for i = 1:numel(all_blocks_for_pos)
     end
 end
 
-% ========== C) ³£¹æĞÅºÅÏßµÄÕÛÏß×ø±ê£¨¿ÉÑ¡£© ==========
-% why: ÆÕÍ¨ Simulink ĞÅºÅÏßÓĞ line ¶ÔÏó£¬ÄÜÖ±½ÓÄÃ polyline µã£»ÎïÀíÏßÈôÃ»ÓĞ£¬ÔòÓÃ B) µÄ¶ËµãÖØ½¨
+% ========== C) å¸¸è§„ä¿¡å·çº¿çš„æŠ˜çº¿åæ ‡ï¼ˆå¯é€‰ï¼‰ ==========
+% why: æ™®é€š Simulink ä¿¡å·çº¿æœ‰ line å¯¹è±¡ï¼Œèƒ½ç›´æ¥æ‹¿ polyline ç‚¹ï¼›ç‰©ç†çº¿è‹¥æ²¡æœ‰ï¼Œåˆ™ç”¨ B) çš„ç«¯ç‚¹é‡å»º
 all_lines = all_blocks;
 for i = 1:numel(all_lines)
     lh = all_lines(i);
     srcH = get_param(lh,'SrcPortHandle');
     isRoot = srcH ~= -1;
 
-    % Ô´ÓëÄ¿±ê£¨×¢Òâ£ºbranch line Ò²ÓĞ×Ô¼ºµÄ Dst ¼¯ºÏ£©
+    % æºä¸ç›®æ ‡ï¼ˆæ³¨æ„ï¼šbranch line ä¹Ÿæœ‰è‡ªå·±çš„ Dst é›†åˆï¼‰
     srcPath = '';
     if isRoot
         srcPath = getfullname(get_param(srcH,'Parent'));
@@ -331,7 +331,7 @@ for i = 1:numel(all_lines)
         dstPaths = arrayfun(@(h)getfullname(h), dstHs(:),'UniformOutput',false);
     end
 
-    pts = get_param(lh,'Points'); % Nx2 ÕÛÏß×ø±ê
+    pts = get_param(lh,'Points'); % Nx2 æŠ˜çº¿åæ ‡
     sigLines(end+1) = struct( ... %#ok<AGROW>
         'Handle',  lh, ...
         'IsRoot',  isRoot, ...
@@ -341,25 +341,25 @@ for i = 1:numel(all_lines)
     );
 end
 
-% ÄãÏÖÔÚÓµÓĞ£º
-% elements  -> ËùÓĞÔª¼şµÄ¼¸ºÎĞÅÏ¢£¨Î»ÖÃ/ÖĞĞÄ/³¯Ïò/¿âÁ´½Ó£©
-% ports     -> ËùÓĞ¶Ë¿ÚµÄÏñËØ×ø±ê£¨¿ÉÓÃÓÚÖØ½¨ÎïÀíÁ¬½Ó£©
-% sigLines  -> ËùÓĞ³£¹æ¡°ĞÅºÅÏß¡±µÄÕÛÏßµã¼¯
-% ¿É°´Ğè±£´æÎª MAT/JSON£¬»òÓë connectivity ±í½øĞĞ join
+% ä½ ç°åœ¨æ‹¥æœ‰ï¼š
+% elements  -> æ‰€æœ‰å…ƒä»¶çš„å‡ ä½•ä¿¡æ¯ï¼ˆä½ç½®/ä¸­å¿ƒ/æœå‘/åº“é“¾æ¥ï¼‰
+% ports     -> æ‰€æœ‰ç«¯å£çš„åƒç´ åæ ‡ï¼ˆå¯ç”¨äºé‡å»ºç‰©ç†è¿æ¥ï¼‰
+% sigLines  -> æ‰€æœ‰å¸¸è§„â€œä¿¡å·çº¿â€çš„æŠ˜çº¿ç‚¹é›†
+% å¯æŒ‰éœ€ä¿å­˜ä¸º MAT/JSONï¼Œæˆ–ä¸ connectivity è¡¨è¿›è¡Œ join
 % =========
-%% ========= µ¼³öÄ£ĞÍ¼¸ºÎÓëÁ¬½ÓĞÅÏ¢£¨JSON / MAT / CSV£¬º¬ÍêÕûÂ·¾¶£© =========
+%% ========= å¯¼å‡ºæ¨¡å‹å‡ ä½•ä¸è¿æ¥ä¿¡æ¯ï¼ˆJSON / MAT / CSVï¼Œå«å®Œæ•´è·¯å¾„ï¼‰ =========
 % why:
-% - JSON£º¿çÓïÑÔ¿É¶Á£¬°üº¬ÍêÕûÇ¶Ì×½á¹¹£¨º¬ÍêÕûÂ·¾¶£¬±ãÓÚ¸´Ô­ÎŞÆçÒå£©
-% - MAT£º±£ÁôÔ­Ê¼±äÁ¿£¬±ãÓÚ MATLAB ¶ş´Î·ÖÎö
-% - CSV£º±ãÓÚ¿ìËÙ²é¿´Óë±í¸ñ´¦Àí£¨ÔªËØ/¶Ë¿Ú/Á¬ÏßÈıÕÅ±í£©
+% - JSONï¼šè·¨è¯­è¨€å¯è¯»ï¼ŒåŒ…å«å®Œæ•´åµŒå¥—ç»“æ„ï¼ˆå«å®Œæ•´è·¯å¾„ï¼Œä¾¿äºå¤åŸæ— æ­§ä¹‰ï¼‰
+% - MATï¼šä¿ç•™åŸå§‹å˜é‡ï¼Œä¾¿äº MATLAB äºŒæ¬¡åˆ†æ
+% - CSVï¼šä¾¿äºå¿«é€ŸæŸ¥çœ‹ä¸è¡¨æ ¼å¤„ç†ï¼ˆå…ƒç´ /ç«¯å£/è¿çº¿ä¸‰å¼ è¡¨ï¼‰
 
-% 1) »ù±¾Êä³öÄ¿Â¼ÓëÎÄ¼şÃû£¨¶ÔÄ£ĞÍÃû×öÇåÏ´£¬È·±£¿É×÷ÎªÎÄ¼şÃû£©
+% 1) åŸºæœ¬è¾“å‡ºç›®å½•ä¸æ–‡ä»¶åï¼ˆå¯¹æ¨¡å‹ååšæ¸…æ´—ï¼Œç¡®ä¿å¯ä½œä¸ºæ–‡ä»¶åï¼‰
 if ~exist('model_root','var') || isempty(model_root), model_root = 'model'; end
 model_tag = regexprep(char(model_root),'[^\w]','_');
 out_dir   = fullfile(pwd, 'export_model_graph');
 if ~exist(out_dir, 'dir'); mkdir(out_dir); end
 
-% 2) ¶µµ×£ºÈô±äÁ¿È±Ê§Ôò¸ø¿Õ½á¹¹£¬±ÜÃâµ¼³öÊ±±¨´í
+% 2) å…œåº•ï¼šè‹¥å˜é‡ç¼ºå¤±åˆ™ç»™ç©ºç»“æ„ï¼Œé¿å…å¯¼å‡ºæ—¶æŠ¥é”™
 if ~exist('elements','var') || isempty(elements)
     elements = struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{});
 end
@@ -373,7 +373,7 @@ if ~exist('connectivity','var') || isempty(connectivity)
     connectivity = {};
 end
 
-% Á¬½Ó´Ó cell ×ª³É struct Êı×é£¬Í³Ò»×Ö¶ÎÒÔ¡°°üº¬ÍêÕûÂ·¾¶¡±Îª×¼
+% è¿æ¥ä» cell è½¬æˆ struct æ•°ç»„ï¼Œç»Ÿä¸€å­—æ®µä»¥â€œåŒ…å«å®Œæ•´è·¯å¾„â€ä¸ºå‡†
 if iscell(connectivity)
     if isempty(connectivity)
         conn = struct('Source',{},'SourcePath',{},'SourcePort',{}, ...
@@ -386,16 +386,16 @@ else
     conn = connectivity;
 end
 
-% 3) ¹æ·¶»¯×Ö¶ÎÓëÊıÖµ£¨²¹È«È±Ê§×Ö¶Î£»¶Ë¿ÚºÅ NaN -> -1£©
+% 3) è§„èŒƒåŒ–å­—æ®µä¸æ•°å€¼ï¼ˆè¡¥å…¨ç¼ºå¤±å­—æ®µï¼›ç«¯å£å· NaN -> -1ï¼‰
 wantedFields = {'Source','SourcePath','SourcePort','Destination','DestinationPath','DestinationPort','Origin'};
 if isempty(conn)
-    % ¿ÕÁ¬½Ó±íÒ²ĞèÒªÈ·±£×Ö¶Î´æÔÚ£¬±ãÓÚ JSON/CSV Ğ´³ö
+    % ç©ºè¿æ¥è¡¨ä¹Ÿéœ€è¦ç¡®ä¿å­—æ®µå­˜åœ¨ï¼Œä¾¿äº JSON/CSV å†™å‡º
     conn = cell2struct(cell(size(wantedFields)), wantedFields, 2);
-    conn(1) = []; % ÖÃ¿Õµ«±£Áô×Ö¶Î¶¨Òå
+    conn(1) = []; % ç½®ç©ºä½†ä¿ç•™å­—æ®µå®šä¹‰
 else
-    % ÎªËùÓĞÁ¬½Ó²¹Æë×Ö¶Î£¬±£³ÖÒ»ÖÂĞÔ
+    % ä¸ºæ‰€æœ‰è¿æ¥è¡¥é½å­—æ®µï¼Œä¿æŒä¸€è‡´æ€§
     for i = 1:numel(conn)
-        % ×Ö¶ÎÈ±Ê§Ôò²¹¿Õ
+        % å­—æ®µç¼ºå¤±åˆ™è¡¥ç©º
         for f = 1:numel(wantedFields)
             fld = wantedFields{f};
             if ~isfield(conn, fld) || isempty(conn(i).(fld))
@@ -407,14 +407,14 @@ else
                 end
             end
         end
-        % ¶Ë¿ÚºÅ±ê×¼»¯
+        % ç«¯å£å·æ ‡å‡†åŒ–
         if ~isfield(conn,'SourcePort') || isempty(conn(i).SourcePort) || isnan(conn(i).SourcePort)
             conn(i).SourcePort = -1;
         end
         if ~isfield(conn,'DestinationPort') || isempty(conn(i).DestinationPort) || isnan(conn(i).DestinationPort)
             conn(i).DestinationPort = -1;
         end
-        % È·±£×Ö·û´®Îª char£¨±ÜÃâ string ±àÂë²îÒì£©
+        % ç¡®ä¿å­—ç¬¦ä¸²ä¸º charï¼ˆé¿å… string ç¼–ç å·®å¼‚ï¼‰
         conn(i).Source          = char(conn(i).Source);
         conn(i).SourcePath      = char(conn(i).SourcePath);
         conn(i).Destination     = char(conn(i).Destination);
@@ -427,7 +427,7 @@ else
     end
 end
 
-% 4) ×éÖ¯×Ü¶ÔÏó²¢Ğ´ JSON£¨ÍêÕûĞÅÏ¢£¬°üº¬ÍêÕûÂ·¾¶£©
+% 4) ç»„ç»‡æ€»å¯¹è±¡å¹¶å†™ JSONï¼ˆå®Œæ•´ä¿¡æ¯ï¼ŒåŒ…å«å®Œæ•´è·¯å¾„ï¼‰
 graph = struct();
 graph.model       = char(model_root);
 graph.timestamp   = char(datetime('now','Format','yyyy-MM-dd HH:mm:ss'));
@@ -438,22 +438,22 @@ graph.ports       = ports;
 graph.connections = conn;
 graph.lines       = sigLines;
 
-% ==================£¨¿ÉÑ¡£©µ¼³öÄ£ĞÍÓë¿é²ÎÊıÅäÖÃ£¬½âñîÓÚ¼¸ºÎ/Á¬Ïß==================
+% ==================ï¼ˆå¯é€‰ï¼‰å¯¼å‡ºæ¨¡å‹ä¸å—å‚æ•°é…ç½®ï¼Œè§£è€¦äºå‡ ä½•/è¿çº¿==================
 % why:
-% - ½ö¼¸ºÎÓëÁ¬Ïß²»×ãÒÔ¡°Ö±½Ó·ÂÕæ¡±£»»¹ĞèÄ£ĞÍÇó½âÆ÷Óë¸÷¿é¶Ô»°²ÎÊı
-% - ±£³ÖÓëÏÖÓĞµ¼³öÂß¼­½âñî£ºÓÃ¶ÀÁ¢¶ÎÊÕ¼¯²ÎÊı£¬°´Ğè¿ª¹Ø£»µ«²»ĞÂ½¨½Å±¾
+% - ä»…å‡ ä½•ä¸è¿çº¿ä¸è¶³ä»¥â€œç›´æ¥ä»¿çœŸâ€ï¼›è¿˜éœ€æ¨¡å‹æ±‚è§£å™¨ä¸å„å—å¯¹è¯å‚æ•°
+% - ä¿æŒä¸ç°æœ‰å¯¼å‡ºé€»è¾‘è§£è€¦ï¼šç”¨ç‹¬ç«‹æ®µæ”¶é›†å‚æ•°ï¼ŒæŒ‰éœ€å¼€å…³ï¼›ä½†ä¸æ–°å»ºè„šæœ¬
 % how:
-% - Ä£ĞÍ²ÎÊı£ºÌô³£ÓÃ·ÂÕæ/Çó½âÆ÷¹Ø¼üÏî£¨Èô´æÔÚÔò×¥È¡£©
-% - ¿é²ÎÊı£ºÊ¹ÓÃ DialogParameters ÁĞ±íÖğÏî get_param£¬¹æ±Ü±àÒëÌ¬/¾ä±úÀà×Ö¶Î
-% - ÖµÒ»ÂÉĞòÁĞ»¯Îª×Ö·û´®£¬±ãÓÚ set_param »Ø·Å
-ENABLE_PARAM_EXPORT = true;  % ÖÃÎª false ¿ÉÍêÈ«Ìø¹ı²ÎÊıµ¼³ö£¬²»Ó°ÏìÆäËûµ¼³ö
-% ¼¯ÖĞÊ½²ÎÊı¹ıÂËÅäÖÃ£¨½âñî£©£º°×/ºÚÃûµ¥ + ÊôĞÔ¹ıÂË
+% - æ¨¡å‹å‚æ•°ï¼šæŒ‘å¸¸ç”¨ä»¿çœŸ/æ±‚è§£å™¨å…³é”®é¡¹ï¼ˆè‹¥å­˜åœ¨åˆ™æŠ“å–ï¼‰
+% - å—å‚æ•°ï¼šä½¿ç”¨ DialogParameters åˆ—è¡¨é€é¡¹ get_paramï¼Œè§„é¿ç¼–è¯‘æ€/å¥æŸ„ç±»å­—æ®µ
+% - å€¼ä¸€å¾‹åºåˆ—åŒ–ä¸ºå­—ç¬¦ä¸²ï¼Œä¾¿äº set_param å›æ”¾
+ENABLE_PARAM_EXPORT = true;  % ç½®ä¸º false å¯å®Œå…¨è·³è¿‡å‚æ•°å¯¼å‡ºï¼Œä¸å½±å“å…¶ä»–å¯¼å‡º
+% é›†ä¸­å¼å‚æ•°è¿‡æ»¤é…ç½®ï¼ˆè§£è€¦ï¼‰ï¼šç™½/é»‘åå• + å±æ€§è¿‡æ»¤
 PARAM_FILTER = get_param_filter_config();
 params = struct('model', struct(), 'blocks', struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{}));
 if ENABLE_PARAM_EXPORT
     try
-        % Ê¶±ğ¡°ÕæÊµÄ£ĞÍ¸ùÃû¡±£¬±ÜÃâÊ¹ÓÃÕ¼Î» model_root µ¼ÖÂ get_param Ê§°Ü
-        % why: bdroot ·µ»Øµ±Ç°Ä£ĞÍÃû£»µ±Ä¬ÈÏ model_root ÓëÊµ¼Ê²»Ò»ÖÂÊ±»áµ¼³ö¿Õ²ÎÊı
+        % è¯†åˆ«â€œçœŸå®æ¨¡å‹æ ¹åâ€ï¼Œé¿å…ä½¿ç”¨å ä½ model_root å¯¼è‡´ get_param å¤±è´¥
+        % why: bdroot è¿”å›å½“å‰æ¨¡å‹åï¼›å½“é»˜è®¤ model_root ä¸å®é™…ä¸ä¸€è‡´æ—¶ä¼šå¯¼å‡ºç©ºå‚æ•°
         root_for_params = '';
         try
             if exist('all_blocks_pc','var') && ~isempty(all_blocks_pc)
@@ -465,56 +465,56 @@ if ENABLE_PARAM_EXPORT
             try, root_for_params = char(bdroot); catch, root_for_params = char(model_root); end
         end
 
-        % ÊÕ¼¯Ä£ĞÍ¼¶²ÎÊı£¨Çó½âÆ÷/Ê±¼ä²½µÈ£©£¬ÒÔ¡°´æÔÚ¼´¼ÇÂ¼¡±Îª×¼
+        % æ”¶é›†æ¨¡å‹çº§å‚æ•°ï¼ˆæ±‚è§£å™¨/æ—¶é—´æ­¥ç­‰ï¼‰ï¼Œä»¥â€œå­˜åœ¨å³è®°å½•â€ä¸ºå‡†
         params.model = collect_model_params(root_for_params, PARAM_FILTER);
 
-        % ÊÕ¼¯¿é¼¶¶Ô»°²ÎÊı
+        % æ”¶é›†å—çº§å¯¹è¯å‚æ•°
         params.blocks = collect_block_params(all_blocks_pc, PARAM_FILTER);
 
-        % ×¢Èëµ½ graph£¨ÓÃÓÚµ¥ÎÄ¼ş¸´Ô­£©£¬²¢¸²¸Ç graph.model ÎªÕæÊµ¸ùÃû
+        % æ³¨å…¥åˆ° graphï¼ˆç”¨äºå•æ–‡ä»¶å¤åŸï¼‰ï¼Œå¹¶è¦†ç›– graph.model ä¸ºçœŸå®æ ¹å
         graph.parameters = params;
         graph.model = char(root_for_params);
     catch ME
-        warning('²ÎÊıµ¼³öÓöµ½ÎÊÌâ£¬½«Ìø¹ı²ÎÊı×¢Èë£º%s', ME.message);
+        warning('å‚æ•°å¯¼å‡ºé‡åˆ°é—®é¢˜ï¼Œå°†è·³è¿‡å‚æ•°æ³¨å…¥ï¼š%s', ME.message);
     end
 end
 
 json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
-txt = jsonencode(graph, 'PrettyPrint', true);   % MATLAB »á½« NaN ±àÂëÎª null
+txt = jsonencode(graph, 'PrettyPrint', true);   % MATLAB ä¼šå°† NaN ç¼–ç ä¸º null
 fid = fopen(json_path,'w');
-assert(fid~=-1, 'ÎŞ·¨´´½¨ÎÄ¼ş: %s', json_path);
+assert(fid~=-1, 'æ— æ³•åˆ›å»ºæ–‡ä»¶: %s', json_path);
 fwrite(fid, txt, 'char');
 fclose(fid);
 
-% 5) Áí´æ MAT£¨±£ÁôÔ­Ê¼½á¹¹£¬±ãÓÚºóĞø MATLAB Ö±½Ó¼ÓÔØ£©
+% 5) å¦å­˜ MATï¼ˆä¿ç•™åŸå§‹ç»“æ„ï¼Œä¾¿äºåç»­ MATLAB ç›´æ¥åŠ è½½ï¼‰
 mat_path = fullfile(out_dir, sprintf('%s_graph.mat', model_tag));
 save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.3');
 
-% ÈôÆôÓÃÁË²ÎÊıµ¼³ö£¬Í¬Ê±¶ÀÁ¢ÂäÅÌ£¨±ãÓÚµ¥¶À¼ì²é/±È¶Ô/°æ±¾»¯£©
+% è‹¥å¯ç”¨äº†å‚æ•°å¯¼å‡ºï¼ŒåŒæ—¶ç‹¬ç«‹è½ç›˜ï¼ˆä¾¿äºå•ç‹¬æ£€æŸ¥/æ¯”å¯¹/ç‰ˆæœ¬åŒ–ï¼‰
 if ENABLE_PARAM_EXPORT
     try
         params_json_path = fullfile(out_dir, sprintf('%s_params.json', model_tag));
         ptxt = jsonencode(params, 'PrettyPrint', true);
         fidp = fopen(params_json_path,'w');
-        assert(fidp~=-1, 'ÎŞ·¨´´½¨ÎÄ¼ş: %s', params_json_path);
+        assert(fidp~=-1, 'æ— æ³•åˆ›å»ºæ–‡ä»¶: %s', params_json_path);
         fwrite(fidp, ptxt, 'char'); fclose(fidp);
     catch ME
-        warning('²ÎÊıµ¥¶Àµ¼³öÊ§°Ü£º%s', ME.message);
+        warning('å‚æ•°å•ç‹¬å¯¼å‡ºå¤±è´¥ï¼š%s', ME.message);
     end
 end
 
-% 6) ´Ó MAT ÔÙÉú³É CSV£¨ÑÏ¸ñÒÔ MAT ÖĞµÄÄÚÈİÎª×¼£¬È·±£ CSV Óë MAT Ò»ÖÂ£©
+% 6) ä» MAT å†ç”Ÿæˆ CSVï¼ˆä¸¥æ ¼ä»¥ MAT ä¸­çš„å†…å®¹ä¸ºå‡†ï¼Œç¡®ä¿ CSV ä¸ MAT ä¸€è‡´ï¼‰
 % why:
-% - ±ÜÃâ¡°ÄÚ´æÖĞ±äÁ¿±»ºóĞø¸Ä¶¯¡±µ¼ÖÂ CSV Óë MAT ²»Ò»ÖÂ
-% - Í³Ò»Èë¿Ú£ºÓÅÏÈ´Ó¸Õ¸Õ±£´æµÄ mat_path ¼ÓÔØ graph/elements/ports/conn
+% - é¿å…â€œå†…å­˜ä¸­å˜é‡è¢«åç»­æ”¹åŠ¨â€å¯¼è‡´ CSV ä¸ MAT ä¸ä¸€è‡´
+% - ç»Ÿä¸€å…¥å£ï¼šä¼˜å…ˆä»åˆšåˆšä¿å­˜çš„ mat_path åŠ è½½ graph/elements/ports/conn
 try
-    S_csv = load(mat_path); % Ö»¶Á£º²»ÒÀÀµ¹¤×÷ÇøµÄÍ¬Ãû±äÁ¿£¬±£Ö¤Ò»ÖÂĞÔ
+    S_csv = load(mat_path); % åªè¯»ï¼šä¸ä¾èµ–å·¥ä½œåŒºçš„åŒåå˜é‡ï¼Œä¿è¯ä¸€è‡´æ€§
 catch ME
-    warning('´Ó MAT ¼ÓÔØµ¼³ö½á¹¹Ê§°Ü£¬½«Ìø¹ı CSV Éú³É£º%s', ME.message);
+    warning('ä» MAT åŠ è½½å¯¼å‡ºç»“æ„å¤±è´¥ï¼Œå°†è·³è¿‡ CSV ç”Ÿæˆï¼š%s', ME.message);
     S_csv = struct();
 end
 
-% ½âÎö³öÓÃÓÚ CSV µÄÈıÀà¶ÔÏó
+% è§£æå‡ºç”¨äº CSV çš„ä¸‰ç±»å¯¹è±¡
 try
     if isfield(S_csv,'graph') && isstruct(S_csv.graph)
         conn = S_csv.conn;
@@ -537,14 +537,14 @@ try
 
 
 
-fprintf('µ¼³öÍê³É£º\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
+fprintf('å¯¼å‡ºå®Œæˆï¼š\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
 
 if ENABLE_PARAM_EXPORT
-    fprintf('²ÎÊıÒÑµ¼³öÖÁ£º%s\n', out_dir);
+    fprintf('å‚æ•°å·²å¯¼å‡ºè‡³ï¼š%s\n', out_dir);
 end
 
 % =========
-% ¹¤¾ßº¯Êı£ºµİ¹éÊÕ¼¯¡°Ä³ÌõÏß¼°ÆäËùÓĞ·ÖÖ§¡±µÄÄ¿±ê¶Ë¿Ú£¨½ö¶ÔÆÕÍ¨ĞÅºÅÏßÓĞĞ§£©
+% å·¥å…·å‡½æ•°ï¼šé€’å½’æ”¶é›†â€œæŸæ¡çº¿åŠå…¶æ‰€æœ‰åˆ†æ”¯â€çš„ç›®æ ‡ç«¯å£ï¼ˆä»…å¯¹æ™®é€šä¿¡å·çº¿æœ‰æ•ˆï¼‰
 % =========
 function [dstBlks, dstPorts, visited_lines] = collect_all_dsts(line_h, visited_lines)
     if any(visited_lines == line_h)
@@ -574,19 +574,19 @@ function [dstBlks, dstPorts, visited_lines] = collect_all_dsts(line_h, visited_l
 end
 
 function n = get_port_num(pcEntry)
-    % ¼æÈİ²»Í¬°æ±¾µÄ PortConnectivity ×Ö¶Î²îÒì
+    % å…¼å®¹ä¸åŒç‰ˆæœ¬çš„ PortConnectivity å­—æ®µå·®å¼‚
     if isfield(pcEntry, 'PortNumber') && ~isempty(pcEntry.PortNumber)
         n = pcEntry.PortNumber;
     elseif isfield(pcEntry, 'Port') && ~isempty(pcEntry.Port)
         n = pcEntry.Port;
     else
-        % Ä³Ğ©ÌØÊâ¶Ë¿Ú£¨ÈçÎïÀí¶Ë¿Ú£©¿ÉÄÜÃ»ÓĞ±àºÅ£¬ÕâÀï·µ»Ø NaN ÒÔÊ¾Çø·Ö
+        % æŸäº›ç‰¹æ®Šç«¯å£ï¼ˆå¦‚ç‰©ç†ç«¯å£ï¼‰å¯èƒ½æ²¡æœ‰ç¼–å·ï¼Œè¿™é‡Œè¿”å› NaN ä»¥ç¤ºåŒºåˆ†
         n = NaN;
     end
 end
 
 function [kind, idx] = kind_and_index_by_handle(blockH, portH)
-    % Í¨¹ı PortHandles ·´²é¶Ë¿ÚÊôÓÚÄÄÒ»Àà¼°ÔÚ¸ÃÀàÊı×éµÄË÷Òı
+    % é€šè¿‡ PortHandles åæŸ¥ç«¯å£å±äºå“ªä¸€ç±»åŠåœ¨è¯¥ç±»æ•°ç»„çš„ç´¢å¼•
     kind = '';
     idx  = -1;
     try
@@ -607,12 +607,12 @@ function [kind, idx] = kind_and_index_by_handle(blockH, portH)
 end
 
 function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
-    % Í¨¹ı pcEntry ºÍ PortHandles ÍÆ¶Ï¶Ë¿ÚÖÖÀàÓëË÷Òı£¨ÓÃÓÚ pc À´Ô´£©
+    % é€šè¿‡ pcEntry å’Œ PortHandles æ¨æ–­ç«¯å£ç§ç±»ä¸ç´¢å¼•ï¼ˆç”¨äº pc æ¥æºï¼‰
     kind = '';
     idx  = -1;
     try
         ph = get_param(blockH,'PortHandles');
-        % ÓÅÏÈÊ¹ÓÃ Type
+        % ä¼˜å…ˆä½¿ç”¨ Type
         if ~isempty(ph.RConn)
             for i=1:numel(ph.RConn)
                 if port == ph.RConn(i)
@@ -630,7 +630,7 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
            end
         end
         
-        % »ØÍË£º¸ù¾İ×ø±êÆ¥Åä×î½ü¶Ë¿Ú¾ä±ú£¬²¢·µ»ØÆäÖÖÀàÓëË÷Òı
+        % å›é€€ï¼šæ ¹æ®åæ ‡åŒ¹é…æœ€è¿‘ç«¯å£å¥æŸ„ï¼Œå¹¶è¿”å›å…¶ç§ç±»ä¸ç´¢å¼•
         if isfield(pcEntry,'Position') && ~isempty(pcEntry.Position)
             candH = []; candP = []; candF = {};
             fields = {'Outport','Inport','LConn','RConn','Conn'};
@@ -657,7 +657,7 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
 end
 
 function pcEntry = get_pc_entry_for_port(blockH, portNum)
-    % ÔÚÄ¿±ê¿éµÄ PortConnectivity ÖĞÕÒµ½Óë¶Ë¿ÚºÅÆ¥ÅäµÄÌõÄ¿
+    % åœ¨ç›®æ ‡å—çš„ PortConnectivity ä¸­æ‰¾åˆ°ä¸ç«¯å£å·åŒ¹é…çš„æ¡ç›®
     pcEntry = struct();
     try
         pcAll = get_param(blockH,'PortConnectivity');
@@ -674,7 +674,7 @@ function pcEntry = get_pc_entry_for_port(blockH, portNum)
 end
 
 function pcEntry = find_pc_entry_by_srcblock(dstBlockH, srcBlockH)
-    % ÔÚÄ¿±ê¿éµÄ PortConnectivity ÖĞÕÒµ½¡°ÉÏÓÎ¿é==srcBlockH¡±µÄÌõÄ¿
+    % åœ¨ç›®æ ‡å—çš„ PortConnectivity ä¸­æ‰¾åˆ°â€œä¸Šæ¸¸å—==srcBlockHâ€çš„æ¡ç›®
     pcEntry = struct();
     try
         pcAll = get_param(dstBlockH,'PortConnectivity');
@@ -715,12 +715,12 @@ function v = getfield_or_default_num(S, field)
 end
 
 function pos = get_port_position(pcEntry, blockHandle)
-    % why: ÓÅÏÈÓÃ PortConnectivity ×Ô´øµÄÆÁÄ»×ø±ê£»ÈôÎŞÔò»ØÍËµ½¶Ë¿Ú¾ä±ú
+    % why: ä¼˜å…ˆç”¨ PortConnectivity è‡ªå¸¦çš„å±å¹•åæ ‡ï¼›è‹¥æ— åˆ™å›é€€åˆ°ç«¯å£å¥æŸ„
     if isfield(pcEntry,'Position') && ~isempty(pcEntry.Position)
         pos = pcEntry.Position; % [x y]
         return;
     end
-    % »ØÍË£ºÍ¨¹ı¶Ë¿Ú¾ä±úÄÃÎ»ÖÃ£¨¼æÈİ Inport/Outport/LConn/RConn µÈ£©
+    % å›é€€ï¼šé€šè¿‡ç«¯å£å¥æŸ„æ‹¿ä½ç½®ï¼ˆå…¼å®¹ Inport/Outport/LConn/RConn ç­‰ï¼‰
     pos = [NaN NaN];
     try
         pnum = get_port_num(pcEntry);
@@ -740,17 +740,17 @@ function pos = get_port_position(pcEntry, blockHandle)
             end
         end
     catch
-        % ºöÂÔ¸ö±ğ²»¼æÈİ¶Ë¿Ú£»±£³Ö [NaN NaN]
+        % å¿½ç•¥ä¸ªåˆ«ä¸å…¼å®¹ç«¯å£ï¼›ä¿æŒ [NaN NaN]
     end
 end
 
 % =========
-% ¹¤¾ßº¯Êı£¨²ÎÊı²É¼¯ÓëÂäÅÌ£©
+% å·¥å…·å‡½æ•°ï¼ˆå‚æ•°é‡‡é›†ä¸è½ç›˜ï¼‰
 % =========
 function m = collect_model_params(model_root, PARAM_FILTER)
-    % why: ²É¼¯³£ÓÃÇó½âÆ÷/Ê±Óò/Êı¾İµ¼Èëµ¼³öµÈ¹Ø¼üÏî£¬±ÜÃâÒÅÂ©Ö±½Ó·ÂÕæËùĞèÅäÖÃ
-    % how: Õë¶ÔÒ»×éºòÑ¡²ÎÊıÃû£¬´æÔÚ¼´¼ÇÂ¼£»ÖµÍ³Ò»×ªÎª×Ö·û´®£¬±ãÓÚ set_param »Ø·Å
-    % ÔÊĞíÍ¨¹ıÅäÖÃ×·¼Ó/²Ã¼ô
+    % why: é‡‡é›†å¸¸ç”¨æ±‚è§£å™¨/æ—¶åŸŸ/æ•°æ®å¯¼å…¥å¯¼å‡ºç­‰å…³é”®é¡¹ï¼Œé¿å…é—æ¼ç›´æ¥ä»¿çœŸæ‰€éœ€é…ç½®
+    % how: é’ˆå¯¹ä¸€ç»„å€™é€‰å‚æ•°åï¼Œå­˜åœ¨å³è®°å½•ï¼›å€¼ç»Ÿä¸€è½¬ä¸ºå­—ç¬¦ä¸²ï¼Œä¾¿äº set_param å›æ”¾
+    % å…è®¸é€šè¿‡é…ç½®è¿½åŠ /è£å‰ª
     defaultCand = {'StartTime','StopTime','SolverType','Solver','FixedStep','AbsTol','RelTol', ...
             'StrictBusMsg','MinStepSize','MaxStepSize','MaxConsecutiveZCs','SignalLogging','ReturnWorkspaceOutputs', ...
             'DataTypeOverride','MinMaxOverflowLogging','AlgebraicLoopMsg','SimCompilerOptimization','InlineParams'};
@@ -758,7 +758,7 @@ function m = collect_model_params(model_root, PARAM_FILTER)
     m = struct();
     try
         root = char(model_root);
-        % model ¶ÔÏó²ÎÊı¿Õ¼ä
+        % model å¯¹è±¡å‚æ•°ç©ºé—´
         for i = 1:numel(cand)
             pname = cand{i};
             try
@@ -774,7 +774,7 @@ function m = collect_model_params(model_root, PARAM_FILTER)
 end
 
 function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
-    % why: Ê¹ÓÃ DialogParameters ÄÜ¸²¸Ç´ó¶àÊı¿ÉÅäÖÃÏî£¨º¬ Mask ²ÎÊı£©£¬±ÜÃâ×¥È¡Ö»¶Á/¾ä±ú×Ö¶Î
+    % why: ä½¿ç”¨ DialogParameters èƒ½è¦†ç›–å¤§å¤šæ•°å¯é…ç½®é¡¹ï¼ˆå« Mask å‚æ•°ï¼‰ï¼Œé¿å…æŠ“å–åªè¯»/å¥æŸ„å­—æ®µ
     blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
     for i = 1:numel(all_blocks_pc)
         bh = all_blocks_pc(i);
@@ -784,41 +784,41 @@ function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
             mtype = '';
             try, mtype = get_param(bh,'MaskType'); catch, mtype = ''; end
             dp = struct();
-            % DialogParameters: struct£¬ÆäÖĞ×Ö¶ÎÃûÎª¿ÉÉèÖÃµÄ¶Ô»°¿ò²ÎÊı
+            % DialogParameters: structï¼Œå…¶ä¸­å­—æ®µåä¸ºå¯è®¾ç½®çš„å¯¹è¯æ¡†å‚æ•°
             dlg = struct();
             try, dlg = get_param(bh,'DialogParameters'); catch, dlg = struct(); end
             if ~isempty(dlg)
                 names = fieldnames(dlg);
                 for k = 1:numel(names)
                     pname = names{k};
-                    % Ìø¹ı¼¸ºÎ/Á¬ÏßµÈ¼¸ºÎÖØ¸´Ïî
+                    % è·³è¿‡å‡ ä½•/è¿çº¿ç­‰å‡ ä½•é‡å¤é¡¹
                     if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
                         continue;
                     end
-                    % Ãû³Æ¼¶¹ıÂË£¨°×/ºÚÃûµ¥£©
+                    % åç§°çº§è¿‡æ»¤ï¼ˆç™½/é»‘åå•ï¼‰
                     if ~name_allowed(pname, PARAM_FILTER.block.white, PARAM_FILTER.block.black)
                         continue;
                     end
                     try
-                        % ÊôĞÔ¼¶¹ıÂË£ºObjectParameters ¿ÉÌá¹©ÊôĞÔ£¨read-only/no-set/deprecated µÈ£©
+                        % å±æ€§çº§è¿‡æ»¤ï¼šObjectParameters å¯æä¾›å±æ€§ï¼ˆread-only/no-set/deprecated ç­‰ï¼‰
                         if param_allowed_on_block(bh, pname, PARAM_FILTER.block.attr_black)
                             val = get_param(bh, pname);
                             dp.(pname) = param_value_to_string(val);
                         end
                     catch
-                        % ÓĞĞ©Á´½Ó¿â²ÎÊı¿ÉÄÜÖ»¶Á»òÊÜ±äÌå¿ØÖÆ£¬ºöÂÔ¼´¿É
+                        % æœ‰äº›é“¾æ¥åº“å‚æ•°å¯èƒ½åªè¯»æˆ–å—å˜ä½“æ§åˆ¶ï¼Œå¿½ç•¥å³å¯
                     end
                 end
             end
 
-            % ²¹³ä£ºMask Öµ£¨Èô´æÔÚÇÒ DialogParameters Î´¸²¸Ç£©
+            % è¡¥å……ï¼šMask å€¼ï¼ˆè‹¥å­˜åœ¨ä¸” DialogParameters æœªè¦†ç›–ï¼‰
             try
                 mnames = get_param(bh,'MaskNames');
                 mvals  = get_param(bh,'MaskValues');
                 if iscell(mnames) && iscell(mvals) && numel(mnames)==numel(mvals)
                     for t = 1:numel(mnames)
                         key = char(mnames{t});
-                        % Ãû³Æ¼¶¹ıÂË
+                        % åç§°çº§è¿‡æ»¤
                         if ~isfield(dp, key) && name_allowed(key, PARAM_FILTER.mask.white, PARAM_FILTER.mask.black)
                             dp.(key) = param_value_to_string(mvals{t});
                         end
@@ -834,7 +834,7 @@ function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
 end
 
 function s = param_value_to_string(v)
-    % why: set_param Í³Ò»ÒÔ×Ö·û´®ÉèÖÃ£»²»Í¬ÀàĞÍÍ³Ò»ĞòÁĞ»¯ÎªÎÈ¶¨×Ö·û´®
+    % why: set_param ç»Ÿä¸€ä»¥å­—ç¬¦ä¸²è®¾ç½®ï¼›ä¸åŒç±»å‹ç»Ÿä¸€åºåˆ—åŒ–ä¸ºç¨³å®šå­—ç¬¦ä¸²
     try
         if isstring(v)
             s = char(v);
@@ -843,14 +843,14 @@ function s = param_value_to_string(v)
         elseif isnumeric(v)
             s = mat2str(v);
         elseif islogical(v)
-            s = char(string(v));  % 'true'/'false'£»¶àÊı¶Ô»°²ÎÊıÒ²½ÓÊÜ 'on'/'off' ×Ö·û
+            s = char(string(v));  % 'true'/'false'ï¼›å¤šæ•°å¯¹è¯å‚æ•°ä¹Ÿæ¥å— 'on'/'off' å­—ç¬¦
         elseif iscell(v)
-            % ½« cell ÄÚ²¿ÖğÏî×ª×Ö·û´®ÔÙ JSON£»±ãÓÚÈË¶ÁÓë»Ø·Å
+            % å°† cell å†…éƒ¨é€é¡¹è½¬å­—ç¬¦ä¸²å† JSONï¼›ä¾¿äºäººè¯»ä¸å›æ”¾
             s = char(jsonencode(v));
         elseif isstruct(v)
             s = char(jsonencode(v));
         else
-            % Fallback£ºÊ¹ÓÃ disp Êä³öÎª×Ö·û´®
+            % Fallbackï¼šä½¿ç”¨ disp è¾“å‡ºä¸ºå­—ç¬¦ä¸²
             s = strtrim(evalc('disp(v)'));
         end
     catch
@@ -859,25 +859,25 @@ function s = param_value_to_string(v)
 end
 
 % =========
-% ¹ıÂËÅäÖÃÓëÅĞ¶¨£¨¼¯ÖĞÅäÖÃ£¬±£³Ö½âñî£©
+% è¿‡æ»¤é…ç½®ä¸åˆ¤å®šï¼ˆé›†ä¸­é…ç½®ï¼Œä¿æŒè§£è€¦ï¼‰
 % =========
 function CFG = get_param_filter_config()
-    % why: ½«¡°ÄÄĞ©²ÎÊıĞèÒª/²»ĞèÒª¡±¼¯ÖĞÅäÖÃ£¬±ÜÃâÉ¢ÂäÔÚµ¼³öÂß¼­ÖĞ
-    % ÓÃ»§¿ÉÔÚ´Ë°×/ºÚÃûµ¥À©Õ¹£¬ÎŞĞè´¥Åö²É¼¯Ö÷Á÷³Ì
+    % why: å°†â€œå“ªäº›å‚æ•°éœ€è¦/ä¸éœ€è¦â€é›†ä¸­é…ç½®ï¼Œé¿å…æ•£è½åœ¨å¯¼å‡ºé€»è¾‘ä¸­
+    % ç”¨æˆ·å¯åœ¨æ­¤ç™½/é»‘åå•æ‰©å±•ï¼Œæ— éœ€è§¦ç¢°é‡‡é›†ä¸»æµç¨‹
     CFG = struct();
 
-    % Ãû³Æ°×Ãûµ¥£¨ÓÅÏÈ±£Áô£©ÓëºÚÃûµ¥£¨Ç¿ÖÆºöÂÔ£©
+    % åç§°ç™½åå•ï¼ˆä¼˜å…ˆä¿ç•™ï¼‰ä¸é»‘åå•ï¼ˆå¼ºåˆ¶å¿½ç•¥ï¼‰
     CFG.block.white = {'SampleTime','InitialCondition','Gain','Numerator','Denominator','UpperSaturationLimit','LowerSaturationLimit','OutDataTypeStr'};
     CFG.block.black = {'Position','Orientation','LineHandles','PortConnectivity','ForegroundColor','BackgroundColor','ShowName','NamePlacement','Priority','Tag'};
 
-    CFG.mask.white  = {};  % Ä¬ÈÏÈ«²¿ÔÊĞí£¬³ı·ÇÃüÖĞºÚÃûµ¥
-    CFG.mask.black  = {'ForegroundColor','BackgroundColor'}; % ÑÚÄ£UIÀà
+    CFG.mask.white  = {};  % é»˜è®¤å…¨éƒ¨å…è®¸ï¼Œé™¤éå‘½ä¸­é»‘åå•
+    CFG.mask.black  = {'ForegroundColor','BackgroundColor'}; % æ©æ¨¡UIç±»
 
-    CFG.model.white = {};  % Ê¹ÓÃ defaultCand ÒÑ¸²¸Ç³£¼ûÏî
-    CFG.model.black = {};  % ĞèÒª¿ÉÔÚ´ËÆÁ±Î
+    CFG.model.white = {};  % ä½¿ç”¨ defaultCand å·²è¦†ç›–å¸¸è§é¡¹
+    CFG.model.black = {};  % éœ€è¦å¯åœ¨æ­¤å±è”½
 
-    % ÊôĞÔºÚÃûµ¥£ºÃüÖĞÕâĞ©ÊôĞÔµÄ²ÎÊı²»µ¼³ö
-    % ³£¼û£ºread-only, no-set, no-query, deprecated, simulated-only, run-time-only µÈ
+    % å±æ€§é»‘åå•ï¼šå‘½ä¸­è¿™äº›å±æ€§çš„å‚æ•°ä¸å¯¼å‡º
+    % å¸¸è§ï¼šread-only, no-set, no-query, deprecated, simulated-only, run-time-only ç­‰
     CFG.block.attr_black = {'read-only','no-set','deprecated'};
     CFG.model.attr_black = {'read-only','no-set','deprecated'};
 end
@@ -890,7 +890,7 @@ function allowed = name_allowed(name, whites, blacks)
 end
 
 function ok = param_allowed_on_block(blockH, pname, attr_black)
-    % Í¨¹ı ObjectParameters ÊôĞÔ¹ıÂË£¨Èô¿É²éÑ¯£©
+    % é€šè¿‡ ObjectParameters å±æ€§è¿‡æ»¤ï¼ˆè‹¥å¯æŸ¥è¯¢ï¼‰
     ok = true;
     try
         op = get_param(blockH, 'ObjectParameters');
@@ -907,7 +907,7 @@ function ok = param_allowed_on_block(blockH, pname, attr_black)
 end
 
 function ok = param_allowed_by_attr(~, pname, ~, attr_black)
-    % Ä£ĞÍ¼¶£ºÎŞ block ¾ä±ú£¬½öÁôÀ©Õ¹µã±£ÁôÍ¬Ñù½Ó¿Ú
+    % æ¨¡å‹çº§ï¼šæ—  block å¥æŸ„ï¼Œä»…ç•™æ‰©å±•ç‚¹ä¿ç•™åŒæ ·æ¥å£
     ok = true; %#ok<INUSD>
     try
         a = lower(string(attr_black)); %#ok<NASGU>
@@ -916,7 +916,7 @@ function ok = param_allowed_by_attr(~, pname, ~, attr_black)
 end
 
 function merged = merge_name_list(defaults, whites, blacks)
-    % ×éºÏÄ¬ÈÏºòÑ¡ + °×Ãûµ¥£¬È»ºóÈ¥µôºÚÃûµ¥
+    % ç»„åˆé»˜è®¤å€™é€‰ + ç™½åå•ï¼Œç„¶åå»æ‰é»‘åå•
     lst = defaults;
     if ~isempty(whites)
         for i = 1:numel(whites)
