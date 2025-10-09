@@ -35,6 +35,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		close_system(newModel, 0);
 	end
 	new_system(newModel); open_system(newModel);
+    load_system('simulink');
 
 	% -------- 3) 预处理块并创建（ ?->子） --------
 	elemTable = preprocess_elements(elements, origRoot, newModel);              % 计算新旧路径映射

@@ -1,11 +1,11 @@
 {
   "model": "",
-  "timestamp": "2025-10-09 09:52:08",
+  "timestamp": "2025-10-09 11:12:23",
   "counts": {
     "elements": 60,
     "ports": 187,
-    "connections": 403,
-    "lines": 135
+    "connections": 580,
+    "lines": 134
   },
   "elements": [
     {
@@ -4341,6 +4341,84 @@
       "Origin": "line"
     },
     {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope",
+      "DestinationPath": "untitled1/Scope",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Delay",
+      "DestinationPath": "untitled1/Delay",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto5",
+      "DestinationPath": "untitled1/Goto5",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto5",
+      "DestinationPath": "untitled1/Goto5",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Delay",
+      "DestinationPath": "untitled1/Delay",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope",
+      "DestinationPath": "untitled1/Scope",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
       "Source": "Series RLC Load3",
       "SourcePath": "untitled1/Series RLC Load3",
       "SourcePort": 1,
@@ -4439,6 +4517,331 @@
       "SourcePortIndex": 1,
       "Destination": "Asynchronous Machine\nSI Units2",
       "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units3",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units3",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Rate Limiter",
+      "SourcePath": "untitled1/Rate Limiter",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -4614,17 +5017,186 @@
       "Origin": "line"
     },
     {
-      "Source": "Rate Limiter",
-      "SourcePath": "untitled1/Rate Limiter",
-      "SourcePort": 0,
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "Asynchronous Machine\nSI Units",
-      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
-      "DestinationPort": -1,
+      "Destination": "Bus\nSelector2",
+      "DestinationPath": "untitled1/Bus\nSelector2",
+      "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
-      "Origin": "pc"
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector1",
+      "DestinationPath": "untitled1/Bus\nSelector1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector1",
+      "DestinationPath": "untitled1/Bus\nSelector1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector2",
+      "DestinationPath": "untitled1/Bus\nSelector2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector2",
+      "DestinationPath": "untitled1/Bus\nSelector2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector1",
+      "DestinationPath": "untitled1/Bus\nSelector1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector",
+      "DestinationPath": "untitled1/Bus\nSelector",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto3",
+      "DestinationPath": "untitled1/Goto3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto3",
+      "DestinationPath": "untitled1/Goto3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector",
+      "DestinationPath": "untitled1/Bus\nSelector",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector2",
+      "DestinationPath": "untitled1/Bus\nSelector2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector1",
+      "DestinationPath": "untitled1/Bus\nSelector1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector1",
+      "DestinationPath": "untitled1/Bus\nSelector1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Bus\nSelector2",
+      "DestinationPath": "untitled1/Bus\nSelector2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
     },
     {
       "Source": "Asynchronous Machine\nSI Units",
@@ -4692,16 +5264,29 @@
       "Origin": "pc"
     },
     {
-      "Source": "Rate Limiter",
-      "SourcePath": "untitled1/Rate Limiter",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Asynchronous Machine\nSI Units1",
-      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -4731,16 +5316,55 @@
       "Origin": "pc"
     },
     {
-      "Source": "Rate Limiter",
-      "SourcePath": "untitled1/Rate Limiter",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Asynchronous Machine\nSI Units2",
-      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "Source": "Asynchronous Machine\nSI Units1",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units1",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units1",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units1",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -4770,16 +5394,55 @@
       "Origin": "pc"
     },
     {
-      "Source": "Rate Limiter",
-      "SourcePath": "untitled1/Rate Limiter",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
+      "Source": "Asynchronous Machine\nSI Units2",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units2",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units2",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units2",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
       "Destination": "Asynchronous Machine\nSI Units3",
       "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units2",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units2",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units2",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units2",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units3",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -4809,16 +5472,55 @@
       "Origin": "pc"
     },
     {
-      "Source": "Asynchronous Machine\nSI Units",
-      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
-      "SourcePort": 0,
-      "SourcePortKind": "rconn",
-      "SourcePortIndex": 1,
-      "Destination": "Bus\nSelector",
-      "DestinationPath": "untitled1/Bus\nSelector",
+      "Source": "Asynchronous Machine\nSI Units3",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units3",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units3",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units3",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units3",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units3",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Asynchronous Machine\nSI Units3",
+      "SourcePath": "untitled1/Asynchronous Machine\nSI Units3",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -4835,19 +5537,6 @@
       "Origin": "pc"
     },
     {
-      "Source": "Asynchronous Machine\nSI Units",
-      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
-      "SourcePort": 0,
-      "SourcePortKind": "rconn",
-      "SourcePortIndex": 3,
-      "Destination": "Bus\nSelector1",
-      "DestinationPath": "untitled1/Bus\nSelector1",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
       "Source": "Bus\nSelector1",
       "SourcePath": "untitled1/Bus\nSelector1",
       "SourcePort": -1,
@@ -4855,19 +5544,6 @@
       "SourcePortIndex": 2,
       "Destination": "Goto1",
       "DestinationPath": "untitled1/Goto1",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Asynchronous Machine\nSI Units",
-      "SourcePath": "untitled1/Asynchronous Machine\nSI Units",
-      "SourcePort": 0,
-      "SourcePortKind": "rconn",
-      "SourcePortIndex": 3,
-      "Destination": "Bus\nSelector2",
-      "DestinationPath": "untitled1/Bus\nSelector2",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -4897,19 +5573,6 @@
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 2,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Sine Wave",
-      "SourcePath": "untitled1/Sine Wave",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Controlled Voltage Source",
-      "DestinationPath": "untitled1/Controlled Voltage Source",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
       "Origin": "pc"
     },
     {
@@ -5260,19 +5923,6 @@
       "DestinationPath": "untitled1/Multi-Winding\nTransformer",
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Voltage Measurement",
-      "SourcePath": "untitled1/Voltage Measurement",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Delay",
-      "DestinationPath": "untitled1/Delay",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -5758,32 +6408,6 @@
       "Origin": "pc"
     },
     {
-      "Source": "Relay",
-      "SourcePath": "untitled1/Relay",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Mux",
-      "DestinationPath": "untitled1/Mux",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Constant",
-      "SourcePath": "untitled1/Constant",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Mux",
-      "DestinationPath": "untitled1/Mux",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 2,
-      "Origin": "pc"
-    },
-    {
       "Source": "Mux",
       "SourcePath": "untitled1/Mux",
       "SourcePort": -1,
@@ -5843,19 +6467,6 @@
       "SourcePortIndex": 1,
       "Destination": "Asynchronous Machine\nSI Units1",
       "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
-      "DestinationPort": -1,
-      "DestinationPortKind": "inport",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Delay",
-      "SourcePath": "untitled1/Delay",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Relay",
-      "DestinationPath": "untitled1/Relay",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -6049,6 +6660,84 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -6075,8 +6764,60 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load",
+      "SourcePath": "untitled1/Series RLC Load",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
@@ -6244,6 +6985,84 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -6270,11 +7089,63 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load1",
+      "SourcePath": "untitled1/Series RLC Load1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
       "Origin": "pc"
     },
     {
@@ -6517,6 +7388,19 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load2",
+      "SourcePath": "untitled1/Series RLC Load2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Series RLC Load1",
       "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
@@ -7206,6 +8090,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -7232,8 +8181,73 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load6",
+      "SourcePath": "untitled1/Series RLC Load6",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
@@ -7453,6 +8467,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -7479,8 +8558,73 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Series RLC Load9",
+      "SourcePath": "untitled1/Series RLC Load9",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
@@ -7542,6 +8686,58 @@
       "Source": "Three-Phase\nV-I Measurement",
       "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
       "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
       "Destination": "Asynchronous Machine\nSI Units",
@@ -7549,6 +8745,32 @@
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -7591,6 +8813,32 @@
       "Origin": "pc"
     },
     {
+      "Source": "Three-Phase\nV-I Measurement1",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase\nV-I Measurement1",
+      "SourcePath": "untitled1/Three-Phase\nV-I Measurement1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 3,
+      "Origin": "pc"
+    },
+    {
       "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "SourcePort": -1,
@@ -7607,6 +8855,32 @@
       "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
       "Destination": "Three-Phase\nV-I Measurement1",
@@ -7614,6 +8888,32 @@
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase\nV-I Measurement1",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase\nV-I Measurement1",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 3,
       "Origin": "pc"
     },
     {
@@ -7640,6 +8940,58 @@
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 3,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units1",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase\nV-I Measurement",
+      "DestinationPath": "untitled1/Three-Phase\nV-I Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
       "Origin": "pc"
     },
     {
@@ -7817,6 +9169,84 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Series RLC Load5",
       "DestinationPath": "untitled1/Series RLC Load5",
       "DestinationPort": -1,
@@ -7832,6 +9262,58 @@
       "SourcePortIndex": 2,
       "Destination": "Series RLC Load3",
       "DestinationPath": "untitled1/Series RLC Load3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge",
+      "SourcePath": "untitled1/Universal Bridge",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
@@ -7867,6 +9349,58 @@
       "Source": "Universal Bridge1",
       "SourcePath": "untitled1/Universal Bridge1",
       "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Asynchronous Machine\nSI Units3",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units3",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Asynchronous Machine\nSI Units2",
+      "DestinationPath": "untitled1/Asynchronous Machine\nSI Units2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
       "Destination": "Series RLC Load9",
@@ -8038,6 +9572,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Series RLC Load5",
       "DestinationPath": "untitled1/Series RLC Load5",
       "DestinationPort": -1,
@@ -8059,15 +9658,67 @@
       "Origin": "pc"
     },
     {
-      "Source": "Mux",
-      "SourcePath": "untitled1/Mux",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Universal Bridge2",
       "DestinationPath": "untitled1/Universal Bridge2",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge1",
+      "SourcePath": "untitled1/Universal Bridge1",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -8246,6 +9897,84 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -8267,15 +9996,67 @@
       "Origin": "pc"
     },
     {
-      "Source": "From",
-      "SourcePath": "untitled1/From",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Universal Bridge3",
-      "DestinationPath": "untitled1/Universal Bridge3",
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load2",
+      "DestinationPath": "untitled1/Series RLC Load2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge2",
+      "SourcePath": "untitled1/Universal Bridge2",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -8467,6 +10248,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -8493,6 +10339,19 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
       "DestinationPort": -1,
@@ -8501,15 +10360,54 @@
       "Origin": "pc"
     },
     {
-      "Source": "From1",
-      "SourcePath": "untitled1/From1",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Universal Bridge4",
-      "DestinationPath": "untitled1/Universal Bridge4",
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge3",
+      "SourcePath": "untitled1/Universal Bridge3",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -8701,6 +10599,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -8727,6 +10690,19 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Series RLC Load2",
       "DestinationPath": "untitled1/Series RLC Load2",
       "DestinationPort": -1,
@@ -8735,15 +10711,54 @@
       "Origin": "pc"
     },
     {
-      "Source": "From2",
-      "SourcePath": "untitled1/From2",
-      "SourcePort": 0,
-      "SourcePortKind": "outport",
-      "SourcePortIndex": 1,
-      "Destination": "Universal Bridge5",
-      "DestinationPath": "untitled1/Universal Bridge5",
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
       "DestinationPort": -1,
-      "DestinationPortKind": "inport",
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge4",
+      "SourcePath": "untitled1/Universal Bridge4",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -8758,6 +10773,32 @@
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 3,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 3,
+      "Destination": "Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
       "Origin": "pc"
     },
     {
@@ -8935,6 +10976,71 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
       "Destination": "Series RLC Load5",
       "DestinationPath": "untitled1/Series RLC Load5",
       "DestinationPort": -1,
@@ -8950,6 +11056,71 @@
       "SourcePortIndex": 2,
       "Destination": "Series RLC Load3",
       "DestinationPath": "untitled1/Series RLC Load3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled1/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Universal Bridge5",
+      "SourcePath": "untitled1/Universal Bridge5",
+      "SourcePort": -1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
@@ -9156,6 +11327,84 @@
       "SourcePort": -1,
       "SourcePortKind": "lconn",
       "SourcePortIndex": 2,
+      "Destination": "Universal Bridge1",
+      "DestinationPath": "untitled1/Universal Bridge1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load9",
+      "DestinationPath": "untitled1/Series RLC Load9",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge5",
+      "DestinationPath": "untitled1/Universal Bridge5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load6",
+      "DestinationPath": "untitled1/Series RLC Load6",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge4",
+      "DestinationPath": "untitled1/Universal Bridge4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge3",
+      "DestinationPath": "untitled1/Universal Bridge3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
       "Destination": "Current Measurement",
       "DestinationPath": "untitled1/Current Measurement",
       "DestinationPort": -1,
@@ -9188,11 +11437,63 @@
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge",
+      "DestinationPath": "untitled1/Universal Bridge",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load",
+      "DestinationPath": "untitled1/Series RLC Load",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Universal Bridge2",
+      "DestinationPath": "untitled1/Universal Bridge2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 2,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled1/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 2,
+      "Destination": "Series RLC Load1",
+      "DestinationPath": "untitled1/Series RLC Load1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
     }
   ],
   "lines": [
     {
-      "Handle": 3218.0029296875,
+      "Handle": 3218.0040283203125,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement1",
       "DstPaths": [
@@ -9218,7 +11519,7 @@
       ]
     },
     {
-      "Handle": 3217.0023193359375,
+      "Handle": 3217.0032958984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement1",
       "DstPaths": [
@@ -9236,7 +11537,7 @@
       ]
     },
     {
-      "Handle": 3216.0025634765625,
+      "Handle": 3216.00341796875,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -9254,7 +11555,7 @@
       ]
     },
     {
-      "Handle": 3215.0030517578125,
+      "Handle": 3215.00390625,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -9280,7 +11581,7 @@
       ]
     },
     {
-      "Handle": 3214.0028076171875,
+      "Handle": 3214.003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase Transformer\nInductance Matrix Type\n(Two Windings)",
       "DstPaths": [
@@ -9306,7 +11607,7 @@
       ]
     },
     {
-      "Handle": 3213.001708984375,
+      "Handle": 3213.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -9332,7 +11633,7 @@
       ]
     },
     {
-      "Handle": 3212.001953125,
+      "Handle": 3212.0028076171875,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -9350,7 +11651,7 @@
       ]
     },
     {
-      "Handle": 3211.002685546875,
+      "Handle": 3211.0035400390625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [
@@ -9376,7 +11677,7 @@
       ]
     },
     {
-      "Handle": 3210.001708984375,
+      "Handle": 3210.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/From2",
       "DstPaths": [
@@ -9402,7 +11703,7 @@
       ]
     },
     {
-      "Handle": 3209.00146484375,
+      "Handle": 3209.0023193359375,
       "IsRoot": true,
       "SrcPath": "untitled1/Sine Wave",
       "DstPaths": [
@@ -9424,7 +11725,7 @@
       ]
     },
     {
-      "Handle": 3208.00146484375,
+      "Handle": 3208.0023193359375,
       "IsRoot": true,
       "SrcPath": "untitled1/Controlled Voltage Source",
       "DstPaths": [
@@ -9446,7 +11747,7 @@
       ]
     },
     {
-      "Handle": 3207.0015869140625,
+      "Handle": 3207.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Controlled Voltage Source",
       "DstPaths": [
@@ -9468,7 +11769,7 @@
       ]
     },
     {
-      "Handle": 3206.001708984375,
+      "Handle": 3206.0028076171875,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement3",
       "DstPaths": [
@@ -9486,7 +11787,7 @@
       ]
     },
     {
-      "Handle": 3205.001708984375,
+      "Handle": 3205.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [
@@ -9512,7 +11813,7 @@
       ]
     },
     {
-      "Handle": 3204.0015869140625,
+      "Handle": 3204.002197265625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -9532,7 +11833,7 @@
       ]
     },
     {
-      "Handle": 3203.0018310546875,
+      "Handle": 3203.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch3",
       "DstPaths": [],
@@ -9552,7 +11853,7 @@
       ]
     },
     {
-      "Handle": 3202.001953125,
+      "Handle": 3202.003173828125,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch1",
       "DstPaths": [],
@@ -9568,7 +11869,7 @@
       ]
     },
     {
-      "Handle": 3201.0018310546875,
+      "Handle": 3201.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [
@@ -9602,7 +11903,7 @@
       ]
     },
     {
-      "Handle": 3200.0015869140625,
+      "Handle": 3200.002197265625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -9622,7 +11923,7 @@
       ]
     },
     {
-      "Handle": 3199.00244140625,
+      "Handle": 3199.0032958984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch2",
       "DstPaths": [],
@@ -9642,7 +11943,7 @@
       ]
     },
     {
-      "Handle": 3198.001708984375,
+      "Handle": 3198.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch",
       "DstPaths": [],
@@ -9658,7 +11959,7 @@
       ]
     },
     {
-      "Handle": 3197.001708984375,
+      "Handle": 3197.0028076171875,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load12",
       "DstPaths": [
@@ -9676,7 +11977,7 @@
       ]
     },
     {
-      "Handle": 3196.0015869140625,
+      "Handle": 3196.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load11",
       "DstPaths": [
@@ -9694,7 +11995,7 @@
       ]
     },
     {
-      "Handle": 3195.001953125,
+      "Handle": 3195.0025634765625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -9710,7 +12011,7 @@
       ]
     },
     {
-      "Handle": 3194.0015869140625,
+      "Handle": 3194.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch1",
       "DstPaths": [],
@@ -9730,7 +12031,7 @@
       ]
     },
     {
-      "Handle": 3193.001708984375,
+      "Handle": 3193.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [],
@@ -9746,7 +12047,7 @@
       ]
     },
     {
-      "Handle": 3192.0023193359375,
+      "Handle": 3192.0029296875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -9762,7 +12063,7 @@
       ]
     },
     {
-      "Handle": 3191.0013427734375,
+      "Handle": 3191.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Ideal Switch",
       "DstPaths": [],
@@ -9782,7 +12083,7 @@
       ]
     },
     {
-      "Handle": 3190.0013427734375,
+      "Handle": 3190.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement1",
       "DstPaths": [],
@@ -9798,7 +12099,7 @@
       ]
     },
     {
-      "Handle": 3189.0018310546875,
+      "Handle": 3189.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [
@@ -9824,7 +12125,7 @@
       ]
     },
     {
-      "Handle": 3188.002685546875,
+      "Handle": 3188.003662109375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement1",
       "DstPaths": [
@@ -9850,7 +12151,7 @@
       ]
     },
     {
-      "Handle": 3187.001953125,
+      "Handle": 3187.0029296875,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load7",
       "DstPaths": [
@@ -9868,7 +12169,7 @@
       ]
     },
     {
-      "Handle": 3186.00146484375,
+      "Handle": 3186.0023193359375,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement2",
       "DstPaths": [
@@ -9886,7 +12187,7 @@
       ]
     },
     {
-      "Handle": 3185.0010986328125,
+      "Handle": 3185.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [
@@ -9912,7 +12213,7 @@
       ]
     },
     {
-      "Handle": 3184.0013427734375,
+      "Handle": 3184.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/From1",
       "DstPaths": [
@@ -9938,7 +12239,7 @@
       ]
     },
     {
-      "Handle": 3183.0010986328125,
+      "Handle": 3183.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load7",
       "DstPaths": [
@@ -9964,7 +12265,7 @@
       ]
     },
     {
-      "Handle": 3182.0010986328125,
+      "Handle": 3182.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/From",
       "DstPaths": [
@@ -9990,7 +12291,7 @@
       ]
     },
     {
-      "Handle": 3181.001220703125,
+      "Handle": 3181.0020751953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement",
       "DstPaths": [
@@ -10012,7 +12313,7 @@
       ]
     },
     {
-      "Handle": 3180.0013427734375,
+      "Handle": 3180.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load5",
       "DstPaths": [
@@ -10030,7 +12331,7 @@
       ]
     },
     {
-      "Handle": 3179.001220703125,
+      "Handle": 3179.0020751953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -10052,7 +12353,7 @@
       ]
     },
     {
-      "Handle": 3178.0010986328125,
+      "Handle": 3178.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -10070,7 +12371,7 @@
       ]
     },
     {
-      "Handle": 3177.0010986328125,
+      "Handle": 3177.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -10092,7 +12393,7 @@
       ]
     },
     {
-      "Handle": 3176.0013427734375,
+      "Handle": 3176.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [
@@ -10112,7 +12413,7 @@
       ]
     },
     {
-      "Handle": 3175.001220703125,
+      "Handle": 3175.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load3",
       "DstPaths": [
@@ -10130,7 +12431,7 @@
       ]
     },
     {
-      "Handle": 3174.001220703125,
+      "Handle": 3174.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Mux",
       "DstPaths": [
@@ -10156,7 +12457,7 @@
       ]
     },
     {
-      "Handle": 3173.0013427734375,
+      "Handle": 3173.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Constant",
       "DstPaths": [
@@ -10182,7 +12483,7 @@
       ]
     },
     {
-      "Handle": 3172.00146484375,
+      "Handle": 3172.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Relay",
       "DstPaths": [
@@ -10208,7 +12509,7 @@
       ]
     },
     {
-      "Handle": 3171.0013427734375,
+      "Handle": 3171.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Delay",
       "DstPaths": [
@@ -10234,7 +12535,7 @@
       ]
     },
     {
-      "Handle": 3170.0010986328125,
+      "Handle": 3170.0020751953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [
@@ -10264,7 +12565,7 @@
       ]
     },
     {
-      "Handle": 3169.001220703125,
+      "Handle": 3169.0023193359375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10280,7 +12581,7 @@
       ]
     },
     {
-      "Handle": 3168.0010986328125,
+      "Handle": 3168.0020751953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [],
@@ -10292,11 +12593,15 @@
         [
           -850,
           380
+        ],
+        [
+          -850,
+          448
         ]
       ]
     },
     {
-      "Handle": 3167.0009765625,
+      "Handle": 3167.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load",
       "DstPaths": [],
@@ -10307,12 +12612,12 @@
         ],
         [
           -680,
-          385
+          412
         ]
       ]
     },
     {
-      "Handle": 3166.0013427734375,
+      "Handle": 3166.002197265625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10336,7 +12641,7 @@
       ]
     },
     {
-      "Handle": 3165.001708984375,
+      "Handle": 3165.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load2",
       "DstPaths": [],
@@ -10352,7 +12657,7 @@
       ]
     },
     {
-      "Handle": 3164.0009765625,
+      "Handle": 3164.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [],
@@ -10372,7 +12677,7 @@
       ]
     },
     {
-      "Handle": 3163.0010986328125,
+      "Handle": 3163.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load4",
       "DstPaths": [],
@@ -10388,7 +12693,7 @@
       ]
     },
     {
-      "Handle": 3162.0015869140625,
+      "Handle": 3162.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Current Measurement",
       "DstPaths": [],
@@ -10404,7 +12709,7 @@
       ]
     },
     {
-      "Handle": 3161.001220703125,
+      "Handle": 3161.0023193359375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [],
@@ -10424,7 +12729,7 @@
       ]
     },
     {
-      "Handle": 3160.0015869140625,
+      "Handle": 3160.00244140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [],
@@ -10440,7 +12745,7 @@
       ]
     },
     {
-      "Handle": 3159.0010986328125,
+      "Handle": 3159.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load6",
       "DstPaths": [],
@@ -10456,7 +12761,7 @@
       ]
     },
     {
-      "Handle": 3158.0010986328125,
+      "Handle": 3158.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10476,7 +12781,7 @@
       ]
     },
     {
-      "Handle": 3157.0013427734375,
+      "Handle": 3157.002197265625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10492,7 +12797,7 @@
       ]
     },
     {
-      "Handle": 3156.0008544921875,
+      "Handle": 3156.001708984375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10512,7 +12817,7 @@
       ]
     },
     {
-      "Handle": 3154.0008544921875,
+      "Handle": 3154.001708984375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10532,7 +12837,7 @@
       ]
     },
     {
-      "Handle": 3155.000732421875,
+      "Handle": 3155.0013427734375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10548,7 +12853,7 @@
       ]
     },
     {
-      "Handle": 3153.0008544921875,
+      "Handle": 3153.001708984375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10558,6 +12863,22 @@
           448
         ],
         [
+          -850,
+          448
+        ]
+      ]
+    },
+    {
+      "Handle": 3151.0020751953125,
+      "IsRoot": false,
+      "SrcPath": "",
+      "DstPaths": [],
+      "Points": [
+        [
+          -850,
+          448
+        ],
+        [
           -680,
           448
         ],
@@ -10568,47 +12889,7 @@
       ]
     },
     {
-      "Handle": 3152.000732421875,
-      "IsRoot": false,
-      "SrcPath": "",
-      "DstPaths": [],
-      "Points": [
-        [
-          -680,
-          385
-        ],
-        [
-          -680,
-          412
-        ]
-      ]
-    },
-    {
-      "Handle": 3151.0009765625,
-      "IsRoot": false,
-      "SrcPath": "",
-      "DstPaths": [],
-      "Points": [
-        [
-          -850,
-          380
-        ],
-        [
-          -850,
-          375
-        ],
-        [
-          -680,
-          375
-        ],
-        [
-          -680,
-          385
-        ]
-      ]
-    },
-    {
-      "Handle": 3150.0009765625,
+      "Handle": 3150.0020751953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10619,12 +12900,12 @@
         ],
         [
           -850,
-          380
+          448
         ]
       ]
     },
     {
-      "Handle": 3149.0008544921875,
+      "Handle": 3149.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [],
@@ -10644,7 +12925,7 @@
       ]
     },
     {
-      "Handle": 3148.000732421875,
+      "Handle": 3148.0013427734375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load9",
       "DstPaths": [],
@@ -10660,7 +12941,7 @@
       ]
     },
     {
-      "Handle": 3147.000732421875,
+      "Handle": 3147.0013427734375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10684,7 +12965,7 @@
       ]
     },
     {
-      "Handle": 3146.000732421875,
+      "Handle": 3146.0015869140625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10700,7 +12981,7 @@
       ]
     },
     {
-      "Handle": 3145.000732421875,
+      "Handle": 3145.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -10724,7 +13005,7 @@
       ]
     },
     {
-      "Handle": 3144.0006103515625,
+      "Handle": 3144.00146484375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10740,7 +13021,7 @@
       ]
     },
     {
-      "Handle": 3143.00048828125,
+      "Handle": 3143.0010986328125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -10768,7 +13049,7 @@
       ]
     },
     {
-      "Handle": 3142.0009765625,
+      "Handle": 3142.0018310546875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10784,7 +13065,7 @@
       ]
     },
     {
-      "Handle": 3141.0009765625,
+      "Handle": 3141.0018310546875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10800,7 +13081,7 @@
       ]
     },
     {
-      "Handle": 3140.0006103515625,
+      "Handle": 3140.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge2",
       "DstPaths": [],
@@ -10820,7 +13101,7 @@
       ]
     },
     {
-      "Handle": 3139.0006103515625,
+      "Handle": 3139.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Voltage Measurement",
       "DstPaths": [],
@@ -10840,7 +13121,7 @@
       ]
     },
     {
-      "Handle": 3138.000732421875,
+      "Handle": 3138.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load3",
       "DstPaths": [],
@@ -10856,7 +13137,7 @@
       ]
     },
     {
-      "Handle": 3137.0010986328125,
+      "Handle": 3137.0025634765625,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load5",
       "DstPaths": [],
@@ -10872,7 +13153,7 @@
       ]
     },
     {
-      "Handle": 3136.0009765625,
+      "Handle": 3136.0023193359375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge3",
       "DstPaths": [],
@@ -10888,7 +13169,7 @@
       ]
     },
     {
-      "Handle": 3135.000732421875,
+      "Handle": 3135.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge4",
       "DstPaths": [],
@@ -10912,7 +13193,7 @@
       ]
     },
     {
-      "Handle": 3134.0008544921875,
+      "Handle": 3134.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load6",
       "DstPaths": [],
@@ -10928,7 +13209,7 @@
       ]
     },
     {
-      "Handle": 3133.0008544921875,
+      "Handle": 3133.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10948,7 +13229,7 @@
       ]
     },
     {
-      "Handle": 3132.0008544921875,
+      "Handle": 3132.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10968,7 +13249,7 @@
       ]
     },
     {
-      "Handle": 3131.0008544921875,
+      "Handle": 3131.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -10984,7 +13265,7 @@
       ]
     },
     {
-      "Handle": 3130.0006103515625,
+      "Handle": 3130.0013427734375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11004,7 +13285,7 @@
       ]
     },
     {
-      "Handle": 3129.00048828125,
+      "Handle": 3129.0010986328125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11020,7 +13301,7 @@
       ]
     },
     {
-      "Handle": 3128.000732421875,
+      "Handle": 3128.0018310546875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11036,7 +13317,7 @@
       ]
     },
     {
-      "Handle": 3127.0008544921875,
+      "Handle": 3127.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11052,7 +13333,7 @@
       ]
     },
     {
-      "Handle": 3125.0008544921875,
+      "Handle": 3125.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Series RLC Load9",
       "DstPaths": [],
@@ -11068,7 +13349,7 @@
       ]
     },
     {
-      "Handle": 3126.000732421875,
+      "Handle": 3126.0013427734375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge5",
       "DstPaths": [],
@@ -11092,7 +13373,7 @@
       ]
     },
     {
-      "Handle": 3124.000732421875,
+      "Handle": 3124.0013427734375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11112,7 +13393,7 @@
       ]
     },
     {
-      "Handle": 3123.0008544921875,
+      "Handle": 3123.001953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11128,7 +13409,7 @@
       ]
     },
     {
-      "Handle": 3122.0006103515625,
+      "Handle": 3122.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -11156,7 +13437,7 @@
       ]
     },
     {
-      "Handle": 3121.00048828125,
+      "Handle": 3121.0010986328125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -11172,7 +13453,7 @@
       ]
     },
     {
-      "Handle": 3120.000732421875,
+      "Handle": 3120.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units1",
       "DstPaths": [],
@@ -11192,7 +13473,7 @@
       ]
     },
     {
-      "Handle": 3119.0006103515625,
+      "Handle": 3119.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -11212,7 +13493,7 @@
       ]
     },
     {
-      "Handle": 3118.0006103515625,
+      "Handle": 3118.0013427734375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11236,7 +13517,7 @@
       ]
     },
     {
-      "Handle": 3117.000732421875,
+      "Handle": 3117.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -11256,7 +13537,7 @@
       ]
     },
     {
-      "Handle": 3116.0006103515625,
+      "Handle": 3116.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge",
       "DstPaths": [],
@@ -11276,7 +13557,7 @@
       ]
     },
     {
-      "Handle": 3115.00048828125,
+      "Handle": 3115.0010986328125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11292,7 +13573,7 @@
       ]
     },
     {
-      "Handle": 3114.000732421875,
+      "Handle": 3114.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [],
@@ -11312,7 +13593,7 @@
       ]
     },
     {
-      "Handle": 3113.0006103515625,
+      "Handle": 3113.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units1",
       "DstPaths": [],
@@ -11340,7 +13621,7 @@
       ]
     },
     {
-      "Handle": 3112.000732421875,
+      "Handle": 3112.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11358,7 +13639,7 @@
       ]
     },
     {
-      "Handle": 3111.0006103515625,
+      "Handle": 3111.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11376,7 +13657,7 @@
       ]
     },
     {
-      "Handle": 3110.0006103515625,
+      "Handle": 3110.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11398,7 +13679,7 @@
       ]
     },
     {
-      "Handle": 3109.000732421875,
+      "Handle": 3109.0015869140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11416,7 +13697,7 @@
       ]
     },
     {
-      "Handle": 3108.0006103515625,
+      "Handle": 3108.001220703125,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11435,7 +13716,7 @@
       ]
     },
     {
-      "Handle": 3107.000732421875,
+      "Handle": 3107.0018310546875,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11459,7 +13740,7 @@
       ]
     },
     {
-      "Handle": 3106.0006103515625,
+      "Handle": 3106.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Rate Limiter",
       "DstPaths": [
@@ -11488,7 +13769,7 @@
       ]
     },
     {
-      "Handle": 3105.00048828125,
+      "Handle": 3105.0010986328125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -11508,7 +13789,7 @@
       ]
     },
     {
-      "Handle": 3104.000732421875,
+      "Handle": 3104.0018310546875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11528,7 +13809,7 @@
       ]
     },
     {
-      "Handle": 3103.000732421875,
+      "Handle": 3103.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -11544,7 +13825,7 @@
       ]
     },
     {
-      "Handle": 3102.0008544921875,
+      "Handle": 3102.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -11564,7 +13845,7 @@
       ]
     },
     {
-      "Handle": 3101.001220703125,
+      "Handle": 3101.0025634765625,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11584,7 +13865,7 @@
       ]
     },
     {
-      "Handle": 3100.0010986328125,
+      "Handle": 3100.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -11600,7 +13881,7 @@
       ]
     },
     {
-      "Handle": 3099.0009765625,
+      "Handle": 3099.0018310546875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -11616,7 +13897,7 @@
       ]
     },
     {
-      "Handle": 3098.0010986328125,
+      "Handle": 3098.002197265625,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units3",
       "DstPaths": [],
@@ -11636,7 +13917,7 @@
       ]
     },
     {
-      "Handle": 3097.0009765625,
+      "Handle": 3097.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Universal Bridge1",
       "DstPaths": [],
@@ -11652,7 +13933,7 @@
       ]
     },
     {
-      "Handle": 3096.0008544921875,
+      "Handle": 3096.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -11670,7 +13951,7 @@
       ]
     },
     {
-      "Handle": 3095.0008544921875,
+      "Handle": 3095.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -11688,7 +13969,7 @@
       ]
     },
     {
-      "Handle": 3094.0008544921875,
+      "Handle": 3094.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -11706,7 +13987,7 @@
       ]
     },
     {
-      "Handle": 3093.0008544921875,
+      "Handle": 3093.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Three-Phase\nV-I Measurement",
       "DstPaths": [
@@ -11732,7 +14013,7 @@
       ]
     },
     {
-      "Handle": 3092.0008544921875,
+      "Handle": 3092.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector2",
       "DstPaths": [
@@ -11758,7 +14039,7 @@
       ]
     },
     {
-      "Handle": 3091.0009765625,
+      "Handle": 3091.001953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector1",
       "DstPaths": [
@@ -11784,7 +14065,7 @@
       ]
     },
     {
-      "Handle": 3090.000732421875,
+      "Handle": 3090.0015869140625,
       "IsRoot": true,
       "SrcPath": "untitled1/Bus\nSelector",
       "DstPaths": [
@@ -11810,7 +14091,7 @@
       ]
     },
     {
-      "Handle": 3089.0008544921875,
+      "Handle": 3089.0020751953125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -11832,7 +14113,7 @@
       ]
     },
     {
-      "Handle": 3088.000732421875,
+      "Handle": 3088.001708984375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -11858,7 +14139,7 @@
       ]
     },
     {
-      "Handle": 3087.0006103515625,
+      "Handle": 3087.00146484375,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -11876,7 +14157,7 @@
       ]
     },
     {
-      "Handle": 3086.0006103515625,
+      "Handle": 3086.001220703125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -11898,7 +14179,7 @@
       ]
     },
     {
-      "Handle": 3085.0006103515625,
+      "Handle": 3085.001220703125,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [
@@ -11917,7 +14198,7 @@
       ]
     },
     {
-      "Handle": 3084.0003662109375,
+      "Handle": 3084.000732421875,
       "IsRoot": true,
       "SrcPath": "untitled1/Asynchronous Machine\nSI Units",
       "DstPaths": [

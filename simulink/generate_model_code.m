@@ -20,7 +20,7 @@ all_blocks = find_system(model_name, 'SearchDepth',1,'FindAll','on', ...
 % 创建一个空的结构体或单元格数组来存储连接关系
 connectivity = {};
 % 去重：源块全名|源端口 => 目标块全名|目标端口
-conn_keys = containers.Map('KeyType','char','ValueType','logical');
+%conn_keys = containers.Map('KeyType','char','ValueType','logical');
 
 % 遍历每条“信号线”，并递归遍历分支（避免漏掉 LineChildren）
 for i = 1:length(all_blocks)
@@ -51,9 +51,9 @@ for i = 1:length(all_blocks)
                 [dst_kind, dst_index] = kind_and_index_by_handle(dst_block, dst_port_handles(j));
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                if ~isKey(conn_keys, key)
-                    conn_keys(key) = true;
-                    connectivity{end+1} = struct( ...
+                %if ~isKey(conn_keys, key)
+                    %conn_keys(key) = true;
+                connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增：源块完整路径
                         'SourcePort',       src_port_num, ...
@@ -66,13 +66,13 @@ for i = 1:length(all_blocks)
                         'DestinationPortIndex', dst_index, ...   % 新增
                         'Origin',           'line' ...            % 可选：来源标记（普通信号线）
                     );
-                    disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
+                disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ')']);
                end
             end
         end
     end
-end
+
 
 % ========= 新增：基于 PortConnectivity 的扫描 =========
 all_blocks_pc = find_system(model_name, 'FindAll','on','FollowLinks','on','Type','block');  % 不限制层级，确保掩模/链接下的端口也统计
@@ -102,9 +102,9 @@ for i = 1:length(all_blocks_pc)
                 [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                if ~isKey(conn_keys, key)
-                    conn_keys(key) = true;
-                    connectivity{end+1} = struct( ...
+                %if ~isKey(conn_keys, key)
+                    %conn_keys(key) = true;
+                connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增
                         'SourcePort',       src_port_num, ...
@@ -117,7 +117,7 @@ for i = 1:length(all_blocks_pc)
                         'DestinationPortIndex', dst_index2, ...
                         'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
                     );
-                    disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
+                disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
                 end
             end
@@ -143,9 +143,9 @@ for i = 1:length(all_blocks_pc)
             [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
 
             key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-            if ~isKey(conn_keys, key)
-                conn_keys(key) = true;
-                connectivity{end+1} = struct( ...
+            %if ~isKey(conn_keys, key)
+                %conn_keys(key) = true;
+            connectivity{end+1} = struct( ...
                     'Source',           src_block_name, ...
                     'SourcePath',       src_block_full, ...      % 新增
                     'SourcePort',       src_port_num, ...
@@ -158,12 +158,11 @@ for i = 1:length(all_blocks_pc)
                     'DestinationPortIndex', dst_index3, ...
                     'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
                 );
-                disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
+            disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                   dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
             end
         end
-    end
-end
+
 % 现在 connectivity 单元格数组包含了所有的源-目标连接对（信号线 + 物理网络线）
 for i = 1:length(connectivity)
     disp(connectivity{1,i});

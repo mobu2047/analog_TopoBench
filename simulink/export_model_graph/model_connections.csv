@@ -71,6 +71,12 @@ Transformer",2,"rconn",2,"line"
 "Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Goto5","untitled1/Goto5",1,"inport",1,"line"
 "Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Delay","untitled1/Delay",1,"inport",1,"line"
 "Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Scope","untitled1/Scope",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Scope","untitled1/Scope",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Delay","untitled1/Delay",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Goto5","untitled1/Goto5",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Goto5","untitled1/Goto5",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Delay","untitled1/Delay",1,"inport",1,"line"
+"Voltage Measurement","untitled1/Voltage Measurement",1,"outport",1,"Scope","untitled1/Scope",1,"inport",1,"line"
 "Series RLC Load3","untitled1/Series RLC Load3",1,"rconn",1,"Series RLC Load4","untitled1/Series RLC Load4",1,"lconn",1,"line"
 "Mux","untitled1/Mux",1,"outport",1,"Universal Bridge2","untitled1/Universal Bridge2",1,"inport",1,"line"
 "Constant","untitled1/Constant",1,"outport",1,"Mux","untitled1/Mux",2,"inport",2,"line"
@@ -83,6 +89,81 @@ SI Units3",1,"inport",1,"line"
 "Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
 SI Units2","untitled1/Asynchronous Machine
 SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",1,"inport",1,"line"
+"Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"inport",1,"line"
 "Rate Limiter","untitled1/Rate Limiter",1,"outport",1,"Asynchronous Machine
 SI Units","untitled1/Asynchronous Machine
 SI Units",1,"inport",1,"line"
@@ -134,9 +215,72 @@ SI Units","untitled1/Asynchronous Machine
 SI Units",1,"outport",1,"Bus
 Selector2","untitled1/Bus
 Selector2",1,"inport",1,"line"
-"Rate Limiter","untitled1/Rate Limiter",0,"outport",1,"Asynchronous Machine
+"Asynchronous Machine
 SI Units","untitled1/Asynchronous Machine
-SI Units",-1,"inport",1,"pc"
+SI Units",1,"outport",1,"Bus
+Selector2","untitled1/Bus
+Selector2",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector1","untitled1/Bus
+Selector1",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector1","untitled1/Bus
+Selector1",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector2","untitled1/Bus
+Selector2",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector2","untitled1/Bus
+Selector2",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector1","untitled1/Bus
+Selector1",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector","untitled1/Bus
+Selector",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Goto3","untitled1/Goto3",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Goto3","untitled1/Goto3",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector","untitled1/Bus
+Selector",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector2","untitled1/Bus
+Selector2",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector1","untitled1/Bus
+Selector1",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector1","untitled1/Bus
+Selector1",1,"inport",1,"line"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",1,"outport",1,"Bus
+Selector2","untitled1/Bus
+Selector2",1,"inport",1,"line"
 "Asynchronous Machine
 SI Units","untitled1/Asynchronous Machine
 SI Units",-1,"outport",1,"Goto3","untitled1/Goto3",-1,"inport",1,"pc"
@@ -160,9 +304,16 @@ SI Units","untitled1/Asynchronous Machine
 SI Units",-1,"lconn",1,"Three-Phase
 V-I Measurement","untitled1/Three-Phase
 V-I Measurement",-1,"rconn",1,"pc"
-"Rate Limiter","untitled1/Rate Limiter",0,"outport",1,"Asynchronous Machine
-SI Units1","untitled1/Asynchronous Machine
-SI Units1",-1,"inport",1,"pc"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",-1,"lconn",2,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"rconn",2,"pc"
+"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",-1,"lconn",3,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"rconn",3,"pc"
 "Asynchronous Machine
 SI Units1","untitled1/Asynchronous Machine
 SI Units1",-1,"lconn",1,"Three-Phase
@@ -171,9 +322,22 @@ V-I Measurement",-1,"lconn",1,"pc"
 "Asynchronous Machine
 SI Units1","untitled1/Asynchronous Machine
 SI Units1",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",3,"pc"
-"Rate Limiter","untitled1/Rate Limiter",0,"outport",1,"Asynchronous Machine
-SI Units2","untitled1/Asynchronous Machine
-SI Units2",-1,"inport",1,"pc"
+"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",2,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",3,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",1,"pc"
+"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",3,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",3,"pc"
 "Asynchronous Machine
 SI Units2","untitled1/Asynchronous Machine
 SI Units2",-1,"lconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",3,"pc"
@@ -182,9 +346,22 @@ SI Units2","untitled1/Asynchronous Machine
 SI Units2",-1,"lconn",1,"Asynchronous Machine
 SI Units3","untitled1/Asynchronous Machine
 SI Units3",-1,"lconn",1,"pc"
-"Rate Limiter","untitled1/Rate Limiter",0,"outport",1,"Asynchronous Machine
+"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",2,"Asynchronous Machine
 SI Units3","untitled1/Asynchronous Machine
-SI Units3",-1,"inport",1,"pc"
+SI Units3",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",3,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",1,"pc"
+"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",3,"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",3,"pc"
 "Asynchronous Machine
 SI Units3","untitled1/Asynchronous Machine
 SI Units3",-1,"lconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",3,"pc"
@@ -194,31 +371,31 @@ SI Units3",-1,"lconn",1,"Asynchronous Machine
 SI Units2","untitled1/Asynchronous Machine
 SI Units2",-1,"lconn",1,"pc"
 "Asynchronous Machine
-SI Units","untitled1/Asynchronous Machine
-SI Units",0,"rconn",1,"Bus
-Selector","untitled1/Bus
-Selector",-1,"inport",1,"pc"
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",2,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",2,"pc"
+"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",3,"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",1,"pc"
+"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",3,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",3,"pc"
 "Bus
 Selector","untitled1/Bus
 Selector",-1,"outport",2,"Goto","untitled1/Goto",-1,"inport",1,"pc"
-"Asynchronous Machine
-SI Units","untitled1/Asynchronous Machine
-SI Units",0,"rconn",3,"Bus
-Selector1","untitled1/Bus
-Selector1",-1,"inport",1,"pc"
 "Bus
 Selector1","untitled1/Bus
 Selector1",-1,"outport",2,"Goto1","untitled1/Goto1",-1,"inport",1,"pc"
-"Asynchronous Machine
-SI Units","untitled1/Asynchronous Machine
-SI Units",0,"rconn",3,"Bus
-Selector2","untitled1/Bus
-Selector2",-1,"inport",1,"pc"
 "Bus
 Selector2","untitled1/Bus
 Selector2",-1,"outport",2,"Goto2","untitled1/Goto2",-1,"inport",1,"pc"
 "Constant","untitled1/Constant",-1,"outport",1,"Mux","untitled1/Mux",-1,"inport",2,"pc"
-"Sine Wave","untitled1/Sine Wave",0,"outport",1,"Controlled Voltage Source","untitled1/Controlled Voltage Source",-1,"inport",1,"pc"
 "Controlled Voltage Source","untitled1/Controlled Voltage Source",-1,"lconn",1,"Multi-Winding
 Transformer","untitled1/Multi-Winding
 Transformer",-1,"lconn",2,"pc"
@@ -250,7 +427,6 @@ Transformer",-1,"lconn",2,"pc"
 "Current Measurement3","untitled1/Current Measurement3",-1,"outport",1,"Multi-Winding
 Transformer","untitled1/Multi-Winding
 Transformer",-1,"lconn",1,"pc"
-"Voltage Measurement","untitled1/Voltage Measurement",0,"outport",1,"Delay","untitled1/Delay",-1,"inport",1,"pc"
 "Delay","untitled1/Delay",-1,"outport",1,"Relay","untitled1/Relay",-1,"inport",1,"pc"
 "From","untitled1/From",-1,"outport",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"inport",1,"pc"
 "From1","untitled1/From1",-1,"outport",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"inport",1,"pc"
@@ -326,8 +502,6 @@ Transformer",-1,"rconn",3,"Ideal Switch3","untitled1/Ideal Switch3",-1,"lconn",1
 "Multi-Winding
 Transformer","untitled1/Multi-Winding
 Transformer",-1,"rconn",4,"Universal Bridge4","untitled1/Universal Bridge4",-1,"lconn",2,"pc"
-"Relay","untitled1/Relay",0,"outport",1,"Mux","untitled1/Mux",-1,"inport",1,"pc"
-"Constant","untitled1/Constant",0,"outport",1,"Mux","untitled1/Mux",-1,"inport",2,"pc"
 "Mux","untitled1/Mux",-1,"outport",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"inport",1,"pc"
 "Rate Limiter","untitled1/Rate Limiter",-1,"outport",1,"Asynchronous Machine
 SI Units3","untitled1/Asynchronous Machine
@@ -341,7 +515,6 @@ SI Units",-1,"inport",1,"pc"
 "Rate Limiter","untitled1/Rate Limiter",-1,"outport",1,"Asynchronous Machine
 SI Units1","untitled1/Asynchronous Machine
 SI Units1",-1,"inport",1,"pc"
-"Delay","untitled1/Delay",0,"outport",1,"Relay","untitled1/Relay",-1,"inport",1,"pc"
 "Relay","untitled1/Relay",-1,"outport",1,"Mux","untitled1/Mux",-1,"inport",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",0,"outport",1,"Scope","untitled1/Scope",-1,"inport",1,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
@@ -356,9 +529,19 @@ SI Units1",-1,"inport",1,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"pc"
@@ -371,9 +554,19 @@ SI Units1",-1,"inport",1,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
 "Series RLC Load11","untitled1/Series RLC Load11",-1,"lconn",1,"Current Measurement1","untitled1/Current Measurement1",-1,"lconn",1,"pc"
 "Series RLC Load11","untitled1/Series RLC Load11",-1,"lconn",1,"Ideal Switch","untitled1/Ideal Switch",-1,"rconn",1,"pc"
 "Series RLC Load11","untitled1/Series RLC Load11",-1,"rconn",1,"Ideal Switch2","untitled1/Ideal Switch2",-1,"rconn",1,"pc"
@@ -392,6 +585,7 @@ SI Units1",-1,"inport",1,"pc"
 "Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
 "Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
 "Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Series RLC Load3","untitled1/Series RLC Load3",-1,"lconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
 "Series RLC Load3","untitled1/Series RLC Load3",-1,"lconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"pc"
@@ -445,9 +639,19 @@ SI Units1",-1,"inport",1,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Series RLC Load7","untitled1/Series RLC Load7",-1,"lconn",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"lconn",1,"pc"
 "Series RLC Load7","untitled1/Series RLC Load7",-1,"rconn",1,"Current Measurement1","untitled1/Current Measurement1",-1,"rconn",1,"pc"
 "Series RLC Load8","untitled1/Series RLC Load8",-1,"lconn",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"lconn",1,"pc"
@@ -464,9 +668,19 @@ SI Units1",-1,"inport",1,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Sine Wave","untitled1/Sine Wave",-1,"outport",1,"Controlled Voltage Source","untitled1/Controlled Voltage Source",-1,"inport",1,"pc"
 "Three-Phase
 V-I Measurement","untitled1/Three-Phase
@@ -481,9 +695,35 @@ V-I Measurement","untitled1/Three-Phase
 V-I Measurement",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",3,"pc"
 "Three-Phase
 V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",2,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",2,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",2,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",3,"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",1,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",3,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",3,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
 V-I Measurement",-1,"rconn",1,"Asynchronous Machine
 SI Units","untitled1/Asynchronous Machine
 SI Units",-1,"lconn",1,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"rconn",2,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",-1,"lconn",2,"pc"
+"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"rconn",3,"Asynchronous Machine
+SI Units","untitled1/Asynchronous Machine
+SI Units",-1,"lconn",3,"pc"
 "Three-Phase
 V-I Measurement1","untitled1/Three-Phase
 V-I Measurement1",-1,"outport",1,"Goto11","untitled1/Goto11",-1,"inport",1,"pc"
@@ -497,6 +737,20 @@ Inductance Matrix Type
 (Two Windings)","untitled1/Three-Phase Transformer
 Inductance Matrix Type
 (Two Windings)",-1,"rconn",1,"pc"
+"Three-Phase
+V-I Measurement1","untitled1/Three-Phase
+V-I Measurement1",-1,"lconn",2,"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"rconn",2,"pc"
+"Three-Phase
+V-I Measurement1","untitled1/Three-Phase
+V-I Measurement1",-1,"lconn",3,"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"rconn",3,"pc"
 "Three-Phase Transformer
 Inductance Matrix Type
 (Two Windings)","untitled1/Three-Phase Transformer
@@ -506,15 +760,51 @@ Inductance Matrix Type
 Inductance Matrix Type
 (Two Windings)","untitled1/Three-Phase Transformer
 Inductance Matrix Type
+(Two Windings)",-1,"lconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"lconn",2,"pc"
+"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"lconn",3,"Universal Bridge5","untitled1/Universal Bridge5",-1,"lconn",1,"pc"
+"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
 (Two Windings)",-1,"rconn",1,"Three-Phase
 V-I Measurement1","untitled1/Three-Phase
 V-I Measurement1",-1,"lconn",1,"pc"
+"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"rconn",2,"Three-Phase
+V-I Measurement1","untitled1/Three-Phase
+V-I Measurement1",-1,"lconn",2,"pc"
+"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"rconn",3,"Three-Phase
+V-I Measurement1","untitled1/Three-Phase
+V-I Measurement1",-1,"lconn",3,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"lconn",1,"Three-Phase
 V-I Measurement","untitled1/Three-Phase
 V-I Measurement",-1,"lconn",3,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"lconn",1,"Asynchronous Machine
 SI Units1","untitled1/Asynchronous Machine
 SI Units1",-1,"lconn",3,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",2,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",2,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",2,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",2,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",3,"Asynchronous Machine
+SI Units1","untitled1/Asynchronous Machine
+SI Units1",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"lconn",3,"Three-Phase
+V-I Measurement","untitled1/Three-Phase
+V-I Measurement",-1,"lconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
@@ -528,14 +818,36 @@ SI Units1",-1,"lconn",3,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load5","untitled1/Series RLC Load5",-1,"lconn",1,"pc"
 "Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load3","untitled1/Series RLC Load3",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
+"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",1,"Asynchronous Machine
 SI Units2","untitled1/Asynchronous Machine
 SI Units2",-1,"lconn",3,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",1,"Asynchronous Machine
 SI Units3","untitled1/Asynchronous Machine
 SI Units3",-1,"lconn",3,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",2,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",2,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",2,"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",2,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",3,"Asynchronous Machine
+SI Units3","untitled1/Asynchronous Machine
+SI Units3",-1,"lconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"lconn",3,"Asynchronous Machine
+SI Units2","untitled1/Asynchronous Machine
+SI Units2",-1,"lconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
@@ -549,9 +861,18 @@ SI Units3",-1,"lconn",3,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load5","untitled1/Series RLC Load5",-1,"lconn",1,"pc"
 "Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load3","untitled1/Series RLC Load3",-1,"lconn",1,"pc"
-"Mux","untitled1/Mux",0,"outport",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"inport",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
+"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"lconn",1,"Series RLC Load2","untitled1/Series RLC Load2",-1,"lconn",1,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"pc"
@@ -565,9 +886,19 @@ SI Units3",-1,"lconn",3,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
-"From","untitled1/From",0,"outport",1,"Universal Bridge3","untitled1/Universal Bridge3",-1,"inport",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"lconn",1,"Series RLC Load7","untitled1/Series RLC Load7",-1,"lconn",1,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"lconn",2,"Multi-Winding
 Transformer","untitled1/Multi-Winding
@@ -584,10 +915,19 @@ Transformer",-1,"rconn",2,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
-"From1","untitled1/From1",0,"outport",1,"Universal Bridge4","untitled1/Universal Bridge4",-1,"inport",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"lconn",1,"Series RLC Load8","untitled1/Series RLC Load8",-1,"lconn",1,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"lconn",2,"Multi-Winding
 Transformer","untitled1/Multi-Winding
@@ -604,15 +944,34 @@ Transformer",-1,"rconn",4,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"pc"
 "Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
-"From2","untitled1/From2",0,"outport",1,"Universal Bridge5","untitled1/Universal Bridge5",-1,"inport",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"lconn",1,"Three-Phase Transformer
 Inductance Matrix Type
 (Two Windings)","untitled1/Three-Phase Transformer
 Inductance Matrix Type
 (Two Windings)",-1,"lconn",3,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"lconn",2,"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"lconn",2,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"lconn",3,"Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)","untitled1/Three-Phase Transformer
+Inductance Matrix Type
+(Two Windings)",-1,"lconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
@@ -626,8 +985,18 @@ Inductance Matrix Type
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",2,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"lconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"lconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load5","untitled1/Series RLC Load5",-1,"lconn",1,"pc"
 "Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load3","untitled1/Series RLC Load3",-1,"lconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
+"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"outport",1,"Goto5","untitled1/Goto5",-1,"inport",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"outport",1,"Delay","untitled1/Delay",-1,"inport",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"outport",1,"Scope","untitled1/Scope",-1,"inport",1,"pc"
@@ -643,6 +1012,16 @@ Inductance Matrix Type
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"Series RLC Load","untitled1/Series RLC Load",-1,"lconn",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",2,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",1,"Series RLC Load1","untitled1/Series RLC Load1",-1,"lconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge1","untitled1/Universal Bridge1",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load9","untitled1/Series RLC Load9",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge5","untitled1/Universal Bridge5",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load6","untitled1/Series RLC Load6",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge4","untitled1/Universal Bridge4",-1,"rconn",2,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge3","untitled1/Universal Bridge3",-1,"rconn",2,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Current Measurement","untitled1/Current Measurement",-1,"rconn",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load4","untitled1/Series RLC Load4",-1,"rconn",1,"pc"
 "Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load2","untitled1/Series RLC Load2",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge","untitled1/Universal Bridge",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load","untitled1/Series RLC Load",-1,"rconn",1,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Universal Bridge2","untitled1/Universal Bridge2",-1,"rconn",2,"pc"
+"Voltage Measurement","untitled1/Voltage Measurement",-1,"lconn",2,"Series RLC Load1","untitled1/Series RLC Load1",-1,"rconn",1,"pc"
