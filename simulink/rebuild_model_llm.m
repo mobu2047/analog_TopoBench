@@ -1,6 +1,6 @@
 new_system('temp'); open_system('temp');
 load_system('simulink');
-load_system('MyLib')
+load_system('MyLib/MyLib.slx')
 add_block('simulink/Continuous/Derivative', 'temp/Derivative', 'MakeNameUnique','off');
 add_block('MyLib/control', 'temp/control');
 close_system('MyLib')
