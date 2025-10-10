@@ -1,6 +1,6 @@
 {
-  "model": "",
-  "timestamp": "2025-10-10 11:16:45",
+  "model": "Ꙁ",
+  "timestamp": "2025-10-10 17:06:08",
   "counts": {
     "elements": 28,
     "ports": 48,
@@ -2382,7 +2382,7 @@
   ],
   "lines": [
     {
-      "Handle": 4304.015869140625,
+      "Handle": 45457.007690429688,
       "IsRoot": true,
       "SrcPath": "untitled3/Sine Wave1",
       "DstPaths": [
@@ -2408,7 +2408,7 @@
       ]
     },
     {
-      "Handle": 4303.0181884765625,
+      "Handle": 45456.006958007812,
       "IsRoot": true,
       "SrcPath": "untitled3/Product1",
       "DstPaths": [
@@ -2434,7 +2434,7 @@
       ]
     },
     {
-      "Handle": 4302.0146484375,
+      "Handle": 45455.007568359375,
       "IsRoot": true,
       "SrcPath": "untitled3/Sine Wave",
       "DstPaths": [
@@ -2460,7 +2460,7 @@
       ]
     },
     {
-      "Handle": 4301.0120849609375,
+      "Handle": 45454.00634765625,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2490,7 +2490,7 @@
       ]
     },
     {
-      "Handle": 4300.013671875,
+      "Handle": 45453.007446289062,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2508,7 +2508,7 @@
       ]
     },
     {
-      "Handle": 4299.0125732421875,
+      "Handle": 45452.007690429688,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2527,7 +2527,7 @@
       ]
     },
     {
-      "Handle": 4298.0125732421875,
+      "Handle": 45451.0078125,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [
@@ -2553,7 +2553,7 @@
       ]
     },
     {
-      "Handle": 4297.0115966796875,
+      "Handle": 45450.0068359375,
       "IsRoot": true,
       "SrcPath": "untitled3/Constant",
       "DstPaths": [
@@ -2579,7 +2579,7 @@
       ]
     },
     {
-      "Handle": 4296.0126953125,
+      "Handle": 45449.00732421875,
       "IsRoot": true,
       "SrcPath": "untitled3/Square Wave\nGenerator",
       "DstPaths": [
@@ -2605,7 +2605,7 @@
       ]
     },
     {
-      "Handle": 4295.0155029296875,
+      "Handle": 45448.006713867188,
       "IsRoot": true,
       "SrcPath": "untitled3/Repeating\nSequence",
       "DstPaths": [
@@ -2631,7 +2631,7 @@
       ]
     },
     {
-      "Handle": 4294.0135498046875,
+      "Handle": 45447.007446289062,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
@@ -2653,7 +2653,7 @@
       ]
     },
     {
-      "Handle": 4293.0133056640625,
+      "Handle": 45446.008422851562,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
@@ -2683,7 +2683,7 @@
       ]
     },
     {
-      "Handle": 4292.0146484375,
+      "Handle": 45445.00732421875,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
@@ -2702,7 +2702,7 @@
       ]
     },
     {
-      "Handle": 4291.017822265625,
+      "Handle": 45444.0068359375,
       "IsRoot": true,
       "SrcPath": "untitled3/NOT1",
       "DstPaths": [
@@ -2728,7 +2728,7 @@
       ]
     },
     {
-      "Handle": 4289.01708984375,
+      "Handle": 45443.0078125,
       "IsRoot": true,
       "SrcPath": "untitled3/NOT",
       "DstPaths": [
@@ -2754,7 +2754,7 @@
       ]
     },
     {
-      "Handle": 4288.0184326171875,
+      "Handle": 45442.007934570312,
       "IsRoot": true,
       "SrcPath": "untitled3/From2",
       "DstPaths": [
@@ -2788,7 +2788,7 @@
       ]
     },
     {
-      "Handle": 4287.022705078125,
+      "Handle": 45441.007934570312,
       "IsRoot": true,
       "SrcPath": "untitled3/From1",
       "DstPaths": [
@@ -2818,7 +2818,7 @@
       ]
     },
     {
-      "Handle": 4286.0211181640625,
+      "Handle": 45440.006713867188,
       "IsRoot": true,
       "SrcPath": "untitled3/From3",
       "DstPaths": [
@@ -2848,7 +2848,7 @@
       ]
     },
     {
-      "Handle": 4285.0152587890625,
+      "Handle": 45439.006225585938,
       "IsRoot": true,
       "SrcPath": "untitled3/From",
       "DstPaths": [
@@ -2870,7 +2870,7 @@
       ]
     },
     {
-      "Handle": 4284.01904296875,
+      "Handle": 45438.00732421875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2886,7 +2886,7 @@
       ]
     },
     {
-      "Handle": 4283.018310546875,
+      "Handle": 45437.007934570312,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2902,7 +2902,7 @@
       ]
     },
     {
-      "Handle": 4282.0166015625,
+      "Handle": 45436.00634765625,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [],
@@ -2922,7 +2922,7 @@
       ]
     },
     {
-      "Handle": 4281.017578125,
+      "Handle": 45435.005126953125,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2938,7 +2938,7 @@
       ]
     },
     {
-      "Handle": 4280.0208740234375,
+      "Handle": 45434.006591796875,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2958,7 +2958,7 @@
       ]
     },
     {
-      "Handle": 4279.021728515625,
+      "Handle": 45433.006591796875,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT",
       "DstPaths": [],
@@ -2974,7 +2974,7 @@
       ]
     },
     {
-      "Handle": 4278.0201416015625,
+      "Handle": 45432.005249023438,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2990,7 +2990,7 @@
       ]
     },
     {
-      "Handle": 4277.021484375,
+      "Handle": 45431.0048828125,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [],
@@ -3018,7 +3018,7 @@
       ]
     },
     {
-      "Handle": 4276.023193359375,
+      "Handle": 45430.00634765625,
       "IsRoot": true,
       "SrcPath": "untitled3/Series RLC Branch1",
       "DstPaths": [],
@@ -3034,7 +3034,7 @@
       ]
     },
     {
-      "Handle": 4275.0279541015625,
+      "Handle": 45429.006225585938,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT1",
       "DstPaths": [],
@@ -3054,7 +3054,7 @@
       ]
     },
     {
-      "Handle": 4274.026611328125,
+      "Handle": 45428.005737304688,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -3070,7 +3070,7 @@
       ]
     },
     {
-      "Handle": 4273.029296875,
+      "Handle": 45427.005249023438,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT3",
       "DstPaths": [],
@@ -3090,7 +3090,7 @@
       ]
     },
     {
-      "Handle": 4272.02978515625,
+      "Handle": 45426.005981445312,
       "IsRoot": true,
       "SrcPath": "untitled3/DC Voltage Source",
       "DstPaths": [],
@@ -3110,7 +3110,7 @@
       ]
     },
     {
-      "Handle": 4271.032470703125,
+      "Handle": 45425.005859375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -3126,7 +3126,7 @@
       ]
     },
     {
-      "Handle": 4270.037353515625,
+      "Handle": 45424.0068359375,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT1",
       "DstPaths": [],
@@ -3146,7 +3146,7 @@
       ]
     },
     {
-      "Handle": 4269.0301513671875,
+      "Handle": 45423.005615234375,
       "IsRoot": true,
       "SrcPath": "untitled3/DC Voltage Source",
       "DstPaths": [],
@@ -3178,8 +3178,14 @@
         "BlockType": "Constant",
         "MaskType": "",
         "DialogParams": {
+          "Value": "0",
+          "VectorParams1D": "on",
+          "OutMin": "[]",
+          "OutMax": "[]",
           "OutDataTypeStr": "Inherit: Inherit from 'Constant value'",
-          "SampleTime": "inf"
+          "LockScale": "off",
+          "SampleTime": "inf",
+          "FramePeriod": "inf"
         }
       },
       {
@@ -3187,7 +3193,7 @@
         "BlockType": "SubSystem",
         "MaskType": "DC Voltage Source",
         "DialogParams": {
-          "Amplitude": "100",
+          "Amplitude": "1000",
           "Measurements": "None"
         }
       },
@@ -3195,57 +3201,89 @@
         "Path": "untitled3/From",
         "BlockType": "From",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A1",
+          "IconDisplay": "Tag"
+        }
       },
       {
         "Path": "untitled3/From1",
         "BlockType": "From",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A2",
+          "IconDisplay": "Tag"
+        }
       },
       {
         "Path": "untitled3/From2",
         "BlockType": "From",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A4",
+          "IconDisplay": "Tag"
+        }
       },
       {
         "Path": "untitled3/From3",
         "BlockType": "From",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A3",
+          "IconDisplay": "Tag"
+        }
       },
       {
         "Path": "untitled3/Goto",
         "BlockType": "Goto",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A1",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
       },
       {
         "Path": "untitled3/Goto1",
         "BlockType": "Goto",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A4",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
       },
       {
         "Path": "untitled3/Goto2",
         "BlockType": "Goto",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A3",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
       },
       {
         "Path": "untitled3/Goto3",
         "BlockType": "Goto",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "GotoTag": "A2",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
       },
       {
         "Path": "untitled3/GreaterThan",
         "BlockType": "RelationalOperator",
         "MaskType": "",
         "DialogParams": {
+          "Operator": ">",
+          "InputSameDT": "off",
           "OutDataTypeStr": "boolean",
-          "SampleTime": "-1"
+          "ZeroCross": "on",
+          "SampleTime": "-1",
+          "RndMeth": "Simplest"
         }
       },
       {
@@ -3253,8 +3291,12 @@
         "BlockType": "RelationalOperator",
         "MaskType": "",
         "DialogParams": {
+          "Operator": ">",
+          "InputSameDT": "off",
           "OutDataTypeStr": "boolean",
-          "SampleTime": "-1"
+          "ZeroCross": "on",
+          "SampleTime": "-1",
+          "RndMeth": "Simplest"
         }
       },
       {
@@ -3326,6 +3368,10 @@
         "BlockType": "Logic",
         "MaskType": "",
         "DialogParams": {
+          "Operator": "NOT",
+          "Inputs": "2",
+          "IconShape": "distinctive",
+          "AllPortsSameDT": "off",
           "OutDataTypeStr": "boolean",
           "SampleTime": "-1"
         }
@@ -3335,6 +3381,10 @@
         "BlockType": "Logic",
         "MaskType": "",
         "DialogParams": {
+          "Operator": "NOT",
+          "Inputs": "2",
+          "IconShape": "distinctive",
+          "AllPortsSameDT": "off",
           "OutDataTypeStr": "boolean",
           "SampleTime": "-1"
         }
@@ -3344,7 +3394,17 @@
         "BlockType": "Product",
         "MaskType": "",
         "DialogParams": {
+          "Inputs": "2",
+          "Multiplication": "Element-wise(.*)",
+          "CollapseMode": "All dimensions",
+          "CollapseDim": "1",
+          "InputSameDT": "off",
+          "OutMin": "[]",
+          "OutMax": "[]",
           "OutDataTypeStr": "Inherit: Inherit via internal rule",
+          "LockScale": "off",
+          "RndMeth": "Floor",
+          "SaturateOnIntegerOverflow": "off",
           "SampleTime": "-1"
         }
       },
@@ -3362,7 +3422,36 @@
         "BlockType": "Scope",
         "MaskType": "",
         "DialogParams": {
-          "SampleTime": "-1"
+          "OpenAtSimulationStart": "off",
+          "DisplayFullPath": "off",
+          "NumInputPorts": "1",
+          "LayoutDimensionsString": "[1 1]",
+          "SampleTime": "-1",
+          "FrameBasedProcessingString": "Elements as channels (sample based)",
+          "MaximizeAxes": "Off",
+          "AxesScaling": "Manual",
+          "AxesScalingNumUpdates": "10",
+          "TimeSpan": "Auto",
+          "TimeSpanOverrunAction": "Wrap",
+          "TimeUnits": "None",
+          "TimeDisplayOffset": "0",
+          "TimeAxisLabels": "Bottom displays only",
+          "ShowTimeAxisLabel": "off",
+          "ActiveDisplayString": "1",
+          "Title": "%<SignalLabel>",
+          "ShowLegend": "off",
+          "ShowGrid": "on",
+          "PlotAsMagnitudePhase": "off",
+          "ActiveDisplayYMinimum": "-0.16754",
+          "ActiveDisplayYMaximum": "1.3897",
+          "YLabel": "",
+          "DataLoggingLimitDataPoints": "off",
+          "DataLoggingMaxPoints": "5000",
+          "DataLoggingDecimateData": "off",
+          "DataLoggingDecimation": "2",
+          "DataLogging": "off",
+          "DataLoggingVariableName": "ScopeData",
+          "DataLoggingSaveFormat": "Dataset"
         }
       },
       {
@@ -3371,7 +3460,7 @@
         "MaskType": "Series RLC Branch",
         "DialogParams": {
           "BranchType": "RL",
-          "Resistance": "1",
+          "Resistance": "10",
           "Inductance": "1e-2",
           "SetiL0": "off",
           "InitialCurrent": "0",
@@ -3402,7 +3491,16 @@
         "BlockType": "Sin",
         "MaskType": "",
         "DialogParams": {
-          "SampleTime": "0"
+          "SineType": "Time based",
+          "TimeSource": "Use simulation time",
+          "Amplitude": "1",
+          "Bias": "0",
+          "Frequency": "pi",
+          "Phase": "0",
+          "Samples": "10",
+          "Offset": "0",
+          "SampleTime": "0",
+          "VectorParams1D": "on"
         }
       },
       {
@@ -3410,14 +3508,30 @@
         "BlockType": "Sin",
         "MaskType": "",
         "DialogParams": {
-          "SampleTime": "0"
+          "SineType": "Time based",
+          "TimeSource": "Use simulation time",
+          "Amplitude": "1",
+          "Bias": "0",
+          "Frequency": "1",
+          "Phase": "0",
+          "Samples": "10",
+          "Offset": "0",
+          "SampleTime": "0",
+          "VectorParams1D": "on"
         }
       },
       {
         "Path": "untitled3/Square Wave\nGenerator",
         "BlockType": "SignalGenerator",
         "MaskType": "",
-        "DialogParams": {}
+        "DialogParams": {
+          "WaveForm": "square",
+          "TimeSource": "Use simulation time",
+          "Amplitude": "1",
+          "Frequency": "2*pi",
+          "Units": "rad/sec",
+          "VectorParams1D": "on"
+        }
       },
       {
         "Path": "untitled3/Voltage Measurement",
@@ -3434,8 +3548,8 @@
         "BlockType": "SubSystem",
         "MaskType": "PSB option menu block",
         "DialogParams": {
-          "SampleTime": "1e-6",
           "SimulationMode": "Discrete",
+          "SampleTime": "1e-6",
           "frequency": "60",
           "Iterations": "50",
           "frequencyindice": "0",

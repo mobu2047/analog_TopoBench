@@ -726,23 +726,31 @@ function apply_block_params(elemTable, blockParams)
                 newPath = char(elemTable.NewPath(idx));
             end
 
-            % 逐参数 set_param
-            if isfield(bp,'DialogParams') && ~isempty(bp.DialogParams)
-                names = fieldnames(bp.DialogParams);
-                for k = 1:numel(names)
-                    pname = names{k};
-                    % 跳过几何类参数
-                    if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
-                        continue;
-                    end
-                    pval  = bp.DialogParams.(pname);
-                    try
-                        set_param(newPath, pname, char(pval));
-                    catch
-                        % 掩模/变体导致不可设置时跳过
-                    end
-                end
-            end
+			% 成组一次性 set_param（方案A）：避免掩模块在参数不一致中间态触发初始化报错
+			if isfield(bp,'DialogParams') && ~isempty(bp.DialogParams)
+				names = fieldnames(bp.DialogParams);
+				nvPairs = {};
+				for k = 1:numel(names)
+					pname = names{k};
+					% 跳过几何类参数
+					if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
+						continue;
+					end
+					pval  = bp.DialogParams.(pname);
+					% 非字符串一律用 mat2str 序列化，确保 set_param 可接受
+					if ~(ischar(pval) || isstring(pval))
+						pval = mat2str(pval);
+					end
+					nvPairs(end+1:end+2) = {pname, char(pval)}; %#ok<AGROW>
+				end
+				if ~isempty(nvPairs)
+					try
+						set_param(newPath, nvPairs{:});
+					catch
+						% 掩模/变体导致不可设置时跳过
+					end
+				end
+			end
         catch
         end
     end

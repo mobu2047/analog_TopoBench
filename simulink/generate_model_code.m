@@ -868,7 +868,10 @@ function CFG = get_param_filter_config()
     CFG = struct();
 
     % 名称白名单（优先保留）与黑名单（强制忽略）
-    CFG.block.white = {'SampleTime','InitialCondition','Gain','Numerator','Denominator','UpperSaturationLimit','LowerSaturationLimit','OutDataTypeStr'};
+    % NOTE: 留空白名单=默认允许所有 DialogParameters（除黑名单/属性黑名单）
+    % WHY: 防止遗漏如 Sine Wave 的 Amplitude/Bias/Phase/Frequency，和 Constant 的 Value 等常用参数
+    % HOW: 依赖下方 CFG.block.black 与属性黑名单筛掉 UI/只读/不可设置项
+    CFG.block.white = {};
     CFG.block.black = {'Position','Orientation','LineHandles','PortConnectivity','ForegroundColor','BackgroundColor','ShowName','NamePlacement','Priority','Tag'};
 
     CFG.mask.white  = {};  % 默认全部允许，除非命中黑名单
