@@ -1,28 +1,52 @@
-function newModel = rebuild_model_from_export(inputPath, newModelName)
+function newModel = rebuild_model_from_export(inputPath, newModelName, useCsv)
 % 重建 Simulink 模型（不依赖 sigLines ?
 % - 直接使用导出的完整路 ? SourcePath/DestinationPath 精确定位 ?
 % - 端口号缺 ?(-1/NaN)时，使用端口/块几何位置最近邻匹配到端口句 ?
 % - 自动创建父系统，过滤库块内部子块，所有连线使 ? autorouting
 
-	% -------- 1) 加载数据（MAT/JSON 自 ? 应 ? --------
+	% -------- 1) 加载数据（新增 CSV/MAT 可选；默认 CSV） --------
+	% why: 默认以 model_graph.mat 所在目录下 CSV 组合还原，保持与 MAT 版一致的数据结构；
+	% how: 第三个参数 useCsv 可为 true/false 或 'csv'/'mat' 字符串，CSV 缺失时自动回退 MAT/JSON。
 	if nargin < 1 || isempty(inputPath)
-		error('请提供前面导出的 MAT  ? JSON 文件路径 ?');
+		% 默认指向导出目录下的 mat 路径，仅用于定位同目录 CSV
+		inputPath = fullfile(pwd,'export_model_graph','model_graph.mat');
 	end
 	if nargin < 2 || isempty(newModelName)
 		newModelName = 'recovered_model';
 	end
+	if nargin < 3 || isempty(useCsv)
+		useCsv = true;  % 默认按 CSV 读取
+	end
+	if isstring(useCsv) || ischar(useCsv)
+		sw = lower(char(useCsv));
+		if strcmp(sw,'csv')
+			useCsv = true;
+		elseif any(strcmp(sw,{'mat','json'}))
+			useCsv = false;
+		else
+			try, useCsv = logical(str2double(sw)); catch, useCsv = true; end
+		end
+	end
 
-	data = load_or_decode_graph(inputPath);
+	try
+		if useCsv
+			data = load_graph_from_csv_dir(inputPath);  % 读取同目录 CSV -> 组装标准结构
+		else
+			data = load_or_decode_graph(inputPath);     % 保留原 MAT/JSON 路径读取
+		end
+	except ME
+		% CSV 失败则自动回退，确保可继续运行
+		warning('CSV 解析失败，回退到 MAT/JSON：%s', ME.message);
+		data = load_or_decode_graph(inputPath);
+	end
 
 	% 基本变量（若缺失则置空安全）
 	elements = safe_field(data, 'elements', struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{},'Mirror',{},'Rotation',{},'GotoTag',{},'GotoVisibility',{},'FromTag',{}));
 	ports    = safe_field(data, 'ports',    struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{},'RelPos',{},'Side',{}));
-	conns    = safe_connections(data);  % 现在包含 SourcePath/DestinationPath
+	conns    = data.connections;  % 现在包含 SourcePath/DestinationPath
     params   = safe_field(data, 'parameters', struct());  % 新增：模型与块参数（可选）
-    % 侧文件回退：若模型级为空，则尝试加载同目录 params.json/csv
-    params   = ensure_params_loaded(params, inputPath);
-
 	assert(~isempty(elements), 'elements 为空，无法重建模型 ??');
+    
 
     
     
@@ -258,7 +282,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		warning('参数回放失败，将以默认参数运行：%s', ME.message);
 	end
 
-	%set_param(newModel, 'SimulationCommand', 'update');
+	set_param(newModel, 'SimulationCommand', 'update');
 	disp(['模型已重建：' newModel]);
     save_system(newModel)
 end
@@ -369,62 +393,204 @@ function data = load_or_decode_graph(inputPath)
 	end
 end
 
+function data = load_graph_from_csv_dir(inputPath)
+	% why: 从 inputPath 所在目录读取 model_elements.csv / model_ports.csv / model_connections.csv
+	%      并组装为与 MAT 读取一致的 data 结构，便于后续流程无感知使用。
+	% how: 允许 inputPath 为 .mat 或目录路径；若为文件，则使用其所在目录。
+	[dirp,~,ext] = fileparts(inputPath);
+	if isempty(dirp) || (~isempty(ext) && ~strcmpi(ext,'.mat') && ~strcmpi(ext,'.json'))
+		% 若传入就是目录
+		dirp = inputPath;
+	end
+	if isempty(dirp)
+		dirp = pwd;
+	end
+
+	% 目标文件（同目录）
+	fe = fullfile(dirp,'model_elements.csv');
+	fp = fullfile(dirp,'model_ports.csv');
+	fc = fullfile(dirp,'model_connections.csv');
+	fj = fullfile(dirp,'model_params.json');
+
+	% 读取 CSV 为表
+	assert(exist(fe,'file')==2 && exist(fp,'file')==2 && exist(fc,'file')==2, 'CSV 文件缺失（需要 elements/ports/connections）');
+	Te = readtable(fe, 'TextType','string');
+	Tp = readtable(fp, 'TextType','string');
+	Tc = readtable(fc, 'TextType','string');
+
+	% elements: struct 数组
+	elements = table_elements_to_structs(Te);
+	% ports: struct 数组
+	ports    = table_ports_to_structs(Tp);
+	% connections: struct 数组（字段名与 MAT 保持）
+	connections = table_conns_to_structs(Tc);
+
+	% 可选参数
+	params = struct();
+	try
+		if exist(fj,'file')==2
+			txt = fileread(fj);
+			params = jsondecode(txt);
+		end
+	catch
+		params = struct();
+	end
+
+	data = struct('elements',elements,'ports',ports,'connections',connections,'parameters',params);
+end
+
+function elements = table_elements_to_structs(T)
+	% 将 elements.csv 表转换为结构数组，字段名与 MAT 对齐
+	n = height(T); elements = repmat(struct('Path','', 'Name','', 'BlockType','', 'Orientation','', 'Position',[], 'Center',[], 'LibraryLink','', 'Mirror','', 'Rotation','', 'GotoTag','', 'GotoVisibility','', 'FromTag',''), 0, 1);
+	for i = 1:n
+		try
+			pos = [num_or(T.Position_1(i),30) num_or(T.Position_2(i),30) num_or(T.Position_3(i),60) num_or(T.Position_4(i),60)];
+			ctr = [num_or(T.Center_1(i), (pos(1)+pos(3))/2) num_or(T.Center_2(i), (pos(2)+pos(4))/2)];
+			E = struct();
+			E.Path          = char(T.Path(i));
+			E.Name          = char(T.Name(i));
+			E.BlockType     = char(T.BlockType(i));
+			E.Orientation   = char(T.Orientation(i));
+			E.Position      = pos;
+			E.Center        = ctr;
+			E.LibraryLink   = char(def_str_in_table(T,'LibraryLink',i,""));
+			E.Mirror        = char(def_str_in_table(T,'Mirror',i,""));
+			E.Rotation      = char(num_or_str(T,'Rotation',i,'0'));
+			E.GotoTag       = char(def_str_in_table(T,'GotoTag',i,""));
+			E.GotoVisibility= char(def_str_in_table(T,'GotoVisibility',i,""));
+			E.FromTag       = char(def_str_in_table(T,'FromTag',i,""));
+			elements(end+1) = E; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function s = num_or_str(T, col, i, def)
+	% why: Rotation 列可能是数值或字符串，需要统一成字符串输出
+	% how: 若列存在且非缺失，则将数值转字符串；否则返回默认字符串
+	if nargin < 4, def = '0'; end
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			val = T.(col)(i);
+			if ismissing(val)
+				s = def; return;
+			end
+			if isstring(val)
+				if strlength(val)==0
+					s = def; else, s = char(val); end
+				return;
+			end
+			try
+				nv = num_or(val, NaN);
+				if isnan(nv)
+					s = def;
+				else
+					s = char(string(nv));
+				end
+			catch
+				s = def;
+			end
+			return;
+		end
+	catch
+	end
+	s = def;
+end
+
+function ports = table_ports_to_structs(T)
+	% 将 ports.csv 表转换为结构数组，字段名与 MAT 对齐
+	n = height(T); ports = repmat(struct('BlockPath','', 'PortNumber',[], 'PortType','', 'Position',[], 'RelPos',[], 'Side',''), 0, 1);
+	for i = 1:n
+		try
+			pos   = [num_or(T.Position_1(i),NaN) num_or(T.Position_2(i),NaN)];
+			rel   = [num_or(T.RelPos_1(i),NaN) num_or(T.RelPos_2(i),NaN)];
+			pnum  = num_or(T.PortNumber(i), NaN);
+			P = struct();
+			P.BlockPath = char(T.BlockPath(i));
+			P.PortNumber= pnum;
+			P.PortType  = char(T.PortType(i));
+			P.Position  = pos;
+			P.RelPos    = rel;
+			P.Side      = char(def_str_in_table(T,'Side',i,""));
+			ports(end+1) = P; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function conns = table_conns_to_structs(T)
+	% 将 connections.csv 表转换为结构数组，字段名与 MAT 对齐
+	n = height(T); conns = repmat(struct('Source','', 'SourcePath','', 'SourcePort',-1, 'SourcePortKind','', 'SourcePortIndex',-1, 'Destination','', 'DestinationPath','', 'DestinationPort',-1, 'DestinationPortKind','', 'DestinationPortIndex',-1, 'Origin',''), 0, 1);
+	for i = 1:n
+		try
+			C = struct();
+			C.Source                    = char(T.Source(i));
+			C.SourcePath                = char(T.SourcePath(i));
+			C.SourcePort                = num_or(T.SourcePort(i), -1);
+			C.SourcePortKind            = char(def_str_in_table(T,'SourcePortKind',i,""));
+			C.SourcePortIndex           = num_or(def_num_in_table(T,'SourcePortIndex',i), -1);
+			C.Destination               = char(T.Destination(i));
+			C.DestinationPath           = char(T.DestinationPath(i));
+			C.DestinationPort           = num_or(T.DestinationPort(i), -1);
+			C.DestinationPortKind       = char(def_str_in_table(T,'DestinationPortKind',i,""));
+			C.DestinationPortIndex      = num_or(def_num_in_table(T,'DestinationPortIndex',i), -1);
+			C.Origin                    = char(def_str_in_table(T,'Origin',i,""));
+			conns(end+1) = C; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function v = num_or(x, def)
+	% 工具：将字符串/缺失转换为数值；失败返回默认
+	try
+		if ismissing(x) || (isstring(x) && strlength(x)==0)
+			v = def; return;
+		end
+		vx = double(x);
+		if ~isnan(vx)
+			v = vx; return;
+		end
+	catch
+	end
+	try, v = str2double(x); catch, v = def; end
+	if isnan(v), v = def; end
+end
+
+function s = def_str_in_table(T, col, i, def)
+	% 工具：读取表列字符串，缺失/不存在返回默认
+	if nargin < 4, def = ""; end
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			s = T.(col)(i);
+			if ismissing(s) || (isstring(s) && strlength(s)==0)
+				s = def;
+			end
+			return;
+		end
+	catch
+	end
+	s = def;
+end
+
+function v = def_num_in_table(T, col, i)
+	% 工具：读取表列数字，缺失返回 NaN
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			v = num_or(T.(col)(i), NaN);
+			return;
+		end
+	catch
+	end
+	v = NaN;
+end
+
 function v = safe_field(S, name, defaultV)
 	if isstruct(S) && isfield(S, name) && ~isempty(S.(name))
 		v = S.(name);
 	else
 		v = defaultV;
 	end
-end
-
-function params = ensure_params_loaded(params, inputPath)
-    % 若 params.model 为空 struct，则尝试从边车文件加载（与导出侧保持解耦）
-    try
-        needModel = true;
-        try, needModel = isempty(fieldnames(params)) || ~isfield(params,'model') || isempty(fieldnames(params.model)); catch, needModel = true; end
-        if ~needModel, return; end
-
-        [pdir, pbase, ~] = fileparts(inputPath);
-        % 查找 *_params.json（优先）
-        jsonPath = fullfile(pdir, sprintf('%s_params.json', pbase));
-        if exist(jsonPath, 'file')
-            try
-                txt = fileread(jsonPath); J = jsondecode(txt);
-                if isstruct(J)
-                    if ~isfield(params,'blocks') && isfield(J,'blocks'), params.blocks = J.blocks; end
-                    if (~isfield(params,'model') || isempty(fieldnames(params.model))) && isfield(J,'model')
-                        params.model = J.model;
-                    end
-                    return;
-                end
-            catch
-            end
-        end
-
-        % 次选：model/block params CSV（仅在 json 不存在时尝试）
-        mcsv = fullfile(pdir, sprintf('%s_model_params.csv', pbase));
-        if exist(mcsv,'file')
-            try
-                Tm = readtable(mcsv);
-                pm = struct();
-                for i = 1:height(Tm)
-                    pm.(char(Tm.Param{i})) = char(string(Tm.Value{i}));
-                end
-                params.model = pm;
-            catch
-            end
-        end
-
-        bcsv = fullfile(pdir, sprintf('%s_block_params.csv', pbase));
-        if exist(bcsv,'file') && (~isfield(params,'blocks') || isempty(params.blocks))
-            try
-                Tb = readtable(bcsv);
-                params.blocks = rebuild_blocks_from_long_table(Tb);
-            catch
-            end
-        end
-    catch
-    end
 end
 
 function blocks = rebuild_blocks_from_long_table(Tb)
@@ -451,41 +617,7 @@ function blocks = rebuild_blocks_from_long_table(Tb)
     catch
     end
 end
-function s = def_or_empty_struct(S, field)
-    % 工具：如果字段存在则返回之；否则返回空 struct
-    if isstruct(S) && isfield(S, field) && ~isempty(S.(field))
-        s = S.(field);
-    else
-        s = struct();
-    end
-end
 
-function conns = safe_connections(data)
-	% 标准化连接结构，确保包含 SourcePath/DestinationPath
-	if isfield(data, 'connections') && ~isempty(data.connections)
-		conns = data.connections;
-	elseif isfield(data, 'connectivity') && ~isempty(data.connectivity)
-		c = data.connectivity;
-		if iscell(c), conns = [c{:}]; else, conns = c; end
-	else
-		conns = struct('Source',{},'SourcePath',{},'SourcePort',{},'Destination',{},'DestinationPath',{},'DestinationPort',{});
-	end
-	% 字段补齐
-	fieldsNeeded = {'Source','SourcePath','SourcePort','Destination','DestinationPath','DestinationPort'};
-	for i = 1:numel(conns)
-		for f = 1:numel(fieldsNeeded)
-			fd = fieldsNeeded{f};
-			if ~isfield(conns, fd) || isempty(conns(i).(fd))
-				switch fd
-					case {'Source','Destination','SourcePath','DestinationPath'}
-						conns(i).(fd) = '';
-					case {'SourcePort','DestinationPort'}
-						conns(i).(fd) = -1;
-				end
-			end
-		end
-	end
-end
 
 function root = get_root_from_elements(elements)
 	%  ? elements.Path 推断原根 ?
@@ -899,4 +1031,4 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
-newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
+newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model', 1);

@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = untitled1;
+    model_name = untitled3;
 
   
     
@@ -82,86 +82,88 @@ for i = 1:length(all_blocks_pc)
     pc = get_param(bh, 'PortConnectivity');  % 每个端口的上下游连接信息（同时支持物理连接与信号线）
 
     % 遍历该块的每个端口连接
-    for p = 1:numel(pc)
-        % 1) 作为“输出端口”一侧：本块 -> 下游块（包含信号与物理端口）
-        if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
-            src_block_full = getfullname(bh);
-            src_block_name = get_param(bh, 'Name');
-            src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
-            % 新增：端口种类与在该种类数组的索引
-            [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p), 0);
-
-            for d = 1:numel(pc(p).DstBlock)
-                dst_bh         = pc(p).DstBlock(d);
-                port           = pc(p).DstPort(d);
-                dst_block_full = getfullname(dst_bh);
-                dst_block_name = get_param(dst_bh, 'Name');
-                % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
-                dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
-                dst_port_num   = get_port_num(dst_pc_entry); % 若取得为空则返回 NaN→后续统一为 -1
-                [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
-
+    if numel(pc) >= 1
+        for p = 1:numel(pc)
+            % 1) 作为“输出端口”一侧：本块 -> 下游块（包含信号与物理端口）
+            if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
+                src_block_full = getfullname(bh);
+                src_block_name = get_param(bh, 'Name');
+                src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
+                % 新增：端口种类与在该种类数组的索引
+                [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p), 0);
+    
+                for d = 1:numel(pc(p).DstBlock)
+                    dst_bh         = pc(p).DstBlock(d);
+                    port           = pc(p).DstPort(d);
+                    dst_block_full = getfullname(dst_bh);
+                    dst_block_name = get_param(dst_bh, 'Name');
+                    % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
+                    dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
+                    dst_port_num   = get_port_num(dst_pc_entry); % 若取得为空则返回 NaN→后续统一为 -1
+                    [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
+    
+                    key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
+                    %if ~isKey(conn_keys, key)
+                        %conn_keys(key) = true;
+                    connectivity{end+1} = struct( ...
+                            'Source',           src_block_name, ...
+                            'SourcePath',       src_block_full, ...   % 新增
+                            'SourcePort',       src_port_num, ...
+                            'SourcePortKind',   src_kind2, ...
+                            'SourcePortIndex',  src_index2, ...
+                            'Destination',      dst_block_name, ...
+                            'DestinationPath',  dst_block_full, ...   % 新增
+                            'DestinationPort',  dst_port_num, ...
+                            'DestinationPortKind',  dst_kind2, ...
+                            'DestinationPortIndex', dst_index2, ...
+                            'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
+                        );
+                    disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
+                                          dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
+                    end
+                end
+            end
+    
+            % 2) 作为“输入端口”一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
+            if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
+                src_bh          = pc(p).SrcBlock;
+                src_block_full  = getfullname(src_bh);
+                src_block_name  = get_param(src_bh, 'Name');
+                % 上游块的端口号应取 SrcPort；没有则置为 -1 以便后续识别
+                if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
+                    src_port_num = pc(p).SrcPort;
+                else
+                    src_port_num = -1;
+                end
+                [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p),0);
+    
+                dst_block_full  = getfullname(bh);
+                port            = pc(p).DstPort;
+                dst_block_name  = get_param(bh, 'Name');
+                dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
+                [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
+    
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
                 %if ~isKey(conn_keys, key)
                     %conn_keys(key) = true;
                 connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
-                        'SourcePath',       src_block_full, ...   % 新增
+                        'SourcePath',       src_block_full, ...      % 新增
                         'SourcePort',       src_port_num, ...
-                        'SourcePortKind',   src_kind2, ...
-                        'SourcePortIndex',  src_index2, ...
+                        'SourcePortKind',   src_kind3, ...
+                        'SourcePortIndex',  src_index3, ...
                         'Destination',      dst_block_name, ...
-                        'DestinationPath',  dst_block_full, ...   % 新增
+                        'DestinationPath',  dst_block_full, ...      % 新增
                         'DestinationPort',  dst_port_num, ...
-                        'DestinationPortKind',  dst_kind2, ...
-                        'DestinationPortIndex', dst_index2, ...
-                        'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
+                        'DestinationPortKind',  dst_kind3, ...
+                        'DestinationPortIndex', dst_index3, ...
+                        'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
                     );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
                 end
-            end
-        end
-
-        % 2) 作为“输入端口”一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
-        if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
-            src_bh          = pc(p).SrcBlock;
-            src_block_full  = getfullname(src_bh);
-            src_block_name  = get_param(src_bh, 'Name');
-            % 上游块的端口号应取 SrcPort；没有则置为 -1 以便后续识别
-            if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
-                src_port_num = pc(p).SrcPort;
-            else
-                src_port_num = -1;
-            end
-            [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p),0);
-
-            dst_block_full  = getfullname(bh);
-            port            = pc(p).DstPort;
-            dst_block_name  = get_param(bh, 'Name');
-            dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
-            [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
-
-            key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-            %if ~isKey(conn_keys, key)
-                %conn_keys(key) = true;
-            connectivity{end+1} = struct( ...
-                    'Source',           src_block_name, ...
-                    'SourcePath',       src_block_full, ...      % 新增
-                    'SourcePort',       src_port_num, ...
-                    'SourcePortKind',   src_kind3, ...
-                    'SourcePortIndex',  src_index3, ...
-                    'Destination',      dst_block_name, ...
-                    'DestinationPath',  dst_block_full, ...      % 新增
-                    'DestinationPort',  dst_port_num, ...
-                    'DestinationPortKind',  dst_kind3, ...
-                    'DestinationPortIndex', dst_index3, ...
-                    'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
-                );
-            disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
-                                  dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
-            end
-        end
+    end
+end
 
 % 现在 connectivity 单元格数组包含了所有的源-目标连接对（信号线 + 物理网络线）
 for i = 1:length(connectivity)

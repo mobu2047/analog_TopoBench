@@ -1,94 +1,34 @@
 Path,Name,BlockType,Orientation,Position_1,Position_2,Position_3,Position_4,Center_1,Center_2,LibraryLink,Mirror,Rotation,GotoTag,GotoVisibility,FromTag
-"untitled1/Asynchronous Machine
-SI Units","Asynchronous Machine
-SI Units","SubSystem","right",375,150,465,240,420,195,"spsAsynchronousMachineSIUnitsLib/Asynchronous Machine
-SI Units","off",0,"","",""
-"untitled1/Asynchronous Machine
-SI Units1","Asynchronous Machine
-SI Units1","SubSystem","right",375,285,465,375,420,330,"spsAsynchronousMachineSIUnitsLib/Asynchronous Machine
-SI Units","off",0,"","",""
-"untitled1/Asynchronous Machine
-SI Units2","Asynchronous Machine
-SI Units2","SubSystem","right",380,445,470,535,425,490,"spsAsynchronousMachineSIUnitsLib/Asynchronous Machine
-SI Units","off",0,"","",""
-"untitled1/Asynchronous Machine
-SI Units3","Asynchronous Machine
-SI Units3","SubSystem","right",385,605,475,695,430,650,"spsAsynchronousMachineSIUnitsLib/Asynchronous Machine
-SI Units","off",0,"","",""
-"untitled1/Bus
-Selector","Bus
-Selector","BusSelector","right",630,166,635,204,632.5,185,"","off",0,"","",""
-"untitled1/Bus
-Selector1","Bus
-Selector1","BusSelector","right",705,201,710,239,707.5,220,"","off",0,"","",""
-"untitled1/Bus
-Selector2","Bus
-Selector2","BusSelector","right",705,271,710,309,707.5,290,"","off",0,"","",""
-"untitled1/Constant","Constant","Constant","right",-1445,385,-1415,415,-1430,400,"","off",0,"","",""
-"untitled1/Controlled Voltage Source","Controlled Voltage Source","SubSystem","up",-4040,420,-4005,465,-4022.5,442.5,"spsControlledVoltageSourceLib/Controlled Voltage Source","off",270,"","",""
-"untitled1/Current Measurement","Current Measurement","SubSystem","down",-2152,360,-2128,385,-2140,372.5,"spsCurrentMeasurementLib/Current Measurement","off",90,"","",""
-"untitled1/Current Measurement1","Current Measurement1","SubSystem","right",-2965,278,-2940,302,-2952.5,290,"spsCurrentMeasurementLib/Current Measurement","off",0,"","",""
-"untitled1/Current Measurement2","Current Measurement2","SubSystem","right",-2965,513,-2940,537,-2952.5,525,"spsCurrentMeasurementLib/Current Measurement","off",0,"","",""
-"untitled1/Current Measurement3","Current Measurement3","SubSystem","right",-3910,258,-3885,282,-3897.5,270,"spsCurrentMeasurementLib/Current Measurement","off",0,"","",""
-"untitled1/Delay","Delay","Delay","right",-1550,338,-1515,372,-1532.5,355,"","off",0,"","",""
-"untitled1/From","From","From","right",-2630,216,-2590,244,-2610,230,"","off",0,"","","Pulse11"
-"untitled1/From1","From1","From","right",-2700,436,-2660,464,-2680,450,"","off",0,"","","pulse12"
-"untitled1/From2","From2","From","right",-495,926,-455,954,-475,940,"","off",0,"","","A"
-"untitled1/Goto","Goto","Goto","right",770,130,810,160,790,145,"","off",0,"motor_labc","local",""
-"untitled1/Goto1","Goto1","Goto","right",780,195,820,225,800,210,"","off",0,"motor_wm","local",""
-"untitled1/Goto11","Goto11","Goto","right",-20,745,20,775,0,760,"","off",0,"U_FINV","local",""
-"untitled1/Goto2","Goto2","Goto","right",780,260,890,280,835,270,"","off",0,"motor_Te","local",""
-"untitled1/Goto3","Goto3","Goto","right",670,85,710,115,690,100,"","off",0,"Motor_measure","local",""
-"untitled1/Goto4","Goto4","Goto","right",180,130,220,160,200,145,"","off",0,"I_Motor1","local",""
-"untitled1/Goto5","Goto5","Goto","right",-1550,285,-1510,315,-1530,300,"","off",0,"udc","local",""
-"untitled1/Goto6","Goto6","Goto","right",-2080,405,-2040,435,-2060,420,"","off",0,"ic_4QS1","local",""
-"untitled1/Goto7","Goto7","Goto","right",-2845,205,-2805,235,-2825,220,"","off",0,"i_4qs1","local",""
-"untitled1/Goto8","Goto8","Goto","right",-2835,435,-2795,465,-2815,450,"","off",0,"i_4qs2","local",""
-"untitled1/Goto9","Goto9","Goto","right",-15,805,25,835,5,820,"","off",0,"I_FINV","local",""
-"untitled1/Ideal Switch","Ideal Switch","SubSystem","right",-3270,188,-3210,232,-3240,210,"spsIdealSwitchLib/Ideal Switch","off",0,"","",""
-"untitled1/Ideal Switch1","Ideal Switch1","SubSystem","right",-3295,418,-3235,462,-3265,440,"spsIdealSwitchLib/Ideal Switch","off",0,"","",""
-"untitled1/Ideal Switch2","Ideal Switch2","SubSystem","right",-3320,258,-3260,302,-3290,280,"spsIdealSwitchLib/Ideal Switch","off",0,"","",""
-"untitled1/Ideal Switch3","Ideal Switch3","SubSystem","right",-3345,493,-3285,537,-3315,515,"spsIdealSwitchLib/Ideal Switch","off",0,"","",""
-"untitled1/Multi-Winding
-Transformer","Multi-Winding
-Transformer","SubSystem","right",-3755,144,-3685,671,-3720,407.5,"spsMultiWindingTransformerLib/Multi-Winding
-Transformer","off",0,"","",""
-"untitled1/Mux","Mux","Mux","right",-1355,321,-1350,359,-1352.5,340,"","off",0,"","",""
-"untitled1/Rate Limiter","Rate Limiter","RateLimiter","right",30,705,60,735,45,720,"","off",0,"","",""
-"untitled1/Relay","Relay","Relay","right",-1450,325,-1420,355,-1435,340,"","off",0,"","",""
-"untitled1/Scope","Scope","Scope","right",-1545,384,-1515,416,-1530,400,"","off",0,"","",""
-"untitled1/Series RLC Load","Series RLC Load","PMComponent","down",-697,290,-663,370,-680,330,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load1","Series RLC Load1","PMComponent","down",-712,495,-678,575,-695,535,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load11","Series RLC Load11","PMComponent","left",-3130,278,-3095,302,-3112.5,290,"spsSeriesRLCLoadLib/Series RLC Load","on",-0,"","",""
-"untitled1/Series RLC Load12","Series RLC Load12","PMComponent","left",-3130,513,-3095,537,-3112.5,525,"spsSeriesRLCLoadLib/Series RLC Load","on",-0,"","",""
-"untitled1/Series RLC Load2","Series RLC Load2","PMComponent","down",-1212,380,-1188,415,-1200,397.5,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load3","Series RLC Load3","PMComponent","down",-1742,325,-1718,360,-1730,342.5,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load4","Series RLC Load4","PMComponent","down",-1742,385,-1718,420,-1730,402.5,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load5","Series RLC Load5","PMComponent","down",-2152,285,-2128,320,-2140,302.5,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load6","Series RLC Load6","PMComponent","down",-2357,510,-2333,545,-2345,527.5,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Series RLC Load7","Series RLC Load7","PMComponent","left",-2785,283,-2750,307,-2767.5,295,"spsSeriesRLCLoadLib/Series RLC Load","on",-0,"","",""
-"untitled1/Series RLC Load8","Series RLC Load8","PMComponent","left",-2775,518,-2740,542,-2757.5,530,"spsSeriesRLCLoadLib/Series RLC Load","on",-0,"","",""
-"untitled1/Series RLC Load9","Series RLC Load9","PMComponent","down",-712,815,-678,895,-695,855,"spsSeriesRLCLoadLib/Series RLC Load","on",270,"","",""
-"untitled1/Sine Wave","Sine Wave","Sin","right",-4185,555,-4155,585,-4170,570,"","off",0,"","",""
-"untitled1/Three-Phase
-V-I Measurement","Three-Phase
-V-I Measurement","SubSystem","right",-85,129,-20,241,-52.5,185,"spsThreePhaseVIMeasurementLib/Three-Phase
-V-I Measurement","off",0,"","",""
-"untitled1/Three-Phase
-V-I Measurement1","Three-Phase
-V-I Measurement1","SubSystem","right",-155,744,-90,856,-122.5,800,"spsThreePhaseVIMeasurementLib/Three-Phase
-V-I Measurement","off",0,"","",""
-"untitled1/Three-Phase Transformer
-Inductance Matrix Type
-(Two Windings)","Three-Phase Transformer
-Inductance Matrix Type
-(Two Windings)","SubSystem","right",-340,737,-260,853,-300,795,"spsThreePhaseTransformerInductanceMatrixTypeTwoWindingsLib/Three-Phase Transformer
-Inductance Matrix Type
-(Two Windings)","off",0,"","",""
-"untitled1/Universal Bridge","Universal Bridge","SubSystem","left",-550,281,-455,424,-502.5,352.5,"spsUniversalBridgeLib/Universal Bridge","off",180,"","",""
-"untitled1/Universal Bridge1","Universal Bridge1","SubSystem","left",-450,464,-360,601,-405,532.5,"spsUniversalBridgeLib/Universal Bridge","off",180,"","",""
-"untitled1/Universal Bridge2","Universal Bridge2","SubSystem","right",-985,288,-890,412,-937.5,350,"spsUniversalBridgeLib/Universal Bridge","off",0,"","",""
-"untitled1/Universal Bridge3","Universal Bridge3","SubSystem","right",-2475,283,-2380,407,-2427.5,345,"spsUniversalBridgeLib/Universal Bridge","off",0,"","",""
-"untitled1/Universal Bridge4","Universal Bridge4","SubSystem","right",-2550,493,-2455,617,-2502.5,555,"spsUniversalBridgeLib/Universal Bridge","off",0,"","",""
-"untitled1/Universal Bridge5","Universal Bridge5","SubSystem","left",-545,744,-455,881,-500,812.5,"spsUniversalBridgeLib/Universal Bridge","off",180,"","",""
-"untitled1/Voltage Measurement","Voltage Measurement","SubSystem","right",-1655,343,-1630,367,-1642.5,355,"spsVoltageMeasurementLib/Voltage Measurement","off",0,"","",""
+"untitled3/Constant","Constant","Constant","right",-735,270,-705,300,-720,285,"","off",0,"","",""
+"untitled3/DC Voltage Source","DC Voltage Source","SubSystem","up",10,200,30,235,20,217.5,"spsDCVoltageSourceLib/DC Voltage Source","off",270,"","",""
+"untitled3/From","From","From","right",-30,-4,10,24,-10,10,"","off",0,"","","A1"
+"untitled3/From1","From1","From","right",480,6,520,34,500,20,"","off",0,"","","A2"
+"untitled3/From2","From2","From","right",505,231,545,259,525,245,"","off",0,"","","A4"
+"untitled3/From3","From3","From","right",45,156,85,184,65,170,"","off",0,"","","A3"
+"untitled3/Goto","Goto","Goto","right",-170,155,-130,185,-150,170,"","off",0,"A1","local",""
+"untitled3/Goto1","Goto1","Goto","right",-195,475,-155,505,-175,490,"","off",0,"A4","local",""
+"untitled3/Goto2","Goto2","Goto","right",-250,400,-210,430,-230,415,"","off",0,"A3","local",""
+"untitled3/Goto3","Goto3","Goto","right",-180,330,-140,360,-160,345,"","off",0,"A2","local",""
+"untitled3/GreaterThan","GreaterThan","RelationalOperator","right",-410,397,-380,428,-395,412.5,"","off",0,"","",""
+"untitled3/GreaterThan1","GreaterThan1","RelationalOperator","right",-555,212,-525,243,-540,227.5,"","off",0,"","",""
+"untitled3/IGBT","IGBT","SubSystem","down",108,110,152,170,130,140,"spsIGBTLib/IGBT","off",90,"","",""
+"untitled3/IGBT1","IGBT1","SubSystem","down",438,110,482,170,460,140,"spsIGBTLib/IGBT","off",90,"","",""
+"untitled3/IGBT2","IGBT2","SubSystem","down",108,270,152,330,130,300,"spsIGBTLib/IGBT","off",90,"","",""
+"untitled3/IGBT3","IGBT3","SubSystem","down",428,260,472,320,450,290,"spsIGBTLib/IGBT","off",90,"","",""
+"untitled3/NOT","NOT","Logic","right",-430,304,-400,336,-415,320,"","off",0,"","",""
+"untitled3/NOT1","NOT1","Logic","right",-395,489,-365,521,-380,505,"","off",0,"","",""
+"untitled3/Product1","Product1","Product","right",-570,412,-540,443,-555,427.5,"","off",0,"","",""
+"untitled3/Repeating
+Sequence","Repeating
+Sequence","SubSystem","right",-770,445,-740,475,-755,460,"simulink/Sources/Repeating
+Sequence","off",0,"","",""
+"untitled3/Scope","Scope","Scope","right",365,109,395,141,380,125,"","off",0,"","",""
+"untitled3/Series RLC Branch","Series RLC Branch","PMComponent","right",160,196,240,234,200,215,"spsSeriesRLCBranchLib/Series RLC Branch","off",0,"","",""
+"untitled3/Series RLC Branch1","Series RLC Branch1","PMComponent","right",315,196,395,234,355,215,"spsSeriesRLCBranchLib/Series RLC Branch","off",0,"","",""
+"untitled3/Sine Wave","Sine Wave","Sin","right",-590,310,-560,340,-575,325,"","off",0,"","",""
+"untitled3/Sine Wave1","Sine Wave1","Sin","right",-730,185,-700,215,-715,200,"","off",0,"","",""
+"untitled3/Square Wave
+Generator","Square Wave
+Generator","SignalGenerator","right",-770,375,-740,405,-755,390,"","off",0,"","",""
+"untitled3/Voltage Measurement","Voltage Measurement","SubSystem","right",285,138,310,162,297.5,150,"spsVoltageMeasurementLib/Voltage Measurement","off",0,"","",""
+"untitled3/powergui","powergui","SubSystem","right",-450,-80,-369,-41,-409.5,-60.5,"spspowerguiLib/powergui","off",0,"","",""
