@@ -12,6 +12,11 @@ Analog TopoBench 是一个分层解耦的 Python⇄Simulink 控制仿真框架�
 - **智能体支持**：标准化的智能体接口，支持 RL/DL/启发式算法
 - **可视化工具**：自动生成仿真结果图表和性能指标
 - **扩展性强**：模块化设计，易于添加新的拓扑和控制算法
+- **自动参数发现**：从 `model_params.json` 一键生成全量 `auto_params.yaml`，可选生成 `config/default.yaml`
+- **自动输出发现**：扫描 `To Workspace/Scope/Outport` 等观测源，自动接线并写入工作区，结果自动并入输出映射
+- **Scope 注入（可选）**：按配置自动添加 `To Workspace`/开启 Scope DataLogging
+- **Dataset/Timeseries 解析**：自动解析 `Simulink.SimulationData.Dataset/timeseries`，多通道绘图
+- **时间轴自动对齐**：支持 `tout` 与各通道长度不一致自动对齐重建
 
 ## 项目架构
 
