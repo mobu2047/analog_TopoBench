@@ -4,7 +4,7 @@
 
 Analog TopoBench 是一个分层解耦的 Python⇄Simulink 控制仿真框架，专为电力电子拓扑的智能控制而设计。框架后续计划支持强化学习（RL）、深度学习（DL）与 MCP/LLM Agent 的接入，核心原则是仿真层、智能体层、应用层彼此独立，通过清晰的数据接口交互。
 
-### 核心特性
+### 核心特性（v2）
 
 - **分层架构**：仿真层、智能体层、应用层完全解耦
 - **MATLAB/Simulink 集成**：无缝对接 MATLAB 仿真环境
@@ -96,26 +96,31 @@ addpath('path/to/analog_TopoBench/simulink');
 modelPath = generate_inverter_model();
 ```
 
-## 使用方法
+## 使用方法（v2）
 
-### 快速开始
+### 1) 一键生成配置
 
-#### 1. 交互模式
+- 生成全量参数快照（仅参数树）：
 ```bash
-# 手动输入控制参数
-python main.py --interactive
+python -m inverter_ai_control.utils.config_mapper --json simulink/export_model_graph/model_params.json --out config/auto_params.yaml
 ```
 
-#### 2. 预设模式
+- 基于快照生成精简版 v2 主配置：
 ```bash
-# 按配置文件执行预设动作序列
+python -m inverter_ai_control.utils.config_mapper --gen-default --model-path simulink/untitled3.slx --stop-time 0.1 --auto config/auto_params.yaml --config config/default.yaml
+```
+
+### 2) 运行仿真
+```bash
 python main.py
 ```
+- 运行后：
+  - 自动发现并接线观测信号，`out['sim']` 中包含 `tout`、数组信号和（如存在）解析后的 `ScopeData/yout`
+  - 自动在 `runs/<timestamp>/outputs.png` 保存绘图（支持 zip 多通道 & 时间对齐）
 
-#### 3. 独立测试
+### 3) 交互模式（可选）
 ```bash
-# 验证仿真器功能
-python test_simulator.py
+python main.py --interactive
 ```
 
 ### 编程接口
@@ -166,93 +171,46 @@ class MyAgent(BaseAgent):
         pass
 ```
 
-## 配置项详细说明
+## 配置项详细说明（v2）
 
-### 1. MATLAB 仿真配置 (matlab)
-
+### 1) 顶层结构
 ```yaml
+version: 2
+model: { path: simulink/untitled3.slx }
+sim:
+  step: 1.0e-06
+  stop_time: 0.1
+  mode: { start_in_accelerator: true, external_mode: false }
 matlab:
-  model_path: 'simulink/untitled.slx'    # Simulink 模型路径（相对或绝对）
-  simulation_step: 0.001                 # 仿真步长 (s)
-  stop_time: 0.1                         # 仿真停止时间 (s)
-  start_in_accelerator: true             # 是否启用加速模式
-  use_external_mode: false               # 是否使用外部模式
-  extra_params:                          # 额外参数
-    Ts: 0.001                            # 采样时间
-    L_load: 0.001                        # 负载电感
-  input_map:                             # 输入变量映射
-    L_load: 'L_load'                     # 动作名 -> MATLAB 变量名
-  output_map:                            # 输出变量映射
-    ScopeData: 'ScopeData'               # 观测名 -> MATLAB 变量名
-```
-
-### 2. 拓扑配置 (topology)
-
-```yaml
-topology:
-  id: single_phase_bridge                # 拓扑标识符
-  description: 单相桥式逆变器（示例）      # 拓扑描述
-  read_mode: base_workspace              # 数据读取模式
-```
-
-### 3. 动作空间配置 (action_space)
-
-```yaml
+  output_map:
+    tout: tout              # 保底：时间向量
+  scope:                    # 可选：自动添加 To Workspace/开启 Scope 日志
+    enable: true
+    var: ScopeData
+    save_format: Dataset    # 或 Array/Structure With Time
+parameters:
+  auto: { file: config/auto_params.yaml }
 action_space:
-  - name: Kp                             # 动作名称
-    target: workspace                    # 目标位置（workspace/model）
-    path: Kp_val                         # 目标变量路径
-    dtype: float                         # 数据类型
-    bounds: { min: 0.0, max: 10.0 }     # 取值范围
-    apply: assign                        # 应用方式（assign/update）
-    step_rate: per_step                  # 更新频率（per_step/per_episode）
-  - name: L_load
-    target: workspace
-    path: L_load
-    dtype: float
-    default: 0.001                       # 默认值
-    bounds: { min: 0.0001, max: 0.01 }
-    apply: assign
-    step_rate: per_episode
-```
-
-### 4. 观测空间配置 (observation_space)
-
-```yaml
-observation_space:
-  signals:
-    - key: ScopeData                     # 观测键名
-      from: workspace                    # 数据源
-      path: ScopeData                    # 变量路径
-      transforms: [ last ]               # 数据变换（last/mean/max等）
-```
-
-### 5. 性能指标配置 (metrics)
-
-```yaml
-metrics:
-  evaluation_window: by_step             # 评估窗口（by_step/by_episode）
-  definitions:
-    - name: voltage_tracking             # 指标名称
-      expr: abs(V_out - V_ref)          # 计算表达式
-      aggregator: mean                   # 聚合方式
-      goal: minimize                     # 优化目标
-      weight: 0.5                        # 权重
-  constraints:
-    - name: thd_limit                    # 约束名称
-      expr: thd(V_out, fs=10000, f0=50) <= 0.05  # 约束表达式
-```
-
-### 6. 预设动作配置 (presets)
-
-```yaml
+  - { name: Kp, target: workspace, path: Kp_val, dtype: float, bounds: { min: 0.0, max: 10.0 }, apply: assign, step_rate: per_step }
+  - { name: Ki, target: workspace, path: Ki_val, dtype: float, bounds: { min: 0.0, max: 100.0 }, apply: assign, step_rate: per_step }
 presets:
-  episode:                              # 每回合初始化动作
-    L_load: 0.001
-  steps:                                # 逐步动作序列
-    - { L_load: 10 }
-    - { L_load: 20 }
+  init_action: { L_load: 0.001 }
 ```
+
+说明：
+- v2 移除了 `parameters.manual` 与 `input_map`；默认值通过 `presets.init_action`，可控量通过 `action_space`
+- 运行时输出映射以自动发现为主，配置的 `matlab.output_map` 仅用于补充/重命名
+
+### 2) 自动输出发现与注入
+- 仿真器会扫描并自动接线：
+  - `To Workspace`（直接读取变量名）
+  - `Scope`（自动开启 DataLogging=on，并设变量名/格式）
+  - 根级 `Outport`（可选写入 yout）
+- 发现的变量将被规范化命名为：`<模块规范名>_<工作区变量名>`，例如：`scope__1_ScopeData`
+- 解析 `Dataset/timeseries` 为多通道；绘图会自动展开为 `name_ch1/name_ch2` 并进行时间轴对齐
+
+### 3) 指标与观测
+- 指标仍使用 `metrics` 段定义；`observation_space` 可选（若直接从 `out['sim']` 获取即可）
 
 ## 扩展方向
 
@@ -260,7 +218,7 @@ presets:
 
 1. 在 `config/default.yaml` 中定义新的拓扑配置
 2. 在 `simulink/` 目录下创建对应的 Simulink 模型
-3. 更新 `input_map` 和 `output_map` 配置
+3. 如需固定输出命名，在 `matlab.output_map` 中补充；否则依赖自动发现
 
 ### 2. 实现新的智能体算法
 
