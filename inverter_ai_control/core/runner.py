@@ -18,18 +18,19 @@ class Runner:
     def __init__(self, simulator, cfg: Dict[str, Any]):
         self._sim = simulator
         self._cfg = cfg
-        topo = cfg.get("topology", {})
         self._validator = ActionValidator(cfg.get("action_space", []))
         self._adapter = TopologyAdapter(simulator, cfg.get("action_space", []))
-        self._observer = ObservationReader(simulator, cfg.get("observation_space", {}), topo.get("read_mode", "base_workspace"))
+        # v2 不再使用 topology.read_mode；默认从 workspace 读取
+        self._observer = ObservationReader(simulator, cfg.get("observation_space", {}), "base_workspace")
         self._metrics = MetricEvaluator(cfg.get("metrics", {}))
 
     def reset(self, initial_action: Dict[str, Any] | None = None) -> Dict[str, Any]:
-        # 按 per_episode 的动作预写（若提供）
-        if initial_action:
-            self._adapter.apply_action(self._validator.clip_and_validate(initial_action))
-        # 仿真复位
-        return self._sim.reset()
+        # v2: 支持从 presets.init_action 获取默认初始动作；避免重复写入，统一交由 simulator.reset 处理覆盖
+        if initial_action is None:
+            presets = self._cfg.get("presets", {}) or {}
+            initial_action = presets.get("init_action")
+        validated = self._validator.clip_and_validate(initial_action) if initial_action else None
+        return self._sim.reset(initial_setpoints=validated)
 
     def step(self, action: Dict[str, Any], *, whole_duration: bool = True) -> Dict[str, Any]:
         # 恢复校验

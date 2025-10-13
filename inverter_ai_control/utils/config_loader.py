@@ -18,21 +18,43 @@ from inverter_ai_control.utils.logger import get_logger
 log = get_logger(__name__)
 
 
-def load_config(path: str | Path) -> Dict[str, Any]:
-    """从 YAML 文件加载配置为字典。
+def _read_yaml(p: Path) -> Dict[str, Any]:
+    with p.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
 
-    设计：
-    - 返回纯 dict，避免与具体库（omegaconf 等）耦合
-    - 在此处可加入默认值注入/结构校验
+
+def load_config(path: str | Path) -> Dict[str, Any]:
+    """从 YAML 文件加载配置为字典，并兼容 v2 结构。
+
+    v2 关键点：
+    - model.path / sim.step / sim.stop_time / sim.mode.*
+    - matlab.output_map 作为唯一输出映射
+    - parameters.manual（工作区变量）+ parameters.auto.file（外置自动参数）
+    - presets.init_action（替代旧版 presets.episode/steps）
     """
     p = Path(path)
     if not p.exists():
         raise FileNotFoundError(f"Config file not found: {p}")
 
-    with p.open("r", encoding="utf-8") as f:
-        cfg = yaml.safe_load(f) or {}
+    cfg = _read_yaml(p)
 
-    log.info("config.loaded", path=str(p))
+    # 合并 auto 参数（若定义了外置文件）
+    params = cfg.get("parameters", {}) or {}
+    auto = params.get("auto", {}) or {}
+    auto_file = auto.get("file")
+    if auto_file:
+        auto_path = Path(auto_file)
+        if not auto_path.is_absolute():
+            auto_path = p.parent / auto_path
+        if auto_path.exists():
+            auto_data = _read_yaml(auto_path)
+            params["auto_merged"] = auto_data
+            cfg["parameters"] = params
+            log.info("config.auto_params.merged", file=str(auto_path))
+        else:
+            log.warning("config.auto_params.missing", file=str(auto_path))
+
+    log.info("config.loaded", path=str(p), version=str(cfg.get("version", "unknown")))
     return cfg
 
 

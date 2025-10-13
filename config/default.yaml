@@ -1,115 +1,87 @@
-matlab:
-  model_path: 'simulink/untitled.slx'  # 使用相对路径，默认相对于项目根目录运行路径
-  simulation_step: 0.001
+version: 2
+model:
+  path: simulink/untitled3.slx
+sim:
+  step: 1.0e-06
   stop_time: 0.1
-  start_in_accelerator: true
-  use_external_mode: false
-  extra_params: { Ts: 0.001 , L_load: 0.001 }
-  input_map:
-    # Kp: 'Kp_val'
-    # Ki: 'Ki_val'
-    # rep_t: 'rep_t'
-    # rep_y: 'rep_y' 
-    L_load: 'L_load'
+  mode:
+    start_in_accelerator: true
+    external_mode: false
+matlab:
   output_map:
-    ScopeData: 'ScopeData'
-    # V_out: 'V_out'
-    # V_ref: 'V_ref'
-    # error: 'error'
-
-action_bounds:
-  # Kp:
-  #   min: 0.0
-  #   max: 10.0
-  # Ki:
-  #   min: 0.0
-  #   max: 100.0
-
-# 新增：拓扑与动作/观测/指标声明
-topology:
-  id: single_phase_bridge
-  description: 单相桥式逆变器（示例）
-  read_mode: base_workspace
-
+    tout: tout
+parameters:
+  auto:
+    file: auto_params.yaml
 action_space:
-  - name: Kp
-    target: workspace
-    path: Kp_val
-    dtype: float
-    bounds: { min: 0.0, max: 10.0 }
-    apply: assign
-    step_rate: per_step
-  - name: Ki
-    target: workspace
-    path: Ki_val
-    dtype: float
-    bounds: { min: 0.0, max: 100.0 }
-    apply: assign
-    step_rate: per_step
-  - name: rep_t
-    target: workspace
-    path: rep_t
-    dtype: array
-    shape: [3]
-    default: [0, 0.00005, 0.0001]
-    apply: assign
-    step_rate: per_episode
-  - name: L_load
-    target: workspace
-    path: L_load
-    dtype: float
-    default: 0.001
-    bounds: { min: 0.0001, max: 0.01 }
-    apply: assign
-    step_rate: per_episode
-
+- name: Kp
+  target: workspace
+  path: Kp_val
+  dtype: float
+  bounds:
+    min: 0.0
+    max: 10.0
+  apply: assign
+  step_rate: per_step
+- name: Ki
+  target: workspace
+  path: Ki_val
+  dtype: float
+  bounds:
+    min: 0.0
+    max: 100.0
+  apply: assign
+  step_rate: per_step
+- name: L_load
+  target: workspace
+  path: L_load
+  dtype: float
+  bounds:
+    min: 0.0001
+    max: 0.01
+  default: 0.001
+  apply: assign
+  step_rate: per_episode
+- name: rep_t
+  target: workspace
+  path: rep_t
+  dtype: array
+  shape:
+  - 3
+  bounds:
+    element_min: 0.0
+    element_max: 0.01
+  default:
+  - 0
+  - 5.0e-05
+  - 0.0001
+  apply: assign
+  step_rate: per_episode
 observation_space:
   signals:
-    # - key: V_out
-    #   from: workspace
-    #   path: V_out
-    #   transforms: [ last ]
-    # - key: V_ref
-    #   from: workspace
-    #   path: V_ref
-    #   transforms: [ last ]
-    # - key: error
-    #   from: workspace
-    #   path: error
-    #   transforms: [ last ]  
-    - key: ScopeData
-      from: workspace
-      path: ScopeData
-      transforms: [ last ]
-
+  - key: tout
+    from: workspace
+    path: tout
+    transforms:
+    - last
 metrics:
   evaluation_window: by_step
   definitions:
-    - name: voltage_tracking
-      expr: abs(V_out - V_ref)
-      aggregator: mean
-      goal: minimize
-      weight: 0.5
-    - name: waveform_thd
-      expr: thd(V_out, fs=10000, f0=50)
-      aggregator: last
-      goal: minimize
-      weight: 0.5
+  - name: voltage_tracking
+    expr: abs(V_out - V_ref)
+    aggregator: mean
+    goal: minimize
+    weight: 0.5
+  - name: waveform_thd
+    expr: thd(V_out, fs=10000, f0=50)
+    aggregator: last
+    goal: minimize
+    weight: 0.5
   constraints:
-    - name: thd_limit
-      expr: thd(V_out, fs=10000, f0=50) <= 0.05
-    - name: saturation_guard
-      expr: V_out <= 400
-
-# 预设动作（目标方案）：按实际需求声明每回合动作与逐步动作
+  - name: thd_limit
+    expr: thd(V_out, fs=10000, f0=50) <= 0.05
+  - name: saturation_guard
+    expr: V_out <= 400
 presets:
-  episode:
-    # rep_t: [0, 0.00005, 0.0001]
-    # rep_y: [-1,0,-1]     # 每回合一次性设置的变量
+  init_action:
     L_load: 0.001
-  steps:
-    # - {  rep_t: [0, 0.00005, 0.0001], rep_y: [-1,0,-1]  ,L_load: 0.001 }
-    # - {  rep_t: [0, 0.00004, 0.00005], L_load: 0.002 }
-
-    - {  L_load: 10}
-    - {  L_load: 20 }

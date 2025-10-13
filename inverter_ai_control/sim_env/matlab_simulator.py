@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Mapping, Optional, Protocol, Tuple
 
 import os
+import re
 import logging
 import numpy as np
 
@@ -216,17 +217,13 @@ class MatlabSimulator:
         """初始化并建立与 MATLAB 引擎的连接，载入 Simulink 模型。
 
         参数:
-        - config: 配置字典（或类似映射），预期结构：
-            matlab:
-              model_path: str
-              simulation_step: float
-              stop_time: float
-              start_in_accelerator: bool
-              use_external_mode: bool
-              extra_params: dict
-              input_map: dict[str, str]
-              output_map: dict[str, str]
-            action_bounds: dict[str, {min: float, max: float}]  # 可选，供上层使用
+        - config: 配置字典（或类似映射），预期结构（v2）：
+            model.path: str
+            sim.step: float
+            sim.stop_time: float
+            sim.mode:{ start_in_accelerator: bool, external_mode: bool }
+            parameters.auto.file: str  # 外置全量参数快照（仅用于生成/参考，不在此处注入）
+            matlab.output_map: dict[str, str]
         - engine: 可选，外部提供的 MATLAB 引擎实例（不由本类管理生命周期）
 
         行为：
@@ -240,14 +237,20 @@ class MatlabSimulator:
 
         # 归一化并校验模型路径
         # 读取配置（含默认值）
+        # v2 读取
+        model_cfg = dict(config.get("model", {}))
+        sim_cfg = dict(config.get("sim", {}))
         matlab_cfg = dict(config.get("matlab", {}))
-        model_path = matlab_cfg.get("model_path", "inverter_model.slx")
-        sample_time_s = float(matlab_cfg.get("simulation_step", 1e-3))
-        stop_time_s = matlab_cfg.get("stop_time", None)
-        start_in_accelerator = bool(matlab_cfg.get("start_in_accelerator", True))
-        use_external_mode = bool(matlab_cfg.get("use_external_mode", False))
-        extra_params = dict(matlab_cfg.get("extra_params", {}))
-        input_map = dict(matlab_cfg.get("input_map", {}))
+        params_cfg = dict(config.get("parameters", {}))
+
+        model_path = model_cfg.get("path", "")
+        sample_time_s = float(sim_cfg.get("step", 1e-3))
+        stop_time_s = sim_cfg.get("stop_time", None)
+        mode_cfg = dict(sim_cfg.get("mode", {}))
+        start_in_accelerator = bool(mode_cfg.get("start_in_accelerator", True))
+        use_external_mode = bool(mode_cfg.get("external_mode", False))
+        # v2 精简：不再从 manual 注入默认变量；仅使用 init_action/每步 action 进行赋值
+        extra_params: Dict[str, Any] = {}
         output_map = dict(matlab_cfg.get("output_map", {}))
 
         normalized_path = os.path.abspath(os.path.expanduser(str(model_path)))
@@ -259,7 +262,8 @@ class MatlabSimulator:
         self._model_name: str = os.path.splitext(os.path.basename(normalized_path))[0]
         self._sample_time_s: float = float(sample_time_s)
         self._stop_time_s: Optional[float] = float(stop_time_s) if stop_time_s is not None else None
-        self._input_map: Dict[str, str] = input_map
+        # v2 去除 input_map，动作由 TopologyAdapter 直接调用 _assign_in_base
+        self._input_map: Dict[str, str] = {}
         self._output_map: Dict[str, str] = output_map
         self._extra_params: Dict[str, Any] = extra_params
         self._accelerator: bool = start_in_accelerator
@@ -301,9 +305,53 @@ class MatlabSimulator:
                     # 某些模型/许可证不支持 accelerator，降级为 normal
                     self._eng.set_param(self._model_name, "SimulationMode", "normal", nargout=0)
 
+            # 可选：确保存在 To Workspace 块写出 ScopeData（需配置 matlab.scope.enable），并关闭 Single simulation output
+            try:
+                # 关闭单输出，使 To Workspace 正常写出 base 变量
+                try:
+                    self._eng.set_param(self._model_name, "ReturnWorkspaceOutputs", "off", nargout=0)
+                except Exception:
+                    pass
+
+                scope_cfg = dict(matlab_cfg.get("scope", {}))
+                if bool(scope_cfg.get("enable", False)):
+                    var_name = scope_cfg.get("var", "ScopeData")
+                    save_fmt = scope_cfg.get("save_format", "Array")  # Array | Structure With Time | Dataset
+                    to_block = f"{self._model_name}/auto_ToWorkspace_{var_name}"
+
+                    need_add = False
+                    try:
+                        _ = self._eng.get_param(to_block, "BlockType", nargout=1)
+                    except Exception:
+                        need_add = True
+
+                    if need_add:
+                        self._eng.add_block("simulink/Sinks/To Workspace", to_block, "MakeNameUnique", "off", nargout=0)
+                        self._eng.set_param(to_block, "VariableName", var_name, nargout=0)
+                        self._eng.set_param(to_block, "SaveFormat", save_fmt, nargout=0)
+
+                        src_block = scope_cfg.get("source_block")  # 形如 'model/Sub/Block'
+                        src_port = int(scope_cfg.get("source_port", 1))
+                        if src_block:
+                            try:
+                                self._eng.add_line(self._model_name, f"{src_block}/{src_port}", f"{to_block}/1", "autorouting", "on", nargout=0)
+                            except Exception:
+                                # 如果源端口已连接，Simulink 可能不允许重复连线；这里忽略错误
+                                pass
+            except Exception:
+                # 添加/连接失败不影响主流程
+                pass
+
             # 写入初始参数到工作区
             for var_name, var_value in self._extra_params.items():
                 self._assign_in_base(var_name, var_value)
+
+            # 自动发现并接线观测信号，填充输出映射
+            try:
+                self._autoconfigure_outputs(matlab_cfg)
+            except Exception:
+                # 发现/接线失败不阻塞主流程
+                pass
 
             # 确认连接就绪
             self._connected = True
@@ -329,19 +377,13 @@ class MatlabSimulator:
             self._eng.set_param(self._model_name, "StartTime", "0.0", nargout=0)
             self._eng.set_param(self._model_name, "StopTime", str(self._stop_time_s), nargout=0)
 
-            # 完全解耦：仅按配置与调用者提供的变量写入，不推断/派生任何模型专属变量
-            # 由外部 Profile（配置）/Adapter 决定需要哪些变量，如 rep_t/L_load/Kp/Ki 等
-            base_vars: Dict[str, Any] = dict(self._extra_params)
-            # input_vars: Dict[str, Any] = dict(self._input_map)
-            for var_name, var_value in base_vars.items():
+            # 写入初始化参数（工作区变量）
+            for var_name, var_value in dict(self._extra_params).items():
                 self._assign_in_base(var_name, var_value)
-            # for var_name, var_value in input_vars.items():
-            #     self._eng.set_param(self._model_name+'/Series RLC Branch', var_name, var_value, nargout=0)
+            # 写入初始化 setpoints（直接按变量名赋值，v2 不再通过 input_map）
             if initial_setpoints:
                 for logical_key, value in dict(initial_setpoints).items():
-                    target = self._input_map.get(logical_key, logical_key)
-                    # 按类型处理：标量->1x1 double；数组->double 向量；字符串跳过
-                    self._assign_in_base(target, value)
+                    self._assign_in_base(logical_key, value)
 
             # 再执行一次模型更新，使初始条件与参数生效
             self._eng.set_param(self._model_name, "SimulationCommand", "update", nargout=0)
@@ -369,10 +411,9 @@ class MatlabSimulator:
             raise MatlabSimulationError("Engine/model is not connected. Initialize first.")
 
         try:
-            # 写入控制量/动作到工作区（按类型处理，避免将数组强制转换为标量）
+            # 写入控制量/动作到工作区（v2：直接按变量名赋值）
             for logical_key, value in dict(action).items():
-                target = self._input_map.get(logical_key, logical_key)
-                self._assign_in_base(target, value)
+                self._assign_in_base(logical_key, value)
 
             # 设置 StopTime 以推进一个控制步长
             next_t = self._current_time + self._stop_time_s
@@ -440,6 +481,82 @@ class MatlabSimulator:
     # ---------------------------
     # 内部工具方法（封装交互细节）
     # ---------------------------
+    def _try_eval_numeric(self, s: str) -> float:
+        """尽力将字符串数学表达式转为 float。
+
+        支持：'1/5000', '2*pi', 'pi', '+-*/**'，以及空格。
+        不支持任意函数调用，确保安全；若失败则抛出 ValueError。
+        """
+        import math, ast
+
+        text = str(s).strip()
+        # 简单 array 字面量在其他分支处理
+        if text.startswith("[") and text.endswith("]"):
+            raise ValueError("array literal handled elsewhere")
+
+        # MATLAB 幂运算符 '^' 转为 Python '**'
+        text = text.replace("^", "**")
+
+        # 解析 AST 并仅允许安全节点
+        allowed_nodes = (
+            ast.Expression,
+            ast.BinOp,
+            ast.UnaryOp,
+            ast.Num,
+            ast.Constant,
+            ast.Add,
+            ast.Sub,
+            ast.Mult,
+            ast.Div,
+            ast.Pow,
+            ast.USub,
+            ast.UAdd,
+            ast.Load,
+            ast.Name,
+            ast.Mod,
+        )
+
+        tree = ast.parse(text, mode="eval")
+        for node in ast.walk(tree):
+            if not isinstance(node, allowed_nodes):
+                raise ValueError(f"disallowed expression: {type(node).__name__}")
+            if isinstance(node, ast.Name) and node.id not in {"pi", "inf", "nan"}:
+                raise ValueError(f"disallowed name: {node.id}")
+
+        val = eval(compile(tree, filename="<expr>", mode="eval"), {"__builtins__": {}}, {"pi": math.pi, "inf": float("inf"), "nan": float("nan")})
+        return float(val)
+
+    def _coerce_arraylike(self, value: Any) -> list:
+        """将 list/tuple/ndarray/字符串数组字面量转为 1xN 的 Python 浮点列表。
+
+        - 若为字符串形如 "[0 1/5000 1/2000]"，按空白/逗号/分号分割并解析每个元素
+        - 若为一般序列，则逐元素进行字符串表达式求值或直接转 float
+        """
+        import re
+        if isinstance(value, str):
+            text = value.strip()
+            if text.startswith("[") and text.endswith("]"):
+                inner = text[1:-1]
+                tokens = [t for t in re.split(r"[\s,;]+", inner) if t]
+                return [self._try_eval_numeric(tok) if not re.fullmatch(r"[+-]?(\d+\.?\d*|\.\d+)", tok) else float(tok) for tok in tokens]
+            # 非数组字符串，尝试作为单标量表达式处理为单元素数组
+            try:
+                return [self._try_eval_numeric(text)]
+            except Exception as e:
+                raise ValueError(f"cannot parse numeric array from '{value}': {e}")
+
+        # 一般序列：逐元素处理
+        seq = list(value) if not isinstance(value, np.ndarray) else value.tolist()
+        coerced: list[float] = []
+        for elem in seq:
+            if isinstance(elem, (float, int)):
+                coerced.append(float(elem))
+            elif isinstance(elem, str):
+                coerced.append(self._try_eval_numeric(elem))
+            else:
+                coerced.append(float(elem))
+        return coerced
+
     def _assign_in_base(self, name: str, value: Any) -> None:
         """将 Python 值写入 MATLAB base 工作区。
 
@@ -452,8 +569,17 @@ class MatlabSimulator:
                 # 转成 1x1 double，避免维度歧义
                 self._eng.workspace[name] = matlab.double([float(value)])
             elif isinstance(value, (list, tuple, np.ndarray)):
-                arr = np.asarray(value, dtype=float).reshape(1, -1)
+                # 支持诸如 "1/5000" 等分数字符串与 MATLAB 风格数组字符串
+                coerced = self._coerce_arraylike(value)
+                arr = np.asarray(coerced, dtype=float).reshape(1, -1)
                 self._eng.workspace[name] = matlab.double(arr.tolist())
+            elif isinstance(value, str):
+                # 尝试解析为单标量表达式，否则作为字符串原样写入
+                try:
+                    num = self._try_eval_numeric(value)
+                    self._eng.workspace[name] = matlab.double([float(num)])
+                except Exception:
+                    self._eng.workspace[name] = value
             else:
                 # 回退：尝试直接赋值（某些标量/结构体可能允许）
                 self._eng.workspace[name] = value
@@ -515,4 +641,146 @@ class MatlabSimulator:
         except Exception:
             # 若无法识别类型，直接返回原值（可能是标量/字符串/结构体）
             return value
+
+    # ---------------------------
+    # 自动发现/接线/映射输出
+    # ---------------------------
+    def _normalize_ws_var(self, path: str, prefix: str = "sig") -> str:
+        name = str(path).strip()
+        name = name.replace(self._model_name + "/", "")
+        name = re.sub(r"[^A-Za-z0-9]+", "_", name).strip("_")
+        if not name or re.match(r"^[0-9]", name):
+            name = f"{prefix}_{name}"
+        return name
+
+    def _ensure_to_workspace(self, src_block: str, src_port: int, var_name: str, save_format: str = "Array") -> None:
+        # 在源块父系统内插入 To Workspace，避免跨层连线失败
+        parent_system = str(src_block).rsplit("/", 1)[0]
+        to_block = f"{parent_system}/auto_ToWorkspace_{var_name}"
+        try:
+            _ = self._eng.get_param(to_block, "BlockType", nargout=1)
+            exists = True
+        except Exception:
+            exists = False
+        if not exists:
+            self._eng.add_block("simulink/Sinks/To Workspace", to_block, "MakeNameUnique", "off", nargout=0)
+            self._eng.set_param(to_block, "VariableName", var_name, nargout=0)
+            self._eng.set_param(to_block, "SaveFormat", save_format, nargout=0)
+            try:
+                self._eng.set_param(to_block, "LimitDataPoints", "off", nargout=0)
+            except Exception:
+                pass
+            try:
+                self._eng.add_line(parent_system, f"{src_block}/{int(src_port)}", f"{to_block}/1", "autorouting", "on", nargout=0)
+            except Exception:
+                pass
+
+    def _autoconfigure_outputs(self, matlab_cfg: Dict[str, Any]) -> None:
+        # 基础：始终包含 tout
+        discovered: Dict[str, str] = {}
+
+        # To Workspace 块：直接读取变量名，逻辑名=规范化块名_变量名
+        try:
+            tows = self._eng.find_system(self._model_name, "LookUnderMasks", "all", "FollowLinks", "on", "BlockType", "ToWorkspace", nargout=1)
+        except Exception:
+            tows = []
+        try:
+            for blk in (tows or []):
+                var = self._eng.get_param(blk, "VariableName", nargout=1)
+                if var:
+                    logic = f"{self._normalize_ws_var(str(blk), prefix='tow')}_{str(var)}"
+                    discovered[logic] = str(var)
+        except Exception:
+            pass
+
+        # Scope：若未开启 DataLogging，则自动开启并设变量名/格式
+        try:
+            scopes = self._eng.find_system(self._model_name, "LookUnderMasks", "all", "FollowLinks", "on", "BlockType", "Scope", nargout=1)
+        except Exception:
+            scopes = []
+        try:
+            def _is_on(val: Any) -> bool:
+                s = str(val).strip().lower()
+                return s in {"on", "true", "1"}
+
+            for blk in (scopes or []):
+                logging_on = _is_on(self._eng.get_param(blk, "DataLogging", nargout=1))
+                name = self._eng.get_param(blk, "DataLoggingVariableName", nargout=1)
+                if not name:
+                    # 基于块路径生成一个稳定变量名
+                    name = self._normalize_ws_var(str(blk), prefix="scope")
+                if not logging_on:
+                    try:
+                        self._eng.set_param(blk, "DataLogging", "on", nargout=0)
+                    except Exception:
+                        pass
+                    try:
+                        # 统一保存为 Dataset，兼容多通道
+                        self._eng.set_param(blk, "DataLoggingSaveFormat", "Dataset", nargout=0)
+                    except Exception:
+                        pass
+                    try:
+                        # 某些版本支持 NameMode
+                        self._eng.set_param(blk, "DataLoggingNameMode", "Custom", nargout=0)
+                    except Exception:
+                        pass
+                    try:
+                        self._eng.set_param(blk, "DataLoggingVariableName", name, nargout=0)
+                    except Exception:
+                        pass
+                discovered[str(name)] = str(name)
+        except Exception:
+            pass
+
+        # # 电压/电流测量：若存在，自动接 To Workspace
+        # def _find_mask(mask_type: str):
+        #     try:
+        #         return self._eng.find_system(self._model_name, "LookUnderMasks", "all", "FollowLinks", "on", "MaskType", mask_type, nargout=1)
+        #     except Exception:
+        #         return []
+
+        # for mask, prefix in (("Voltage Measurement", "v"), ("Current Measurement", "i")):
+        #     blks = _find_mask(mask) or []
+        #     for blk in blks:
+        #         # 使用块的 Name 作为变量名，便于与用户预期一致（如 Voltage_Measurement）
+        #         try:
+        #             blk_name = self._eng.get_param(blk, "Name", nargout=1)
+        #         except Exception:
+        #             blk_name = os.path.basename(str(blk))
+        #         var = self._normalize_ws_var(str(blk_name), prefix=prefix)
+        #         try:
+        #             self._ensure_to_workspace(str(blk), 1, var, save_format="Array")
+        #             discovered[var] = var
+        #         except Exception:
+        #             pass
+
+        # 根级 Outport：自动接 To Workspace（不覆盖已有）
+        try:
+            outs = self._eng.find_system(self._model_name, "SearchDepth", 1.0, "BlockType", "Outport", nargout=1)
+        except Exception:
+            outs = []
+        if outs:
+             discovered['yout'] = 'yout'
+        # for blk in (outs or []):
+        #     try:
+        #         port_num = int(self._eng.get_param(blk, "Port", nargout=1))
+        #     except Exception:
+        #         port_num = 1
+        #     var = self._normalize_ws_var(f"out_{port_num}", prefix="out")
+        #     try:
+        #         self._ensure_to_workspace(str(blk), 1, var, save_format="Array")
+        #         discovered[var] = str(var)
+        #     except Exception:
+        #         pass
+
+        # 合并到输出映射：以自动发现为主，配置项仅补充/重命名
+        config_map = dict(matlab_cfg.get("output_map", {}))
+        if config_map:
+            combined = dict(config_map)
+            # 自动发现覆盖同名项，且补充所有未声明项
+            combined.update(discovered)
+        else:
+            combined = discovered
+        self._output_map = combined
+        log.info("matlab.outputs.discovered", count=len(discovered), keys=list(discovered.keys()))
 

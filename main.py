@@ -14,7 +14,6 @@ from typing import Any, Dict, List
 
 import numpy as np
 
-from inverter_ai_control.utils.visualization import plot_scope_dataset
 
 try:
     import matplotlib.pyplot as plt
@@ -26,21 +25,20 @@ from inverter_ai_control.utils.logger import get_logger
 from inverter_ai_control.utils.config_loader import load_config
 from inverter_ai_control.sim_env.matlab_simulator import MatlabSimulator
 from inverter_ai_control.core.runner import Runner
-from inverter_ai_control.utils.visualization import plot_scope_dataset
+
 
 
 log = get_logger(__name__)
 
 
 def find_config() -> Path:
-    """查找配置文件：优先 config/config.yaml，其次 config/default.yaml，最后包内示例。"""
+    """查找配置文件：优先 config/config.yaml 其后 config/default.yaml；目标 v2。"""
     project_root = Path(__file__).parent
-    for rel in ("config/config.yaml", "config/default.yaml", "inverter_ai_control/config/default.yaml"):
+    for rel in ("config/config.yaml", "config/default.yaml"):
         p = project_root / rel
         if p.exists():
             return p
-    # 若都不存在，仍返回默认位置，load_config 会抛出清晰错误
-    return project_root / "config/config.yaml"
+    return project_root / "config/default.yaml"
 
 
 def clamp_action(action: Dict[str, float], bounds: Dict[str, Dict[str, float]]) -> Dict[str, float]:
@@ -92,39 +90,39 @@ def run_interactive(sim: MatlabSimulator, cfg: Dict[str, Any]) -> None:
         print(f"t={t:.6f}s  Kp={action['Kp']:.4f} Ki={action['Ki']:.4f}  V_out={v_out_last:.4f} V_ref={v_ref_last:.4f} err={err_last:.4f}")
 
 
-def run_preset(sim: MatlabSimulator, cfg: Dict[str, Any], steps: int, kp_start: float, kp_end: float, ki: float) -> None:
-    """预设模式：按线性序列扫描 Kp，Ki 固定，循环推进仿真并可选绘图。"""
-    bounds = dict(cfg.get("action_bounds", {}))
-    times: List[float] = []
-    vout: List[float] = []
-    vref: List[float] = []
-    errs: List[float] = []
+# def run_preset(sim: MatlabSimulator, cfg: Dict[str, Any], steps: int, kp_start: float, kp_end: float, ki: float) -> None:
+#     """预设模式：按线性序列扫描 Kp，Ki 固定，循环推进仿真并可选绘图。"""
+#     bounds = dict(cfg.get("action_bounds", {}))
+#     times: List[float] = []
+#     vout: List[float] = []
+#     vref: List[float] = []
+#     errs: List[float] = []
 
-    for i, kp in enumerate(np.linspace(kp_start, kp_end, num=steps)):
-        action = clamp_action({"Kp": float(kp), "Ki": float(ki)}, bounds)
-        res = sim.run_step(action)
-        times.append(float(res.get("time", (i + 1))))
-        def last(x: Any) -> float:
-            arr = np.asarray(x).flatten()
-            return float(arr[-1]) if arr.size else float("nan")
-        vout.append(last(res.get("V_out", 0.0)))
-        vref.append(last(res.get("V_ref", 0.0)))
-        errs.append(last(res.get("error", 0.0)))
-        log.info("preset.step", step=i, kp=action["Kp"], ki=action["Ki"], t=times[-1], err=errs[-1])
+#     for i, kp in enumerate(np.linspace(kp_start, kp_end, num=steps)):
+#         action = clamp_action({"Kp": float(kp), "Ki": float(ki)}, bounds)
+#         res = sim.run_step(action)
+#         times.append(float(res.get("time", (i + 1))))
+#         def last(x: Any) -> float:
+#             arr = np.asarray(x).flatten()
+#             return float(arr[-1]) if arr.size else float("nan")
+#         vout.append(last(res.get("V_out", 0.0)))
+#         vref.append(last(res.get("V_ref", 0.0)))
+#         errs.append(last(res.get("error", 0.0)))
+#         log.info("preset.step", step=i, kp=action["Kp"], ki=action["Ki"], t=times[-1], err=errs[-1])
 
-    # 简单绘图（可选）
-    if HAS_PLT:
-        import matplotlib.pyplot as plt  # 局部导入以避免无环境时报错
-        plt.figure(figsize=(8, 4))
-        plt.plot(times, vout, label="V_out")
-        plt.plot(times, vref, label="V_ref")
-        plt.plot(times, errs, label="error")
-        plt.grid(True)
-        plt.legend()
-        plt.title("Simulation Outputs (Preset Mode)")
-        plt.xlabel("time [s]")
-        plt.tight_layout()
-        plt.show()
+#     # 简单绘图（可选）
+#     if HAS_PLT:
+#         import matplotlib.pyplot as plt  # 局部导入以避免无环境时报错
+#         plt.figure(figsize=(8, 4))
+#         plt.plot(times, vout, label="V_out")
+#         plt.plot(times, vref, label="V_ref")
+#         plt.plot(times, errs, label="error")
+#         plt.grid(True)
+#         plt.legend()
+#         plt.title("Simulation Outputs (Preset Mode)")
+#         plt.xlabel("time [s]")
+#         plt.tight_layout()
+#         plt.show()
 
 
 def main() -> None:
@@ -146,9 +144,8 @@ def main() -> None:
         runner.reset()
 
         if args.interactive:
-            # 动态交互：根据 action_space 逐步输入
+            # 动态交互：根据 action_space 逐步输入（v2 不再使用全局 action_bounds）
             action_space = cfg.get("action_space", [])
-            bounds = dict(cfg.get("action_bounds", {}))
             print("交互模式：输入键=值（以空格分隔），例如：Kp=1.0 Ki=0.1；输入 q 退出")
             while True:
                 raw = input("> ").strip()
@@ -168,27 +165,48 @@ def main() -> None:
                 out = runner.step(action)
                 print(out["metrics"])  # 简要反馈
         else:
-            # 目标方案：按配置 presets 执行
-            presets = cfg.get("presets", {})
-            episode_action = presets.get("episode", {})
-            if episode_action:
-                runner.reset(initial_action=episode_action)
-            steps = presets.get("steps", [])
+            # v2：仅执行一次完整仿真，初始动作由 presets.init_action 提供
+            presets = cfg.get("presets", {}) or {}
+            init_action = presets.get("init_action")
+            if init_action:
+                runner.reset(initial_action=init_action)
+            out = runner.step({}, whole_duration=True)
+            log.info("run.metrics", metrics=out["metrics"]) 
+            # 自动从配置的 output_map/结果中绘图并保存到 runs 目录
             import os, time
             run_dir = os.path.join("runs", time.strftime("%Y%m%d-%H%M%S"))
             os.makedirs(run_dir, exist_ok=True)
-            for i, step_action in enumerate(steps):
-                out = runner.step(step_action, whole_duration=True)
-                log.info("preset.step.metrics", step=i, metrics=out["metrics"]) 
-                # 保存/绘制 ScopeData
-                img_path = os.path.join(run_dir, f"scope_action_{i+1}.png")
-                try:
-                    # 传入本步的动作字典以用于图例，避免显示诸如 'act11' 的占位标签，直接显示真实动作值
-                    # 例如：当 step_action = {"L_load": 10} 时，图例将展示为 'L_load=10'
-                    plot_scope_dataset(sim, var_name="ScopeData", label_prefix ='', actions=step_action, save_path=img_path)
-                except Exception:
-                    log.warning("plot.scope.failed", step=i)
-                # plot_scope_dataset(sim, var_name="ScopeData", label_prefix=f"act{i + 1}")
+            from inverter_ai_control.utils.visualization import plot_outputs_from_result
+
+            # 解析并打印 MATLAB Dataset/Timeseries（例如 ScopeData / yout）中的数据摘要
+            out_map = {}
+            try:
+                from inverter_ai_control.utils.visualization import extract_scope_dataset
+                dataset_vars = [name for name in out.get("sim", {})]
+                for var_name in dataset_vars:
+                    series = extract_scope_dataset(sim, var_name)
+                    if not series:
+                        continue
+                    # 打印通道数量与每个通道的前几项
+                    print(f"[Dataset] {var_name}: channels={len(series)}")
+                    for ch_idx, (tt, yy) in enumerate(series, start=1):
+                        import numpy as _np
+                        tt = _np.asarray(tt).reshape(-1)
+                        yy = _np.asarray(yy).reshape(-1)
+                        head_t = ", ".join(f"{float(x):.4g}" for x in tt[:5])
+                        head_y = ", ".join(f"{float(x):.4g}" for x in yy[:5])
+                        print(f"  - ch{ch_idx}: len={len(tt)}  t=[{head_t}]  y=[{head_y}] ...")
+                        out_map[var_name] = zip(tt, yy)
+                plot_outputs_from_result(cfg, out, run_dir, label_prefix="", filename="outputs.png",simulator=sim,out_map=out_map)
+            except Exception as _e:
+                print(f"[warn] failed to extract dataset/timeseries: {_e}")
+
+            # 打印 out['sim'] 中可用的数据摘要，便于排查哪些变量成功写入工作区
+            sim_out = dict(out.get("sim", {}))
+            keys = sorted(sim_out.keys())
+            print("\n[Simulation outputs summary]")
+            print("keys:", keys)
+            
 
 if __name__ == "__main__":
     main()

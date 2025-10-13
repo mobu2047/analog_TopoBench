@@ -29,9 +29,11 @@ def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[
 
     # 情况1：Dataset 读取（优先）
     try:
-        n = int(eng.numElements(scope, nargout=1))
+        # 使用 feval 获取元素数量/元素对象
+        n = int(eng.feval('numElements', scope, nargout=1))
         for i in range(1, n + 1):
-            el = eng.getElement(scope, float(i), nargout=1)
+            el = eng.feval('getElement', scope, float(i), nargout=1)
+            # 属性访问使用 getfield，避免类不支持 get 的报错
             vals = eng.getfield(el, 'Values', nargout=1)
             t = np.array(eng.getfield(vals, 'Time', nargout=1), dtype=float).reshape(-1)
             y_raw = np.array(eng.getfield(vals, 'Data', nargout=1), dtype=float)
@@ -56,106 +58,146 @@ def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[
             return [(t, y2d[:, c]) for c in range(y2d.shape[1])]
     except Exception:
         return []
-
-
-def _format_actions(actions: Optional[dict]) -> str:
-    if not actions:
-        return ""
-    parts = []
-    for k, v in actions.items():
-        if isinstance(v, (list, tuple, np.ndarray)):
-            arr = np.asarray(v).reshape(-1)
-            if arr.size <= 5:
-                parts.append(f"{k}=[" + ",".join(f"{x:.4g}" for x in arr) + "]")
-            else:
-                head = ",".join(f"{x:.4g}" for x in arr[:3])
-                tail = ",".join(f"{x:.4g}" for x in arr[-2:])
-                parts.append(f"{k}=[{head},...,{tail}](n={arr.size})")
-        elif isinstance(v, float):
-            parts.append(f"{k}={v:.6g}")
-        else:
-            parts.append(f"{k}={v}")
-    return "\n".join(parts)
-
-
-def plot_scope_dataset(
-    simulator,
-    var_name: str = "ScopeData",
-    label_prefix: str = "sig",
-    save_path: Optional[str] = None,
+def plot_outputs_from_result(
+    cfg: dict,
+    result: dict,
+    save_dir: str,
     *,
+    label_prefix: str = "",
     actions: Optional[dict] = None,
-    xlabel: str = "Time [s]",
-    ylabel: str = "Voltage [V]",
-    sample_time: Optional[float] = None,
-    time_mode: str = "native",   # native | reconstruct | scale_by_ts
-    style: str = "line",         # line | stairs
-    legend_from_actions: bool = True,  # 是否用动作值作为图例标签
-):
+    filename: str = "outputs.png",
+    simulator=None,
+    out_map: Optional[dict] = None,
+    **kwargs,
+) -> Optional[str]:
+    """根据配置与 step 结果自动绘制输出变量，并保存到指定目录。
+
+    约定：
+    - cfg['matlab']['output_map'] 提供逻辑名 -> 基础工作区名的映射；此处使用逻辑名索引 result['sim']
+    - result['sim'] 至少包含 'time'（标量）与可选 'tout'（时间向量）；若无 'tout'，则尝试用 sim.step 重建
+    - 对除 'tout' 之外的数组信号逐一绘制
+    """
+    import os
     import matplotlib.pyplot as plt
 
-    series = extract_scope_dataset(simulator, var_name)
-    if not series:
-        print(f"[plot_scope_dataset] {var_name} 为空或无法识别。")
-        return
+    sim_cfg = dict(cfg.get("sim", {}))
+    matlab_cfg = dict(cfg.get("matlab", {}))
+    output_map = dict(matlab_cfg.get("output_map", {}))
+    sim_out = dict(result.get("sim", {}))
+
+    # 时间轴优先使用 'tout'
+    t = None
+    if "tout" in sim_out:
+        t = np.asarray(sim_out.get("tout"), dtype=float).reshape(-1)
+    step_ts = float(sim_cfg.get("step", 0.0) or 0.0)
+
+    # 选择要绘制的信号（排除 'tout' 与时间标量），支持数组与 zip(通道迭代器)
+    # 若调用方提供了 out_map（向后兼容），合并到配置映射中（out_map 优先）
+    if out_map:
+        output_map = {**output_map, **dict(out_map)}
+
+    logical_names = [k for k in output_map.keys() if k not in {"tout", "time"}] or [k for k in sim_out.keys() if k not in {"tout", "time"}]
+    def _is_array_like(v):
+        return isinstance(v, (list, tuple, np.ndarray))
+    def _is_zip(v):
+        return hasattr(v, "__class__") and v.__class__.__name__ == 'zip'
+    y_names = [name for name in logical_names if _is_array_like(sim_out.get(name)) or _is_zip(sim_out.get(name))]
+    if not y_names:
+        y_names = [k for k, v in sim_out.items() if k not in {"tout", "time"} and (_is_array_like(v) or _is_zip(v))]
+
+    # 兜底1：若仅有 tout（时间向量）且为数组，则绘制 tout vs sample_index
+    if not y_names and isinstance(sim_out.get("tout"), (list, tuple, np.ndarray)):
+        import os
+        import matplotlib.pyplot as plt
+        os.makedirs(save_dir, exist_ok=True)
+        tt = np.asarray(sim_out.get("tout"), dtype=float).reshape(-1)
+        plt.figure(figsize=(9, 4.8))
+        ax = plt.gca()
+        ax.plot(np.arange(tt.size, dtype=float), tt, label="tout")
+        ax.grid(True)
+        ax.legend()
+        ax.set_title("tout")
+        ax.set_xlabel("Sample Index")
+        ax.set_ylabel("Time [s]")
+        plt.tight_layout()
+        save_path = os.path.join(save_dir, filename)
+        plt.savefig(save_path, dpi=160)
+        return save_path
+
+    # 兜底2：既没有数组信号，又提供了 simulator，则从工作区提取 ScopeData 直接绘制
+    if not y_names:
+        if simulator is not None:
+            series = extract_scope_dataset(simulator, var_name=output_map.get("ScopeData", "ScopeData"))
+            if series:
+                import os
+                import matplotlib.pyplot as plt
+                os.makedirs(save_dir, exist_ok=True)
+                plt.figure(figsize=(9, 4.8))
+                ax = plt.gca()
+                for idx, (tt, yy) in enumerate(series, start=1):
+                    ax.plot(np.asarray(tt, dtype=float).reshape(-1), np.asarray(yy, dtype=float).reshape(-1), label=f"{label_prefix}{idx}" if label_prefix else f"sig{idx}")
+                ax.grid(True)
+                ax.legend()
+                ax.set_title("ScopeData")
+                ax.set_xlabel("Time [s]")
+                ax.set_ylabel("Value")
+                plt.tight_layout()
+                save_path = os.path.join(save_dir, filename)
+                plt.savefig(save_path, dpi=160)
+                return save_path
+        # 若仍无法绘制，则返回
+        return None
+
+    os.makedirs(save_dir, exist_ok=True)
     plt.figure(figsize=(9, 4.8))
     ax = plt.gca()
-    # 生成图例标签：优先使用动作的简短摘要
-    def _legend_label(idx: int) -> str:
-        if legend_from_actions and actions:
-            # 仅保留简短的标量键，数组标记为 [...]
-            items = []
-            for k, v in actions.items():
-                if isinstance(v, (int, float)):
-                    items.append(f"{k}={v:.4g}")
+
+    def _align_time(tt_in, yy_in):
+        import numpy as _np
+        yy = _np.asarray(yy_in, dtype=float).reshape(-1)
+        if tt_in is None:
+            if step_ts and yy.size > 0:
+                return _np.arange(yy.size, dtype=float) * step_ts, yy
+            return _np.arange(yy.size, dtype=float), yy
+        tt = _np.asarray(tt_in, dtype=float).reshape(-1)
+        if tt.size == yy.size:
+            return tt, yy
+        # 尝试对齐：优先裁剪较长的序列；若差异过大且有步长，则重建
+        if step_ts and abs(tt.size - yy.size) > max(10, int(0.001 * max(tt.size, yy.size))):
+            return _np.arange(yy.size, dtype=float) * step_ts, yy
+        if tt.size > yy.size:
+            return tt[:yy.size], yy
+        # tt 较短：线性插值为与 y 等长
+        try:
+            t_new = _np.linspace(tt[0] if tt.size else 0.0, tt[-1] if tt.size else (yy.size - 1) * (step_ts or 1.0), yy.size)
+            return t_new, yy
+        except Exception:
+            return _np.arange(yy.size, dtype=float), yy
+
+    for idx, name in enumerate(y_names, start=1):
+        val = sim_out.get(name)
+        if _is_zip(val):
+            # zip 迭代器：每个元素是 (t, y) 或 (y)；优先使用提供的 t，否则用公共 t 或重建
+            chan_idx = 0
+            for item in list(val):
+                chan_idx += 1
+                if isinstance(item, (list, tuple)) and len(item) == 2:
+                    tt, yy = _align_time(item[0], item[1])
                 else:
-                    items.append(f"{k}=[...]")
-            label = ", ".join(items)
-            # 避免过长
-            return (label[:60] + "…") if len(label) > 60 else label
-        return f"{label_prefix}{idx}" if label_prefix else f"signal{idx}" if label_prefix else f"signal{idx}" if label_prefix else f"signal{idx}"
-
-    for idx, (t, y) in enumerate(series, start=1):
-        # 根据需求修正时间轴：
-        # - reconstruct: 用等间隔 sample_time 重建 t
-        # - scale_by_ts: 若 t 为采样索引(0..N-1)，则乘以 sample_time
-        if time_mode == "reconstruct" and (sample_time is not None):
-            t = np.arange(len(y), dtype=float) * float(sample_time)
-        elif time_mode == "scale_by_ts" and (sample_time is not None):
-            t = np.asarray(t, dtype=float) * float(sample_time)
+                    tt, yy = _align_time(t, item)
+                label = f"{name}_ch{chan_idx}"
+                ax.plot(tt, yy, label=label)
         else:
-            t = np.asarray(t, dtype=float)
+            tt, y = _align_time(t, val)
+            label = f"{label_prefix}{idx}" if label_prefix else name
+            ax.plot(tt, y, label=label)
 
-        if style == "stairs":
-            ax.step(t, y, where="post", label=_legend_label(idx))
-        else:
-            ax.plot(t, y, label=_legend_label(idx))
     ax.grid(True)
     ax.legend()
-    ax.set_title(f"{var_name}")
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-
-    # 动作值已通过图例显示，不再需要右上角文本框
-    # 注释掉原来的文本框显示，避免重复显示动作值
-    # text = _format_actions(actions)
-    # if text:
-    #     ax.text(
-    #         0.99,
-    #         0.99,
-    #         text,
-    #         transform=ax.transAxes,
-    #         va="top",
-    #         ha="right",
-    #         fontsize=9,
-    #         family="monospace",
-    #         bbox=dict(facecolor="white", alpha=0.7, edgecolor="gray"),
-    #     )
-
+    ax.set_title("Outputs")
+    ax.set_xlabel("Time [s]")
+    ax.set_ylabel("Value")
     plt.tight_layout()
-    if save_path:
-        plt.savefig(save_path, dpi=160)
-    else:
-        plt.show()
-
-
+    save_path = os.path.join(save_dir, filename)
+    plt.savefig(save_path, dpi=160)
+    return save_path
