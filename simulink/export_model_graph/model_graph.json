@@ -1,11 +1,11 @@
 {
   "model": "Ꙁ",
-  "timestamp": "2025-10-10 17:06:08",
+  "timestamp": "2025-10-14 17:22:33",
   "counts": {
-    "elements": 28,
-    "ports": 48,
-    "connections": 83,
-    "lines": 35
+    "elements": 37,
+    "ports": 59,
+    "connections": 159,
+    "lines": 51
   },
   "elements": [
     {
@@ -24,6 +24,28 @@
         285
       ],
       "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Current Measurement",
+      "Name": "Current Measurement",
+      "BlockType": "SubSystem",
+      "Orientation": "right",
+      "Position": [
+        265,
+        243,
+        290,
+        267
+      ],
+      "Center": [
+        277.5,
+        255
+      ],
+      "LibraryLink": "spsCurrentMeasurementLib/Current Measurement",
       "Mirror": "off",
       "Rotation": 0,
       "GotoTag": "",
@@ -225,6 +247,50 @@
       "Mirror": "off",
       "Rotation": 0,
       "GotoTag": "A2",
+      "GotoVisibility": "local",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Goto4",
+      "Name": "Goto4",
+      "BlockType": "Goto",
+      "Orientation": "right",
+      "Position": [
+        225,
+        -125,
+        265,
+        -95
+      ],
+      "Center": [
+        245,
+        -110
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "A5",
+      "GotoVisibility": "local",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Goto5",
+      "Name": "Goto5",
+      "BlockType": "Goto",
+      "Orientation": "right",
+      "Position": [
+        315,
+        410,
+        355,
+        440
+      ],
+      "Center": [
+        335,
+        425
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "A6",
       "GotoVisibility": "local",
       "FromTag": ""
     },
@@ -449,8 +515,8 @@
       "FromTag": ""
     },
     {
-      "Path": "untitled3/Scope",
-      "Name": "Scope",
+      "Path": "untitled3/Scope——1",
+      "Name": "Scope——1",
       "BlockType": "Scope",
       "Orientation": "right",
       "Position": [
@@ -462,6 +528,72 @@
       "Center": [
         380,
         125
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Scope——2",
+      "Name": "Scope——2",
+      "BlockType": "Scope",
+      "Orientation": "right",
+      "Position": [
+        375,
+        -21,
+        405,
+        11
+      ],
+      "Center": [
+        390,
+        -5
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Scope——3",
+      "Name": "Scope——3",
+      "BlockType": "Scope",
+      "Orientation": "right",
+      "Position": [
+        -450,
+        89,
+        -420,
+        121
+      ],
+      "Center": [
+        -435,
+        105
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Scope——4",
+      "Name": "Scope——4",
+      "BlockType": "Scope",
+      "Orientation": "right",
+      "Position": [
+        705,
+        -76,
+        735,
+        -44
+      ],
+      "Center": [
+        720,
+        -60
       ],
       "LibraryLink": "",
       "Mirror": "off",
@@ -623,6 +755,72 @@
       "GotoTag": "",
       "GotoVisibility": "",
       "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Outport",
+      "Name": "Outport",
+      "BlockType": "Outport",
+      "Orientation": "right",
+      "Position": [
+        115,
+        -192,
+        145,
+        -178
+      ],
+      "Center": [
+        130,
+        -185
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Outport1",
+      "Name": "Outport1",
+      "BlockType": "Outport",
+      "Orientation": "right",
+      "Position": [
+        -125,
+        -147,
+        -95,
+        -133
+      ],
+      "Center": [
+        -110,
+        -140
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
+    },
+    {
+      "Path": "untitled3/Outport2",
+      "Name": "Outport2",
+      "BlockType": "Outport",
+      "Orientation": "right",
+      "Position": [
+        450,
+        -167,
+        480,
+        -153
+      ],
+      "Center": [
+        465,
+        -160
+      ],
+      "LibraryLink": "",
+      "Mirror": "off",
+      "Rotation": 0,
+      "GotoTag": "",
+      "GotoVisibility": "",
+      "FromTag": ""
     }
   ],
   "ports": [
@@ -635,8 +833,50 @@
         285
       ],
       "RelPos": [
-        -3.0864197530864197,
-        9.35897435897436
+        -38.333333333333336,
+        32.285714285714285
+      ],
+      "Side": "bottom"
+    },
+    {
+      "BlockPath": "untitled3/Current Measurement",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        295,
+        250
+      ],
+      "RelPos": [
+        -5.166666666666667,
+        29.785714285714285
+      ],
+      "Side": "left"
+    },
+    {
+      "BlockPath": "untitled3/Current Measurement",
+      "PortNumber": null,
+      "PortType": "LConn1",
+      "Position": [
+        261,
+        255
+      ],
+      "RelPos": [
+        -6.3,
+        30.142857142857142
+      ],
+      "Side": "left"
+    },
+    {
+      "BlockPath": "untitled3/Current Measurement",
+      "PortNumber": null,
+      "PortType": "RConn1",
+      "Position": [
+        294,
+        260
+      ],
+      "RelPos": [
+        -5.2,
+        30.5
       ],
       "Side": "left"
     },
@@ -649,8 +889,8 @@
         239
       ],
       "RelPos": [
-        5.8024691358024691,
-        8.1794871794871788
+        -14.333333333333334,
+        29
       ],
       "Side": "bottom"
     },
@@ -663,8 +903,8 @@
         196
       ],
       "RelPos": [
-        5.8024691358024691,
-        7.0769230769230766
+        -14.333333333333334,
+        25.928571428571427
       ],
       "Side": "bottom"
     },
@@ -677,8 +917,8 @@
         10
       ],
       "RelPos": [
-        5.7407407407407405,
-        2.3076923076923075
+        -14.5,
+        12.642857142857142
       ],
       "Side": "bottom"
     },
@@ -691,10 +931,10 @@
         20
       ],
       "RelPos": [
-        12.037037037037036,
-        2.5641025641025643
+        2.5,
+        13.357142857142858
       ],
-      "Side": "bottom"
+      "Side": "right"
     },
     {
       "BlockPath": "untitled3/From2",
@@ -705,10 +945,10 @@
         245
       ],
       "RelPos": [
-        12.345679012345679,
-        8.3333333333333339
+        3.3333333333333335,
+        29.428571428571427
       ],
-      "Side": "bottom"
+      "Side": "right"
     },
     {
       "BlockPath": "untitled3/From3",
@@ -719,8 +959,8 @@
         170
       ],
       "RelPos": [
-        6.666666666666667,
-        6.4102564102564106
+        -12,
+        24.071428571428573
       ],
       "Side": "bottom"
     },
@@ -733,10 +973,10 @@
         170
       ],
       "RelPos": [
-        3.3950617283950617,
-        6.4102564102564106
+        -20.833333333333332,
+        24.071428571428573
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Goto1",
@@ -747,10 +987,10 @@
         490
       ],
       "RelPos": [
-        3.0864197530864197,
-        14.615384615384615
+        -21.666666666666668,
+        46.928571428571431
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Goto2",
@@ -761,10 +1001,10 @@
         415
       ],
       "RelPos": [
-        2.4074074074074074,
-        12.692307692307692
+        -23.5,
+        41.571428571428569
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Goto3",
@@ -775,10 +1015,38 @@
         345
       ],
       "RelPos": [
-        3.2716049382716048,
-        10.897435897435898
+        -21.166666666666668,
+        36.571428571428569
       ],
-      "Side": "right"
+      "Side": "bottom"
+    },
+    {
+      "BlockPath": "untitled3/Goto4",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        220,
+        -110
+      ],
+      "RelPos": [
+        -7.666666666666667,
+        4.0714285714285712
+      ],
+      "Side": "bottom"
+    },
+    {
+      "BlockPath": "untitled3/Goto5",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        310,
+        425
+      ],
+      "RelPos": [
+        -4.666666666666667,
+        42.285714285714285
+      ],
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/GreaterThan",
@@ -789,10 +1057,10 @@
         405
       ],
       "RelPos": [
-        0.43209876543209874,
-        12.435897435897436
+        -28.833333333333332,
+        40.857142857142854
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/GreaterThan",
@@ -803,10 +1071,10 @@
         420
       ],
       "RelPos": [
-        0.43209876543209874,
-        12.820512820512821
+        -28.833333333333332,
+        41.928571428571431
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/GreaterThan",
@@ -817,10 +1085,10 @@
         415
       ],
       "RelPos": [
-        0.92592592592592593,
-        12.692307692307692
+        -27.5,
+        41.571428571428569
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/GreaterThan1",
@@ -831,10 +1099,10 @@
         220
       ],
       "RelPos": [
-        -1.3580246913580247,
-        7.6923076923076925
+        -33.666666666666664,
+        27.642857142857142
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/GreaterThan1",
@@ -845,10 +1113,10 @@
         235
       ],
       "RelPos": [
-        -1.3580246913580247,
-        8.0769230769230766
+        -33.666666666666664,
+        28.714285714285715
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/GreaterThan1",
@@ -859,10 +1127,10 @@
         230
       ],
       "RelPos": [
-        -0.86419753086419748,
-        7.9487179487179489
+        -32.333333333333336,
+        28.357142857142858
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/IGBT",
@@ -873,8 +1141,8 @@
         105
       ],
       "RelPos": [
-        7.283950617283951,
-        4.7435897435897436
+        -10.333333333333334,
+        19.428571428571427
       ],
       "Side": "bottom"
     },
@@ -887,8 +1155,8 @@
         106
       ],
       "RelPos": [
-        7.0370370370370372,
-        4.7692307692307692
+        -11,
+        19.5
       ],
       "Side": "bottom"
     },
@@ -901,10 +1169,10 @@
         174
       ],
       "RelPos": [
-        7.1604938271604937,
-        6.5128205128205128
+        -10.666666666666666,
+        24.357142857142858
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT1",
@@ -915,10 +1183,10 @@
         105
       ],
       "RelPos": [
-        11.358024691358025,
-        4.7435897435897436
+        0.66666666666666663,
+        19.428571428571427
       ],
-      "Side": "bottom"
+      "Side": "right"
     },
     {
       "BlockPath": "untitled3/IGBT1",
@@ -929,10 +1197,10 @@
         106
       ],
       "RelPos": [
-        11.111111111111111,
-        4.7692307692307692
+        0,
+        19.5
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT1",
@@ -943,10 +1211,10 @@
         174
       ],
       "RelPos": [
-        11.234567901234568,
-        6.5128205128205128
+        0.33333333333333331,
+        24.357142857142858
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT2",
@@ -957,10 +1225,10 @@
         265
       ],
       "RelPos": [
-        7.283950617283951,
-        8.8461538461538467
+        -10.333333333333334,
+        30.857142857142858
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT2",
@@ -971,10 +1239,10 @@
         266
       ],
       "RelPos": [
-        7.0370370370370372,
-        8.8717948717948723
+        -11,
+        30.928571428571427
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT2",
@@ -985,10 +1253,10 @@
         334
       ],
       "RelPos": [
-        7.1604938271604937,
-        10.615384615384615
+        -10.666666666666666,
+        35.785714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT3",
@@ -999,10 +1267,10 @@
         255
       ],
       "RelPos": [
-        11.234567901234568,
-        8.58974358974359
+        0.33333333333333331,
+        30.142857142857142
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT3",
@@ -1013,10 +1281,10 @@
         256
       ],
       "RelPos": [
-        10.987654320987655,
-        8.615384615384615
+        -0.33333333333333331,
+        30.214285714285715
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/IGBT3",
@@ -1027,10 +1295,10 @@
         324
       ],
       "RelPos": [
-        11.111111111111111,
-        10.358974358974359
+        0,
+        35.071428571428569
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/NOT",
@@ -1041,10 +1309,10 @@
         320
       ],
       "RelPos": [
-        0.18518518518518517,
-        10.256410256410257
+        -29.5,
+        34.785714285714285
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/NOT",
@@ -1055,10 +1323,10 @@
         320
       ],
       "RelPos": [
-        0.67901234567901236,
-        10.256410256410257
+        -28.166666666666668,
+        34.785714285714285
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/NOT1",
@@ -1069,10 +1337,10 @@
         505
       ],
       "RelPos": [
-        0.61728395061728392,
-        15
+        -28.333333333333332,
+        48
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/NOT1",
@@ -1083,10 +1351,10 @@
         505
       ],
       "RelPos": [
-        1.1111111111111112,
-        15
+        -27,
+        48
       ],
-      "Side": "right"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Product1",
@@ -1097,10 +1365,10 @@
         420
       ],
       "RelPos": [
-        -1.5432098765432098,
-        12.820512820512821
+        -34.166666666666664,
+        41.928571428571431
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Product1",
@@ -1111,10 +1379,10 @@
         435
       ],
       "RelPos": [
-        -1.5432098765432098,
-        13.205128205128204
+        -34.166666666666664,
+        43
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Product1",
@@ -1125,10 +1393,10 @@
         430
       ],
       "RelPos": [
-        -1.0493827160493827,
-        13.076923076923077
+        -32.833333333333336,
+        42.642857142857146
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Repeating\nSequence",
@@ -1139,13 +1407,13 @@
         460
       ],
       "RelPos": [
-        -3.5185185185185186,
-        13.846153846153847
+        -39.5,
+        44.785714285714285
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
-      "BlockPath": "untitled3/Scope",
+      "BlockPath": "untitled3/Scope——1",
       "PortNumber": null,
       "PortType": "1",
       "Position": [
@@ -1153,8 +1421,50 @@
         125
       ],
       "RelPos": [
-        10,
-        5.2564102564102564
+        -3,
+        20.857142857142858
+      ],
+      "Side": "left"
+    },
+    {
+      "BlockPath": "untitled3/Scope——2",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        370,
+        -5
+      ],
+      "RelPos": [
+        -2.6666666666666665,
+        11.571428571428571
+      ],
+      "Side": "left"
+    },
+    {
+      "BlockPath": "untitled3/Scope——3",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        -455,
+        105
+      ],
+      "RelPos": [
+        -30.166666666666668,
+        19.428571428571427
+      ],
+      "Side": "bottom"
+    },
+    {
+      "BlockPath": "untitled3/Scope——4",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        700,
+        -60
+      ],
+      "RelPos": [
+        8.3333333333333339,
+        7.6428571428571432
       ],
       "Side": "bottom"
     },
@@ -1167,10 +1477,10 @@
         215
       ],
       "RelPos": [
-        7.4814814814814818,
-        7.5641025641025639
+        -9.8,
+        27.285714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Series RLC Branch",
@@ -1181,10 +1491,10 @@
         215
       ],
       "RelPos": [
-        8.567901234567902,
-        7.5641025641025639
+        -6.8666666666666663,
+        27.285714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Series RLC Branch1",
@@ -1195,10 +1505,10 @@
         215
       ],
       "RelPos": [
-        9.3950617283950617,
-        7.5641025641025639
+        -4.6333333333333337,
+        27.285714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Series RLC Branch1",
@@ -1209,10 +1519,10 @@
         215
       ],
       "RelPos": [
-        10.481481481481481,
-        7.5641025641025639
+        -1.7,
+        27.285714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Sine Wave",
@@ -1223,10 +1533,10 @@
         325
       ],
       "RelPos": [
-        -1.2962962962962963,
-        10.384615384615385
+        -33.5,
+        35.142857142857146
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Sine Wave1",
@@ -1237,8 +1547,8 @@
         200
       ],
       "RelPos": [
-        -3.0246913580246915,
-        7.17948717948718
+        -38.166666666666664,
+        26.214285714285715
       ],
       "Side": "bottom"
     },
@@ -1251,10 +1561,10 @@
         390
       ],
       "RelPos": [
-        -3.5185185185185186,
-        12.051282051282051
+        -39.5,
+        39.785714285714285
       ],
-      "Side": "left"
+      "Side": "bottom"
     },
     {
       "BlockPath": "untitled3/Voltage Measurement",
@@ -1265,10 +1575,10 @@
         150
       ],
       "RelPos": [
-        9.4444444444444446,
-        5.8974358974358978
+        -4.5,
+        22.642857142857142
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Voltage Measurement",
@@ -1279,10 +1589,10 @@
         145
       ],
       "RelPos": [
-        9.0246913580246915,
-        5.7692307692307692
+        -5.6333333333333337,
+        22.285714285714285
       ],
-      "Side": "bottom"
+      "Side": "left"
     },
     {
       "BlockPath": "untitled3/Voltage Measurement",
@@ -1293,14 +1603,160 @@
         155
       ],
       "RelPos": [
-        9.0246913580246915,
-        6.0256410256410255
+        -5.6333333333333337,
+        23
+      ],
+      "Side": "left"
+    },
+    {
+      "BlockPath": "untitled3/Outport",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        110,
+        -185
+      ],
+      "RelPos": [
+        -11.333333333333334,
+        -1.2857142857142858
+      ],
+      "Side": "top"
+    },
+    {
+      "BlockPath": "untitled3/Outport1",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        -130,
+        -140
+      ],
+      "RelPos": [
+        -19.333333333333332,
+        1.9285714285714286
       ],
       "Side": "bottom"
+    },
+    {
+      "BlockPath": "untitled3/Outport2",
+      "PortNumber": null,
+      "PortType": "1",
+      "Position": [
+        445,
+        -160
+      ],
+      "RelPos": [
+        -0.16666666666666666,
+        0.5
+      ],
+      "Side": "left"
     }
   ],
   "connections": [
     {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto5",
+      "DestinationPath": "untitled3/Goto5",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Branch1",
+      "DestinationPath": "untitled3/Series RLC Branch1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
       "Source": "Sine Wave1",
       "SourcePath": "untitled3/Sine Wave1",
       "SourcePort": 1,
@@ -1308,6 +1764,110 @@
       "SourcePortIndex": 1,
       "Destination": "GreaterThan1",
       "DestinationPath": "untitled3/GreaterThan1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "GreaterThan1",
+      "DestinationPath": "untitled3/GreaterThan1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "GreaterThan1",
+      "DestinationPath": "untitled3/GreaterThan1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1423,8 +1983,372 @@
       "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "Scope",
-      "DestinationPath": "untitled3/Scope",
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——1",
+      "DestinationPath": "untitled3/Scope——1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——1",
+      "DestinationPath": "untitled3/Scope——1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——1",
+      "DestinationPath": "untitled3/Scope——1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1475,8 +2399,47 @@
       "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto",
+      "DestinationPath": "untitled3/Goto",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
       "Destination": "NOT",
       "DestinationPath": "untitled3/NOT",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1514,8 +2477,8 @@
       "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "NOT",
-      "DestinationPath": "untitled3/NOT",
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1527,8 +2490,8 @@
       "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "NOT",
-      "DestinationPath": "untitled3/NOT",
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1542,6 +2505,84 @@
       "SourcePortIndex": 1,
       "Destination": "Goto",
       "DestinationPath": "untitled3/Goto",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "NOT",
+      "DestinationPath": "untitled3/NOT",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "NOT",
+      "DestinationPath": "untitled3/NOT",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto",
+      "DestinationPath": "untitled3/Goto",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto",
+      "DestinationPath": "untitled3/Goto",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1579,8 +2620,73 @@
       "SourcePort": 1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
+      "Destination": "Scope——4",
+      "DestinationPath": "untitled3/Scope——4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
       "Destination": "IGBT3",
       "DestinationPath": "untitled3/IGBT3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——4",
+      "DestinationPath": "untitled3/Scope——4",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "IGBT3",
+      "DestinationPath": "untitled3/IGBT3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "IGBT3",
+      "DestinationPath": "untitled3/IGBT3",
+      "DestinationPort": 1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "line"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——4",
+      "DestinationPath": "untitled3/Scope——4",
       "DestinationPort": 1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1639,6 +2745,58 @@
       "Origin": "pc"
     },
     {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Goto5",
+      "DestinationPath": "untitled3/Goto5",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 1,
+      "Destination": "Voltage Measurement",
+      "DestinationPath": "untitled3/Voltage Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Branch",
+      "DestinationPath": "untitled3/Series RLC Branch",
+      "DestinationPort": -1,
+      "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Series RLC Branch1",
+      "DestinationPath": "untitled3/Series RLC Branch1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
       "Source": "DC Voltage Source",
       "SourcePath": "untitled3/DC Voltage Source",
       "SourcePort": -1,
@@ -1724,6 +2882,19 @@
       "SourcePortIndex": 1,
       "Destination": "IGBT3",
       "DestinationPath": "untitled3/IGBT3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——4",
+      "DestinationPath": "untitled3/Scope——4",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1789,6 +2960,32 @@
       "SourcePortIndex": 1,
       "Destination": "Goto3",
       "DestinationPath": "untitled3/Goto3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 0,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 1,
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Current Measurement",
+      "SourcePath": "untitled3/Current Measurement",
+      "SourcePort": 0,
+      "SourcePortKind": "rconn",
+      "SourcePortIndex": 1,
+      "Destination": "Goto5",
+      "DestinationPath": "untitled3/Goto5",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -1841,6 +3038,19 @@
       "SourcePortIndex": 1,
       "Destination": "Goto",
       "DestinationPath": "untitled3/Goto",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -2138,8 +3348,47 @@
       "SourcePort": 0,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "Scope",
-      "DestinationPath": "untitled3/Scope",
+      "Destination": "Scope——1",
+      "DestinationPath": "untitled3/Scope——1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "From2",
+      "SourcePath": "untitled3/From2",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——4",
+      "DestinationPath": "untitled3/Scope——4",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -2190,8 +3439,8 @@
       "SourcePort": -1,
       "SourcePortKind": "rconn",
       "SourcePortIndex": 1,
-      "Destination": "Series RLC Branch1",
-      "DestinationPath": "untitled3/Series RLC Branch1",
+      "Destination": "Current Measurement",
+      "DestinationPath": "untitled3/Current Measurement",
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
@@ -2203,21 +3452,8 @@
       "SourcePort": -1,
       "SourcePortKind": "lconn",
       "SourcePortIndex": 1,
-      "Destination": "Voltage Measurement",
-      "DestinationPath": "untitled3/Voltage Measurement",
-      "DestinationPort": -1,
-      "DestinationPortKind": "lconn",
-      "DestinationPortIndex": 1,
-      "Origin": "pc"
-    },
-    {
-      "Source": "Series RLC Branch1",
-      "SourcePath": "untitled3/Series RLC Branch1",
-      "SourcePort": -1,
-      "SourcePortKind": "lconn",
-      "SourcePortIndex": 1,
-      "Destination": "Series RLC Branch",
-      "DestinationPath": "untitled3/Series RLC Branch",
+      "Destination": "Current Measurement",
+      "DestinationPath": "untitled3/Current Measurement",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
       "DestinationPortIndex": 1,
@@ -2289,6 +3525,32 @@
       "Origin": "pc"
     },
     {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——3",
+      "DestinationPath": "untitled3/Scope——3",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
       "Source": "Square Wave\nGenerator",
       "SourcePath": "untitled3/Square Wave\nGenerator",
       "SourcePort": -1,
@@ -2307,8 +3569,8 @@
       "SourcePort": -1,
       "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "Scope",
-      "DestinationPath": "untitled3/Scope",
+      "Destination": "Scope——1",
+      "DestinationPath": "untitled3/Scope——1",
       "DestinationPort": -1,
       "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
@@ -2318,12 +3580,38 @@
       "Source": "Voltage Measurement",
       "SourcePath": "untitled3/Voltage Measurement",
       "SourcePort": -1,
-      "SourcePortKind": "lconn",
+      "SourcePortKind": "outport",
       "SourcePortIndex": 1,
-      "Destination": "Series RLC Branch1",
-      "DestinationPath": "untitled3/Series RLC Branch1",
+      "Destination": "Goto4",
+      "DestinationPath": "untitled3/Goto4",
       "DestinationPort": -1,
-      "DestinationPortKind": "lconn",
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Scope——2",
+      "DestinationPath": "untitled3/Scope——2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -2337,6 +3625,19 @@
       "DestinationPath": "untitled3/Series RLC Branch",
       "DestinationPort": -1,
       "DestinationPortKind": "rconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": -1,
+      "SourcePortKind": "lconn",
+      "SourcePortIndex": 1,
+      "Destination": "Current Measurement",
+      "DestinationPath": "untitled3/Current Measurement",
+      "DestinationPort": -1,
+      "DestinationPortKind": "lconn",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     },
@@ -2376,13 +3677,167 @@
       "DestinationPath": "untitled3/IGBT3",
       "DestinationPort": -1,
       "DestinationPortKind": "lconn",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Sine Wave1",
+      "SourcePath": "untitled3/Sine Wave1",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport",
+      "DestinationPath": "untitled3/Outport",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "GreaterThan1",
+      "SourcePath": "untitled3/GreaterThan1",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport1",
+      "DestinationPath": "untitled3/Outport1",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
+      "DestinationPortIndex": 1,
+      "Origin": "pc"
+    },
+    {
+      "Source": "Voltage Measurement",
+      "SourcePath": "untitled3/Voltage Measurement",
+      "SourcePort": 0,
+      "SourcePortKind": "outport",
+      "SourcePortIndex": 1,
+      "Destination": "Outport2",
+      "DestinationPath": "untitled3/Outport2",
+      "DestinationPort": -1,
+      "DestinationPortKind": "inport",
       "DestinationPortIndex": 1,
       "Origin": "pc"
     }
   ],
   "lines": [
     {
-      "Handle": 45457.007690429688,
+      "Handle": 46116.005981445312,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Current Measurement",
+      "DstPaths": [
+        "untitled3/Goto5"
+      ],
+      "Points": [
+        [
+          295,
+          250
+        ],
+        [
+          308,
+          250
+        ],
+        [
+          308,
+          425
+        ],
+        [
+          310,
+          425
+        ]
+      ]
+    },
+    {
+      "Handle": 46113.006225585938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Current Measurement",
+      "DstPaths": [
+        "untitled3/Series RLC Branch1"
+      ],
+      "Points": [
+        [
+          305,
+          260
+        ],
+        [
+          300,
+          260
+        ],
+        [
+          300,
+          215
+        ],
+        [
+          311,
+          215
+        ]
+      ]
+    },
+    {
+      "Handle": 51972.00244140625,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Sine Wave1",
+      "DstPaths": [
+        "untitled3/Outport"
+      ],
+      "Points": [
+        [
+          -536,
+          105
+        ],
+        [
+          -536,
+          -185
+        ],
+        [
+          110,
+          -185
+        ]
+      ]
+    },
+    {
+      "Handle": 51971.002319335938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Sine Wave1",
+      "DstPaths": [
+        "untitled3/Scope——3"
+      ],
+      "Points": [
+        [
+          -536,
+          105
+        ],
+        [
+          -455,
+          105
+        ]
+      ]
+    },
+    {
+      "Handle": 51677.002685546875,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Sine Wave1",
+      "DstPaths": [
+        "untitled3/Outport",
+        "untitled3/Scope——3"
+      ],
+      "Points": [
+        [
+          -646,
+          200
+        ],
+        [
+          -646,
+          105
+        ],
+        [
+          -536,
+          105
+        ]
+      ]
+    },
+    {
+      "Handle": 51676.002685546875,
       "IsRoot": true,
       "SrcPath": "untitled3/Sine Wave1",
       "DstPaths": [
@@ -2390,7 +3845,7 @@
       ],
       "Points": [
         [
-          -695,
+          -646,
           200
         ],
         [
@@ -2408,7 +3863,27 @@
       ]
     },
     {
-      "Handle": 45456.006958007812,
+      "Handle": 45460.010131835938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Sine Wave1",
+      "DstPaths": [
+        "untitled3/Outport",
+        "untitled3/Scope——3",
+        "untitled3/GreaterThan1"
+      ],
+      "Points": [
+        [
+          -695,
+          200
+        ],
+        [
+          -646,
+          200
+        ]
+      ]
+    },
+    {
+      "Handle": 45458.017700195312,
       "IsRoot": true,
       "SrcPath": "untitled3/Product1",
       "DstPaths": [
@@ -2434,7 +3909,7 @@
       ]
     },
     {
-      "Handle": 45455.007568359375,
+      "Handle": 45457.0087890625,
       "IsRoot": true,
       "SrcPath": "untitled3/Sine Wave",
       "DstPaths": [
@@ -2460,7 +3935,7 @@
       ]
     },
     {
-      "Handle": 45454.00634765625,
+      "Handle": 45456.008178710938,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2490,7 +3965,7 @@
       ]
     },
     {
-      "Handle": 45453.007446289062,
+      "Handle": 45455.008666992188,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2508,7 +3983,7 @@
       ]
     },
     {
-      "Handle": 45452.007690429688,
+      "Handle": 45454.007202148438,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan",
       "DstPaths": [
@@ -2527,11 +4002,133 @@
       ]
     },
     {
-      "Handle": 45451.0078125,
+      "Handle": 46251.006225585938,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [
-        "untitled3/Scope"
+        "untitled3/Scope——2"
+      ],
+      "Points": [
+        [
+          201,
+          -5
+        ],
+        [
+          370,
+          -5
+        ]
+      ]
+    },
+    {
+      "Handle": 46250.00634765625,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Outport2",
+        "untitled3/Goto4"
+      ],
+      "Points": [
+        [
+          201,
+          -5
+        ],
+        [
+          201,
+          -110
+        ]
+      ]
+    },
+    {
+      "Handle": 46245.006225585938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Outport2"
+      ],
+      "Points": [
+        [
+          201,
+          -110
+        ],
+        [
+          201,
+          -160
+        ],
+        [
+          445,
+          -160
+        ]
+      ]
+    },
+    {
+      "Handle": 46244.006103515625,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Goto4"
+      ],
+      "Points": [
+        [
+          201,
+          -110
+        ],
+        [
+          220,
+          -110
+        ]
+      ]
+    },
+    {
+      "Handle": 4196.0364990234375,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Scope——2",
+        "untitled3/Outport2",
+        "untitled3/Goto4"
+      ],
+      "Points": [
+        [
+          338,
+          125
+        ],
+        [
+          201,
+          125
+        ],
+        [
+          201,
+          -5
+        ]
+      ]
+    },
+    {
+      "Handle": 51968.001831054688,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Scope——1"
+      ],
+      "Points": [
+        [
+          338,
+          125
+        ],
+        [
+          360,
+          125
+        ]
+      ]
+    },
+    {
+      "Handle": 45453.008544921875,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Voltage Measurement",
+      "DstPaths": [
+        "untitled3/Scope——2",
+        "untitled3/Outport2",
+        "untitled3/Goto4",
+        "untitled3/Scope——1"
       ],
       "Points": [
         [
@@ -2545,15 +4142,11 @@
         [
           338,
           125
-        ],
-        [
-          360,
-          125
         ]
       ]
     },
     {
-      "Handle": 45450.0068359375,
+      "Handle": 45452.0087890625,
       "IsRoot": true,
       "SrcPath": "untitled3/Constant",
       "DstPaths": [
@@ -2579,7 +4172,7 @@
       ]
     },
     {
-      "Handle": 45449.00732421875,
+      "Handle": 45451.009033203125,
       "IsRoot": true,
       "SrcPath": "untitled3/Square Wave\nGenerator",
       "DstPaths": [
@@ -2605,7 +4198,7 @@
       ]
     },
     {
-      "Handle": 45448.006713867188,
+      "Handle": 45450.007934570312,
       "IsRoot": true,
       "SrcPath": "untitled3/Repeating\nSequence",
       "DstPaths": [
@@ -2631,7 +4224,47 @@
       ]
     },
     {
-      "Handle": 45447.007446289062,
+      "Handle": 51958.002197265625,
+      "IsRoot": true,
+      "SrcPath": "untitled3/GreaterThan1",
+      "DstPaths": [
+        "untitled3/Outport1"
+      ],
+      "Points": [
+        [
+          -266,
+          170
+        ],
+        [
+          -266,
+          -140
+        ],
+        [
+          -130,
+          -140
+        ]
+      ]
+    },
+    {
+      "Handle": 51957.002197265625,
+      "IsRoot": true,
+      "SrcPath": "untitled3/GreaterThan1",
+      "DstPaths": [
+        "untitled3/Goto"
+      ],
+      "Points": [
+        [
+          -266,
+          170
+        ],
+        [
+          -175,
+          170
+        ]
+      ]
+    },
+    {
+      "Handle": 45449.008544921875,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
@@ -2653,10 +4286,11 @@
       ]
     },
     {
-      "Handle": 45446.008422851562,
+      "Handle": 45448.0078125,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
+        "untitled3/Outport1",
         "untitled3/Goto"
       ],
       "Points": [
@@ -2677,16 +4311,17 @@
           170
         ],
         [
-          -175,
+          -266,
           170
         ]
       ]
     },
     {
-      "Handle": 45445.00732421875,
+      "Handle": 45447.00830078125,
       "IsRoot": true,
       "SrcPath": "untitled3/GreaterThan1",
       "DstPaths": [
+        "untitled3/Outport1",
         "untitled3/Goto",
         "untitled3/NOT"
       ],
@@ -2702,7 +4337,7 @@
       ]
     },
     {
-      "Handle": 45444.0068359375,
+      "Handle": 45446.009521484375,
       "IsRoot": true,
       "SrcPath": "untitled3/NOT1",
       "DstPaths": [
@@ -2728,7 +4363,7 @@
       ]
     },
     {
-      "Handle": 45443.0078125,
+      "Handle": 45445.008422851562,
       "IsRoot": true,
       "SrcPath": "untitled3/NOT",
       "DstPaths": [
@@ -2754,7 +4389,29 @@
       ]
     },
     {
-      "Handle": 45442.007934570312,
+      "Handle": 46256.006225585938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/From2",
+      "DstPaths": [
+        "untitled3/Scope——4"
+      ],
+      "Points": [
+        [
+          534,
+          202
+        ],
+        [
+          534,
+          -60
+        ],
+        [
+          700,
+          -60
+        ]
+      ]
+    },
+    {
+      "Handle": 46255.006103515625,
       "IsRoot": true,
       "SrcPath": "untitled3/From2",
       "DstPaths": [
@@ -2762,11 +4419,7 @@
       ],
       "Points": [
         [
-          550,
-          245
-        ],
-        [
-          550,
+          534,
           202
         ],
         [
@@ -2788,7 +4441,30 @@
       ]
     },
     {
-      "Handle": 45441.007934570312,
+      "Handle": 45444.007934570312,
+      "IsRoot": true,
+      "SrcPath": "untitled3/From2",
+      "DstPaths": [
+        "untitled3/Scope——4",
+        "untitled3/IGBT3"
+      ],
+      "Points": [
+        [
+          550,
+          245
+        ],
+        [
+          550,
+          202
+        ],
+        [
+          534,
+          202
+        ]
+      ]
+    },
+    {
+      "Handle": 45443.008911132812,
       "IsRoot": true,
       "SrcPath": "untitled3/From1",
       "DstPaths": [
@@ -2818,7 +4494,7 @@
       ]
     },
     {
-      "Handle": 45440.006713867188,
+      "Handle": 45442.009155273438,
       "IsRoot": true,
       "SrcPath": "untitled3/From3",
       "DstPaths": [
@@ -2848,7 +4524,7 @@
       ]
     },
     {
-      "Handle": 45439.006225585938,
+      "Handle": 45441.009033203125,
       "IsRoot": true,
       "SrcPath": "untitled3/From",
       "DstPaths": [
@@ -2870,13 +4546,33 @@
       ]
     },
     {
-      "Handle": 45438.00732421875,
+      "Handle": 46112.006225585938,
+      "IsRoot": true,
+      "SrcPath": "untitled3/Current Measurement",
+      "DstPaths": [],
+      "Points": [
+        [
+          250,
+          255
+        ],
+        [
+          260,
+          255
+        ],
+        [
+          260,
+          215
+        ]
+      ]
+    },
+    {
+      "Handle": 46111.006225585938,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
       "Points": [
         [
-          273,
+          260,
           215
         ],
         [
@@ -2886,23 +4582,7 @@
       ]
     },
     {
-      "Handle": 45437.007934570312,
-      "IsRoot": false,
-      "SrcPath": "",
-      "DstPaths": [],
-      "Points": [
-        [
-          273,
-          215
-        ],
-        [
-          311,
-          215
-        ]
-      ]
-    },
-    {
-      "Handle": 45436.00634765625,
+      "Handle": 45438.008178710938,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [],
@@ -2918,11 +4598,15 @@
         [
           273,
           215
+        ],
+        [
+          260,
+          215
         ]
       ]
     },
     {
-      "Handle": 45435.005126953125,
+      "Handle": 45437.009155273438,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2938,7 +4622,7 @@
       ]
     },
     {
-      "Handle": 45434.006591796875,
+      "Handle": 45436.007446289062,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2958,7 +4642,7 @@
       ]
     },
     {
-      "Handle": 45433.006591796875,
+      "Handle": 45435.006103515625,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT",
       "DstPaths": [],
@@ -2974,7 +4658,7 @@
       ]
     },
     {
-      "Handle": 45432.005249023438,
+      "Handle": 45434.007690429688,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -2990,7 +4674,7 @@
       ]
     },
     {
-      "Handle": 45431.0048828125,
+      "Handle": 45433.0078125,
       "IsRoot": true,
       "SrcPath": "untitled3/Voltage Measurement",
       "DstPaths": [],
@@ -3018,7 +4702,7 @@
       ]
     },
     {
-      "Handle": 45430.00634765625,
+      "Handle": 45432.006469726562,
       "IsRoot": true,
       "SrcPath": "untitled3/Series RLC Branch1",
       "DstPaths": [],
@@ -3034,7 +4718,7 @@
       ]
     },
     {
-      "Handle": 45429.006225585938,
+      "Handle": 45431.005737304688,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT1",
       "DstPaths": [],
@@ -3054,7 +4738,7 @@
       ]
     },
     {
-      "Handle": 45428.005737304688,
+      "Handle": 45430.007568359375,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -3070,7 +4754,7 @@
       ]
     },
     {
-      "Handle": 45427.005249023438,
+      "Handle": 45429.007446289062,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT3",
       "DstPaths": [],
@@ -3090,7 +4774,7 @@
       ]
     },
     {
-      "Handle": 45426.005981445312,
+      "Handle": 45428.006591796875,
       "IsRoot": true,
       "SrcPath": "untitled3/DC Voltage Source",
       "DstPaths": [],
@@ -3110,7 +4794,7 @@
       ]
     },
     {
-      "Handle": 45425.005859375,
+      "Handle": 45427.006469726562,
       "IsRoot": false,
       "SrcPath": "",
       "DstPaths": [],
@@ -3126,7 +4810,7 @@
       ]
     },
     {
-      "Handle": 45424.0068359375,
+      "Handle": 45426.006958007812,
       "IsRoot": true,
       "SrcPath": "untitled3/IGBT1",
       "DstPaths": [],
@@ -3146,7 +4830,7 @@
       ]
     },
     {
-      "Handle": 45423.005615234375,
+      "Handle": 45425.006469726562,
       "IsRoot": true,
       "SrcPath": "untitled3/DC Voltage Source",
       "DstPaths": [],
@@ -3186,6 +4870,16 @@
           "LockScale": "off",
           "SampleTime": "inf",
           "FramePeriod": "inf"
+        }
+      },
+      {
+        "Path": "untitled3/Current Measurement",
+        "BlockType": "SubSystem",
+        "MaskType": "Current Measurement",
+        "DialogParams": {
+          "PhasorSimulation": "off",
+          "OutputType": "Complex",
+          "PSBequivalent": "0"
         }
       },
       {
@@ -3269,6 +4963,26 @@
         "MaskType": "",
         "DialogParams": {
           "GotoTag": "A2",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
+      },
+      {
+        "Path": "untitled3/Goto4",
+        "BlockType": "Goto",
+        "MaskType": "",
+        "DialogParams": {
+          "GotoTag": "A5",
+          "IconDisplay": "Tag",
+          "TagVisibility": "local"
+        }
+      },
+      {
+        "Path": "untitled3/Goto5",
+        "BlockType": "Goto",
+        "MaskType": "",
+        "DialogParams": {
+          "GotoTag": "A6",
           "IconDisplay": "Tag",
           "TagVisibility": "local"
         }
@@ -3418,7 +5132,7 @@
         }
       },
       {
-        "Path": "untitled3/Scope",
+        "Path": "untitled3/Scope——1",
         "BlockType": "Scope",
         "MaskType": "",
         "DialogParams": {
@@ -3449,8 +5163,119 @@
           "DataLoggingMaxPoints": "5000",
           "DataLoggingDecimateData": "off",
           "DataLoggingDecimation": "2",
-          "DataLogging": "off",
+          "DataLogging": "on",
           "DataLoggingVariableName": "ScopeData",
+          "DataLoggingSaveFormat": "Dataset"
+        }
+      },
+      {
+        "Path": "untitled3/Scope——2",
+        "BlockType": "Scope",
+        "MaskType": "",
+        "DialogParams": {
+          "OpenAtSimulationStart": "off",
+          "DisplayFullPath": "off",
+          "NumInputPorts": "1",
+          "LayoutDimensionsString": "[1 1]",
+          "SampleTime": "-1",
+          "FrameBasedProcessingString": "Elements as channels (sample based)",
+          "MaximizeAxes": "Off",
+          "AxesScaling": "Manual",
+          "AxesScalingNumUpdates": "10",
+          "TimeSpan": "Auto",
+          "TimeSpanOverrunAction": "Wrap",
+          "TimeUnits": "None",
+          "TimeDisplayOffset": "0",
+          "TimeAxisLabels": "Bottom displays only",
+          "ShowTimeAxisLabel": "off",
+          "ActiveDisplayString": "1",
+          "Title": "%<SignalLabel>",
+          "ShowLegend": "off",
+          "ShowGrid": "on",
+          "PlotAsMagnitudePhase": "off",
+          "ActiveDisplayYMinimum": "-0.16754",
+          "ActiveDisplayYMaximum": "1.3897",
+          "YLabel": "",
+          "DataLoggingLimitDataPoints": "off",
+          "DataLoggingMaxPoints": "5000",
+          "DataLoggingDecimateData": "off",
+          "DataLoggingDecimation": "2",
+          "DataLogging": "on",
+          "DataLoggingVariableName": "ScopeData2",
+          "DataLoggingSaveFormat": "Dataset"
+        }
+      },
+      {
+        "Path": "untitled3/Scope——3",
+        "BlockType": "Scope",
+        "MaskType": "",
+        "DialogParams": {
+          "OpenAtSimulationStart": "off",
+          "DisplayFullPath": "off",
+          "NumInputPorts": "1",
+          "LayoutDimensionsString": "[1 1]",
+          "SampleTime": "-1",
+          "FrameBasedProcessingString": "Elements as channels (sample based)",
+          "MaximizeAxes": "Off",
+          "AxesScaling": "Manual",
+          "AxesScalingNumUpdates": "10",
+          "TimeSpan": "Auto",
+          "TimeSpanOverrunAction": "Wrap",
+          "TimeUnits": "None",
+          "TimeDisplayOffset": "0",
+          "TimeAxisLabels": "Bottom displays only",
+          "ShowTimeAxisLabel": "off",
+          "ActiveDisplayString": "1",
+          "Title": "%<SignalLabel>",
+          "ShowLegend": "off",
+          "ShowGrid": "on",
+          "PlotAsMagnitudePhase": "off",
+          "ActiveDisplayYMinimum": "-0.01248",
+          "ActiveDisplayYMaximum": "0.11231",
+          "YLabel": "",
+          "DataLoggingLimitDataPoints": "off",
+          "DataLoggingMaxPoints": "5000",
+          "DataLoggingDecimateData": "off",
+          "DataLoggingDecimation": "2",
+          "DataLogging": "on",
+          "DataLoggingVariableName": "ScopeData1",
+          "DataLoggingSaveFormat": "Dataset"
+        }
+      },
+      {
+        "Path": "untitled3/Scope——4",
+        "BlockType": "Scope",
+        "MaskType": "",
+        "DialogParams": {
+          "OpenAtSimulationStart": "off",
+          "DisplayFullPath": "off",
+          "NumInputPorts": "1",
+          "LayoutDimensionsString": "[1 1]",
+          "SampleTime": "-1",
+          "FrameBasedProcessingString": "Elements as channels (sample based)",
+          "MaximizeAxes": "Off",
+          "AxesScaling": "Manual",
+          "AxesScalingNumUpdates": "10",
+          "TimeSpan": "Auto",
+          "TimeSpanOverrunAction": "Wrap",
+          "TimeUnits": "None",
+          "TimeDisplayOffset": "0",
+          "TimeAxisLabels": "Bottom displays only",
+          "ShowTimeAxisLabel": "off",
+          "ActiveDisplayString": "1",
+          "Title": "%<SignalLabel>",
+          "ShowLegend": "off",
+          "ShowGrid": "on",
+          "PlotAsMagnitudePhase": "off",
+          "ActiveDisplayYMinimum": "-0.16754",
+          "ActiveDisplayYMaximum": "1.3897",
+          "YLabel": "",
+          "DataLoggingLimitDataPoints": "off",
+          "DataLoggingMaxPoints": "5000",
+          "DataLoggingDecimateData": "off",
+          "DataLoggingDecimation": "2",
+          "DataLogging": "on",
+          "DataLoggingVariableName": "ScopeData3",
           "DataLoggingSaveFormat": "Dataset"
         }
       },
@@ -3598,6 +5423,102 @@
           "frequencyindicesteady": "1",
           "RmsSteady": "1",
           "display": "off"
+        }
+      },
+      {
+        "Path": "untitled3/Outport",
+        "BlockType": "Outport",
+        "MaskType": "",
+        "DialogParams": {
+          "Port": "1",
+          "SignalName": "",
+          "SignalObject": "[]",
+          "StorageClass": "Auto",
+          "IconDisplay": "Port number",
+          "OutputFunctionCall": "off",
+          "OutMin": "[]",
+          "OutMax": "[]",
+          "OutDataTypeStr": "Inherit: auto",
+          "LockScale": "off",
+          "BusOutputAsStruct": "off",
+          "BusVirtuality": "inherit",
+          "DataMode": "inherit",
+          "Unit": "inherit",
+          "PortDimensions": "-1",
+          "VarSizeSig": "Inherit",
+          "SampleTime": "-1",
+          "SignalType": "auto",
+          "EnsureOutportIsVirtual": "off",
+          "OutputWhenDisabled": "held",
+          "InitialOutput": "[]",
+          "MustResolveToSignalObject": "off",
+          "OutputWhenUnConnected": "off",
+          "OutputWhenUnconnectedValue": "0",
+          "VectorParamsAs1DForOutWhenUnconnected": "on"
+        }
+      },
+      {
+        "Path": "untitled3/Outport1",
+        "BlockType": "Outport",
+        "MaskType": "",
+        "DialogParams": {
+          "Port": "2",
+          "SignalName": "",
+          "SignalObject": "[]",
+          "StorageClass": "Auto",
+          "IconDisplay": "Port number",
+          "OutputFunctionCall": "off",
+          "OutMin": "[]",
+          "OutMax": "[]",
+          "OutDataTypeStr": "Inherit: auto",
+          "LockScale": "off",
+          "BusOutputAsStruct": "off",
+          "BusVirtuality": "inherit",
+          "DataMode": "inherit",
+          "Unit": "inherit",
+          "PortDimensions": "-1",
+          "VarSizeSig": "Inherit",
+          "SampleTime": "-1",
+          "SignalType": "auto",
+          "EnsureOutportIsVirtual": "off",
+          "OutputWhenDisabled": "held",
+          "InitialOutput": "[]",
+          "MustResolveToSignalObject": "off",
+          "OutputWhenUnConnected": "off",
+          "OutputWhenUnconnectedValue": "0",
+          "VectorParamsAs1DForOutWhenUnconnected": "on"
+        }
+      },
+      {
+        "Path": "untitled3/Outport2",
+        "BlockType": "Outport",
+        "MaskType": "",
+        "DialogParams": {
+          "Port": "3",
+          "SignalName": "",
+          "SignalObject": "[]",
+          "StorageClass": "Auto",
+          "IconDisplay": "Port number",
+          "OutputFunctionCall": "off",
+          "OutMin": "[]",
+          "OutMax": "[]",
+          "OutDataTypeStr": "Inherit: auto",
+          "LockScale": "off",
+          "BusOutputAsStruct": "off",
+          "BusVirtuality": "inherit",
+          "DataMode": "inherit",
+          "Unit": "inherit",
+          "PortDimensions": "-1",
+          "VarSizeSig": "Inherit",
+          "SampleTime": "-1",
+          "SignalType": "auto",
+          "EnsureOutportIsVirtual": "off",
+          "OutputWhenDisabled": "held",
+          "InitialOutput": "[]",
+          "MustResolveToSignalObject": "off",
+          "OutputWhenUnConnected": "off",
+          "OutputWhenUnconnectedValue": "0",
+          "VectorParamsAs1DForOutWhenUnconnected": "on"
         }
       }
     ]

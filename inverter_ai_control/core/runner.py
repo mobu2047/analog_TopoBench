@@ -21,7 +21,6 @@ class Runner:
         self._validator = ActionValidator(cfg.get("action_space", []))
         self._adapter = TopologyAdapter(simulator, cfg.get("action_space", []))
         # v2 不再使用 topology.read_mode；默认从 workspace 读取
-        self._observer = ObservationReader(simulator, cfg.get("observation_space", {}), "base_workspace")
         self._metrics = MetricEvaluator(cfg.get("metrics", {}))
 
     def reset(self, initial_action: Dict[str, Any] | None = None) -> Dict[str, Any]:
@@ -41,8 +40,7 @@ class Runner:
         self._adapter.apply_action(act)
         # 跑完整仿真（默认），或单步
         res = self._sim.run_step(act, whole_duration=whole_duration) if "whole_duration" in self._sim.run_step.__code__.co_varnames else self._sim.run_step(act)
-        obs = self._observer.read()
-        metrics = self._metrics.evaluate(obs)
-        return {"sim": res, "obs": obs, "metrics": metrics}
+        metrics = self._metrics
+        return {"sim": res, "metrics": metrics}
 
 

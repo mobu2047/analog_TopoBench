@@ -14,56 +14,13 @@ parameters:
   auto:
     file: auto_params.yaml
 action_space:
-- name: Kp
-  target: workspace
-  path: Kp_val
-  dtype: float
-  bounds:
-    min: 0.0
-    max: 10.0
-  apply: assign
-  step_rate: per_step
-- name: Ki
-  target: workspace
-  path: Ki_val
+- key: series_rlc_branch1.resistance
   dtype: float
   bounds:
     min: 0.0
     max: 100.0
-  apply: assign
-  step_rate: per_step
-- name: L_load
-  target: workspace
-  path: L_load
-  dtype: float
-  bounds:
-    min: 0.0001
-    max: 0.01
-  default: 0.001
-  apply: assign
-  step_rate: per_episode
-- name: rep_t
-  target: workspace
-  path: rep_t
-  dtype: array
-  shape:
-  - 3
-  bounds:
-    element_min: 0.0
-    element_max: 0.01
-  default:
-  - 0
-  - 5.0e-05
-  - 0.0001
-  apply: assign
-  step_rate: per_episode
-observation_space:
-  signals:
-  - key: tout
-    from: workspace
-    path: tout
-    transforms:
-    - last
+- key: square_wave_generator.frequency
+  dtype: str
 metrics:
   evaluation_window: by_step
   definitions:
@@ -83,5 +40,10 @@ metrics:
   - name: saturation_guard
     expr: V_out <= 400
 presets:
-  init_action:
-    L_load: 0.001
+  init_action: {}
+experiments:
+  cases:
+  - name: case_R_100_freq_3pi
+    action:
+      series_rlc_branch1.resistance: 100
+      square_wave_generator.frequency: '3*pi'

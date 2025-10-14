@@ -319,63 +319,6 @@ def discover_mappings(
     rules.sort(key=lambda r: r.get("target", ""))
     return {"version": 1, "description": "auto discovered mappings", "mappings": rules}
 
-
-
-# ============================ auto_params 清理工具 ============================
-
-def clean_auto_params_file(file_path: Path, keep_prefix: Optional[str] = None) -> int:
-    """清理 auto_params.yaml：
-
-    - 仅保留参数快照树（例如顶层的 'untitled3'）
-    - 若存在重复嵌套（untitled3: { untitled3: {...} }），则扁平化为单层
-    - 删除与 v2 主配置相关的键（version/model/sim/matlab/parameters/...）
-    """
-    if not file_path.exists():
-        log.error("auto.clean.missing", file=str(file_path))
-        return 2
-
-    with file_path.open("r", encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
-
-    # 识别要保留的前缀键
-    candidate_keys = []
-    if keep_prefix:
-        candidate_keys.append(str(keep_prefix))
-    # 常见模型名/默认键
-    for k in ("untitled3", "untitled", "model", "auto_params", "matlab.auto_params"):
-        if k not in candidate_keys:
-            candidate_keys.append(k)
-
-    keep_key = None
-    for k in candidate_keys:
-        if k in data:
-            keep_key = k
-            break
-
-    # 若未找到，尝试启发式：取最像参数树的 dict 键（其 value 仍是 dict）
-    if keep_key is None:
-        for k, v in (data.items() if isinstance(data, dict) else []):
-            if isinstance(v, dict) and k not in {"version", "model", "sim", "matlab", "parameters", "action_space", "observation_space", "metrics", "presets"}:
-                keep_key = k
-                break
-
-    if keep_key is None:
-        log.error("auto.clean.no_params_tree_found", keys=list(data.keys()) if isinstance(data, dict) else type(data))
-        return 3
-
-    subtree = data.get(keep_key, {}) if isinstance(data, dict) else {}
-    # 扁平化重复嵌套（如 untitled3: { untitled3: {...} }）
-    if isinstance(subtree, dict) and keep_key in subtree and isinstance(subtree[keep_key], dict):
-        subtree = subtree[keep_key]
-
-    cleaned = {keep_key: subtree}
-
-    with file_path.open("w", encoding="utf-8") as f:
-        yaml.safe_dump(cleaned, f, allow_unicode=True, sort_keys=False)
-    log.info("auto.clean.written", file=str(file_path), root=keep_key)
-    return 0
-
-
 # ============================ default.yaml 生成器 ============================
 
 def _get_nested(d: Dict[str, Any], path: str, default: Any = None) -> Any:
@@ -396,16 +339,45 @@ def generate_default_v2(
     sim_step: float | None,
     stop_time: float | None,
     auto_params_file: str,
-
-    auto_tree: Dict[str, Any] | None,
+    auto_tree_root_name: str | None = None,
+    auto_tree: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """生成 v2 精简版 default.yaml：去掉 manual，使用 auto+init+action。"""
+    """生成 v2 精简版 default.yaml：去掉 manual，使用 auto+init+action。
+
+    新格式要点：
+    - action_space 使用 key= "<block>.<param>"（可直接从 auto_params 粘贴）
+    - experiments 仅提供 cases 示例，便于用户批量整段仿真
+    """
     manual = {}
     # 允许从 auto 中推断 sim.step（若启发式可用）
     if sim_step is None and auto_tree is not None:
         ts = _get_nested(auto_tree, "powergui.sampletime")
         if isinstance(ts, (int, float)):
             sim_step = float(ts)
+    # 从 auto_tree 中挑选两个示例键（尽量选择可转为 float 的参数）
+    demo_keys: List[str] = []
+    demo_vals: List[float] = []
+    if isinstance(auto_tree, dict):
+        for bname, params in auto_tree.items():
+            if not isinstance(params, dict):
+                continue
+            for pname, pval in params.items():
+                try:
+                    v = float(str(pval).strip())
+                except Exception:
+                    continue
+                demo_keys.append(f"{bname}.{pname}")
+                demo_vals.append(v)
+                if len(demo_keys) >= 2:
+                    break
+            if len(demo_keys) >= 2:
+                break
+
+    # 兜底示例
+    if not demo_keys:
+        demo_keys = ["series_rlc_branch1.resistance", "dc_voltage_source.amplitude"]
+        demo_vals = [0.03, 1000.0]
+
     cfg: Dict[str, Any] = {
         "version": 2,
         "model": {"path": model_path},
@@ -414,15 +386,13 @@ def generate_default_v2(
             "stop_time": float(stop_time) if stop_time is not None else 0.1,
             "mode": {"start_in_accelerator": True, "external_mode": False},
         },
-        "matlab": {"output_map": {"ScopeData": "ScopeData"}},
+        "matlab": {"output_map": {"tout": "tout"}},
         "parameters": {"auto": {"file": auto_params_file}},
+        # 新格式：key = block.param，便于从 auto_params 直接复制
         "action_space": [
-            {"name": "Kp", "target": "workspace", "path": "Kp_val", "dtype": "float", "bounds": {"min": 0.0, "max": 10.0}, "apply": "assign", "step_rate": "per_step"},
-            {"name": "Ki", "target": "workspace", "path": "Ki_val", "dtype": "float", "bounds": {"min": 0.0, "max": 100.0}, "apply": "assign", "step_rate": "per_step"},
-            {"name": "L_load", "target": "workspace", "path": "L_load", "dtype": "float", "bounds": {"min": 1.0e-4, "max": 1e-2}, "default": 1.0e-3, "apply": "assign", "step_rate": "per_episode"},
-            {"name": "rep_t", "target": "workspace", "path": "rep_t", "dtype": "array", "shape": [3], "bounds": {"element_min": 0.0, "element_max": 0.01}, "default": [0, 5.0e-05, 0.0001], "apply": "assign", "step_rate": "per_episode"},
+            {"key": demo_keys[0], "dtype": "float", "bounds": {"min": 0.0, "max": max(1.0, abs(float(demo_vals[0])) * 10)}},
+            {"key": demo_keys[1], "dtype": "float", "bounds": {"min": 0.0, "max": max(1.0, abs(float(demo_vals[1])) * 2)}},
         ],
-        "observation_space": {"signals": [{"key": "ScopeData", "from": "workspace", "path": "ScopeData", "transforms": ["last"]}]},
         "metrics": {
             "evaluation_window": "by_step",
             "definitions": [
@@ -434,7 +404,13 @@ def generate_default_v2(
                 {"name": "saturation_guard", "expr": "V_out <= 400"},
             ],
         },
-        "presets": {"init_action": {"L_load": 1.0e-3}},
+        "presets": {"init_action": {}},
+        "experiments": {
+            "cases": [
+                {"name": f"case_{demo_keys[0].replace('.', '_')}_base", "action": {demo_keys[0]: float(demo_vals[0])}},
+                {"name": f"case_{demo_keys[0].replace('.', '_')}_x2",   "action": {demo_keys[0]: float(demo_vals[0]) * 2}},
+            ]
+        },
     }
     return cfg
 

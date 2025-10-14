@@ -1,5 +1,6 @@
 Path,Name,BlockType,Orientation,Position_1,Position_2,Position_3,Position_4,Center_1,Center_2,LibraryLink,Mirror,Rotation,GotoTag,GotoVisibility,FromTag
 "untitled3/Constant","Constant","Constant","right",-735,270,-705,300,-720,285,"","off",0,"","",""
+"untitled3/Current Measurement","Current Measurement","SubSystem","right",265,243,290,267,277.5,255,"spsCurrentMeasurementLib/Current Measurement","off",0,"","",""
 "untitled3/DC Voltage Source","DC Voltage Source","SubSystem","up",10,200,30,235,20,217.5,"spsDCVoltageSourceLib/DC Voltage Source","off",270,"","",""
 "untitled3/From","From","From","right",-30,-4,10,24,-10,10,"","off",0,"","","A1"
 "untitled3/From1","From1","From","right",480,6,520,34,500,20,"","off",0,"","","A2"
@@ -9,6 +10,8 @@ Path,Name,BlockType,Orientation,Position_1,Position_2,Position_3,Position_4,Cent
 "untitled3/Goto1","Goto1","Goto","right",-195,475,-155,505,-175,490,"","off",0,"A4","local",""
 "untitled3/Goto2","Goto2","Goto","right",-250,400,-210,430,-230,415,"","off",0,"A3","local",""
 "untitled3/Goto3","Goto3","Goto","right",-180,330,-140,360,-160,345,"","off",0,"A2","local",""
+"untitled3/Goto4","Goto4","Goto","right",225,-125,265,-95,245,-110,"","off",0,"A5","local",""
+"untitled3/Goto5","Goto5","Goto","right",315,410,355,440,335,425,"","off",0,"A6","local",""
 "untitled3/GreaterThan","GreaterThan","RelationalOperator","right",-410,397,-380,428,-395,412.5,"","off",0,"","",""
 "untitled3/GreaterThan1","GreaterThan1","RelationalOperator","right",-555,212,-525,243,-540,227.5,"","off",0,"","",""
 "untitled3/IGBT","IGBT","SubSystem","down",108,110,152,170,130,140,"spsIGBTLib/IGBT","off",90,"","",""
@@ -22,7 +25,10 @@ Path,Name,BlockType,Orientation,Position_1,Position_2,Position_3,Position_4,Cent
 Sequence","Repeating
 Sequence","SubSystem","right",-770,445,-740,475,-755,460,"simulink/Sources/Repeating
 Sequence","off",0,"","",""
-"untitled3/Scope","Scope","Scope","right",365,109,395,141,380,125,"","off",0,"","",""
+"untitled3/Scope——1","Scope——1","Scope","right",365,109,395,141,380,125,"","off",0,"","",""
+"untitled3/Scope——2","Scope——2","Scope","right",375,-21,405,11,390,-5,"","off",0,"","",""
+"untitled3/Scope——3","Scope——3","Scope","right",-450,89,-420,121,-435,105,"","off",0,"","",""
+"untitled3/Scope——4","Scope——4","Scope","right",705,-76,735,-44,720,-60,"","off",0,"","",""
 "untitled3/Series RLC Branch","Series RLC Branch","PMComponent","right",160,196,240,234,200,215,"spsSeriesRLCBranchLib/Series RLC Branch","off",0,"","",""
 "untitled3/Series RLC Branch1","Series RLC Branch1","PMComponent","right",315,196,395,234,355,215,"spsSeriesRLCBranchLib/Series RLC Branch","off",0,"","",""
 "untitled3/Sine Wave","Sine Wave","Sin","right",-590,310,-560,340,-575,325,"","off",0,"","",""
@@ -32,3 +38,6 @@ Generator","Square Wave
 Generator","SignalGenerator","right",-770,375,-740,405,-755,390,"","off",0,"","",""
 "untitled3/Voltage Measurement","Voltage Measurement","SubSystem","right",285,138,310,162,297.5,150,"spsVoltageMeasurementLib/Voltage Measurement","off",0,"","",""
 "untitled3/powergui","powergui","SubSystem","right",-450,-80,-369,-41,-409.5,-60.5,"spspowerguiLib/powergui","off",0,"","",""
+"untitled3/Outport","Outport","Outport","right",115,-192,145,-178,130,-185,"","off",0,"","",""
+"untitled3/Outport1","Outport1","Outport","right",-125,-147,-95,-133,-110,-140,"","off",0,"","",""
+"untitled3/Outport2","Outport2","Outport","right",450,-167,480,-153,465,-160,"","off",0,"","",""

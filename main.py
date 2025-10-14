@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
@@ -140,7 +140,7 @@ def main() -> None:
 
     runner = Runner(sim, cfg)
     with sim:
-        # 使用新管线复位；若配置中有 per_episode 动作，可在此传入
+        # 使用新管线复位
         runner.reset()
 
         if args.interactive:
@@ -165,47 +165,59 @@ def main() -> None:
                 out = runner.step(action)
                 print(out["metrics"])  # 简要反馈
         else:
-            # v2：仅执行一次完整仿真，初始动作由 presets.init_action 提供
-            presets = cfg.get("presets", {}) or {}
-            init_action = presets.get("init_action")
-            if init_action:
+            # 批量整段仿真：按 experiments.cases 运行
+            experiments = dict(cfg.get("experiments", {}))
+            cases = list(experiments.get("cases", []) or [])
+            if not cases:
+                # 回退到单次：仅用 presets.init_action
+                presets = cfg.get("presets", {}) or {}
+                init_action = presets.get("init_action") or {}
                 runner.reset(initial_action=init_action)
-            out = runner.step({}, whole_duration=True)
-            log.info("run.metrics", metrics=out["metrics"]) 
-            # 自动从配置的 output_map/结果中绘图并保存到 runs 目录
-            import os, time
-            run_dir = os.path.join("runs", time.strftime("%Y%m%d-%H%M%S"))
-            os.makedirs(run_dir, exist_ok=True)
-            from inverter_ai_control.utils.visualization import plot_outputs_from_result
+                out = runner.step({}, whole_duration=True)
+                _save_and_plot(cfg, sim, out, case_name="single")
+            else:
+                for case in cases:
+                    name = str(case.get("name", "case"))
+                    action = dict(case.get("action", {}))
+                    # 直接使用键为 name 或 block.param 的动作；Runner 内部会进行裁剪与映射
+                    runner.reset(initial_action=(cfg.get("presets", {}) or {}).get("init_action"))
+                    out = runner.step(action, whole_duration=True)
+                    _save_and_plot(cfg, sim, out, case_name=name)
 
-            # 解析并打印 MATLAB Dataset/Timeseries（例如 ScopeData / yout）中的数据摘要
-            out_map = {}
-            try:
-                from inverter_ai_control.utils.visualization import extract_scope_dataset
-                dataset_vars = [name for name in out.get("sim", {})]
-                for var_name in dataset_vars:
-                    series = extract_scope_dataset(sim, var_name)
-                    if not series:
-                        continue
-                    # 打印通道数量与每个通道的前几项
-                    print(f"[Dataset] {var_name}: channels={len(series)}")
-                    for ch_idx, (tt, yy) in enumerate(series, start=1):
-                        import numpy as _np
-                        tt = _np.asarray(tt).reshape(-1)
-                        yy = _np.asarray(yy).reshape(-1)
-                        head_t = ", ".join(f"{float(x):.4g}" for x in tt[:5])
-                        head_y = ", ".join(f"{float(x):.4g}" for x in yy[:5])
-                        print(f"  - ch{ch_idx}: len={len(tt)}  t=[{head_t}]  y=[{head_y}] ...")
-                        out_map[var_name] = zip(tt, yy)
-                plot_outputs_from_result(cfg, out, run_dir, label_prefix="", filename="outputs.png",simulator=sim,out_map=out_map)
-            except Exception as _e:
-                print(f"[warn] failed to extract dataset/timeseries: {_e}")
 
-            # 打印 out['sim'] 中可用的数据摘要，便于排查哪些变量成功写入工作区
-            sim_out = dict(out.get("sim", {}))
-            keys = sorted(sim_out.keys())
-            print("\n[Simulation outputs summary]")
-            print("keys:", keys)
+def _save_and_plot(cfg: Dict[str, Any], sim: MatlabSimulator, out: Dict[str, Any], *, case_name: str) -> None:
+    """将结果保存到 runs/ 并尽量输出图与摘要。"""
+    import os, time
+    run_dir = os.path.join("runs", time.strftime("%Y%m%d-%H%M%S"), case_name)
+    os.makedirs(run_dir, exist_ok=True)
+    log.info("run.metrics", metrics=out.get("metrics", {}), case=case_name)
+    from inverter_ai_control.utils.visualization import plot_outputs_from_result
+    # 解析并打印 MATLAB Dataset/Timeseries 数据摘要
+    out_map = {}
+    try:
+        from inverter_ai_control.utils.visualization import extract_scope_dataset
+        dataset_vars = [name for name in out.get("sim", {})]
+        for var_name in dataset_vars:
+            series = extract_scope_dataset(sim, var_name)
+            if not series:
+                continue
+            print(f"[Dataset] {var_name}: channels={len(series)}")
+            for ch_idx, (tt, yy) in enumerate(series, start=1):
+                import numpy as _np
+                tt = _np.asarray(tt).reshape(-1)
+                yy = _np.asarray(yy).reshape(-1)
+                head_t = ", ".join(f"{float(x):.4g}" for x in tt[:5])
+                head_y = ", ".join(f"{float(x):.4g}" for x in yy[:5])
+                print(f"  - ch{ch_idx}: len={len(tt)}  t=[{head_t}]  y=[{head_y}] ...")
+                out_map[var_name] = zip(tt, yy)
+        plot_outputs_from_result(cfg, out, run_dir, label_prefix=case_name+" ", filename="outputs.png", simulator=sim, out_map=out_map)
+    except Exception as _e:
+        print(f"[warn] failed to extract dataset/timeseries: {_e}")
+    # 打印 summary 键
+    sim_out = dict(out.get("sim", {}))
+    keys = sorted(sim_out.keys())
+    print("\n[Simulation outputs summary]", case_name)
+    print("keys:", keys)
             
 
 if __name__ == "__main__":

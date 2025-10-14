@@ -250,7 +250,6 @@ class MatlabSimulator:
         start_in_accelerator = bool(mode_cfg.get("start_in_accelerator", True))
         use_external_mode = bool(mode_cfg.get("external_mode", False))
         # v2 精简：不再从 manual 注入默认变量；仅使用 init_action/每步 action 进行赋值
-        extra_params: Dict[str, Any] = {}
         output_map = dict(matlab_cfg.get("output_map", {}))
 
         normalized_path = os.path.abspath(os.path.expanduser(str(model_path)))
@@ -259,13 +258,13 @@ class MatlabSimulator:
 
         # 保存配置到实例（保持纯数据）
         self._model_path: str = normalized_path
+
         self._model_name: str = os.path.splitext(os.path.basename(normalized_path))[0]
         self._sample_time_s: float = float(sample_time_s)
         self._stop_time_s: Optional[float] = float(stop_time_s) if stop_time_s is not None else None
         # v2 去除 input_map，动作由 TopologyAdapter 直接调用 _assign_in_base
         self._input_map: Dict[str, str] = {}
         self._output_map: Dict[str, str] = output_map
-        self._extra_params: Dict[str, Any] = extra_params
         self._accelerator: bool = start_in_accelerator
         self._external_mode: bool = use_external_mode
         self._connected: bool = False
@@ -305,46 +304,25 @@ class MatlabSimulator:
                     # 某些模型/许可证不支持 accelerator，降级为 normal
                     self._eng.set_param(self._model_name, "SimulationMode", "normal", nargout=0)
 
-            # 可选：确保存在 To Workspace 块写出 ScopeData（需配置 matlab.scope.enable），并关闭 Single simulation output
+            # 启用模型级别的信号记录功能（Signal Logging）
             try:
-                # 关闭单输出，使 To Workspace 正常写出 base 变量
-                try:
-                    self._eng.set_param(self._model_name, "ReturnWorkspaceOutputs", "off", nargout=0)
-                except Exception:
-                    pass
-
-                scope_cfg = dict(matlab_cfg.get("scope", {}))
-                if bool(scope_cfg.get("enable", False)):
-                    var_name = scope_cfg.get("var", "ScopeData")
-                    save_fmt = scope_cfg.get("save_format", "Array")  # Array | Structure With Time | Dataset
-                    to_block = f"{self._model_name}/auto_ToWorkspace_{var_name}"
-
-                    need_add = False
-                    try:
-                        _ = self._eng.get_param(to_block, "BlockType", nargout=1)
-                    except Exception:
-                        need_add = True
-
-                    if need_add:
-                        self._eng.add_block("simulink/Sinks/To Workspace", to_block, "MakeNameUnique", "off", nargout=0)
-                        self._eng.set_param(to_block, "VariableName", var_name, nargout=0)
-                        self._eng.set_param(to_block, "SaveFormat", save_fmt, nargout=0)
-
-                        src_block = scope_cfg.get("source_block")  # 形如 'model/Sub/Block'
-                        src_port = int(scope_cfg.get("source_port", 1))
-                        if src_block:
-                            try:
-                                self._eng.add_line(self._model_name, f"{src_block}/{src_port}", f"{to_block}/1", "autorouting", "on", nargout=0)
-                            except Exception:
-                                # 如果源端口已连接，Simulink 可能不允许重复连线；这里忽略错误
-                                pass
+                # 启用信号记录到 base workspace
+                self._eng.set_param(self._model_name, "SignalLogging", "on", nargout=0)
+                log.info("matlab.model.setting", key="SignalLogging", value="on")
+            except Exception as e:
+                log.warning("matlab.model.setting_failed", key="SignalLogging", error=str(e))
+            
+            try:
+                # 设置信号记录名称（默认为 logsout）
+                self._eng.set_param(self._model_name, "SignalLoggingName", "logsout", nargout=0)
             except Exception:
-                # 添加/连接失败不影响主流程
                 pass
-
-            # 写入初始参数到工作区
-            for var_name, var_value in self._extra_params.items():
-                self._assign_in_base(var_name, var_value)
+            
+            try:
+                # 设置保存格式为 Dataset
+                self._eng.set_param(self._model_name, "DatasetSignalFormat", "timeseries", nargout=0)
+            except Exception:
+                pass
 
             # 自动发现并接线观测信号，填充输出映射
             try:
@@ -377,9 +355,6 @@ class MatlabSimulator:
             self._eng.set_param(self._model_name, "StartTime", "0.0", nargout=0)
             self._eng.set_param(self._model_name, "StopTime", str(self._stop_time_s), nargout=0)
 
-            # 写入初始化参数（工作区变量）
-            for var_name, var_value in dict(self._extra_params).items():
-                self._assign_in_base(var_name, var_value)
             # 写入初始化 setpoints（直接按变量名赋值，v2 不再通过 input_map）
             if initial_setpoints:
                 for logical_key, value in dict(initial_setpoints).items():
@@ -595,10 +570,23 @@ class MatlabSimulator:
         return results
 
     def _fetch_workspace_var(self, var_name: str) -> Any:
-        """从工作区读取变量并进行尽量自然的类型转换。"""
+        """从工作区读取变量并进行尽量自然的类型转换。
+        
+        支持两种方式：
+        1. 直接从 workspace 读取变量（To Workspace 保存的变量）
+        2. 从 logsout Dataset 中读取信号记录的变量
+        """
         try:
             value = self._eng.workspace[var_name]
         except Exception as e:
+            # 如果直接读取失败，尝试从 logsout 中读取
+            try:
+                value = self._fetch_from_logsout(var_name)
+                if value is not None:
+                    return value
+            except Exception:
+                pass
+            
             # 调试输出：打印当前 base 工作区的变量清单，辅助定位变量名映射问题
             try:
                 # evalc 捕获命令窗口输出，比 who/whos 的返回更直观
@@ -642,6 +630,37 @@ class MatlabSimulator:
             # 若无法识别类型，直接返回原值（可能是标量/字符串/结构体）
             return value
 
+    def _fetch_from_logsout(self, signal_name: str) -> Optional[Any]:
+        """从 logsout Dataset 中提取指定信号的数据。
+        
+        参数:
+            signal_name: 信号名称
+            
+        返回:
+            numpy 数组或 None（如果信号不存在）
+        """
+        try:
+            # 检查 logsout 是否存在
+            logsout = self._eng.workspace.get('logsout', None)
+            if logsout is None:
+                return None
+            
+            # 使用 MATLAB 命令提取信号数据
+            # logsout.get(signal_name).Values.Data
+            matlab_cmd = f"logsout.get('{signal_name}').Values.Data"
+            data = self._eng.eval(matlab_cmd, nargout=1)
+            
+            # 转换为 numpy 数组
+            import matlab
+            if isinstance(data, matlab.double):
+                arr = np.array(data, dtype=float)
+                return arr.flatten()
+            
+            return data
+        except Exception as e:
+            log.debug("matlab.logsout.fetch_failed", signal=signal_name, error=str(e))
+            return None
+
     # ---------------------------
     # 自动发现/接线/映射输出
     # ---------------------------
@@ -652,28 +671,6 @@ class MatlabSimulator:
         if not name or re.match(r"^[0-9]", name):
             name = f"{prefix}_{name}"
         return name
-
-    def _ensure_to_workspace(self, src_block: str, src_port: int, var_name: str, save_format: str = "Array") -> None:
-        # 在源块父系统内插入 To Workspace，避免跨层连线失败
-        parent_system = str(src_block).rsplit("/", 1)[0]
-        to_block = f"{parent_system}/auto_ToWorkspace_{var_name}"
-        try:
-            _ = self._eng.get_param(to_block, "BlockType", nargout=1)
-            exists = True
-        except Exception:
-            exists = False
-        if not exists:
-            self._eng.add_block("simulink/Sinks/To Workspace", to_block, "MakeNameUnique", "off", nargout=0)
-            self._eng.set_param(to_block, "VariableName", var_name, nargout=0)
-            self._eng.set_param(to_block, "SaveFormat", save_format, nargout=0)
-            try:
-                self._eng.set_param(to_block, "LimitDataPoints", "off", nargout=0)
-            except Exception:
-                pass
-            try:
-                self._eng.add_line(parent_system, f"{src_block}/{int(src_port)}", f"{to_block}/1", "autorouting", "on", nargout=0)
-            except Exception:
-                pass
 
     def _autoconfigure_outputs(self, matlab_cfg: Dict[str, Any]) -> None:
         # 基础：始终包含 tout
@@ -732,46 +729,12 @@ class MatlabSimulator:
         except Exception:
             pass
 
-        # # 电压/电流测量：若存在，自动接 To Workspace
-        # def _find_mask(mask_type: str):
-        #     try:
-        #         return self._eng.find_system(self._model_name, "LookUnderMasks", "all", "FollowLinks", "on", "MaskType", mask_type, nargout=1)
-        #     except Exception:
-        #         return []
-
-        # for mask, prefix in (("Voltage Measurement", "v"), ("Current Measurement", "i")):
-        #     blks = _find_mask(mask) or []
-        #     for blk in blks:
-        #         # 使用块的 Name 作为变量名，便于与用户预期一致（如 Voltage_Measurement）
-        #         try:
-        #             blk_name = self._eng.get_param(blk, "Name", nargout=1)
-        #         except Exception:
-        #             blk_name = os.path.basename(str(blk))
-        #         var = self._normalize_ws_var(str(blk_name), prefix=prefix)
-        #         try:
-        #             self._ensure_to_workspace(str(blk), 1, var, save_format="Array")
-        #             discovered[var] = var
-        #         except Exception:
-        #             pass
-
-        # 根级 Outport：自动接 To Workspace（不覆盖已有）
         try:
             outs = self._eng.find_system(self._model_name, "SearchDepth", 1.0, "BlockType", "Outport", nargout=1)
         except Exception:
             outs = []
         if outs:
              discovered['yout'] = 'yout'
-        # for blk in (outs or []):
-        #     try:
-        #         port_num = int(self._eng.get_param(blk, "Port", nargout=1))
-        #     except Exception:
-        #         port_num = 1
-        #     var = self._normalize_ws_var(f"out_{port_num}", prefix="out")
-        #     try:
-        #         self._ensure_to_workspace(str(blk), 1, var, save_format="Array")
-        #         discovered[var] = str(var)
-        #     except Exception:
-        #         pass
 
         # 合并到输出映射：以自动发现为主，配置项仅补充/重命名
         config_map = dict(matlab_cfg.get("output_map", {}))
