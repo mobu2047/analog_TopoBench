@@ -62,15 +62,45 @@ class TopologyAdapter:
             raise
 
     def _set_block_param(self, block: str, param: str, value: Any) -> None:
+        """设置块参数；若直写失败，尝试基于叶子名的宽松匹配自动纠正大小写/空格。"""
+        if isinstance(value, (list, tuple, np.ndarray)):
+            val_str = str(list(np.asarray(value).flatten()))
+        else:
+            val_str = str(value)
         try:
-            if isinstance(value, (list, tuple, np.ndarray)):
-                val_str = str(list(np.asarray(value).flatten()))
-            else:
-                val_str = str(value)
             self._sim._eng.set_param(block, param, val_str, nargout=0)
+            return
         except Exception as e:
+            # 回退：基于最后一级块名做宽松匹配（忽略大小写和空白）
+            try:
+                leaf = block.split("/")[-1]
+                norm = self._normalize_name(leaf)
+                candidates = self._sim._eng.find_system(self._sim._model_name, "LookUnderMasks", "all", "FollowLinks", "on", nargout=1)
+                fixed = None
+                for p in (candidates or []):
+                    try:
+                        if self._normalize_name(str(p).split("/")[-1]) == norm:
+                            fixed = str(p)
+                            break
+                    except Exception:
+                        pass
+                if fixed:
+                    self._sim._eng.set_param(fixed, param, val_str, nargout=0)
+                    log.info("adapter.set_param.resolved_block", orig=block, resolved=fixed, param=param)
+                    return
+            except Exception:
+                pass
             log.error("adapter.set_param_failed", block=block, param=param, error=str(e))
             raise
+
+    @staticmethod
+    def _normalize_name(text: str) -> str:
+        s = str(text).strip().lower()
+        import re as _re
+        s = _re.sub(r"\s+", " ", s)
+        s = s.replace(" ", "_")
+        s = _re.sub(r"[^a-z0-9_]+", "", s)
+        return s
 
     @staticmethod
     def _split_block_param(path: str):

@@ -387,8 +387,8 @@ class MatlabSimulator:
 
         try:
             # 写入控制量/动作到工作区（v2：直接按变量名赋值）
-            for logical_key, value in dict(action).items():
-                self._assign_in_base(logical_key, value)
+            # for logical_key, value in dict(action).items():
+            #     self._assign_in_base(logical_key, value)
 
             # 设置 StopTime 以推进一个控制步长
             next_t = self._current_time + self._stop_time_s

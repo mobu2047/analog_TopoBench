@@ -432,7 +432,7 @@ def export_params_tree(model_params: Dict[str, Any]) -> Dict[str, Any]:
 
     - 不使用映射规则；
     - 保留 JSON 中的原始值（字符串/数字均可），由运行时进行解析；
-    - 路径规范：去除根模型段，仅保留子路径，并进行 normalize（空格->下划线，/->.）。
+    - 路径规范：去除根模型段，仅保留子路径的最后一级块名，保留原始大小写与空格，便于与 Simulink 中真实名称一致；
     """
     root = _detect_model_root_name(model_params) or "model"
     tree: Dict[str, Any] = {root: {}}
@@ -445,7 +445,8 @@ def export_params_tree(model_params: Dict[str, Any]) -> Dict[str, Any]:
             sub = path_str[len(root) + 1 :]
         else:
             sub = path_str
-        sub_key = _normalize_block_path(sub)
+        # 仅取最后一级块名，保持原样（包含空格/大小写）
+        sub_key = sub.split("/")[-1]
         if not sub_key:
             continue
         dp = b.get("DialogParams", {}) or {}
@@ -453,7 +454,8 @@ def export_params_tree(model_params: Dict[str, Any]) -> Dict[str, Any]:
             continue
         block_dict = tree[root].setdefault(sub_key, {})
         for pname, pval in dp.items():
-            block_dict[_normalize_key_segment(pname)] = pval
+            # 参数名保持原始大小写，便于直接用于 set_param
+            block_dict[str(pname)] = pval
     return tree
 
 # ============================ 核心流程 ============================

@@ -14,12 +14,13 @@ parameters:
   auto:
     file: auto_params.yaml
 action_space:
-- key: series_rlc_branch1.resistance
+- key: Series RLC Branch1.Resistance
   dtype: float
   bounds:
     min: 0.0
     max: 100.0
-- key: square_wave_generator.frequency
+- key:  Square Wave Generator.Frequency
+
   dtype: str
 metrics:
   evaluation_window: by_step
@@ -45,5 +46,9 @@ experiments:
   cases:
   - name: case_R_100_freq_3pi
     action:
-      series_rlc_branch1.resistance: 100
-      square_wave_generator.frequency: '3*pi'
+      Series RLC Branch1.Resistance: 100
+      Square Wave Generator.Frequency: '3*pi'
+  - name: case_R_100_freq_2pi
+    action:
+      Series RLC Branch1.Resistance: 100
+      Square Wave Generator.Frequency: '2*pi'

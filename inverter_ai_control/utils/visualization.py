@@ -58,6 +58,7 @@ def extract_scope_dataset(simulator, var_name: str = "ScopeData") -> List[Tuple[
             return [(t, y2d[:, c]) for c in range(y2d.shape[1])]
     except Exception:
         return []
+        
 def plot_outputs_from_result(
     cfg: dict,
     result: dict,

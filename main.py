@@ -192,11 +192,12 @@ def _save_and_plot(cfg: Dict[str, Any], sim: MatlabSimulator, out: Dict[str, Any
     os.makedirs(run_dir, exist_ok=True)
     log.info("run.metrics", metrics=out.get("metrics", {}), case=case_name)
     from inverter_ai_control.utils.visualization import plot_outputs_from_result
-    # 解析并打印 MATLAB Dataset/Timeseries 数据摘要
+    # 解析并打印 MATLAB Dataset/Timeseries 数据摘要（仅限定 ScopeData*/yout，避免误读 'time' 等标量）
     out_map = {}
     try:
         from inverter_ai_control.utils.visualization import extract_scope_dataset
-        dataset_vars = [name for name in out.get("sim", {})]
+        sim_out_keys = list(out.get("sim", {}).keys())
+        dataset_vars = [k for k in sim_out_keys if k.lower().startswith("scopedata") or k == "yout"]
         for var_name in dataset_vars:
             series = extract_scope_dataset(sim, var_name)
             if not series:
