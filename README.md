@@ -26,7 +26,7 @@ Analog TopoBench 是一个分层解耦的 Python⇄Simulink 控制仿真框架�
 ``` 
 
 analog_TopoBench/
-├── main.py                           # 主演示脚本：交互/预设控制模式
+├── main.py                           # 主脚本：cases/agent 两种运行模式
 ├── test_simulator.py                 # 独立测试：验证 MatlabSimulator 功能
 ├── config/
 │   └── default.yaml                  # 默认配置文件（推荐复制为 config.yaml）
@@ -37,7 +37,7 @@ analog_TopoBench/
 │   │   └── inverter_gym_env.py       # Gym 环境适配器
 │   ├── agents/                       # 智能体层
 │   │   ├── base_agent.py             # 智能体抽象基类
-│   │   └── heuristic_agent.py        # 启发式智能体示例
+│   │   └── ollama_agent.py           # 本地 Ollama 大模型代理（占位）
 │   ├── core/                         # 核心处理模块
 │   │   ├── runner.py                 # 统一步进管线
 │   │   ├── validator.py              # 动作验证器
@@ -125,10 +125,25 @@ python main.py
   - 自动发现并接线观测信号，`out['sim']` 中包含 `tout`、数组信号和（如存在）解析后的 `ScopeData/yout`
   - 自动在 `runs/<timestamp>/outputs.png` 保存绘图（支持 zip 多通道 & 时间对齐）
 
-### 3) 交互模式（可选）
+### 3) Agent 模式（占位）
 ```bash
-python main.py --interactive
+# 方式一：直接编辑 config/default.yaml
+# run:
+#   mode: agent
+#   agent:
+#     type: ollama
+#     host: "http://localhost:11434"   # 预留，未配置将回退随机
+#     model: "llama3.1"                 # 预留
+#     max_iterations: 20
+#     timeout_s: 300
+#     early_stop_no_improve: 5
+
+python main.py
 ```
+运行后：
+- agent 模式将进行“动作→整段仿真→指标评估→早停/最优选择”的闭环搜索；
+- 若未配置 Ollama，将退化为随机采样占位；
+- 在 `runs/<timestamp>/agent_best/` 下保存 `outputs.png`、`summary.json`。
 
 ### 编程接口
 

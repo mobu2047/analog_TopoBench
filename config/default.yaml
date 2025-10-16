@@ -10,6 +10,18 @@ sim:
 matlab:
   output_map:
     tout: tout
+    ScopeData: ScopeData
+run:
+  mode: agent
+  agent:
+    type: ollama
+    host: http://localhost:11434
+    model: qwen3-coder:480b-cloud
+    max_iterations: 20
+    timeout_s: 300
+    early_stop_no_improve: 5
+    request_timeout_s: 30
+    prompt_template: ''
 parameters:
   auto:
     file: auto_params.yaml
@@ -19,8 +31,7 @@ action_space:
   bounds:
     min: 0.0
     max: 100.0
-- key:  Square Wave Generator.Frequency
-
+- key: Square Wave Generator.Frequency
   dtype: str
 metrics:
   evaluation_window: by_step
@@ -47,8 +58,8 @@ experiments:
   - name: case_R_100_freq_3pi
     action:
       Series RLC Branch1.Resistance: 100
-      Square Wave Generator.Frequency: '3*pi'
+      Square Wave Generator.Frequency: 3*pi
   - name: case_R_100_freq_2pi
     action:
       Series RLC Branch1.Resistance: 100
-      Square Wave Generator.Frequency: '2*pi'
+      Square Wave Generator.Frequency: 2*pi

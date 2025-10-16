@@ -1,0 +1,445 @@
+untitled3:
+  Constant:
+    Value: '0'
+    VectorParams1D: 'on'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: Inherit from ''Constant value'''
+    LockScale: 'off'
+    SampleTime: inf
+    FramePeriod: inf
+  Current Measurement:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'
+  DC Voltage Source:
+    Amplitude: '1000'
+    Measurements: None
+  From:
+    GotoTag: A1
+    IconDisplay: Tag
+  From1:
+    GotoTag: A2
+    IconDisplay: Tag
+  From2:
+    GotoTag: A4
+    IconDisplay: Tag
+  From3:
+    GotoTag: A3
+    IconDisplay: Tag
+  Goto:
+    GotoTag: A1
+    IconDisplay: Tag
+    TagVisibility: local
+  Goto1:
+    GotoTag: A4
+    IconDisplay: Tag
+    TagVisibility: local
+  Goto2:
+    GotoTag: A3
+    IconDisplay: Tag
+    TagVisibility: local
+  Goto3:
+    GotoTag: A2
+    IconDisplay: Tag
+    TagVisibility: local
+  Goto4:
+    GotoTag: A5
+    IconDisplay: Tag
+    TagVisibility: local
+  Goto5:
+    GotoTag: A6
+    IconDisplay: Tag
+    TagVisibility: local
+  GreaterThan:
+    Operator: '>'
+    InputSameDT: 'off'
+    OutDataTypeStr: boolean
+    ZeroCross: 'on'
+    SampleTime: '-1'
+    RndMeth: Simplest
+  GreaterThan1:
+    Operator: '>'
+    InputSameDT: 'off'
+    OutDataTypeStr: boolean
+    ZeroCross: 'on'
+    SampleTime: '-1'
+    RndMeth: Simplest
+  IGBT:
+    Ron: '0.001'
+    Lon: '0'
+    Vf: '1'
+    Tf: 1e-6
+    Tt: 2e-6
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  IGBT1:
+    Ron: '0.001'
+    Lon: '0'
+    Vf: '1'
+    Tf: 1e-6
+    Tt: 2e-6
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  IGBT2:
+    Ron: '0.001'
+    Lon: '0'
+    Vf: '1'
+    Tf: 1e-6
+    Tt: 2e-6
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  IGBT3:
+    Ron: '0.001'
+    Lon: '0'
+    Vf: '1'
+    Tf: 1e-6
+    Tt: 2e-6
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  NOT:
+    Operator: NOT
+    Inputs: '2'
+    IconShape: distinctive
+    AllPortsSameDT: 'off'
+    OutDataTypeStr: boolean
+    SampleTime: '-1'
+  NOT1:
+    Operator: NOT
+    Inputs: '2'
+    IconShape: distinctive
+    AllPortsSameDT: 'off'
+    OutDataTypeStr: boolean
+    SampleTime: '-1'
+  Product1:
+    Inputs: '2'
+    Multiplication: Element-wise(.*)
+    CollapseMode: All dimensions
+    CollapseDim: '1'
+    InputSameDT: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: Inherit via internal rule'
+    LockScale: 'off'
+    RndMeth: Floor
+    SaturateOnIntegerOverflow: 'off'
+    SampleTime: '-1'
+  ? 'Repeating
+
+    Sequence'
+  : rep_seq_t: '[0 1/5000 1/2000]'
+    rep_seq_y: '[-1 0  -1]'
+  Scope——1:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-0.16754'
+    ActiveDisplayYMaximum: '1.3897'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'on'
+    DataLoggingVariableName: ScopeData
+    DataLoggingSaveFormat: Dataset
+  Scope——2:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-0.16754'
+    ActiveDisplayYMaximum: '1.3897'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'on'
+    DataLoggingVariableName: ScopeData2
+    DataLoggingSaveFormat: Dataset
+  Scope——3:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-0.01248'
+    ActiveDisplayYMaximum: '0.11231'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'on'
+    DataLoggingVariableName: ScopeData1
+    DataLoggingSaveFormat: Dataset
+  Scope——4:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-0.16754'
+    ActiveDisplayYMaximum: '1.3897'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'on'
+    DataLoggingVariableName: ScopeData3
+    DataLoggingSaveFormat: Dataset
+  Series RLC Branch:
+    BranchType: RL
+    Resistance: '10'
+    Inductance: 1e-2
+    SetiL0: 'off'
+    InitialCurrent: '0'
+    Capacitance: 1e-6
+    Setx0: 'off'
+    InitialVoltage: '0'
+    Measurements: None
+  Series RLC Branch1:
+    BranchType: R
+    Resistance: '0.03'
+    Inductance: 1e-3
+    SetiL0: 'off'
+    InitialCurrent: '0'
+    Capacitance: 1e-6
+    Setx0: 'off'
+    InitialVoltage: '0'
+    Measurements: None
+  Sine Wave:
+    SineType: Time based
+    TimeSource: Use simulation time
+    Amplitude: '1'
+    Bias: '0'
+    Frequency: pi
+    Phase: '0'
+    Samples: '10'
+    Offset: '0'
+    SampleTime: '0'
+    VectorParams1D: 'on'
+  Sine Wave1:
+    SineType: Time based
+    TimeSource: Use simulation time
+    Amplitude: '1'
+    Bias: '0'
+    Frequency: '1'
+    Phase: '0'
+    Samples: '10'
+    Offset: '0'
+    SampleTime: '0'
+    VectorParams1D: 'on'
+  Square Wave Generator: 
+    WaveForm: square
+    TimeSource: Use simulation time
+    Amplitude: '1'
+    Frequency: 2*pi
+    Units: rad/sec
+    VectorParams1D: 'on'
+  Voltage Measurement:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'
+  powergui:
+    SimulationMode: Discrete
+    SampleTime: 1e-6
+    frequency: '60'
+    Iterations: '50'
+    frequencyindice: '0'
+    Pbase: 100e6
+    ErrMax: 1e-4
+    UnitsV: kV
+    UnitsW: MW
+    buscounter: '0'
+    FunctionMessages: 'off'
+    echomessages: 'off'
+    EnableUseOfTLC: 'off'
+    CurrentSourceSwitches: 'off'
+    DisableSnubberDevices: 'off'
+    DisableRonSwitches: 'off'
+    DisableVfSwitches: 'off'
+    DisplayEquations: 'off'
+    AutomaticDiscreteSolvers: 'off'
+    SolverType: Tustin/Backward Euler (TBE)
+    Interpol: 'off'
+    ExternalGateDelay: 'off'
+    methode: 'off'
+    Ts: '100'
+    x0status: blocks
+    SPID: 'on'
+    SwTol: '0'
+    HookPort: 'off'
+    NonlinearTolerance: 1e-4
+    nMaxIteration: '100'
+    ContinueOnMaxIteration: 'off'
+    RestoreLinks: warning
+    ResistiveCurrentMeasurement: 'off'
+    Frange: '[0:2:500]'
+    Ylog: 'off'
+    Xlog: 'on'
+    ShowGrid: 'off'
+    save: 'off'
+    variable: ZData
+    structure: '0'
+    ZoomFFT: 'off'
+    StartTime: '0.0'
+    cycles: '1'
+    DisplayStyle: '1'
+    fundamental: '60'
+    FreqAxis: 'off'
+    MaxFrequency: '1000'
+    frequencyindicesteady: '1'
+    RmsSteady: '1'
+    display: 'off'
+  Outport:
+    Port: '1'
+    SignalName: ''
+    SignalObject: '[]'
+    StorageClass: Auto
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    DataMode: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    EnsureOutportIsVirtual: 'off'
+    OutputWhenDisabled: held
+    InitialOutput: '[]'
+    MustResolveToSignalObject: 'off'
+    OutputWhenUnConnected: 'off'
+    OutputWhenUnconnectedValue: '0'
+    VectorParamsAs1DForOutWhenUnconnected: 'on'
+  Outport1:
+    Port: '2'
+    SignalName: ''
+    SignalObject: '[]'
+    StorageClass: Auto
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    DataMode: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    EnsureOutportIsVirtual: 'off'
+    OutputWhenDisabled: held
+    InitialOutput: '[]'
+    MustResolveToSignalObject: 'off'
+    OutputWhenUnConnected: 'off'
+    OutputWhenUnconnectedValue: '0'
+    VectorParamsAs1DForOutWhenUnconnected: 'on'
+  Outport2:
+    Port: '3'
+    SignalName: ''
+    SignalObject: '[]'
+    StorageClass: Auto
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    DataMode: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    EnsureOutportIsVirtual: 'off'
+    OutputWhenDisabled: held
+    InitialOutput: '[]'
+    MustResolveToSignalObject: 'off'
+    OutputWhenUnConnected: 'off'
+    OutputWhenUnconnectedValue: '0'
+    VectorParamsAs1DForOutWhenUnconnected: 'on'
