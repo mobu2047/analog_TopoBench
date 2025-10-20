@@ -12,7 +12,7 @@ matlab:
     tout: tout
     ScopeData: ScopeData
 run:
-  mode: agent
+  mode: cases
   agent:
     type: ollama
     host: http://localhost:11434
@@ -32,7 +32,10 @@ action_space:
     min: 0.0
     max: 100.0
 - key: Square Wave Generator.Frequency
-  dtype: str
+  dtype: int
+  bounds:
+    min: 50
+    max: 60
 metrics:
   evaluation_window: by_step
   definitions:
@@ -54,6 +57,9 @@ metrics:
 presets:
   init_action: {}
 experiments:
+ grid:
+  divisions: 2
+    # variables: ["Series RLC Branch1.Resistance"]  # 可选，默认用所有数值型变量
   cases:
   - name: case_R_100_freq_3pi
     action:

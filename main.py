@@ -24,7 +24,7 @@ except Exception:
 
 from inverter_ai_control.utils.logger import get_logger
 from inverter_ai_control.utils.config_loader import load_config
-from inverter_ai_control.sim_env.matlab_simulator import MatlabSimulator
+from inverter_ai_control.sim_env.matlab_simulator import MatlabSimulator, MatlabSimulationError
 from inverter_ai_control.core.runner import Runner
 from inverter_ai_control.core.metrics import MetricEvaluator
 from inverter_ai_control.agents.ollama_agent import OllamaAgent
@@ -87,9 +87,12 @@ def main() -> None:
                 except Exception as _e_upd:
                     log.warning("agent.output_map.update_failed", error=str(_e_upd))
         else:
-            # 批量整段仿真：按 experiments.cases 运行（默认路径）
+            # 批量整段仿真：按 experiments.cases 运行（默认路径），可选合并 experiments.grid
             experiments = dict(cfg.get("experiments", {}))
             cases = list(experiments.get("cases", []) or [])
+            gridspec = experiments.get("grid")
+            if gridspec:
+                cases.extend(_expand_grid_cases(cfg, gridspec))
             if not cases:
                 # 回退到单次：仅用 presets.init_action
                 presets = cfg.get("presets", {}) or {}
@@ -103,7 +106,11 @@ def main() -> None:
                     action = dict(case.get("action", {}))
                     # 直接使用键为 name 或 block.param 的动作；Runner 内部会进行裁剪与映射
                     runner.reset(initial_action=(cfg.get("presets", {}) or {}).get("init_action"))
-                    out = runner.step(action, whole_duration=True)
+                    try:
+                        out = runner.step(action, whole_duration=True)
+                    except MatlabSimulationError as _e_case:
+                        log.warning("case.failed", case=name, error=str(_e_case))
+                        continue
                     _save_and_plot(cfg, sim, out, case_name=name)
 
     # 若为 agent 模式：探测后重新加载配置并执行智能仿真循环
@@ -332,6 +339,67 @@ def _save_and_plot(cfg: Dict[str, Any], sim: MatlabSimulator, out: Dict[str, Any
     except Exception:
         pass
     return run_dir
+
+
+def _expand_grid_cases(cfg: Dict[str, Any], grid_cfg: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """根据 action_space 的数值 bounds 生成笛卡儿积 cases。
+
+    grid 配置：
+      - divisions: int = 5            # 每变量划分份数，采样点数=divisions+1
+      - variables: [key1, key2, ...]  # 可选：仅对这些变量做网格
+    仅处理 dtype in {float,int} 且同时具备 bounds.min/max 的条目。
+    """
+    import itertools
+    import numpy as _np
+
+    divisions = int(grid_cfg.get("divisions", 5))
+    var_whitelist = grid_cfg.get("variables")
+
+    specs: List[Tuple[str, List[float]]] = []
+    for item in (cfg.get("action_space", []) or []):
+        key = item.get("key") or (f"{item.get('block')}.{item.get('param')}" if (item.get("block") and item.get("param")) else item.get("name"))
+        if not key:
+            continue
+        dt = str(item.get("dtype", "float")).lower()
+        if dt not in {"float", "int"}:
+            continue
+        b = item.get("bounds", {}) or {}
+        if "min" not in b or "max" not in b:
+            continue
+        if var_whitelist and key not in var_whitelist:
+            continue
+        try:
+            lo = float(b["min"])
+            hi = float(b["max"])
+            if hi <= lo:
+                continue
+            xs = _np.linspace(lo, hi, num=max(2, divisions + 1))
+            vals: List[float] = []
+            if dt == "float":
+                # 避免取到精确 0（如电阻/电感等不允许为 0），将 0 调整为极小正数
+                tiny = max(_np.finfo(float).eps, (hi - lo) / 1e9)
+                for x in xs:
+                    if float(x) == 0.0:
+                        vals.append(float(tiny))
+                    else:
+                        vals.append(float(x))
+            else:
+                vals = [float(x) for x in xs]
+            specs.append((str(key), vals))
+        except Exception:
+            continue
+
+    if not specs:
+        return []
+
+    keys = [k for k, _ in specs]
+    grids = [vals for _, vals in specs]
+    cases: List[Dict[str, Any]] = []
+    for combo in itertools.product(*grids):
+        action = {k: float(v) for k, v in zip(keys, combo)}
+        name_parts = [f"{k.replace(' ', '_').replace('.', '_')}={v:g}" for k, v in action.items()]
+        cases.append({"name": "grid_" + "__".join(name_parts), "action": action})
+    return cases
 
 
 def _update_output_map_on_disk(cfg_path: Path, additions: Dict[str, str]) -> None:
