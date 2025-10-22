@@ -1,58 +1,83 @@
-newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
-function newModel = rebuild_model_from_export(inputPath, newModelName)
-% ï¿½Ø½ï¿½ Simulink Ä£ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sigLines ?
-% - Ö±ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â· ? SourcePath/DestinationPath ï¿½ï¿½È·ï¿½ï¿½Î» ?
-% - ï¿½Ë¿Úºï¿½È± ?(-1/NaN)Ê±ï¿½ï¿½Ê¹ï¿½Ã¶Ë¿ï¿½/ï¿½é¼¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½äµ½ï¿½Ë¿Ú¾ï¿½ ?
-% - ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ó¿é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ ? autorouting
+newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model', 1);
+function newModel = rebuild_model_from_export(inputPath, newModelName, useCsv)
+% ÖØ½¨ Simulink Ä£ĞÍ£¨²»ÒÀÀµ sigLines ?
+% - Ö±½ÓÊ¹ÓÃµ¼³öµÄÍêÕûÂ· ? SourcePath/DestinationPath ¾«È·¶¨Î» ?
+% - ¶Ë¿ÚºÅÈ± ?(-1/NaN)Ê±£¬Ê¹ÓÃ¶Ë¿Ú/¿é¼¸ºÎÎ»ÖÃ×î½üÁÚÆ¥Åäµ½¶Ë¿Ú¾ä ?
+% - ×Ô¶¯´´½¨¸¸ÏµÍ³£¬¹ıÂË¿â¿éÄÚ²¿×Ó¿é£¬ËùÓĞÁ¬ÏßÊ¹ ? autorouting
 
-	% -------- 1) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½MAT/JSON ï¿½ï¿½ ? Ó¦ ? --------
+	% -------- 1) ¼ÓÔØÊı¾İ£¨ĞÂÔö CSV/MAT ¿ÉÑ¡£»Ä¬ÈÏ CSV£© --------
+	% why: Ä¬ÈÏÒÔ model_graph.mat ËùÔÚÄ¿Â¼ÏÂ CSV ×éºÏ»¹Ô­£¬±£³ÖÓë MAT °æÒ»ÖÂµÄÊı¾İ½á¹¹£»
+	% how: µÚÈı¸ö²ÎÊı useCsv ¿ÉÎª true/false »ò 'csv'/'mat' ×Ö·û´®£¬CSV È±Ê§Ê±×Ô¶¯»ØÍË MAT/JSON¡£
 	if nargin < 1 || isempty(inputPath)
-		error('ï¿½ï¿½ï¿½á¹©Ç°ï¿½æµ¼ï¿½ï¿½ï¿½ï¿½ MAT  ? JSON ï¿½Ä¼ï¿½Â·ï¿½ï¿½ ?');
+		% Ä¬ÈÏÖ¸Ïòµ¼³öÄ¿Â¼ÏÂµÄ mat Â·¾¶£¬½öÓÃÓÚ¶¨Î»Í¬Ä¿Â¼ CSV
+		inputPath = fullfile(pwd,'export_model_graph','model_graph.mat');
 	end
 	if nargin < 2 || isempty(newModelName)
 		newModelName = 'recovered_model';
 	end
+	if nargin < 3 || isempty(useCsv)
+		useCsv = true;  % Ä¬ÈÏ°´ CSV ¶ÁÈ¡
+	end
+	if isstring(useCsv) || ischar(useCsv)
+		sw = lower(char(useCsv));
+		if strcmp(sw,'csv')
+			useCsv = true;
+		elseif any(strcmp(sw,{'mat','json'}))
+			useCsv = false;
+		else
+			try, useCsv = logical(str2double(sw)); catch, useCsv = true; end
+		end
+	end
 
-	data = load_or_decode_graph(inputPath);
+	try
+		if useCsv
+			data = load_graph_from_csv_dir(inputPath);  % ¶ÁÈ¡Í¬Ä¿Â¼ CSV -> ×é×°±ê×¼½á¹¹
+		else
+			data = load_or_decode_graph(inputPath);     % ±£ÁôÔ­ MAT/JSON Â·¾¶¶ÁÈ¡
+		end
+	catch ME
+		% CSV Ê§°ÜÔò×Ô¶¯»ØÍË£¬È·±£¿É¼ÌĞøÔËĞĞ
+		warning('CSV ½âÎöÊ§°Ü£¬»ØÍËµ½ MAT/JSON£º%s', ME.message);
+		data = load_or_decode_graph(inputPath);
+	end
 
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±Ê§ï¿½ï¿½ï¿½Ã¿Õ°ï¿½È«ï¿½ï¿½
+	% »ù±¾±äÁ¿£¨ÈôÈ±Ê§ÔòÖÃ¿Õ°²È«£©
 	elements = safe_field(data, 'elements', struct('Path',{},'Name',{},'BlockType',{},'Orientation',{},'Position',{},'Center',{},'LibraryLink',{},'Mirror',{},'Rotation',{},'GotoTag',{},'GotoVisibility',{},'FromTag',{}));
 	ports    = safe_field(data, 'ports',    struct('BlockPath',{},'PortNumber',{},'PortType',{},'Position',{},'RelPos',{},'Side',{}));
-	conns    = safe_connections(data);  % ï¿½ï¿½ï¿½Ú°ï¿½ï¿½ï¿½ SourcePath/DestinationPath
-    params   = safe_field(data, 'parameters', struct());  % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
-    % ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ä£ï¿½Í¼ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Í¬Ä¿Â¼ params.json/csv
-    params   = ensure_params_loaded(params, inputPath);
-
-	assert(~isempty(elements), 'elements Îªï¿½Õ£ï¿½ï¿½Ş·ï¿½ï¿½Ø½ï¿½Ä£ï¿½ï¿½ ??');
+	conns    = data.connections;  % ÏÖÔÚ°üº¬ SourcePath/DestinationPath
+    params   = safe_field(data, 'parameters', struct());  % ĞÂÔö£ºÄ£ĞÍÓë¿é²ÎÊı£¨¿ÉÑ¡£©
+	assert(~isempty(elements), 'elements Îª¿Õ£¬ÎŞ·¨ÖØ½¨Ä£ĞÍ ??');
+    
 
     
     
-	% Ô­Ä£ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ path ï¿½Ø¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ ?
+	% Ô­Ä£ĞÍ¸ùÃû£¨ÓÃÓÚ path ÖØ¶¨Î»£©£»ĞÂÄ£ĞÍ ?
 	origRoot = get_root_from_elements(elements);
 	newModel = char(newModelName);
 
-	% -------- 2) ï¿½ï¿½ï¿½ï¿½ï¿½Õ°ï¿½Ä£ï¿½ï¿½ --------
+	% -------- 2) ´´½¨¿Õ°×Ä£ĞÍ --------
 	if bdIsLoaded(newModel)
 		close_system(newModel, 0);
 	end
 	new_system(newModel); open_system(newModel);
+    load_system('simulink');
 
-	% -------- 3) Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½é²¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?->ï¿½Ó£ï¿½ --------
-	elemTable = preprocess_elements(elements, origRoot, newModel);              % ï¿½ï¿½ï¿½ï¿½ï¿½Â¾ï¿½Â·ï¿½ï¿½Ó³ï¿½ï¿½
-	elemTable = filter_descendants_of_library_blocks(elemTable);                % ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ ?
+	% -------- 3) Ô¤´¦Àí¿é²¢´´½¨£¨ ?->×Ó£© --------
+	elemTable = preprocess_elements(elements, origRoot, newModel);              % ¼ÆËãĞÂ¾ÉÂ·¾¶Ó³Éä
+	elemTable = filter_descendants_of_library_blocks(elemTable);                % ¹ıÂË¿âÄÚ²¿×Ó ?
 
-	% ï¿½È½ï¿½ SubSystem
+	% ÏÈ½¨ SubSystem
 	subRows = elemTable(strcmp(elemTable.BlockType, 'SubSystem'), :);
 	subRows = sortrows(subRows, 'Depth');
 	for i = 1:height(subRows), create_block_in_model(subRows(i,:), true); end
 
-	% ï¿½Ù½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
+	% ÔÙ½¨ÆÕÍ¨¿é
 	blkRows = elemTable(~strcmp(elemTable.BlockType, 'SubSystem'), :);
 	blkRows = sortrows(blkRows, 'Depth');
 	for i = 1:height(blkRows), create_block_in_model(blkRows(i,:), false); end
 
-	% -------- 4) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿Ú¾ï¿½ï¿½ï¿½ï¿½ ?ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ ? --------
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Â·ï¿½ï¿½->ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â· ?->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£»Ô­Â·ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿Ú¼ï¿½ï¿½ï¿½
+	% -------- 4) ½¨Á¢Á¬½Ó£¨ÓÅÏÈÓÃÍêÕûÂ·¾¶£»¶Ë¿Ú¾ä±ú»Ø ?¼¸ºÎÆ¥Åä ? --------
+	% Ë÷Òı£ºÔ­Â·¾¶->ĞÂÂ·¾¶£»ĞÂÂ· ?->ÖĞĞÄ×ø±ê£»Ô­Â·¾¶->µ¼³ö¶Ë¿Ú¼¯ºÏ
 	orig2new = containers.Map('KeyType','char','ValueType','char');
 	centers  = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:height(elemTable)
@@ -61,44 +86,44 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		cy = (elemTable.Top(i)+elemTable.Bottom(i))/2;
 		centers(char(elemTable.NewPath{i})) = [cx, cy];
 	end
-	portsByOrig = index_ports_by_blockpath(ports);  % origPath -> ï¿½Ë¿Ú½á¹¹ï¿½ï¿½ï¿½ï¿½
+	portsByOrig = index_ports_by_blockpath(ports);  % origPath -> ¶Ë¿Ú½á¹¹Êı×é
 
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ú²ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½
+	% ÔÊĞíµÄÔ­Â·¾¶¼¯ºÏ£¨¹ıÂË¿âÄÚ²¿×Ó¿éµÄÁ¬½Ó£©
 	keepSet = containers.Map('KeyType','char','ValueType','logical');
 	for i = 1:height(elemTable), keepSet(char(elemTable.OrigPath{i})) = true; end
 
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
+	% ¿â¸ù¼¯ºÏ£ºÓÃÓÚÊ¶±ğ²¢ÖØ¶¨Ïò¿âÄÚ²¿Á¬Ïßµ½¿â¸ù¶Ë¿Ú
 	libMask = elemTable.LibraryLink ~= "";
 	libRootNewPaths  = cellfun(@char, elemTable.NewPath(libMask), 'UniformOutput', false);
 	libRootOrigPaths = cellfun(@char, elemTable.OrigPath(libMask), 'UniformOutput', false);
 
-	% -------- 4A) Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½Åºï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ --------
+	% -------- 4A) Ô¤·ÖÀàÁ¬½Ó£¨ĞÅºÅ/ÎïÀí£© --------
 	tasksSignal   = struct('srcOrig',{},'dstOrig',{},'srcNew',{},'dstNew',{}, ...
 		'SP',{},'DP',{},'SPK',{},'SPI',{},'DPK',{},'DPI',{}, ...
 		'origin',{},'parentSys',{},'srcCenter',{},'dstCenter',{});
 	tasksPhysical = tasksSignal;
 
 	for k = 1:numel(conns)
-		% ï¿½ï¿½È¡Â·ï¿½ï¿½ï¿½ï¿½Ë¿Úºï¿½
+		% ¶ÁÈ¡Â·¾¶Óë¶Ë¿ÚºÅ
 		srcOrigPath = char(getfield_or_default(conns(k), 'SourcePath', ''));
 		dstOrigPath = char(getfield_or_default(conns(k), 'DestinationPath', ''));
 		srcName     = char(getfield_or_default(conns(k), 'Source', ''));
 		dstName     = char(getfield_or_default(conns(k), 'Destination', ''));
 		SP          = getfield_or_default(conns(k), 'SourcePort', -1);
 		DP          = getfield_or_default(conns(k), 'DestinationPort', -1);
-		% ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¾ï¿½È·Æ¥ï¿½ä£©
+		% ¿ÉÑ¡£ºµ¼³öµÄ¶Ë¿ÚÖÖÀàÓëË÷Òı£¨Èô´æÔÚÔòÓÃÓÚ¾«È·Æ¥Åä£©
 		SPK         = char(getfield_or_default(conns(k), 'SourcePortKind', ''));
 		DPK         = char(getfield_or_default(conns(k), 'DestinationPortKind', ''));
 		SPI         = getfield_or_default(conns(k), 'SourcePortIndex', -1);
 		DPI         = getfield_or_default(conns(k), 'DestinationPortIndex', -1);
 		originStr   = char(getfield_or_default(conns(k), 'Origin', ''));
 
-		% Â·ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½
+		% Â·¾¶ÖØÓ³Éä
 		if ~isempty(srcOrigPath)
 			srcNewPath = sanitize_path(rebase_path(srcOrigPath, origRoot, newModel));
 		else
 			idx = find(strcmp(elemTable.ShortName, string(srcName)), 1, 'first');
-			if isempty(idx), warning('ï¿½Ò²ï¿½ï¿½ï¿½Ô´ï¿½é£º%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?', srcName); continue; end
+			if isempty(idx), warning('ÕÒ²»µ½Ô´¿é£º%s¡£Ìø¹ı¸ÃÁ¬½Ó ?', srcName); continue; end
 			srcNewPath = char(elemTable.NewPath(idx));
 			srcOrigPath = char(elemTable.OrigPath(idx));
 		end
@@ -106,26 +131,26 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 			dstNewPath = sanitize_path(rebase_path(dstOrigPath, origRoot, newModel));
 		else
 			idx = find(strcmp(elemTable.ShortName, string(dstName)), 1, 'first');
-			if isempty(idx), warning('ï¿½Ò²ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ ?%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?', dstName); continue; end
+			if isempty(idx), warning('ÕÒ²»µ½Ä¿±ê¿é ?%s¡£Ìø¹ı¸ÃÁ¬½Ó ?', dstName); continue; end
 			dstNewPath = char(elemTable.NewPath(idx));
 			dstOrigPath = char(elemTable.OrigPath(idx));
 		end
 
-		% ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Ú¿ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½â£¬ï¿½ï¿½Ñ¿ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½òµ½¿ï¿½ï¿½ï¿½ï¿½
+		% ÅĞ¶ÏÊÇ·ñ´¦ÓÚ¿âÄÚ²¿£ºÈôÒ»¶ËÔÚ¿âÄÚ²¿ÇÒÁíÒ»¶ËÔÚ¿âÍâ£¬Ôò°Ñ¿âÄÚ²¿¶ËÖØ¶¨Ïòµ½¿â¸ù¿é
 		[srcNewPath, srcOrigPath, srcInLib, srcLibRootNew, srcLibRootOrig] = redirect_to_lib_root_if_inside(srcNewPath, srcOrigPath, libRootNewPaths, libRootOrigPaths);
 		[dstNewPath, dstOrigPath, dstInLib, dstLibRootNew, dstLibRootOrig] = redirect_to_lib_root_if_inside(dstNewPath, dstOrigPath, libRootNewPaths, libRootOrigPaths);
 
-		% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+		% Èç¹ûÁ½¶Ë¶¼ÔÚÍ¬Ò»¸ö¿âÄÚ²¿£¬ÔòÌø¹ı£¨¿âÄÚ²¿×ÔÁ¬Ïß£©
 		if srcInLib && dstInLib && strcmp(srcLibRootNew, dstLibRootNew)
 			continue;
 		end
 
-		% ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø¼ï¿½ï¿½Ï£ï¿½
+		% ¹ıÂË¿âÄÚ²¿Á¬½Ó£¨ÑÏ¸ñÒÀÀµ´´½¨µÄÔªËØ¼¯ºÏ£©
 		if ~(isKey(keepSet, srcOrigPath) && isKey(keepSet, dstOrigPath))
 			continue; 
 		end
 
-		% ï¿½ï¿½ÏµÍ³
+		% ¸¸ÏµÍ³
 		ps = fileparts(srcNewPath); pd = fileparts(dstNewPath);
 		if ~strcmp(ps, pd)
 			parentSys = common_parent_of_paths(srcNewPath, dstNewPath);
@@ -133,27 +158,27 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 			parentSys = ps;
 		end
 
-		% ï¿½ï¿½ï¿½ï¿½
+		% ÖĞĞÄ
 		if isKey(centers, dstNewPath), dstCenter = centers(dstNewPath); else, dstCenter = [inf inf]; end
 		if isKey(centers, srcNewPath), srcCenter = centers(srcNewPath); else, srcCenter = [inf inf]; end
 
-		% ï¿½Ğ¶ï¿½ï¿½ï¿½
+		% ÅĞ¶¨Óò
 		[srcType, srcKnown] = get_export_port_type(portsByOrig, srcOrigPath, SP, 'src');
 		[dstType, dstKnown] = get_export_port_type(portsByOrig, dstOrigPath, DP, 'dst');
 		hasConsSrc = block_has_conserving_port(portsByOrig, srcOrigPath);
 		hasConsDst = block_has_conserving_port(portsByOrig, dstOrigPath);
 		newHasConsSrc = block_has_physical_ports_new(srcNewPath);
 		newHasConsDst = block_has_physical_ports_new(dstNewPath);
-		% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Îª PortConnectivity ï¿½Ò¡ï¿½Ô´/Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ß±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½Ê±ï¿½ï¿½ï¿½Ğ¶ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		% ½öµ±À´Ô´Îª PortConnectivity ÇÒ¡°Ô´/Ä¿±êÁ½¶Ë¶¼¾ß±¸ÎïÀí¶Ë×Ó¡±Ê±£¬ÅĞ¶¨ÎªÎïÀíÁ¬½Ó
 		isPhysical = false;
 		if strcmpi(originStr,'pc')
 			physSrc = strcmpi(srcType,'conserving') || hasConsSrc || newHasConsSrc;
 			physDst = strcmpi(dstType,'conserving') || hasConsDst || newHasConsDst;
 			isPhysical = physSrc && physDst;
 		else
-			isPhysical = false;  % ï¿½ï¿½Í¨ line Ò»ï¿½ï¿½ï¿½ï¿½Îªï¿½Åºï¿½ï¿½ï¿½
+			isPhysical = false;  % ÆÕÍ¨ line Ò»ÂÉÊÓÎªĞÅºÅÓò
 		end
-		% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PC ï¿½ï¿½ï¿½Ò±ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
+		% ½ö±£Áô PC ±ßÇÒ±»ÅĞÎªÎïÀíµÄ¾«¼òÈÕÖ¾
 		if strcmpi(originStr,'pc') && isPhysical
 			fprintf('[pc] %s -> %s | phys=1 | srcT=%s dstT=%s | newSrc=%d newDst=%d\n', ...
 				srcOrigPath, dstOrigPath, string(srcType), string(dstType), newHasConsSrc, newHasConsDst);
@@ -165,24 +190,24 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		if isPhysical
 			tasksPhysical(end+1) = task; %#ok<AGROW>
 		elseif strcmpi(originStr,'line')
-			% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Åºï¿½ï¿½ß´ï¿½ï¿½ï¿½
+			% ·ÇÎïÀíÇÒÀ´×ÔÆÕÍ¨Ïß¶ÔÏó£º×÷ÎªĞÅºÅÏß´¦Àí
 			tasksSignal(end+1) = task;   %#ok<AGROW>
 		else
-			% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ line ï¿½Ø¸ï¿½
+			% ·ÇÎïÀíÇÒÀ´×Ô PC£ºÌø¹ı£¬±ÜÃâÓë line ÖØ¸´
 			continue;
 		end
 	end
 
-	% -------- 4A.1) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½ï¿½ï¿½ Kind/Indexï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ SPK/SPI ï¿½ï¿½Îªï¿½ï¿½ï¿½ßµï¿½ DPK/DPIï¿½ï¿½ --------
-	% why: Ö®Ç°ï¿½Ô¡ï¿½ï¿½ï¿½Ô¡ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Í¬Ò»ï¿½Ô¿ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½á±»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½
-	%      ï¿½ï¿½ï¿½Â»ï¿½Ô­Ê±ï¿½ï¿½ï¿½ï¿½ DPI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³Ò»ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª 3ï¿½ï¿½ï¿½ï¿½
-	% how: ÎªÃ¿ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½Ä¶Ë¿ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ£ï¿½È·ï¿½ï¿½Ò»Ò»ï¿½ï¿½Ó¦ï¿½ï¿½
+	% -------- 4A.1) ÀûÓÃÕı·´ÏòÎïÀí±ß»¥²¹ Kind/Index£¨ÓÃ·´ÏòµÄ SPK/SPI ×÷Îª±¾±ßµÄ DPK/DPI£© --------
+	% why: Ö®Ç°ÒÔ¡°¿é¶Ô¡±Îª¼ü½ö±£´æÒ»Ìõ¼ÇÂ¼£¬ÈôÍ¬Ò»¶Ô¿é´æÔÚ¶àÌõÎïÀí±ß£¬»á±»×îºóÒ»Ìõ¸²¸Ç£¬
+	%      µ¼ÖÂ»¹Ô­Ê±ËùÓĞ DPI ±»´íÎóµØÍ³Ò»µ½Í¬Ò»¸öË÷Òı£¨³£¼ûÎª 3£©¡£
+	% how: ÎªÃ¿¸ö¿é¶ÔÎ¬»¤Ò»¸ö°´³öÏÖË³ĞòµÄ¶Ë¿ÚĞÅÏ¢¶ÓÁĞ£¬²¢ÔÚ»¥²¹Ê±ÖğÌõÏû·Ñ£¬È·±£Ò»Ò»¶ÔÓ¦¡£
 	pair2srcKind = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:numel(tasksPhysical)
 		SPK_i = tasksPhysical(i).SPK; SPI_i = tasksPhysical(i).SPI;
 		if ~isempty(SPK_i) && ~(isstring(SPK_i) && strlength(SPK_i)==0) && SPI_i>=1
 			k = [char(tasksPhysical(i).srcNew) '->' char(tasksPhysical(i).dstNew)];
-			% ï¿½ï¿½Ê¼ï¿½ï¿½Îªï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			% ³õÊ¼»¯Îª½á¹¹ÌåÊı×é¶ÓÁĞ£¬±ÜÃâºóĞø±»¸²¸Ç
 			if ~isKey(pair2srcKind, k)
 				pair2srcKind(k) = struct('k',{},'i',{});
 			end
@@ -191,7 +216,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 			pair2srcKind(k) = lst;
 		end
 	end
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½ï¿½Ğ£ï¿½Êµï¿½ï¿½Ò»Ò»Æ¥ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ DPI ï¿½ï¿½Í¬Öµï¿½ï¿½ï¿½ï¿½
+	% °´·´Ïò¼üÏû·Ñ¶ÓÁĞ£¬ÊµÏÖÒ»Ò»Æ¥Åä£¬±ÜÃâ DPI ±»Í¬Öµ¸²¸Ç
 	for i = 1:numel(tasksPhysical)
 		needDP = (isempty(tasksPhysical(i).DPK) || (isstring(tasksPhysical(i).DPK) && strlength(tasksPhysical(i).DPK)==0) || tasksPhysical(i).DPI<1);
 		if needDP
@@ -200,10 +225,10 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 				lst = pair2srcKind(rk);
 				if ~isempty(lst)
 					info = lst(1);
-					% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½Ô´ï¿½Ë¿Ú¼ï¿½Îªï¿½ï¿½ï¿½ßµï¿½Ä¿ï¿½ï¿½Ë¿ï¿½
+					% »¥²¹£º·´Ïò±ßµÄÔ´¶Ë¿Ú¼´Îª±¾±ßµÄÄ¿±ê¶Ë¿Ú
 					tasksPhysical(i).DPK = info.k;
 					tasksPhysical(i).DPI = info.i;
-					% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ò»ï¿½ï¿½Ó¦
+					% Ïû·ÑÒÑÊ¹ÓÃÏî£¬±£³ÖÓë¶à±ßÒ»Ò»¶ÔÓ¦
 					lst = lst(2:end);
 					pair2srcKind(rk) = lst;
 				end
@@ -211,10 +236,10 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 		end
 	end
 
-	% -------- 4A.2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½Ø£ï¿½Í¬Ò»ï¿½Ô¶Ë¿Ú½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ --------
+	% -------- 4A.2) ÎïÀí±ßÈ¥ÖØ£¨Í¬Ò»¶Ô¶Ë¿Ú½ö±£ÁôÒ»Ìõ£© --------
 	tasksPhysical = dedup_physical_tasks(tasksPhysical);
 
-	% -------- 4B) ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½Åºï¿½ï¿½ß¡ï¿½ --------
+	% -------- 4B) ÏÈÁ¬½Ó¡°ĞÅºÅÏß¡± --------
 	for t = 1:numel(tasksSignal)
 		S = tasksSignal(t);
 		try
@@ -226,18 +251,18 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 				add_line(S.parentSys, srcH, dstH, 'autorouting','on');
 			end
 		catch ME
-			warning('ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ ?%s(%g) -> %s(%g)ï¿½ï¿½Ô­ï¿½ï¿½%s', S.srcNew, S.SP, S.dstNew, S.DP, ME.message);
+			warning('ĞÅºÅÁ¬ÏßÊ§°Ü ?%s(%g) -> %s(%g)¡£Ô­Òò£º%s', S.srcNew, S.SP, S.dstNew, S.DP, ME.message);
 		end
 	end
 
-	% -------- 4C) ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½ --------
+	% -------- 4C) ÔÙÁ¬½Ó¡°ÎïÀíÏß¡± --------
 	for t = 1:numel(tasksPhysical)
 		P = tasksPhysical(t);
 		try
 			srcH = resolve_port_handle_by_kind_index(P.srcNew, P.SPK, P.SPI);
 			dstH = resolve_port_handle_by_kind_index(P.dstNew, P.DPK, P.DPI);
 			
-			% ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ÏµÍ³ï¿½ó¹«¹ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Æ¥ï¿½ï¿½
+			% ÒÔ¾ä±úËùÔÚ¸¸ÏµÍ³Çó¹«¹²¸¸ÏµÍ³£¬±ÜÃâÏµÍ³²»Æ¥Åä
 			psrc = get_param(srcH,'Parent'); pdst = get_param(dstH,'Parent');
 			parentUse = common_parent_of_paths(psrc, pdst);
 			if port_has_existing_line(dstH)
@@ -247,25 +272,26 @@ function newModel = rebuild_model_from_export(inputPath, newModelName)
 				add_line(parentUse, srcH, dstH, 'autorouting','on');
 			end
 		catch ME
-			warning('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ ?%s(%g) -> %s(%g)ï¿½ï¿½Ô­ï¿½ï¿½%s', P.srcNew, P.SP, P.dstNew, P.DP, ME.message);
+			warning('ÎïÀíÁ¬ÏßÊ§°Ü ?%s(%g) -> %s(%g)¡£Ô­Òò£º%s', P.srcNew, P.SP, P.dstNew, P.DP, ME.message);
 		end
 	end
 
-	% -------- 5) ï¿½Ø·Å²ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½é£© --------
+	% -------- 5) »Ø·Å²ÎÊı£¨Ä£ĞÍÓë¿é£© --------
 	try
 		apply_parameters_to_model(newModel, elemTable, params);
 	catch ME
-		warning('ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½%s', ME.message);
+		warning('²ÎÊı»Ø·ÅÊ§°Ü£¬½«ÒÔÄ¬ÈÏ²ÎÊıÔËĞĞ£º%s', ME.message);
 	end
 
 	set_param(newModel, 'SimulationCommand', 'update');
-	disp(['Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½' newModel]);
+	disp(['Ä£ĞÍÒÑÖØ½¨£º' newModel]);
+    save_system(newModel)
 end
-% ============================== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ==============================
+% ============================== ¸¨Öúº¯Êı ==============================
 
 
 function h = resolve_port_handle_by_kind_index(blockPath, kind, idx)
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½Ö±ï¿½Ó·ï¿½ï¿½Ø¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ []
+	% Èôµ¼³öµÄ¶Ë¿ÚÖÖÀà/Ë÷Òı´æÔÚ£¬Ö±½Ó·µ»Ø¶ÔÓ¦¾ä±ú£»·ñÔò·µ»Ø []
 	h = [];
 	try
 		if isempty(kind) || idx < 1
@@ -288,7 +314,7 @@ function h = resolve_port_handle_by_kind_index(blockPath, kind, idx)
 end
 
 function [newPath,outOrig,inLib,libRootNew,libRootOrig] = redirect_to_lib_root_if_inside(newPath, origPath, libRootsNew, libRootsOrig)
-    % ï¿½ï¿½ newPath ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½òµ½¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½Ö¾
+    % Èô newPath ÂäÔÚÄ³¸ö¿â¸ù¿éÏÂ£¬ÔòÖØ¶¨Ïòµ½¿â¸ù²¢·µ»Ø¿â±êÖ¾
     inLib = false; libRootNew = ''; libRootOrig = '';
     try
         for i = 1:numel(libRootsNew)
@@ -305,7 +331,7 @@ function [newPath,outOrig,inLib,libRootNew,libRootOrig] = redirect_to_lib_root_i
 end
 
 function tasks = dedup_physical_tasks(tasks)
-	% ï¿½ï¿½ srcNew/dstNew/DPK/DPI Î¬ï¿½ï¿½È¥ï¿½Ø£ï¿½ï¿½ï¿½ DPK/DPI È±Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ srcNew/dstNew ï¿½ï¿½
+	% °´ srcNew/dstNew/DPK/DPI Î¬¶ÈÈ¥ÖØ£¬Èô DPK/DPI È±Ê§Ôò½öÓÃ srcNew/dstNew ¼ü
 	if isempty(tasks), return; 
     
     end
@@ -346,7 +372,7 @@ function k = build_phys_key(t)
 end
 
 function data = load_or_decode_graph(inputPath)
-	% ï¿½ï¿½ï¿½ï¿½ MAT  ? JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ ?ï¿½á¹¹
+	% ¼ÓÔØ MAT  ? JSON£¬·µ»ØÍ³ ?½á¹¹
 	[~,~,ext] = fileparts(inputPath);
 	switch lower(ext)
 		case '.mat'
@@ -364,8 +390,200 @@ function data = load_or_decode_graph(inputPath)
 			txt  = fileread(inputPath);
 			data = jsondecode(txt);
 		otherwise
-			error('ï¿½ï¿½Ö§ï¿½Öµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ ?%sï¿½ï¿½ï¿½ï¿½ï¿½á¹© .mat  ? .json ?', ext);
+			error('²»Ö§³ÖµÄÎÄ¼şÀàĞÍ ?%s£¨ÇëÌá¹© .mat  ? .json ?', ext);
 	end
+end
+
+function data = load_graph_from_csv_dir(inputPath)
+	% why: ´Ó inputPath ËùÔÚÄ¿Â¼¶ÁÈ¡ model_elements.csv / model_ports.csv / model_connections.csv
+	%      ²¢×é×°ÎªÓë MAT ¶ÁÈ¡Ò»ÖÂµÄ data ½á¹¹£¬±ãÓÚºóĞøÁ÷³ÌÎŞ¸ĞÖªÊ¹ÓÃ¡£
+	% how: ÔÊĞí inputPath Îª .mat »òÄ¿Â¼Â·¾¶£»ÈôÎªÎÄ¼ş£¬ÔòÊ¹ÓÃÆäËùÔÚÄ¿Â¼¡£
+	[dirp,~,ext] = fileparts(inputPath);
+	if isempty(dirp) || (~isempty(ext) && ~strcmpi(ext,'.mat') && ~strcmpi(ext,'.json'))
+		% Èô´«Èë¾ÍÊÇÄ¿Â¼
+		dirp = inputPath;
+	end
+	if isempty(dirp)
+		dirp = pwd;
+	end
+
+	% Ä¿±êÎÄ¼ş£¨Í¬Ä¿Â¼£©
+	fe = fullfile(dirp,'model_elements.csv');
+	fp = fullfile(dirp,'model_ports.csv');
+	fc = fullfile(dirp,'model_connections.csv');
+	fj = fullfile(dirp,'model_params.json');
+
+	% ¶ÁÈ¡ CSV Îª±í
+	assert(exist(fe,'file')==2 && exist(fp,'file')==2 && exist(fc,'file')==2, 'CSV ÎÄ¼şÈ±Ê§£¨ĞèÒª elements/ports/connections£©');
+	Te = readcell(fe);
+	Tp = readcell(fp);
+	Tc = readcell(fc);
+
+	% elements: struct Êı×é
+	elements = table_elements_to_structs(Te);
+	% ports: struct Êı×é
+	ports    = table_ports_to_structs(Tp);
+	% connections: struct Êı×é£¨×Ö¶ÎÃûÓë MAT ±£³Ö£©
+	connections = table_conns_to_structs(Tc);
+
+	% ¿ÉÑ¡²ÎÊı
+	params = struct();
+	try
+		if exist(fj,'file')==2
+			txt = fileread(fj);
+			params = jsondecode(txt);
+		end
+	catch
+		params = struct();
+	end
+
+	data = struct('elements',elements,'ports',ports,'connections',connections,'parameters',params);
+end
+
+function elements = table_elements_to_structs(T)
+	% ½« elements.csv ±í×ª»»Îª½á¹¹Êı×é£¬×Ö¶ÎÃûÓë MAT ¶ÔÆë
+	n = height(T); elements = repmat(struct('Path','', 'Name','', 'BlockType','', 'Orientation','', 'Position',[], 'Center',[], 'LibraryLink','', 'Mirror','', 'Rotation','', 'GotoTag','', 'GotoVisibility','', 'FromTag',''), 0, 1);
+	for i = 1:n
+		try
+			pos = [num_or(T.Position_1(i),30) num_or(T.Position_2(i),30) num_or(T.Position_3(i),60) num_or(T.Position_4(i),60)];
+			ctr = [num_or(T.Center_1(i), (pos(1)+pos(3))/2) num_or(T.Center_2(i), (pos(2)+pos(4))/2)];
+			E = struct();
+			E.Path          = char(T.Path(i));
+			E.Name          = char(T.Name(i));
+			E.BlockType     = char(T.BlockType(i));
+			E.Orientation   = char(T.Orientation(i));
+			E.Position      = pos;
+			E.Center        = ctr;
+			E.LibraryLink   = char(def_str_in_table(T,'LibraryLink',i,""));
+			E.Mirror        = char(def_str_in_table(T,'Mirror',i,""));
+			E.Rotation      = char(num_or_str(T,'Rotation',i,'0'));
+			E.GotoTag       = char(def_str_in_table(T,'GotoTag',i,""));
+			E.GotoVisibility= char(def_str_in_table(T,'GotoVisibility',i,""));
+			E.FromTag       = char(def_str_in_table(T,'FromTag',i,""));
+			elements(end+1) = E; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function s = num_or_str(T, col, i, def)
+	% why: Rotation ÁĞ¿ÉÄÜÊÇÊıÖµ»ò×Ö·û´®£¬ĞèÒªÍ³Ò»³É×Ö·û´®Êä³ö
+	% how: ÈôÁĞ´æÔÚÇÒ·ÇÈ±Ê§£¬Ôò½«ÊıÖµ×ª×Ö·û´®£»·ñÔò·µ»ØÄ¬ÈÏ×Ö·û´®
+	if nargin < 4, def = '0'; end
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			val = T.(col)(i);
+			if ismissing(val)
+				s = def; return;
+			end
+			if isstring(val)
+				if strlength(val)==0
+					s = def; else, s = char(val); end
+				return;
+			end
+			try
+				nv = num_or(val, NaN);
+				if isnan(nv)
+					s = def;
+				else
+					s = char(string(nv));
+				end
+			catch
+				s = def;
+			end
+			return;
+		end
+	catch
+	end
+	s = def;
+end
+
+function ports = table_ports_to_structs(T)
+	% ½« ports.csv ±í×ª»»Îª½á¹¹Êı×é£¬×Ö¶ÎÃûÓë MAT ¶ÔÆë
+	n = height(T); ports = repmat(struct('BlockPath','', 'PortNumber',[], 'PortType','', 'Position',[], 'RelPos',[], 'Side',''), 0, 1);
+	for i = 1:n
+		try
+			pos   = [num_or(T.Position_1(i),NaN) num_or(T.Position_2(i),NaN)];
+			rel   = [num_or(T.RelPos_1(i),NaN) num_or(T.RelPos_2(i),NaN)];
+			pnum  = num_or(T.PortNumber(i), NaN);
+			P = struct();
+			P.BlockPath = char(T.BlockPath(i));
+			P.PortNumber= pnum;
+			P.PortType  = char(T.PortType(i));
+			P.Position  = pos;
+			P.RelPos    = rel;
+			P.Side      = char(def_str_in_table(T,'Side',i,""));
+			ports(end+1) = P; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function conns = table_conns_to_structs(T)
+	% ½« connections.csv ±í×ª»»Îª½á¹¹Êı×é£¬×Ö¶ÎÃûÓë MAT ¶ÔÆë
+	n = height(T); conns = repmat(struct('Source','', 'SourcePath','', 'SourcePort',-1, 'SourcePortKind','', 'SourcePortIndex',-1, 'Destination','', 'DestinationPath','', 'DestinationPort',-1, 'DestinationPortKind','', 'DestinationPortIndex',-1, 'Origin',''), 0, 1);
+	for i = 1:n
+		try
+			C = struct();
+			C.Source                    = char(T.Source(i));
+			C.SourcePath                = char(T.SourcePath(i));
+			C.SourcePort                = num_or(T.SourcePort(i), -1);
+			C.SourcePortKind            = char(def_str_in_table(T,'SourcePortKind',i,""));
+			C.SourcePortIndex           = num_or(def_num_in_table(T,'SourcePortIndex',i), -1);
+			C.Destination               = char(T.Destination(i));
+			C.DestinationPath           = char(T.DestinationPath(i));
+			C.DestinationPort           = num_or(T.DestinationPort(i), -1);
+			C.DestinationPortKind       = char(def_str_in_table(T,'DestinationPortKind',i,""));
+			C.DestinationPortIndex      = num_or(def_num_in_table(T,'DestinationPortIndex',i), -1);
+			C.Origin                    = char(def_str_in_table(T,'Origin',i,""));
+			conns(end+1) = C; %#ok<AGROW>
+		catch
+		end
+	end
+end
+
+function v = num_or(x, def)
+	% ¹¤¾ß£º½«×Ö·û´®/È±Ê§×ª»»ÎªÊıÖµ£»Ê§°Ü·µ»ØÄ¬ÈÏ
+	try
+		if ismissing(x) || (isstring(x) && strlength(x)==0)
+			v = def; return;
+		end
+		vx = double(x);
+		if ~isnan(vx)
+			v = vx; return;
+		end
+	catch
+	end
+	try, v = str2double(x); catch, v = def; end
+	if isnan(v), v = def; end
+end
+
+function s = def_str_in_table(T, col, i, def)
+	% ¹¤¾ß£º¶ÁÈ¡±íÁĞ×Ö·û´®£¬È±Ê§/²»´æÔÚ·µ»ØÄ¬ÈÏ
+	if nargin < 4, def = ""; end
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			s = T.(col)(i);
+			if ismissing(s) || (isstring(s) && strlength(s)==0)
+				s = def;
+			end
+			return;
+		end
+	catch
+	end
+	s = def;
+end
+
+function v = def_num_in_table(T, col, i)
+	% ¹¤¾ß£º¶ÁÈ¡±íÁĞÊı×Ö£¬È±Ê§·µ»Ø NaN
+	try
+		if any(strcmp(T.Properties.VariableNames, col))
+			v = num_or(T.(col)(i), NaN);
+			return;
+		end
+	catch
+	end
+	v = NaN;
 end
 
 function v = safe_field(S, name, defaultV)
@@ -376,61 +594,11 @@ function v = safe_field(S, name, defaultV)
 	end
 end
 
-function params = ensure_params_loaded(params, inputPath)
-    % ï¿½ï¿½ params.model Îªï¿½ï¿½ structï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ó±ß³ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ëµ¼ï¿½ï¿½ï¿½à±£ï¿½Ö½ï¿½ï¿½î£©
-    try
-        needModel = true;
-        try, needModel = isempty(fieldnames(params)) || ~isfield(params,'model') || isempty(fieldnames(params.model)); catch, needModel = true; end
-        if ~needModel, return; end
-
-        [pdir, pbase, ~] = fileparts(inputPath);
-        % ï¿½ï¿½ï¿½ï¿½ *_params.jsonï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½
-        jsonPath = fullfile(pdir, sprintf('%s_params.json', pbase));
-        if exist(jsonPath, 'file')
-            try
-                txt = fileread(jsonPath); J = jsondecode(txt);
-                if isstruct(J)
-                    if ~isfield(params,'blocks') && isfield(J,'blocks'), params.blocks = J.blocks; end
-                    if (~isfield(params,'model') || isempty(fieldnames(params.model))) && isfield(J,'model')
-                        params.model = J.model;
-                    end
-                    return;
-                end
-            catch
-            end
-        end
-
-        % ï¿½ï¿½Ñ¡ï¿½ï¿½model/block params CSVï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ json ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ô£ï¿½
-        mcsv = fullfile(pdir, sprintf('%s_model_params.csv', pbase));
-        if exist(mcsv,'file')
-            try
-                Tm = readtable(mcsv);
-                pm = struct();
-                for i = 1:height(Tm)
-                    pm.(char(Tm.Param{i})) = char(string(Tm.Value{i}));
-                end
-                params.model = pm;
-            catch
-            end
-        end
-
-        bcsv = fullfile(pdir, sprintf('%s_block_params.csv', pbase));
-        if exist(bcsv,'file') && (~isfield(params,'blocks') || isempty(params.blocks))
-            try
-                Tb = readtable(bcsv);
-                params.blocks = rebuild_blocks_from_long_table(Tb);
-            catch
-            end
-        end
-    catch
-    end
-end
-
 function blocks = rebuild_blocks_from_long_table(Tb)
     blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
     try
         if isempty(Tb), return; end
-        % ï¿½ÛºÏ£ï¿½Ã¿ï¿½ï¿½ Path ï¿½Û³ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Â¼
+        % ¾ÛºÏ£ºÃ¿¸ö Path ¾Û³ÉÒ»Ìõ¼ÇÂ¼
         [G, keys] = findgroups(Tb.Path);
         for k = 1:max(G)
             idx = find(G==k);
@@ -450,55 +618,21 @@ function blocks = rebuild_blocks_from_long_table(Tb)
     catch
     end
 end
-function s = def_or_empty_struct(S, field)
-    % ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶Î´ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»Ø¿ï¿½ struct
-    if isstruct(S) && isfield(S, field) && ~isempty(S.(field))
-        s = S.(field);
-    else
-        s = struct();
-    end
-end
 
-function conns = safe_connections(data)
-	% ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Ó½á¹¹ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SourcePath/DestinationPath
-	if isfield(data, 'connections') && ~isempty(data.connections)
-		conns = data.connections;
-	elseif isfield(data, 'connectivity') && ~isempty(data.connectivity)
-		c = data.connectivity;
-		if iscell(c), conns = [c{:}]; else, conns = c; end
-	else
-		conns = struct('Source',{},'SourcePath',{},'SourcePort',{},'Destination',{},'DestinationPath',{},'DestinationPort',{});
-	end
-	% ï¿½Ö¶Î²ï¿½ï¿½ï¿½
-	fieldsNeeded = {'Source','SourcePath','SourcePort','Destination','DestinationPath','DestinationPort'};
-	for i = 1:numel(conns)
-		for f = 1:numel(fieldsNeeded)
-			fd = fieldsNeeded{f};
-			if ~isfield(conns, fd) || isempty(conns(i).(fd))
-				switch fd
-					case {'Source','Destination','SourcePath','DestinationPath'}
-						conns(i).(fd) = '';
-					case {'SourcePort','DestinationPort'}
-						conns(i).(fd) = -1;
-				end
-			end
-		end
-	end
-end
 
 function root = get_root_from_elements(elements)
-	%  ? elements.Path ï¿½Æ¶ï¿½Ô­ï¿½ï¿½ ?
+	%  ? elements.Path ÍÆ¶ÏÔ­¸ù ?
 	p = elements(1).Path;
 	slash = find(p=='/', 1, 'first');
 	if isempty(slash)
-		root = p;              % ï¿½ï¿½ï¿½ï¿½ ?
+		root = p;              % ÒÑÔÚ ?
 	else
-		root = p(1:slash-1);   % ï¿½ï¿½ï¿½ï¿½
+		root = p(1:slash-1);   % ¸ùÃû
 	end
 end
 
 function T = preprocess_elements(elements, origRoot, newModel)
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ñ£¬²ï¿½Ó³ï¿½äµ½ï¿½ï¿½Ä£ï¿½ï¿½Â· ?
+	% Éú³ÉÓÃÓÚ´´½¨µÄ±í¸ñ£¬²¢Ó³Éäµ½ĞÂÄ£ĞÍÂ· ?
 	N = numel(elements);
 	ShortName  = strings(N,1);
 	OrigPath   = strings(N,1);
@@ -540,10 +674,10 @@ function T = preprocess_elements(elements, origRoot, newModel)
               Left, Top, Right, Bottom, LibraryLink, Mirror, Rotation, GotoTag, GotoVisibility, FromTag, Depth);
 end
 
-% ========================= ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ =========================
+% ========================= ²ÎÊı»Ø·ÅÏà¹Øº¯Êı =========================
 function apply_parameters_to_model(newModel, elemTable, params)
-    % why: ï¿½ï¿½Ô­Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ê±ï¿½ä²½ï¿½ï¿½È«ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½æ¡±ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
-    % how: ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½Ê±ï¿½Å³ï¿½ï¿½Ô»Ø·Å£ï¿½set_param È«ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Öµ
+    % why: ¸´Ô­Ä£ĞÍÇó½âÆ÷/Ê±¼ä²½µÈÈ«¾Ö²ÎÊı£¬ÒÔ¼°¸÷¿éµÄ¶Ô»°²ÎÊı£¬Ê¹¡°Ö±½Ó·ÂÕæ¡±³ÉÎª¿ÉÄÜ
+    % how: ½öÔÚµ¼³öÊ±´æÔÚ²ÎÊıÊ±²Å³¢ÊÔ»Ø·Å£»set_param È«²¿Ê¹ÓÃ×Ö·û´®Öµ
 
     if nargin < 3 || isempty(params), return; end
     try
@@ -568,13 +702,13 @@ function apply_model_params(newModel, modelParams)
         try
             set_param(newModel, pname, char(modelParams.(pname)));
         catch
-            % Ä³Ğ©ï¿½æ±¾/ï¿½ï¿½Æ·Î´ï¿½ï¿½×°Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½
+            % Ä³Ğ©°æ±¾/²úÆ·Î´°²×°Ê±²ÎÊı²»¿ÉÓÃ£¬ºöÂÔ
         end
     end
 end
 
 function apply_block_params(elemTable, blockParams)
-    % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Â·ï¿½ï¿½->ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ Path ï¿½ï¿½ï¿½Ğ»Ø·ï¿½
+    % ¹¹½¨¡°Ô­Â·¾¶->ĞÂÂ·¾¶¡±²éÕÒ£¬±ãÓÚÊ¹ÓÃµ¼³ö Path ½øĞĞ»Ø·Å
     mapOrigToNew = containers.Map('KeyType','char','ValueType','char');
     for i = 1:height(elemTable)
         mapOrigToNew(char(elemTable.OrigPath{i})) = char(elemTable.NewPath{i});
@@ -587,24 +721,24 @@ function apply_block_params(elemTable, blockParams)
             if isKey(mapOrigToNew, origPath)
                 newPath = mapOrigToNew(origPath);
             else
-                % ï¿½ï¿½ï¿½Ë£ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½×¸ï¿½Í¬ï¿½ï¿½ï¿½ï¿½
+                % »ØÍË£ºÓÃ¶ÌÃûÆ¥ÅäÊ×¸öÍ¬Ãû¿é
                 idx = find(strcmp(elemTable.ShortName, string(get_basename(origPath))), 1, 'first');
                 if isempty(idx), continue; end
                 newPath = char(elemTable.NewPath(idx));
             end
 
-			% æˆç»„ä¸€æ¬¡æ€§ set_paramï¼ˆæ–¹æ¡ˆAï¼‰ï¼šé¿å…æ©æ¨¡å—åœ¨å‚æ•°ä¸ä¸€è‡´ä¸­é—´æ€è§¦å‘åˆå§‹åŒ–æŠ¥é”™
+			% ³É×éÒ»´ÎĞÔ set_param£¨·½°¸A£©£º±ÜÃâÑÚÄ£¿éÔÚ²ÎÊı²»Ò»ÖÂÖĞ¼äÌ¬´¥·¢³õÊ¼»¯±¨´í
 			if isfield(bp,'DialogParams') && ~isempty(bp.DialogParams)
 				names = fieldnames(bp.DialogParams);
 				nvPairs = {};
 				for k = 1:numel(names)
 					pname = names{k};
-					% è·³è¿‡å‡ ä½•ç±»å‚æ•°
+					% Ìø¹ı¼¸ºÎÀà²ÎÊı
 					if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
 						continue;
 					end
 					pval  = bp.DialogParams.(pname);
-					% éå­—ç¬¦ä¸²ä¸€å¾‹ç”¨ mat2str åºåˆ—åŒ–ï¼Œç¡®ä¿ set_param å¯æ¥å—
+					% ·Ç×Ö·û´®Ò»ÂÉÓÃ mat2str ĞòÁĞ»¯£¬È·±£ set_param ¿É½ÓÊÜ
 					if ~(ischar(pval) || isstring(pval))
 						pval = mat2str(pval);
 					end
@@ -614,7 +748,7 @@ function apply_block_params(elemTable, blockParams)
 					try
 						set_param(newPath, nvPairs{:});
 					catch
-						% æ©æ¨¡/å˜ä½“å¯¼è‡´ä¸å¯è®¾ç½®æ—¶è·³è¿‡
+						% ÑÚÄ£/±äÌåµ¼ÖÂ²»¿ÉÉèÖÃÊ±Ìø¹ı
 					end
 				end
 			end
@@ -627,7 +761,7 @@ function b = get_basename(p)
     [~, b] = fileparts(char(p));
 end
 
-%=========================ï¿½ï¿½ï¿½ï¿½ï¿½Ø·Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=========================
+%=========================²ÎÊı»Ø·Åº¯Êı½áÊø=========================
 
 function s = def_str(st, field, defaultV)
 	if nargin < 3, defaultV = ""; end
@@ -639,7 +773,7 @@ function s = def_str(st, field, defaultV)
 end
 
 function newPath = rebase_path(origPath, origRoot, newRoot)
-	% ï¿½ï¿½Ô­Â·ï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½Ä£ï¿½Í¸ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½È·Ó³ï¿½ï¿½Ê±È¡ ?ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Â¸ï¿½
+	% ½«Ô­Â·¾¶Ìæ»»ÎªĞÂÄ£ĞÍ¸ùÂ·¾¶£»ÎŞ·¨¾«È·Ó³ÉäÊ±È¡ ?ºóÒ»¼¶Ãû¹Òµ½ĞÂ¸ù
 	origPath = char(origPath);
 	origRoot = char(origRoot);
 	newRoot  = char(newRoot);
@@ -655,7 +789,7 @@ function newPath = rebase_path(origPath, origRoot, newRoot)
 end
 
 function T = filter_descendants_of_library_blocks(T)
-	% ï¿½Ş³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ú²ï¿½ï¿½Ó¿é£¨ï¿½ï¿½ ? ".../DC Voltage Source/Model" ?
+	% ÌŞ³ı¿âÒıÓÃ¿éÄÚ²¿×Ó¿é£¨Àı ? ".../DC Voltage Source/Model" ?
 	libMask = T.LibraryLink ~= "";
 	libRoots = cellfun(@char, T.NewPath(libMask), 'UniformOutput', false);
 	if isempty(libRoots), return; end
@@ -674,13 +808,13 @@ function T = filter_descendants_of_library_blocks(T)
 end
 
 function p = sanitize_path(p)
-	% È¥ï¿½ï¿½Î²ï¿½ï¿½Ğ±ï¿½Ü£ï¿½ï¿½ï¿½ ? Simulink ï¿½Ï·ï¿½Â·ï¿½ï¿½
+	% È¥µôÎ²²¿Ğ±¸Ü£¬±£ ? Simulink ºÏ·¨Â·¾¶
 	p = char(string(p));
 	while ~isempty(p) && p(end) == '/', p = p(1:end-1); end
 end
 
 function ensure_system_exists(sysPath)
-	% ï¿½ğ¼¶´ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ ?
+	% Öğ¼¶´´½¨¸¸Ïµ ?
 	sysPath = sanitize_path(sysPath);
 	if isempty(sysPath) || bdIsRoot(sysPath), return; end
 	if exist_block(sysPath), return; end
@@ -716,7 +850,7 @@ function parent = common_parent_of_paths(p1, p2)
 end
 
 function create_block_in_model(row, isSubsystem)
-	% Êµï¿½Ê´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î» ?/ï¿½ï¿½ï¿½ï¿½ï¿½İµÈ£ï¿½
+	% Êµ¼Ê´´½¨µ¥¸ö¿é£¬²¢ÉèÖÃÎ» ?/³¯Ïò£¨ÃİµÈ£©
 	newPath = sanitize_path(char(row.NewPath));
 	parent  = sanitize_path(char(row.ParentPath));
 	btype   = char(row.BlockType);
@@ -767,19 +901,19 @@ function create_block_in_model(row, isSubsystem)
                         
                     %otherwise
 						%add_block('simulink/Ports & Subsystems/Subsystem', newPath, 'MakeNameUnique','off');
-						%warning(' ? %s ï¿½Ş¿ï¿½ï¿½ï¿½ï¿½Ã£ï¿½Ê¹ ? Subsystem Õ¼Î» ?', newPath);
+						%warning(' ? %s ÎŞ¿âÒıÓÃ£¬Ê¹ ? Subsystem Õ¼Î» ?', newPath);
 				end
 			end
 		end
         set_param(newPath, 'Position', pos, 'Orientation', ori);
-        % ï¿½ï¿½ï¿½Ô»Ø·Å¾ï¿½ï¿½ï¿½/ï¿½ï¿½×ª
+        % ³¢ÊÔ»Ø·Å¾µÏñ/Ğı×ª
         if ~isempty(mir)
             try, set_param(newPath,'BlockMirror',mir); end
         end
         if ~isempty(rot)
             try, set_param(newPath,'BlockRotation',rot); end
         end
-        % ï¿½Ø·ï¿½ Goto/From ï¿½ï¿½Ç©
+        % »Ø·Å Goto/From ±êÇ©
         if strcmpi(btype,'Goto')
             if ~isempty(gtag), try, set_param(newPath,'GotoTag',gtag); end, end
             if ~isempty(gvis), try, set_param(newPath,'TagVisibility',gvis); end, end
@@ -787,13 +921,13 @@ function create_block_in_model(row, isSubsystem)
             try, set_param(newPath,'GotoTag',ftag); end
         end
 	catch ME
-		warning('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½%sï¿½ï¿½Ô­ï¿½ï¿½%s ?', newPath, ME.message);
+		warning('´´½¨¿éÊ§°Ü£º%s£¨Ô­Òò£º%s ?', newPath, ME.message);
 	end
 end
 
 
 function portsIdx = index_ports_by_blockpath(ports)
-	% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ports  ? BlockPathï¿½ï¿½Ô­Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?
+	% ½«µ¼³öµÄ ports  ? BlockPath£¨Ô­Â·¾¶£©·Ö ?
 	portsIdx = containers.Map('KeyType','char','ValueType','any');
 	for i = 1:numel(ports)
 		bp = char(ports(i).BlockPath);
@@ -806,14 +940,14 @@ function portsIdx = index_ports_by_blockpath(ports)
 end
 
 function tf = block_has_conserving_port(portsIdx, origPath)
-	% ï¿½Ğ¶Ï¸ï¿½Ô­Â·ï¿½ï¿½ï¿½Ä¶Ë¿ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶Ë¿Ú£ï¿½Side/Type ï¿½ï¿½Ê¾ï¿½ï¿½
+	% ÅĞ¶Ï¸ÃÔ­Â·¾¶µÄ¶Ë¿ÚÊÇ·ñ°üº¬ÎïÀí±£ÊØ¶Ë¿Ú£¨Side/Type ÌáÊ¾£©
 	tf = false;
 	try
 		if isKey(portsIdx, origPath)
 			P = portsIdx(origPath);
 			if isstruct(P)
 				types = {P.PortType};
-				% ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½Simscape conserving ï¿½ï¿½ Specialized Power Systems ï¿½ï¿½ LConn/RConn/Conn
+				% ÎïÀí¶Ë¿ÚÅĞ¶¨£ºSimscape conserving »ò Specialized Power Systems µÄ LConn/RConn/Conn
 				tf = any(strcmpi(types,'conserving')) || any(strcmpi(types,'LConn')) || any(strcmpi(types,'RConn')) || any(strcmpi(types,'Conn'));
 			else
 				for i = 1:numel(P)
@@ -831,12 +965,12 @@ function tf = block_has_conserving_port(portsIdx, origPath)
 end
 
 function tf = port_has_existing_line(portHandle)
-	% ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ add_lineï¿½ï¿½
+	% ¼ì²é¶Ë¿ÚÊÇ·ñÒÑÓĞÁ¬½Ó£¨±ÜÃâÖØ¸´ add_line£©
 	tf = false;
 	try
 		l = get_param(portHandle,'Line');
 		if l ~= -1
-			% Ä¿ï¿½ï¿½ï¿½Ô´ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			% Ä¿±ê»òÔ´¶Ë¿ÚÒÑÓĞÏß
 			tf = true;
 		end
 	catch
@@ -845,7 +979,7 @@ function tf = port_has_existing_line(portHandle)
 end
 
 function tf = block_has_physical_ports_new(blockPath)
-	% Ö±ï¿½ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½Ä£ï¿½ÍµÄ¿é¡±ï¿½ï¿½Ì½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿Ú£ï¿½LConn/RConn/Connï¿½ï¿½
+	% Ö±½ÓÔÚ¡°ĞÂÄ£ĞÍµÄ¿é¡±ÉÏÌ½²âÊÇ·ñ´æÔÚÎïÀí¶Ë¿Ú£¨LConn/RConn/Conn£©
 	tf = false;
 	try
 		ph = get_param(blockPath,'PortHandles');
@@ -858,7 +992,7 @@ function tf = block_has_physical_ports_new(blockPath)
 end
 
 function [ptype, known] = get_export_port_type(portsIdx, origPath, pnum, role)
-	% ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Æ¶Ï¶Ë¿ï¿½ï¿½ï¿½ï¿½Í£ï¿½inport/outport/conserving/portï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ğ·µ»ï¿½ known=true
+	% ´Óµ¼³öĞÅÏ¢ÍÆ¶Ï¶Ë¿ÚÀàĞÍ£¨inport/outport/conserving/port£©£¬Èô¿ÉÊ¶±ğ·µ»Ø known=true
 	ptype = '';
 
     
@@ -866,7 +1000,7 @@ function [ptype, known] = get_export_port_type(portsIdx, origPath, pnum, role)
 	try
 		if isKey(portsIdx, origPath)
 			P = portsIdx(origPath);
-			% ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¶Ë¿Úºï¿½Æ¥ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¶Ë¿ÚºÅ¾Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			% ÓÅÏÈÊ¹ÓÃ¶Ë¿ÚºÅÆ¥ÅäÒ»Ìõ£¬Èç¹ûÎŞ¶Ë¿ÚºÅ¾Í¿´¼¯ºÏÀïÊÇ·ñÓĞÃ÷È·µÄÀàĞÍ
 			candidate = [];
 			if isfinite(pnum) && pnum>=1 && pnum<=numel(P)
 				candidate = P(pnum);
@@ -876,12 +1010,12 @@ function [ptype, known] = get_export_port_type(portsIdx, origPath, pnum, role)
 					ptype = candidate.PortType; known = true; return; 
 				end
 			end
-			% ï¿½ï¿½ï¿½Ü¶Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½
+			% »ã×Ü¶Ë¿ÚÀàĞÍ
 			types = {};
 			for i = 1:numel(P)
 				try, types{end+1} = P(i).PortType; catch, end %#ok<AGROW>
 			end
-            % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½conserving ï¿½ï¿½ LConn/RConn/Conn
+            % ÎïÀí¶Ë×Ó£ºconserving »ò LConn/RConn/Conn
             if any(strcmpi(types,'conserving')) || any(strcmpi(types,'LConn')) || any(strcmpi(types,'RConn')) || any(strcmpi(types,'Conn'))
                 ptype = 'conserving'; known = true; return;
             end
@@ -906,4 +1040,3 @@ function val = getfield_or_default(S, field, def)
 		val = def;
 	end
 end
-%newModel = rebuild_model_from_export(fullfile(pwd,'export_model_graph','model_graph.mat'), 'recovered_model');
