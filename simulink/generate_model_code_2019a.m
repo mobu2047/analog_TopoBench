@@ -1,26 +1,27 @@
 
     % 打开文件准备写入代码
- model_name = 'untitled1';
- open_system(model_name);
+    model_name = 'Sub2_model_20210419';
+    open_system(model_name);
+
   
     
     % 获取模型中的所有块
- blocks = find_system(model_name, 'SearchDepth', 1);
+    blocks = find_system(model_name, 'SearchDepth', 1);
     
     % 跳过模型本身
- blocks = blocks(2:end);
+    blocks = blocks(2:end);
     for i = 1:length(blocks)
         disp(getfullname(blocks(i,1)));
     end
 % 获取模型中所有“线”对象（信号线）
 % 说明：这一步覆盖普通 Simulink 信号线；但拿不到物理网络线（如 RLC 两端子线）
 all_blocks = find_system(model_name, 'SearchDepth',1,'FindAll','on', ...
-    'LookUnderMasks','on', 'FollowLinks','on', 'type','line');
+     'FollowLinks','on', 'type','line');
 
 % 创建一个空的结构体或单元格数组来存储连接关系
 connectivity = {};
 % 去重：源块全名|源端口 => 目标块全名|目标端口
-conn_keys = containers.Map('KeyType','char','ValueType','logical');
+%conn_keys = containers.Map('KeyType','char','ValueType','logical');
 
 % 遍历每条“信号线”，并递归遍历分支（避免漏掉 LineChildren）
 for i = 1:length(all_blocks)
@@ -51,9 +52,9 @@ for i = 1:length(all_blocks)
                 [dst_kind, dst_index] = kind_and_index_by_handle(dst_block, dst_port_handles(j));
 
                 key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                if ~isKey(conn_keys, key)
-                    conn_keys(key) = true;
-                    connectivity{end+1} = struct( ...
+                %if ~isKey(conn_keys, key)
+                    %conn_keys(key) = true;
+                connectivity{end+1} = struct( ...
                         'Source',           src_block_name, ...
                         'SourcePath',       src_block_full, ...   % 新增：源块完整路径
                         'SourcePort',       src_port_num, ...
@@ -66,102 +67,105 @@ for i = 1:length(all_blocks)
                         'DestinationPortIndex', dst_index, ...   % 新增
                         'Origin',           'line' ...            % 可选：来源标记（普通信号线）
                     );
-                    disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
+                disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
                                       dst_block_name, '(', num2str(dst_port_num), ')']);
-                end
+               end
             end
         end
     end
-end
+
 
 % ========= 新增：基于 PortConnectivity 的扫描 =========
-all_blocks_pc = find_system(model_name, 'FindAll','on','LookUnderMasks','all','FollowLinks','on','Type','block');  % 不限制层级，确保掩模/链接下的端口也统计
+all_blocks_pc = find_system(model_name, 'FindAll','on','FollowLinks','on','Type','block');  % 不限制层级，确保掩模/链接下的端口也统计
 
 for i = 1:length(all_blocks_pc)
     bh = all_blocks_pc(i);
     pc = get_param(bh, 'PortConnectivity');  % 每个端口的上下游连接信息（同时支持物理连接与信号线）
 
     % 遍历该块的每个端口连接
-    for p = 1:numel(pc)
-        % 1) 作为“输出端口”一侧：本块 -> 下游块（包含信号与物理端口）
-        if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
-            src_block_full = getfullname(bh);
-            src_block_name = get_param(bh, 'Name');
-            src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
-            % 新增：端口种类与在该种类数组的索引
-            [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p));
-
-            for d = 1:numel(pc(p).DstBlock)
-                dst_bh         = pc(p).DstBlock(d);
-                dst_block_full = getfullname(dst_bh);
-                dst_block_name = get_param(dst_bh, 'Name');
-                % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
-                dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
-                dst_port_num   = get_port_num(dst_pc_entry);  % 若取得为空则返回 NaN→后续统一为 -1
-                [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry);
-
-                key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-                if ~isKey(conn_keys, key)
-                    conn_keys(key) = true;
+    if numel(pc) >= 1
+        for p = 1:numel(pc)
+            % 1) 作为“输出端口”一侧：本块 -> 下游块（包含信号与物理端口）
+            if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
+                src_block_full = getfullname(bh);
+                src_block_name = get_param(bh, 'Name');
+                src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
+                % 新增：端口种类与在该种类数组的索引
+                [src_kind2, src_index2] = kind_and_index_by_pc(bh, pc(p), 0);
+    
+                for d = 1:numel(pc(p).DstBlock)
+                    dst_bh         = pc(p).DstBlock(d);
+                    port           = pc(p).DstPort(d);
+                    dst_block_full = getfullname(dst_bh);
+                    dst_block_name = get_param(dst_bh, 'Name');
+                    % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
+                    dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
+                    dst_port_num   = get_port_num(dst_pc_entry); % 若取得为空则返回 NaN→后续统一为 -1
+                    [dst_kind2, dst_index2] = kind_and_index_by_pc(dst_bh, dst_pc_entry, port);
+    
+                    key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
+                    %if ~isKey(conn_keys, key)
+                        %conn_keys(key) = true;
                     connectivity{end+1} = struct( ...
-                        'Source',           src_block_name, ...
-                        'SourcePath',       src_block_full, ...   % 新增
-                        'SourcePort',       src_port_num, ...
-                        'SourcePortKind',   src_kind2, ...
-                        'SourcePortIndex',  src_index2, ...
-                        'Destination',      dst_block_name, ...
-                        'DestinationPath',  dst_block_full, ...   % 新增
-                        'DestinationPort',  dst_port_num, ...
-                        'DestinationPortKind',  dst_kind2, ...
-                        'DestinationPortIndex', dst_index2, ...
-                        'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
-                    );
+                            'Source',           src_block_name, ...
+                            'SourcePath',       src_block_full, ...   % 新增
+                            'SourcePort',       src_port_num, ...
+                            'SourcePortKind',   src_kind2, ...
+                            'SourcePortIndex',  src_index2, ...
+                            'Destination',      dst_block_name, ...
+                            'DestinationPath',  dst_block_full, ...   % 新增
+                            'DestinationPort',  dst_port_num, ...
+                            'DestinationPortKind',  dst_kind2, ...
+                            'DestinationPortIndex', dst_index2, ...
+                            'Origin',           'pc' ...              % 可选：来源标记（PortConnectivity）
+                        );
                     disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
-                                      dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
+                                          dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
+                    end
                 end
             end
-        end
-
-        % 2) 作为“输入端口”一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
-        if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
-            src_bh          = pc(p).SrcBlock;
-            src_block_full  = getfullname(src_bh);
-            src_block_name  = get_param(src_bh, 'Name');
-            % 上游块的端口号应取 SrcPort；没有则置为 -1 以便后续识别
-            if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
-                src_port_num = pc(p).SrcPort;
-            else
-                src_port_num = -1;
-            end
-            [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p));
-
-            dst_block_full  = getfullname(bh);
-            dst_block_name  = get_param(bh, 'Name');
-            dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
-            [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p));
-
-            key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
-            if ~isKey(conn_keys, key)
-                conn_keys(key) = true;
+    
+            % 2) 作为“输入端口”一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
+            if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
+                src_bh          = pc(p).SrcBlock;
+                src_block_full  = getfullname(src_bh);
+                src_block_name  = get_param(src_bh, 'Name');
+                % 上游块的端口号应取 SrcPort；没有则置为 -1 以便后续识别
+                if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
+                    src_port_num = pc(p).SrcPort;
+                else
+                    src_port_num = -1;
+                end
+                [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p),0);
+    
+                dst_block_full  = getfullname(bh);
+                port            = pc(p).DstPort;
+                dst_block_name  = get_param(bh, 'Name');
+                dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
+                [dst_kind3, dst_index3] = kind_and_index_by_pc(bh, pc(p), port);
+    
+                key = sprintf('%s|%d=>%s|%d', src_block_full, src_port_num, dst_block_full, dst_port_num);
+                %if ~isKey(conn_keys, key)
+                    %conn_keys(key) = true;
                 connectivity{end+1} = struct( ...
-                    'Source',           src_block_name, ...
-                    'SourcePath',       src_block_full, ...      % 新增
-                    'SourcePort',       src_port_num, ...
-                    'SourcePortKind',   src_kind3, ...
-                    'SourcePortIndex',  src_index3, ...
-                    'Destination',      dst_block_name, ...
-                    'DestinationPath',  dst_block_full, ...      % 新增
-                    'DestinationPort',  dst_port_num, ...
-                    'DestinationPortKind',  dst_kind3, ...
-                    'DestinationPortIndex', dst_index3, ...
-                    'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
-                );
+                        'Source',           src_block_name, ...
+                        'SourcePath',       src_block_full, ...      % 新增
+                        'SourcePort',       src_port_num, ...
+                        'SourcePortKind',   src_kind3, ...
+                        'SourcePortIndex',  src_index3, ...
+                        'Destination',      dst_block_name, ...
+                        'DestinationPath',  dst_block_full, ...      % 新增
+                        'DestinationPort',  dst_port_num, ...
+                        'DestinationPortKind',  dst_kind3, ...
+                        'DestinationPortIndex', dst_index3, ...
+                        'Origin',           'pc' ...                 % 可选：来源标记（PortConnectivity）
+                    );
                 disp(['Line from ', src_block_name, '(', num2str(src_port_num), ') to ', ...
-                                  dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
-            end
-        end
+                                      dst_block_name, '(', num2str(dst_port_num), ') [PC]']);
+                end
     end
 end
+
 % 现在 connectivity 单元格数组包含了所有的源-目标连接对（信号线 + 物理网络线）
 for i = 1:length(connectivity)
     disp(connectivity{1,i});
@@ -436,6 +440,47 @@ graph.ports       = ports;
 graph.connections = conn;
 graph.lines       = sigLines;
 
+% ==================（可选）导出模型与块参数配置，解耦于几何/连线==================
+% why:
+% - 仅几何与连线不足以“直接仿真”；还需模型求解器与各块对话参数
+% - 保持与现有导出逻辑解耦：用独立段收集参数，按需开关；但不新建脚本
+% how:
+% - 模型参数：挑常用仿真/求解器关键项（若存在则抓取）
+% - 块参数：使用 DialogParameters 列表逐项 get_param，规避编译态/句柄类字段
+% - 值一律序列化为字符串，便于 set_param 回放
+ENABLE_PARAM_EXPORT = true;  % 置为 false 可完全跳过参数导出，不影响其他导出
+% 集中式参数过滤配置（解耦）：白/黑名单 + 属性过滤
+PARAM_FILTER = get_param_filter_config();
+params = struct('model', struct(), 'blocks', struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{}));
+if ENABLE_PARAM_EXPORT
+    try
+        % 识别“真实模型根名”，避免使用占位 model_root 导致 get_param 失败
+        % why: bdroot 返回当前模型名；当默认 model_root 与实际不一致时会导出空参数
+        root_for_params = '';
+        try
+            if exist('all_blocks_pc','var') && ~isempty(all_blocks_pc)
+                root_for_params = char(bdroot(all_blocks_pc(1)));
+            end
+        catch
+        end
+        if isempty(root_for_params)
+            try, root_for_params = char(bdroot); catch, root_for_params = char(model_root); end
+        end
+
+        % 收集模型级参数（求解器/时间步等），以“存在即记录”为准
+        params.model = collect_model_params(root_for_params, PARAM_FILTER);
+
+        % 收集块级对话参数
+        params.blocks = collect_block_params(all_blocks_pc, PARAM_FILTER);
+
+        % 注入到 graph（用于单文件复原），并覆盖 graph.model 为真实根名
+        graph.parameters = params;
+        graph.model = char(root_for_params);
+    catch ME
+        warning('参数导出遇到问题，将跳过参数注入：%s', ME.message);
+    end
+end
+
 json_path = fullfile(out_dir, sprintf('%s_graph.json', model_tag));
 txt = jsonencode(graph, 'ConvertInfAndNaN', true);   % MATLAB 会将 NaN 编码为 null
 fid = fopen(json_path,'w');
@@ -447,63 +492,59 @@ fclose(fid);
 mat_path = fullfile(out_dir, sprintf('%s_graph.mat', model_tag));
 save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.3');
 
-% 6) 再导出三份 CSV（展开关键几何字段，便于快速查看）
-% 6.1 元件 CSV：展开 Position/Center
-if ~isempty(elements)
-    names  = {elements.Name}';
-    paths  = {elements.Path}';
-    types  = {elements.BlockType}';
-    oris   = {elements.Orientation}';
-    libs   = {elements.LibraryLink}';
-    mirs   = {elements.Mirror}';
-    rots   = {elements.Rotation}';
-    gtags  = {elements.GotoTag}';
-    gvises = {elements.GotoVisibility}';
-    ftags  = {elements.FromTag}';
-    posMat = vertcat(elements.Position);     % Nx4: [L T R B]
-    ctrMat = vertcat(elements.Center);       % Nx2: [Cx Cy]
-    T_e = table(names, paths, types, oris, libs, mirs, rots, gtags, gvises, ftags, ...
-        posMat(:,1), posMat(:,2), posMat(:,3), posMat(:,4), ...
-        ctrMat(:,1), ctrMat(:,2), ...
-        'VariableNames', {'Name','Path','BlockType','Orientation','LibraryLink','Mirror','Rotation','GotoTag','GotoVisibility','FromTag', ...
-                          'Left','Top','Right','Bottom','CenterX','CenterY'});
-    writetable(T_e, fullfile(out_dir, sprintf('%s_elements.csv', model_tag)));
+% 若启用了参数导出，同时独立落盘（便于单独检查/比对/版本化）
+if ENABLE_PARAM_EXPORT
+    try
+        params_json_path = fullfile(out_dir, sprintf('%s_params.json', model_tag));
+        ptxt = jsonencode(params, 'PrettyPrint', true);
+        fidp = fopen(params_json_path,'w');
+        assert(fidp~=-1, '无法创建文件: %s', params_json_path);
+        fwrite(fidp, ptxt, 'char'); fclose(fidp);
+    catch ME
+        warning('参数单独导出失败：%s', ME.message);
+    end
 end
 
-% 6.2 端口 CSV：展开 Position
-if ~isempty(ports)
-    bpaths = {ports.BlockPath}';
-    pnums  = [ports.PortNumber]';
-    ptypes = {ports.PortType}';
-    ppos   = vertcat(ports.Position);        % Nx2: [x y]
-    prel   = vertcat(ports.RelPos);          % Nx2: [rx ry]
-    sides  = {ports.Side}';
-    T_p = table(bpaths, pnums, ptypes, ppos(:,1), ppos(:,2), prel(:,1), prel(:,2), sides, ...
-        'VariableNames', {'BlockPath','PortNumber','PortType','X','Y','RelX','RelY','Side'});
-    writetable(T_p, fullfile(out_dir, sprintf('%s_ports.csv', model_tag)));
+% 6) 从 MAT 再生成 CSV（严格以 MAT 中的内容为准，确保 CSV 与 MAT 一致）
+% why:
+% - 避免“内存中变量被后续改动”导致 CSV 与 MAT 不一致
+% - 统一入口：优先从刚刚保存的 mat_path 加载 graph/elements/ports/conn
+try
+    S_csv = load(mat_path); % 只读：不依赖工作区的同名变量，保证一致性
+catch ME
+    warning('从 MAT 加载导出结构失败，将跳过 CSV 生成：%s', ME.message);
+    S_csv = struct();
 end
 
-% 6.3 连线 CSV：源/目标 + 完整路径 + 端口号 + 来源
-if ~isempty(conn)
-    srcs    = {conn.Source}';
-    srcps   = {conn.SourcePath}';
-    sps     = [conn.SourcePort]';
-    spk     = getfield_or_default_cell(conn,'SourcePortKind');
-    spi     = getfield_or_default_num(conn,'SourcePortIndex');
-    dsts    = {conn.Destination}';
-    dstps   = {conn.DestinationPath}';
-    dps     = [conn.DestinationPort]';
-    dpk     = getfield_or_default_cell(conn,'DestinationPortKind');
-    dpi     = getfield_or_default_num(conn,'DestinationPortIndex');
-    origins = {conn.Origin}';
-    T_c = table(srcs, srcps, sps, spk, spi, dsts, dstps, dps, dpk, dpi, origins, ...
-        'VariableNames', {'Source','SourcePath','SourcePort','SourcePortKind','SourcePortIndex', ...
-                          'Destination','DestinationPath','DestinationPort','DestinationPortKind','DestinationPortIndex','Origin'});
-    writetable(T_c, fullfile(out_dir, sprintf('%s_connections.csv', model_tag)));
-end
+% 解析出用于 CSV 的三类对象
+try
+    if isfield(S_csv,'graph') && isstruct(S_csv.graph)
+        conn = S_csv.conn;
+        T = struct2table(conn);
+        writetable(T, 'export_model_graph/model_connections.csv', 'WriteVariableNames', true, 'QuoteStrings', true,'Encoding', 'UTF-8');      
+        elements = S_csv.elements;
+        T = struct2table(elements);
+        writetable(T, 'export_model_graph/model_elements.csv', 'WriteVariableNames', true, 'QuoteStrings', true,'Encoding', 'UTF-8'); 
+        ports = S_csv.ports;
+        T = struct2table(ports);
+        writetable(T, 'export_model_graph/model_ports.csv', 'WriteVariableNames', true, 'QuoteStrings', true,'Encoding', 'UTF-8'); 
+        siglines = S_csv.sigLines;
+        T = struct2table(siglines);
+        writetable(T, 'export_model_graph/model_siglines.csv', 'WriteVariableNames', true, 'QuoteStrings', true,'Encoding', 'UTF-8'); 
+     end
+  end
+
+
+
+
+
 
 fprintf('导出完成：\n JSON  -> %s\n MAT   -> %s\n CSVs  -> %s\n', json_path, mat_path, out_dir);
-close_system(model_name);
+
+if ENABLE_PARAM_EXPORT
+    fprintf('参数已导出至：%s\n', out_dir);
+end
+
 % =========
 % 工具函数：递归收集“某条线及其所有分支”的目标端口（仅对普通信号线有效）
 % =========
@@ -564,27 +605,33 @@ function [kind, idx] = kind_and_index_by_handle(blockH, portH)
                 end
             end
         end
-    catch
     end
 end
 
-function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
+function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry, port)
     % 通过 pcEntry 和 PortHandles 推断端口种类与索引（用于 pc 来源）
     kind = '';
     idx  = -1;
     try
         ph = get_param(blockH,'PortHandles');
         % 优先使用 Type
-        if isfield(pcEntry,'Type') && ~isempty(pcEntry.Type)
-            switch lower(pcEntry.Type)
-                case {'inport','outport','lconn','rconn','conn','conserving'}
-                    f = map_type_to_field(lower(pcEntry.Type));
-                    if isfield(ph,f) && ~isempty(ph.(f))
-                        kind = lower(f); idx = 1; % 无法精确时返回 1 占位
-                        return;
-                    end
+        if ~isempty(ph.RConn)
+            for i=1:numel(ph.RConn)
+                if port == ph.RConn(i)
+                    kind = 'rconn';
+                    idx  = i;
+                end
             end
         end
+        if ~isempty(ph.LConn)
+           for i=1:numel(ph.LConn)
+                if port == ph.LConn(i)
+                    kind = 'lconn';
+                    idx  = i;
+                end
+           end
+        end
+        
         % 回退：根据坐标匹配最近端口句柄，并返回其种类与索引
         if isfield(pcEntry,'Position') && ~isempty(pcEntry.Position)
             candH = []; candP = []; candF = {};
@@ -604,10 +651,6 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
                 [~,k] = min(d);
                 f = candF{k};
                 kind = lower(f);
-                % 原错误代码：
-                % idx = find(get_param(blockH,'PortHandles').(f) == candH(k), 1);
-
-                % 修复后的代码：
                 portHandles = get_param(blockH, 'PortHandles');
                 idx = find(portHandles.(f) == candH(k), 1);
             end
@@ -616,21 +659,22 @@ function [kind, idx] = kind_and_index_by_pc(blockH, pcEntry)
     end
 end
 
-function f = map_type_to_field(tp)
-    switch tp
-        case {'lconn','rconn','conn'}
-            f = upper(tp);
-        case 'conserving'
-            f = 'Conn';
-        case 'inport'
-            f = 'Inport';
-        case 'outport'
-            f = 'Outport';
-        otherwise
-            f = 'Conn';
+function pcEntry = get_pc_entry_for_port(blockH, portNum)
+    % 在目标块的 PortConnectivity 中找到与端口号匹配的条目
+    pcEntry = struct();
+    try
+        pcAll = get_param(blockH,'PortConnectivity');
+        for k = 1:numel(pcAll)
+            if isfield(pcAll(k),'PortNumber') && isequal(pcAll(k).PortNumber, portNum)
+                pcEntry = pcAll(k); return;
+            elseif isfield(pcAll(k),'Port') && isequal(pcAll(k).Port, portNum)
+                pcEntry = pcAll(k); return;
+            end
+        end
+    catch
+        pcEntry = struct();
     end
 end
-
 
 function pcEntry = find_pc_entry_by_srcblock(dstBlockH, srcBlockH)
     % 在目标块的 PortConnectivity 中找到“上游块==srcBlockH”的条目
@@ -701,4 +745,197 @@ function pos = get_port_position(pcEntry, blockHandle)
     catch
         % 忽略个别不兼容端口；保持 [NaN NaN]
     end
+end
+
+% =========
+% 工具函数（参数采集与落盘）
+% =========
+function m = collect_model_params(model_root, PARAM_FILTER)
+    % why: 采集常用求解器/时域/数据导入导出等关键项，避免遗漏直接仿真所需配置
+    % how: 针对一组候选参数名，存在即记录；值统一转为字符串，便于 set_param 回放
+    % 允许通过配置追加/裁剪
+    defaultCand = {'StartTime','StopTime','SolverType','Solver','FixedStep','AbsTol','RelTol', ...
+            'StrictBusMsg','MinStepSize','MaxStepSize','MaxConsecutiveZCs','SignalLogging','ReturnWorkspaceOutputs', ...
+            'DataTypeOverride','MinMaxOverflowLogging','AlgebraicLoopMsg','SimCompilerOptimization','InlineParams'};
+    cand = merge_name_list(defaultCand, PARAM_FILTER.model.white, PARAM_FILTER.model.black);
+    m = struct();
+    try
+        root = char(model_root);
+        % model 对象参数空间
+        for i = 1:numel(cand)
+            pname = cand{i};
+            try
+                val = get_param(root, pname);
+                if param_allowed_by_attr([] , pname, val, PARAM_FILTER.model.attr_black)
+                    m.(pname) = param_value_to_string(val);
+                end
+            catch
+            end
+        end
+    catch
+    end
+end
+
+function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
+    % why: 使用 DialogParameters 能覆盖大多数可配置项（含 Mask 参数），避免抓取只读/句柄字段
+    blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
+    for i = 1:numel(all_blocks_pc)
+        bh = all_blocks_pc(i);
+        try
+            path  = getfullname(bh);
+            btype = get_param(bh,'BlockType');
+            mtype = '';
+            try, mtype = get_param(bh,'MaskType'); catch, mtype = ''; end
+            dp = struct();
+            % DialogParameters: struct，其中字段名为可设置的对话框参数
+            dlg = struct();
+            try, dlg = get_param(bh,'DialogParameters'); catch, dlg = struct(); end
+            if ~isempty(dlg)
+                names = fieldnames(dlg);
+                for k = 1:numel(names)
+                    pname = names{k};
+                    % 跳过几何/连线等几何重复项
+                    if any(strcmpi(pname, {'Position','PortConnectivity','LineHandles'}))
+                        continue;
+                    end
+                    % 名称级过滤（白/黑名单）
+                    if ~name_allowed(pname, PARAM_FILTER.block.white, PARAM_FILTER.block.black)
+                        continue;
+                    end
+                    try
+                        % 属性级过滤：ObjectParameters 可提供属性（read-only/no-set/deprecated 等）
+                        if param_allowed_on_block(bh, pname, PARAM_FILTER.block.attr_black)
+                            val = get_param(bh, pname);
+                            dp.(pname) = param_value_to_string(val);
+                        end
+                    catch
+                        % 有些链接库参数可能只读或受变体控制，忽略即可
+                    end
+                end
+            end
+
+            % 补充：Mask 值（若存在且 DialogParameters 未覆盖）
+            try
+                mnames = get_param(bh,'MaskNames');
+                mvals  = get_param(bh,'MaskValues');
+                if iscell(mnames) && iscell(mvals) && numel(mnames)==numel(mvals)
+                    for t = 1:numel(mnames)
+                        key = char(mnames{t});
+                        % 名称级过滤
+                        if ~isfield(dp, key) && name_allowed(key, PARAM_FILTER.mask.white, PARAM_FILTER.mask.black)
+                            dp.(key) = param_value_to_string(mvals{t});
+                        end
+                    end
+                end
+            catch
+            end
+
+            blocks(end+1) = struct('Path',path,'BlockType',btype,'MaskType',mtype,'DialogParams',dp); %#ok<AGROW>
+        catch
+        end
+    end
+end
+
+function s = param_value_to_string(v)
+    % why: set_param 统一以字符串设置；不同类型统一序列化为稳定字符串
+    try
+        if isstring(v)
+            s = char(v);
+        elseif ischar(v)
+            s = v;
+        elseif isnumeric(v)
+            s = mat2str(v);
+        elseif islogical(v)
+            s = char(string(v));  % 'true'/'false'；多数对话参数也接受 'on'/'off' 字符
+        elseif iscell(v)
+            % 将 cell 内部逐项转字符串再 JSON；便于人读与回放
+            s = char(jsonencode(v));
+        elseif isstruct(v)
+            s = char(jsonencode(v));
+        else
+            % Fallback：使用 disp 输出为字符串
+            s = strtrim(evalc('disp(v)'));
+        end
+    catch
+        s = '';
+    end
+end
+
+% =========
+% 过滤配置与判定（集中配置，保持解耦）
+% =========
+function CFG = get_param_filter_config()
+    % why: 将“哪些参数需要/不需要”集中配置，避免散落在导出逻辑中
+    % 用户可在此白/黑名单扩展，无需触碰采集主流程
+    CFG = struct();
+
+    % 名称白名单（优先保留）与黑名单（强制忽略）
+    % NOTE: 留空白名单=默认允许所有 DialogParameters（除黑名单/属性黑名单）
+    % WHY: 防止遗漏如 Sine Wave 的 Amplitude/Bias/Phase/Frequency，和 Constant 的 Value 等常用参数
+    % HOW: 依赖下方 CFG.block.black 与属性黑名单筛掉 UI/只读/不可设置项
+    CFG.block.white = {};
+    CFG.block.black = {'Position','Orientation','LineHandles','PortConnectivity','ForegroundColor','BackgroundColor','ShowName','NamePlacement','Priority','Tag'};
+
+    CFG.mask.white  = {};  % 默认全部允许，除非命中黑名单
+    CFG.mask.black  = {'ForegroundColor','BackgroundColor'}; % 掩模UI类
+
+    CFG.model.white = {};  % 使用 defaultCand 已覆盖常见项
+    CFG.model.black = {};  % 需要可在此屏蔽
+
+    % 属性黑名单：命中这些属性的参数不导出
+    % 常见：read-only, no-set, no-query, deprecated, simulated-only, run-time-only 等
+    CFG.block.attr_black = {'read-only','no-set','deprecated'};
+    CFG.model.attr_black = {'read-only','no-set','deprecated'};
+end
+
+function allowed = name_allowed(name, whites, blacks)
+    nm = char(name);
+    if any(strcmpi(nm, blacks)), allowed = false; return; end
+    if isempty(whites), allowed = true; return; end
+    allowed = any(strcmpi(nm, whites));
+end
+
+function ok = param_allowed_on_block(blockH, pname, attr_black)
+    % 通过 ObjectParameters 属性过滤（若可查询）
+    ok = true;
+    try
+        op = get_param(blockH, 'ObjectParameters');
+        if isfield(op, pname) && isfield(op.(pname), 'Attributes')
+            attrs = lower(string(op.(pname).Attributes));
+            for i = 1:numel(attr_black)
+                if any(attrs == lower(string(attr_black{i})))
+                    ok = false; return;
+                end
+            end
+        end
+    catch
+    end
+end
+
+function ok = param_allowed_by_attr(~, pname, ~, attr_black)
+    % 模型级：无 block 句柄，仅留扩展点保留同样接口
+    ok = true; %#ok<INUSD>
+    try
+        a = lower(string(attr_black)); %#ok<NASGU>
+    catch
+    end
+end
+
+function merged = merge_name_list(defaults, whites, blacks)
+    % 组合默认候选 + 白名单，然后去掉黑名单
+    lst = defaults;
+    if ~isempty(whites)
+        for i = 1:numel(whites)
+            if ~any(strcmpi(lst, whites{i}))
+                lst{end+1} = whites{i}; %#ok<AGROW>
+            end
+        end
+    end
+    keep = true(1, numel(lst));
+    for i = 1:numel(lst)
+        if any(strcmpi(lst{i}, blacks))
+            keep(i) = false;
+        end
+    end
+    merged = lst(keep);
 end
