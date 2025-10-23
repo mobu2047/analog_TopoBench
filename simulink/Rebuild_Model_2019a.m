@@ -35,7 +35,7 @@ function newModel = rebuild_model_from_export(inputPath, newModelName, useCsv)
 		else
 			data = load_or_decode_graph(inputPath);     % 保留原 MAT/JSON 路径读取
 		end
-	catch ME
+	except ME
 		% CSV 失败则自动回退，确保可继续运行
 		warning('CSV 解析失败，回退到 MAT/JSON：%s', ME.message);
 		data = load_or_decode_graph(inputPath);
@@ -415,11 +415,17 @@ function data = load_graph_from_csv_dir(inputPath)
 
 	% 读取 CSV 为表
 	assert(exist(fe,'file')==2 && exist(fp,'file')==2 && exist(fc,'file')==2, 'CSV 文件缺失（需要 elements/ports/connections）');
-	Te = readcell(fe);
-	Tp = readcell(fp);
-	Tc = readcell(fc);
-
+	Te = readcell(fe, 'TextType','string');
+	Tp = readcell(fp, 'TextType','string');
+	Tc = readcell(fc, 'TextType','string');
+    varNames = cellfun(@char, Te(1, :), 'UniformOutput', false);
+    Te = cell2table(Te(2:end, :), 'VariableNames', varNames);
+    varNames = cellfun(@char, Tp(1, :), 'UniformOutput', false);
+    Tp = cell2table(Tp(2:end, :), 'VariableNames', varNames);
+    varNames = cellfun(@char, Tc(1, :), 'UniformOutput', false);
+    Tc = cell2table(Tc(2:end, :), 'VariableNames', varNames);
 	% elements: struct 数组
+    
 	elements = table_elements_to_structs(Te);
 	% ports: struct 数组
 	ports    = table_ports_to_structs(Tp);
