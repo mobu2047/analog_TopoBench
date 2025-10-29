@@ -284,6 +284,24 @@ class MatlabSimulator:
         except Exception as e:
             raise MatlabConnectionError(f"Failed to start or acquire MATLAB engine: {e}") from e
 
+        # 基于 model.path 智能设置 MATLAB 工作目录与路径（方案A）
+        # 为什么：
+        # - 模型 InitFcn 中常以相对方式调用脚本（如 para_Sub2; FunParaTry;）与数据文件（xlsread）
+        # - 将当前目录切到模型所在目录，并把该目录加入 path，可确保这些引用可解析
+        # 如何：
+        # - 使用 config.model.path 推导目录，无需写死路径；保持对项目移动/重命名的适配性
+        try:
+            model_dir = os.path.dirname(self._model_path)
+            if model_dir:
+                # 切换 MATLAB 工作目录，保证相对路径读取（InitFcn/xlsread）从模型目录出发
+                self._eng.cd(model_dir, nargout=0)
+                # 将模型目录加入 MATLAB 搜索路径（放在末尾，尽量不改变全局优先级）
+                self._eng.addpath(model_dir, "-end", nargout=0)
+                log.info("matlab.path.prep", cwd=model_dir)
+        except Exception as e:
+            # 仅记录警告，不阻断后续流程；若目录不可达仍可依赖绝对路径模型
+            log.warning("matlab.path.prep_failed", error=str(e), cwd_try=model_dir if 'model_dir' in locals() else None)
+
         # 加载模型并进行基本配置（保持最小副作用）
         try:
             # 加载模型，不强制打开 UI，保持 headless
@@ -303,6 +321,8 @@ class MatlabSimulator:
                 except Exception:
                     # 某些模型/许可证不支持 accelerator，降级为 normal
                     self._eng.set_param(self._model_name, "SimulationMode", "normal", nargout=0)
+            else:
+                self._eng.set_param(self._model_name, "SimulationMode", "normal", nargout=0)
 
             # 启用模型级别的信号记录功能（Signal Logging）
             try:
@@ -690,42 +710,59 @@ class MatlabSimulator:
         except Exception:
             pass
 
-        # Scope：若未开启 DataLogging，则自动开启并设变量名/格式
+        # Scope：统一启用 DataLogging，并为每个 Scope 分配基于相对块路径的变量名（不再使用数字后缀；省略模型名）
         try:
             scopes = self._eng.find_system(self._model_name, "LookUnderMasks", "all", "FollowLinks", "on", "BlockType", "Scope", nargout=1)
         except Exception:
             scopes = []
         try:
-            def _is_on(val: Any) -> bool:
-                s = str(val).strip().lower()
-                return s in {"on", "true", "1"}
+            # 工具：从完整块路径获取相对路径（去除模型名前缀）并编码为合法变量名
+            def _relative_path(full_path: str) -> str:
+                """返回去掉模型名前缀的块路径（保留层级，用于逻辑键）。"""
+                text = str(full_path)
+                prefix = self._model_name + "/"
+                return text[len(prefix):] if text.startswith(prefix) else text
+
+            def _encode_var_name(rel_path: str) -> str:
+                """将相对块路径编码为合法的 MATLAB 变量名。
+
+                - WHY: DataLoggingVariableName 必须是合法变量名，不能包含 '/'、'*' 等字符
+                - HOW: 替换为下划线，保持可读的“路径感”；若以数字开头则前置 'scope_'
+                """
+                name = re.sub(r"[^A-Za-z0-9_]+", "_", rel_path).strip("_")
+                if not name or re.match(r"^[0-9]", name):
+                    name = f"scope_{name}" if name else "scope"
+                return name
 
             for blk in (scopes or []):
-                logging_on = _is_on(self._eng.get_param(blk, "DataLogging", nargout=1))
-                name = self._eng.get_param(blk, "DataLoggingVariableName", nargout=1)
-                if not name:
-                    # 基于块路径生成一个稳定变量名
-                    name = self._normalize_ws_var(str(blk), prefix="scope")
-                if not logging_on:
-                    try:
-                        self._eng.set_param(blk, "DataLogging", "on", nargout=0)
-                    except Exception:
-                        pass
-                    try:
-                        # 统一保存为 Dataset，兼容多通道
-                        self._eng.set_param(blk, "DataLoggingSaveFormat", "Dataset", nargout=0)
-                    except Exception:
-                        pass
-                    try:
-                        # 某些版本支持 NameMode
-                        self._eng.set_param(blk, "DataLoggingNameMode", "Custom", nargout=0)
-                    except Exception:
-                        pass
-                    try:
-                        self._eng.set_param(blk, "DataLoggingVariableName", name, nargout=0)
-                    except Exception:
-                        pass
-                discovered[str(name)] = str(name)
+                # 逻辑键：使用相对块路径（模型名省略，保留层级），便于人类识别；保证天然唯一
+                rel = _relative_path(str(blk))
+                # 变量名：对相对路径进行合法化编码（下划线替换非法字符），以满足 MATLAB 要求
+                name = _encode_var_name(rel)
+
+                # 始终启用数据记录并统一保存格式
+                try:
+                    self._eng.set_param(blk, "DataLogging", "on", nargout=0)
+                except Exception:
+                    pass
+                try:
+                    # 统一保存为 Dataset，兼容多通道
+                    self._eng.set_param(blk, "DataLoggingSaveFormat", "Dataset", nargout=0)
+                except Exception:
+                    pass
+                try:
+                    # 某些版本支持 NameMode；若存在则设置为 Custom 以允许自定义变量名
+                    self._eng.set_param(blk, "DataLoggingNameMode", "Custom", nargout=0)
+                except Exception:
+                    pass
+                try:
+                    # 设置唯一变量名，防止与其他 Scope 重名
+                    self._eng.set_param(blk, "DataLoggingVariableName", name, nargout=0)
+                except Exception:
+                    pass
+
+                # 输出映射：键用“相对路径格式”，值为合法变量名，既可读又可用
+                discovered[str(rel)] = str(name)
         except Exception:
             pass
 

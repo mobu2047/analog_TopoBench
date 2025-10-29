@@ -43,6 +43,25 @@ class TopologyAdapter:
         for name, value in action.items():
             spec = self._name_to_spec.get(name)
             if spec is None:
+                # 未声明键：尝试智能解析 name
+                # - 若形如 "block.param" → 作为块参数写入（自动补全模型名前缀）
+                # - 若形如 "block_path:param" → 旧式块参数路径
+                # - 否则 → 视为工作区变量名
+                try:
+                    if "." in name and ":" not in name:
+                        block, param = name.split(".", 1)
+                        model_name = getattr(self._sim, "_model_name", "")
+                        block_full = f"{model_name}/{block}" if model_name and not block.startswith(model_name + "/") else str(block)
+                        self._set_block_param(block_full, param, value)
+                    elif ":" in name:
+                        blk, prm = self._split_block_param(name)
+                        model_name = getattr(self._sim, "_model_name", "")
+                        blk_full = f"{model_name}/{blk}" if model_name and not blk.startswith(model_name + "/") else blk
+                        self._set_block_param(blk_full, prm, value)
+                    else:
+                        self._assign_workspace(name, value)
+                except Exception as e:
+                    log.error("adapter.apply_action.unknown_key_failed", name=name, error=str(e))
                 continue
             # 解析目标：优先使用极简键 key=block.param
             block_path, param_name, target = self._resolve_target(spec)

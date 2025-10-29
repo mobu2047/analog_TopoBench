@@ -346,7 +346,7 @@ def generate_default_v2(
 
     新格式要点：
     - action_space 使用 key= "<block>.<param>"（可直接从 auto_params 粘贴）
-    - experiments 仅提供 cases 示例，便于用户批量整段仿真
+    - experiments 自动生成 grid 与 cases，便于用户批量整段仿真
     """
     manual = {}
     # 允许从 auto 中推断 sim.step（若启发式可用）
@@ -406,6 +406,9 @@ def generate_default_v2(
         },
         "presets": {"init_action": {}},
         "experiments": {
+            # WHY: 自动生成 grid 便于用户直接做参数网格扫描；
+            # HOW: 默认 divisions=5，variables 使用示例 action_space 键，可按需在 YAML 中修改
+            "grid": false,
             "cases": [
                 {"name": f"case_{demo_keys[0].replace('.', '_')}_base", "action": {demo_keys[0]: float(demo_vals[0])}},
                 {"name": f"case_{demo_keys[0].replace('.', '_')}_x2",   "action": {demo_keys[0]: float(demo_vals[0]) * 2}},

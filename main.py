@@ -74,11 +74,6 @@ def main() -> None:
             add_map: Dict[str, str] = {}
             matlab_cfg = dict(cfg.get("matlab", {}))
             output_map = dict(matlab_cfg.get("output_map", {}))
-            if "ScopeData" not in output_map:
-                add_map["ScopeData"] = "ScopeData"
-            if "tout" not in output_map:
-                add_map["tout"] = "tout"
-
             if add_map:
                 try:
                     _update_output_map_on_disk(cfg_path, add_map)
@@ -302,7 +297,8 @@ def _save_and_plot(cfg: Dict[str, Any], sim: MatlabSimulator, out: Dict[str, Any
     try:
         from inverter_ai_control.utils.visualization import extract_scope_dataset
         sim_out_keys = list(out.get("sim", {}).keys())
-        dataset_vars = [k for k in sim_out_keys if k.lower().startswith("scopedata") or k == "yout"]
+        # WHY: 需要匹配任意包含“scope”的变量名，而非仅“scope”前缀；HOW: 使用不区分大小写的包含判断
+        dataset_vars = [k for k in sim_out_keys if ("scope" in k.lower()) or (k == "yout")]
         for var_name in dataset_vars:
             series = extract_scope_dataset(sim, var_name)
             if not series:

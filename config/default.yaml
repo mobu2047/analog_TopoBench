@@ -1,41 +1,29 @@
 version: 2
 model:
-  path: simulink/untitled3.slx
+  path: simulink/北京2电气仿真/Sub2_model_20210419.slx
 sim:
   step: 1.0e-06
   stop_time: 0.1
   mode:
-    start_in_accelerator: true
+    start_in_accelerator: false
     external_mode: false
 matlab:
   output_map:
-    tout: tout
-    ScopeData: ScopeData
-run:
-  mode: cases
-  agent:
-    type: ollama
-    host: http://localhost:11434
-    model: qwen3-coder:480b-cloud
-    max_iterations: 20
-    timeout_s: 300
-    early_stop_no_improve: 5
-    request_timeout_s: 30
-    prompt_template: ''
+    Scope: Scope
 parameters:
   auto:
     file: auto_params.yaml
 action_space:
-- key: Series RLC Branch1.Resistance
+- key: 'Asynchronous Machine SI Units1.VoltageRatio'
   dtype: float
   bounds:
     min: 0.0
-    max: 100.0
-- key: Square Wave Generator.Frequency
-  dtype: int
+    max: 10.0
+- key: 'Asynchronous Machine SI Units1.LoadFlowParameters'
+  dtype: float
   bounds:
-    min: 50
-    max: 60
+    min: 0.0
+    max: 2984000.0
 metrics:
   evaluation_window: by_step
   definitions:
@@ -57,15 +45,17 @@ metrics:
 presets:
   init_action: {}
 experiments:
- grid:
-  divisions: 2
-    # variables: ["Series RLC Branch1.Resistance"]  # 可选，默认用所有数值型变量
+  grid: false
   cases:
-  - name: case_R_100_freq_3pi
+  - name: 'case_Asynchronous Machine SI Units1_VoltageRatio_base'
     action:
-      Series RLC Branch1.Resistance: 100
-      Square Wave Generator.Frequency: 3*pi
-  - name: case_R_100_freq_2pi
-    action:
-      Series RLC Branch1.Resistance: 100
-      Square Wave Generator.Frequency: 2*pi
+     'Asynchronous Machine SI Units1.VoltageRatio' : 1.0
+     'Asynchronous Machine SI Units1.IterativeModel': Trapezoidal iterative
+     'Asynchronous Machine SI Units2.IterativeModel': 'Trapezoidal iterative'
+     'Asynchronous Machine SI Units3.IterativeModel': Trapezoidal non iterative
+     'Asynchronous Machine SI Units4.IterativeModel': 'Trapezoidal non iterative'
+
+  # - name: 'case_Asynchronous Machine SI Units1_VoltageRatio_x2'
+  #   action:
+  #     'Asynchronous Machine SI Units1.VoltageRatio' : 2.0
+  #     'Asynchronous Machine SI Units1.IterativeModel': Trapezoidal

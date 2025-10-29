@@ -45,7 +45,9 @@ class ActionValidator:
             # 允许传入 name 或 key（block.param）
             spec = self._name_to_spec.get(name)
             if spec is None:
-                # 未声明的动作键，直接忽略
+                # 未声明的动作键：保留原值透传，由适配器执行智能解释
+                # WHY: cases 可能直接给出 block.param 或工作区变量名，不能在此丢弃
+                normalized[name] = value
                 continue
             dtype = spec.get("dtype", "float")
             bounds = spec.get("bounds", {})

@@ -75,8 +75,7 @@ def plot_outputs_from_result(
 
     约定：
     - cfg['matlab']['output_map'] 提供逻辑名 -> 基础工作区名的映射；此处使用逻辑名索引 result['sim']
-    - result['sim'] 至少包含 'time'（标量）与可选 'tout'（时间向量）；若无 'tout'，则尝试用 sim.step 重建
-    - 对除 'tout' 之外的数组信号逐一绘制
+ 
     """
     import os
     import matplotlib.pyplot as plt
@@ -86,13 +85,11 @@ def plot_outputs_from_result(
     output_map = dict(matlab_cfg.get("output_map", {}))
     sim_out = dict(result.get("sim", {}))
 
-    # 时间轴优先使用 'tout'
     t = None
-    if "tout" in sim_out:
-        t = np.asarray(sim_out.get("tout"), dtype=float).reshape(-1)
+
     step_ts = float(sim_cfg.get("step", 0.0) or 0.0)
 
-    # 选择要绘制的信号（排除 'tout' 与时间标量），支持数组与 zip(通道迭代器)
+    # 选择要绘制的信号（ 与时间标量），支持数组与 zip(通道迭代器)
     # 若调用方提供了 out_map（向后兼容），合并到配置映射中（out_map 优先）
     if out_map:
         output_map = {**output_map, **dict(out_map)}
@@ -105,49 +102,6 @@ def plot_outputs_from_result(
     y_names = [name for name in logical_names if _is_array_like(sim_out.get(name)) or _is_zip(sim_out.get(name))]
     if not y_names:
         y_names = [k for k, v in sim_out.items() if k not in {"tout", "time"} and (_is_array_like(v) or _is_zip(v))]
-
-    # 兜底1：若仅有 tout（时间向量）且为数组，则绘制 tout vs sample_index
-    if not y_names and isinstance(sim_out.get("tout"), (list, tuple, np.ndarray)):
-        import os
-        import matplotlib.pyplot as plt
-        os.makedirs(save_dir, exist_ok=True)
-        tt = np.asarray(sim_out.get("tout"), dtype=float).reshape(-1)
-        plt.figure(figsize=(9, 4.8))
-        ax = plt.gca()
-        ax.plot(np.arange(tt.size, dtype=float), tt, label="tout")
-        ax.grid(True)
-        ax.legend()
-        ax.set_title("tout")
-        ax.set_xlabel("Sample Index")
-        ax.set_ylabel("Time [s]")
-        plt.tight_layout()
-        save_path = os.path.join(save_dir, filename)
-        plt.savefig(save_path, dpi=160)
-        return save_path
-
-    # 兜底2：既没有数组信号，又提供了 simulator，则从工作区提取 ScopeData 直接绘制
-    if not y_names:
-        if simulator is not None:
-            series = extract_scope_dataset(simulator, var_name=output_map.get("ScopeData", "ScopeData"))
-            if series:
-                import os
-                import matplotlib.pyplot as plt
-                os.makedirs(save_dir, exist_ok=True)
-                plt.figure(figsize=(9, 4.8))
-                ax = plt.gca()
-                for idx, (tt, yy) in enumerate(series, start=1):
-                    ax.plot(np.asarray(tt, dtype=float).reshape(-1), np.asarray(yy, dtype=float).reshape(-1), label=f"{label_prefix}{idx}" if label_prefix else f"sig{idx}")
-                ax.grid(True)
-                ax.legend()
-                ax.set_title("ScopeData")
-                ax.set_xlabel("Time [s]")
-                ax.set_ylabel("Value")
-                plt.tight_layout()
-                save_path = os.path.join(save_dir, filename)
-                plt.savefig(save_path, dpi=160)
-                return save_path
-        # 若仍无法绘制，则返回
-        return None
 
     os.makedirs(save_dir, exist_ok=True)
     plt.figure(figsize=(9, 4.8))
