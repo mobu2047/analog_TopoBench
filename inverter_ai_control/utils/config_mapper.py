@@ -408,7 +408,7 @@ def generate_default_v2(
         "experiments": {
             # WHY: 自动生成 grid 便于用户直接做参数网格扫描；
             # HOW: 默认 divisions=5，variables 使用示例 action_space 键，可按需在 YAML 中修改
-            "grid": false,
+            "grid": False,
             "cases": [
                 {"name": f"case_{demo_keys[0].replace('.', '_')}_base", "action": {demo_keys[0]: float(demo_vals[0])}},
                 {"name": f"case_{demo_keys[0].replace('.', '_')}_x2",   "action": {demo_keys[0]: float(demo_vals[0]) * 2}},
