@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = 'Sub2_model_20210419';
+    model_name = 'testgen';
     open_system(model_name);
 
   
@@ -11,12 +11,12 @@
     % 跳过模型本身
     blocks = blocks(2:end);
     for i = 1:length(blocks)
-        disp(getfullname(blocks(i,1)));
+        disp(remove_model_prefix(getfullname(blocks(i,1)), model_name)); % 打印路径（去掉模型名）
     end
 % 获取模型中所有“线”对象（信号线）
 % 说明：这一步覆盖普通 Simulink 信号线；但拿不到物理网络线（如 RLC 两端子线）
 all_blocks = find_system(model_name, 'SearchDepth',1,'FindAll','on', ...
-     'FollowLinks','on', 'type','line');
+     'FollowLinks','on', 'type','line'); % SearchDepth搜索深度为1，FollowLinks搜索Library Block库块连线
 
 % 创建一个空的结构体或单元格数组来存储连接关系
 connectivity = {};
@@ -26,16 +26,22 @@ connectivity = {};
 % 遍历每条“信号线”，并递归遍历分支（避免漏掉 LineChildren）
 for i = 1:length(all_blocks)
     block = all_blocks(i,1);               % 实际是 line 句柄，沿用你的变量名
-
-    src_port = get_param(block, 'SrcPortHandle');
+    
+    % 获取源端口和目标端口的句柄
+    src_port = get_param(block, 'SrcPortHandle'); 
     dst_ports = get_param(block, 'DstPortHandle'); % 保留你的原变量（后续我们用递归统一收集）
+    
+    % 检查端口是否有效
     if src_port ~= -1
-        src_block = get_param(src_port, 'Parent');
-        src_block_name = get_param(src_block, 'Name');
-        src_block_full = getfullname(src_block);
-        src_port_num = get_param(src_port, 'PortNumber');
+        src_block = get_param(src_port, 'Parent'); % 获取端口所属块名
+        src_block_name = get_param(src_block, 'Name'); % 获取块的名称（短名，不含路径）
+        src_block_full = remove_model_prefix(getfullname(src_block), model_name); % 获取块的完整路径（去掉模型名）
+        src_port_num = get_param(src_port, 'PortNumber'); % 标识是块的第几个输出端口
 
         % 递归获取该线及全部分支的目标端口
+        % dst_blk_handles：所有目标块的句柄数组
+        % dst_port_handles：所有目标端口的句柄数组
+        % visited_lines：更新后的已访问线列表
         visited_lines = [];
         [dst_blk_handles, dst_port_handles, visited_lines] = collect_all_dsts(block, visited_lines);
 
@@ -44,7 +50,7 @@ for i = 1:length(all_blocks)
             if dst_port_handles(j) ~= -1
                 dst_block = dst_blk_handles(j);
                 dst_block_name = get_param(dst_block, 'Name');
-                dst_block_full = getfullname(dst_block);
+                dst_block_full = remove_model_prefix(getfullname(dst_block), model_name);
                 dst_port_num = get_param(dst_port_handles(j), 'PortNumber');
 
                 % 新增：记录端口种类与“在各自类型数组中的索引”（稳定且可复现）
@@ -85,9 +91,9 @@ for i = 1:length(all_blocks_pc)
     % 遍历该块的每个端口连接
     if numel(pc) >= 1
         for p = 1:numel(pc)
-            % 1) 作为“输出端口”一侧：本块 -> 下游块（包含信号与物理端口）
+            % 1) 作为"输出端口"一侧：本块 -> 下游块（包含信号与物理端口）
             if isfield(pc(p),'DstBlock') && ~isempty(pc(p).DstBlock) && all(pc(p).DstBlock ~= -1)
-                src_block_full = getfullname(bh);
+                src_block_full = remove_model_prefix(getfullname(bh), model_name);
                 src_block_name = get_param(bh, 'Name');
                 src_port_num   = get_port_num(pc(p));   % 当前端口号（本块一侧）
                 % 新增：端口种类与在该种类数组的索引
@@ -96,7 +102,7 @@ for i = 1:length(all_blocks_pc)
                 for d = 1:numel(pc(p).DstBlock)
                     dst_bh         = pc(p).DstBlock(d);
                     port           = pc(p).DstPort(d);
-                    dst_block_full = getfullname(dst_bh);
+                    dst_block_full = remove_model_prefix(getfullname(dst_bh), model_name);
                     dst_block_name = get_param(dst_bh, 'Name');
                     % 目标端口号在物理域常无意义，这里改为“在目标块PC中反查 SrcBlock==bh 的条目”
                     dst_pc_entry   = find_pc_entry_by_srcblock(dst_bh, bh);
@@ -125,10 +131,10 @@ for i = 1:length(all_blocks_pc)
                 end
             end
     
-            % 2) 作为“输入端口”一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
+            % 2) 作为"输入端口"一侧：上游块 -> 本块（物理端口常为双向，这里也补齐）
             if isfield(pc(p),'SrcBlock') && ~isempty(pc(p).SrcBlock) && pc(p).SrcBlock ~= -1
                 src_bh          = pc(p).SrcBlock;
-                src_block_full  = getfullname(src_bh);
+                src_block_full  = remove_model_prefix(getfullname(src_bh), model_name);
                 src_block_name  = get_param(src_bh, 'Name');
                 % 上游块的端口号应取 SrcPort；没有则置为 -1 以便后续识别
                 if isfield(pc(p),'SrcPort') && ~isempty(pc(p).SrcPort)
@@ -138,7 +144,7 @@ for i = 1:length(all_blocks_pc)
                 end
                 [src_kind3, src_index3] = kind_and_index_by_pc(src_bh, pc(p),0);
     
-                dst_block_full  = getfullname(bh);
+                dst_block_full  = remove_model_prefix(getfullname(bh), model_name);
                 port            = pc(p).DstPort;
                 dst_block_name  = get_param(bh, 'Name');
                 dst_port_num    = get_port_num(pc(p));  % 本块一侧端口号
@@ -194,7 +200,7 @@ for i = 1:numel(all_blocks_for_pos)
     bh = all_blocks_for_pos(i);
 
     % 元件基础信息
-    path  = getfullname(bh);
+    path  = remove_model_prefix(getfullname(bh), model_name);
     name  = get_param(bh,'Name');
     btype = get_param(bh,'BlockType');              % 某些掩模块可能为空字符串
     ori   = get_param(bh,'Orientation');            % right/left/up/down
@@ -237,10 +243,10 @@ for i = 1:numel(all_blocks_for_pos)
 end
 
 % ========== B) 端口位置（可选，但强烈建议一起存） ==========
-% why: 即使某些“物理网络线”没有常规 line 对象，也能用端口坐标重建边
+% why: 即使某些"物理网络线"没有常规 line 对象，也能用端口坐标重建边
 for i = 1:numel(all_blocks_for_pos)
     bh = all_blocks_for_pos(i);
-    path = getfullname(bh);
+    path = remove_model_prefix(getfullname(bh), model_name);
 
     pc = get_param(bh,'PortConnectivity');  % 端口连接与几何信息
     for p = 1:numel(pc)
@@ -324,13 +330,13 @@ for i = 1:numel(all_lines)
     % 源与目标（注意：branch line 也有自己的 Dst 集合）
     srcPath = '';
     if isRoot
-        srcPath = getfullname(get_param(srcH,'Parent'));
+        srcPath = remove_model_prefix(getfullname(get_param(srcH,'Parent')), model_name);
     end
     dstHs = get_param(lh,'DstBlockHandle');
     if isequal(dstHs,-1) || isempty(dstHs)
         dstPaths = {};
     else
-        dstPaths = arrayfun(@(h)getfullname(h), dstHs(:),'UniformOutput',false);
+        dstPaths = arrayfun(@(h)remove_model_prefix(getfullname(h), model_name), dstHs(:),'UniformOutput',false);
     end
 
     pts = get_param(lh,'Points'); % Nx2 折线坐标
@@ -471,7 +477,7 @@ if ENABLE_PARAM_EXPORT
         params.model = collect_model_params(root_for_params, PARAM_FILTER);
 
         % 收集块级对话参数
-        params.blocks = collect_block_params(all_blocks_pc, PARAM_FILTER);
+        params.blocks = collect_block_params(all_blocks_pc, PARAM_FILTER, model_name);
 
         % 注入到 graph（用于单文件复原），并覆盖 graph.model 为真实根名
         graph.parameters = params;
@@ -496,7 +502,7 @@ save(mat_path, 'graph','elements','ports','sigLines','conn','connectivity','-v7.
 if ENABLE_PARAM_EXPORT
     try
         params_json_path = fullfile(out_dir, sprintf('%s_params.json', model_tag));
-        ptxt = jsonencode(params, 'PrettyPrint', true);
+        ptxt = jsonencode(params, 'ConvertInfAndNaN', true);
         fidp = fopen(params_json_path,'w');
         assert(fidp~=-1, '无法创建文件: %s', params_json_path);
         fwrite(fidp, ptxt, 'char'); fclose(fidp);
@@ -546,7 +552,24 @@ if ENABLE_PARAM_EXPORT
 end
 
 % =========
-% 工具函数：递归收集“某条线及其所有分支”的目标端口（仅对普通信号线有效）
+% 工具函数：去掉路径中的模型名前缀
+% =========
+function path_without_model = remove_model_prefix(full_path, model_name)
+    % 去掉完整路径中的模型名前缀
+    % 例如: 'testgen/BlockName' -> 'BlockName'
+    %      'testgen/Subsystem/BlockName' -> 'Subsystem/BlockName'
+    path_without_model = full_path;
+    if ~isempty(model_name) && ~isempty(full_path)
+        prefix = [model_name, '/'];
+        % 使用 strncmp 兼容更多 MATLAB 版本
+        if length(full_path) >= length(prefix) && strncmp(full_path, prefix, length(prefix))
+            path_without_model = full_path(length(prefix)+1:end);
+        end
+    end
+end
+
+% =========
+% 工具函数：递归收集"某条线及其所有分支"的目标端口（仅对普通信号线有效）
 % =========
 function [dstBlks, dstPorts, visited_lines] = collect_all_dsts(line_h, visited_lines)
     if any(visited_lines == line_h)
@@ -776,13 +799,13 @@ function m = collect_model_params(model_root, PARAM_FILTER)
     end
 end
 
-function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER)
+function blocks = collect_block_params(all_blocks_pc, PARAM_FILTER, model_name)
     % why: 使用 DialogParameters 能覆盖大多数可配置项（含 Mask 参数），避免抓取只读/句柄字段
     blocks = struct('Path',{},'BlockType',{},'MaskType',{},'DialogParams',{});
     for i = 1:numel(all_blocks_pc)
         bh = all_blocks_pc(i);
         try
-            path  = getfullname(bh);
+            path  = remove_model_prefix(getfullname(bh), model_name);
             btype = get_param(bh,'BlockType');
             mtype = '';
             try, mtype = get_param(bh,'MaskType'); catch, mtype = ''; end
