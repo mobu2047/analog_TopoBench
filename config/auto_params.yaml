@@ -1,35 +1,173 @@
-sub2_model_20210419:
-  ? 'Asynchronous Machine SI Units1'
-  : RotorType: Squirrel-cage
-    PresetModel: 'No'
-    MechanicalLoad: Speed w
-    ShowDetailedParameters: 'on'
-    ReferenceFrame: Stationary
-    Units: SI
-    MeasurementBus: 'off'
-    NominalParameters: '[Pn, Un, fn]'
-    VoltageRatio: '1'
-    Stator: '[Rs Lls]'
-    Rotor: '[Rr  Llr]'
-    Cage1: '[ 0.022 0.226/377]'
-    Cage2: '[ 0.022 0.226/377]'
-    Lm: Lm
-    Mechanical: '[J*0.5 0 P]'
-    PolePairs: P
-    InitialConditions: '[1 0 0 0 0 0 0 0]'
-    SimulateSaturation: 'off'
-    Saturation: '[14.03593122, 27.81365428, 53.79336849, 72.68890987, 97.98006896,
-      148.6815601, 215.7428561, 302.9841135, 428.7778367 ; 230, 322, 414, 460, 506,
-      552, 598, 644, 690]'
-    LoadFlowParameters: '1492000'
-    TsPowergui: '0'
-    TsBlock: '-1'
-    IterativeModel: Forward Euler
-    IterativeDiscreteModel: Trapezoidal non iterative
-    Pmec: '0'
+testgen:
+  charging_circuit_filtering1:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
+  Current Measurement6:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'
+  Ideal Switch:
+    Ron: '0.001'
+    Lon: '0'
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  Ideal Switch1:
+    Ron: '0.001'
+    Lon: '0'
+    IC: '0'
+    Rs: 1e5
+    Cs: inf
+    Measurements: 'off'
+  Series RLC Branch2:
+    BranchType: R
+    Resistance: R_charge
+    Inductance: Lf
+    SetiL0: 'off'
+    InitialCurrent: '0'
+    Capacitance: inf
+    Setx0: 'off'
+    InitialVoltage: '0'
+    Measurements: None
+  Series RLC Branch6:
+    BranchType: RL
+    Resistance: '0.002'
+    Inductance: Lf
+    SetiL0: 'off'
+    InitialCurrent: '0'
+    Capacitance: inf
+    Setx0: 'off'
+    InitialVoltage: '0'
+    Measurements: None
+  Timer:
+    t: '[ 0  0.8]'
+    e: '[0 1]'
+  Timer1:
+    t: '[ 0  T_inv_start]'
+    e: '[0 1]'
+  Conn1:
+    Port: '1'
+    Side: Left
+    ConnectionType: 'Inherit: auto'
+    SampleTime: '-1'
+  Conn2:
+    Port: '2'
+    Side: Left
+    ConnectionType: 'Inherit: auto'
+    SampleTime: '-1'
+  Out1:
+    Port: '1'
+    SignalName: ''
+    SignalObject: '[]'
+    StorageClass: Auto
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    DataMode: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    EnsureOutportIsVirtual: 'off'
+    OutputWhenDisabled: held
+    InitialOutput: '[]'
+    MustResolveToSignalObject: 'off'
+    OutputWhenUnConnected: 'off'
+    OutputWhenUnconnectedValue: '0'
+    VectorParamsAs1DForOutWhenUnconnected: 'off'
+  inverter_3bridge_2asymotor:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
   ? 'Asynchronous Machine
 
-    SI Units2'
+    SI Units1'
   : RotorType: Squirrel-cage
     PresetModel: 'No'
     MechanicalLoad: Speed w
@@ -87,50 +225,280 @@ sub2_model_20210419:
     IterativeModel: Forward Euler
     IterativeDiscreteModel: Trapezoidal non iterative
     Pmec: '0'
-  ? 'Asynchronous Machine SI Units4'
-  : RotorType: Squirrel-cage
-    PresetModel: 'No'
-    MechanicalLoad: Speed w
-    ShowDetailedParameters: 'on'
-    ReferenceFrame: Stationary
-    Units: SI
-    MeasurementBus: 'off'
-    NominalParameters: '[Pn, Un, fn]'
-    VoltageRatio: '1'
-    Stator: '[Rs Lls]'
-    Rotor: '[Rr  Llr]'
-    Cage1: '[ 0.022 0.226/377]'
-    Cage2: '[ 0.022 0.226/377]'
-    Lm: Lm
-    Mechanical: '[J*0.5 0 P]'
-    PolePairs: P
-    InitialConditions: '[1 0 0 0 0 0 0 0]'
-    SimulateSaturation: 'off'
-    Saturation: '[14.03593122, 27.81365428, 53.79336849, 72.68890987, 97.98006896,
-      148.6815601, 215.7428561, 302.9841135, 428.7778367 ; 230, 322, 414, 460, 506,
-      552, 598, 644, 690]'
-    LoadFlowParameters: '1492000'
-    TsPowergui: '0'
-    TsBlock: '-1'
-    IterativeModel: Forward Euler
-    IterativeDiscreteModel: Trapezoidal non iterative
-    Pmec: '0'
-  ? 'Bus
-
-    Selector1'
-  : OutputSignals: Mechanical.Rotor speed (wm)
-    OutputAsBus: 'on'
-  ? 'Bus
-
-    Selector2'
-  : OutputSignals: Stator measurements.Stator current is_a (A),Stator measurements.Stator
-      current is_b (A),Stator measurements.Stator current is_c (A)
-    OutputAsBus: 'on'
-  ? 'Bus
-
-    Selector3'
-  : OutputSignals: Mechanical.Electromagnetic torque Te (N*m)
-    OutputAsBus: 'on'
+  Current Measurement2:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'
+  From:
+    GotoTag: Tg
+    IconDisplay: Tag
+  From3:
+    GotoTag: Pulse_in
+    IconDisplay: Tag
+  IGBT Inverter:
+    Arms: '3'
+    SnubberResistance: '1000'
+    SnubberCapacitance: inf
+    Device: IGBT / Diodes
+    Ron: 1e-5
+    Lon: '0'
+    ForwardVoltages: '[  0.0  0.0  ]'
+    ForwardVoltage: '.8'
+    GTOparameters: '[ 1e-6 , 1e-6 ]'
+    IGBTparameters: '[ 0e-6 , 0e-6 ]'
+    Measurements: None
+    Measurements_2: None
+    converterType: Rectifier
+  Mean Value2:
+    Period: '6'
+  Mean Value3:
+    Period: 1/20
+  Mux3:
+    Inputs: '8'
+    DisplayOption: bar
+  Mux5:
+    Inputs: '2'
+    DisplayOption: bar
+  Mux6:
+    Inputs: '2'
+    DisplayOption: bar
+  RMS1:
+    f1: '20'
+  Scope2:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '261.3976'
+    ActiveDisplayYMaximum: '659.3522'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'off'
+    DataLoggingVariableName: ScopeData4
+    DataLoggingSaveFormat: Dataset
+  Scope4:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: '%<SignalLabel>'
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '23.125'
+    ActiveDisplayYMaximum: '31.875'
+    YLabel: ''
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'off'
+    DataLoggingVariableName: ScopeData4
+    DataLoggingSaveFormat: Dataset
+  Scope5:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '2'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: ''
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-10'
+    ActiveDisplayYMaximum: '10'
+    YLabel: Amplitude
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'off'
+    DataLoggingVariableName: ScopeData3
+    DataLoggingSaveFormat: Dataset
+  Series RLC Branch12:
+    BranchType: RC
+    Resistance: Rc
+    Inductance: '0'
+    SetiL0: 'off'
+    InitialCurrent: '0'
+    Capacitance: Cd
+    Setx0: 'off'
+    InitialVoltage: '3000'
+    Measurements: None
+  Terminator: {}
+  Three-Phase V-I Measurement1:
+    VoltageMeasurement: phase-to-phase
+    SetLabelV: 'off'
+    LabelV: Vabc
+    Vpu: 'off'
+    VpuLL: 'off'
+    CurrentMeasurement: 'no'
+    SetLabelI: 'off'
+    LabelI: Iabc
+    Ipu: 'off'
+    Pbase: 100e6
+    Vbase: 500e3
+    OutputType: Complex
+    PhasorSimulation: 'off'
+    PSBequivalent: '0'
+  Voltage Measurement1:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'
+  Out2:
+    Port: '1'
+    SignalName: ''
+    SignalObject: '[]'
+    StorageClass: Auto
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    DataMode: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    EnsureOutportIsVirtual: 'off'
+    OutputWhenDisabled: held
+    InitialOutput: '[]'
+    MustResolveToSignalObject: 'off'
+    OutputWhenUnConnected: 'off'
+    OutputWhenUnconnectedValue: '0'
+    VectorParamsAs1DForOutWhenUnconnected: 'off'
+  inverter_3bridge_2asymotor1:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
+  power_supply:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
   ? 'Bus
 
     Selector4'
@@ -374,6 +742,31 @@ sub2_model_20210419:
     MessageQueueType: LIFO
     MessageQueueOverwriting: 'on'
     EventTriggers: '[]'
+  In1:
+    Port: '1'
+    IconDisplay: Port number
+    OutputFunctionCall: 'off'
+    OutMin: '[]'
+    OutMax: '[]'
+    OutDataTypeStr: 'Inherit: auto'
+    LockScale: 'off'
+    BusOutputAsStruct: 'off'
+    BusVirtuality: inherit
+    Unit: inherit
+    PortDimensions: '-1'
+    VarSizeSig: Inherit
+    SampleTime: '-1'
+    SignalType: auto
+    LatchByDelayingOutsideSignal: 'off'
+    LatchInputForFeedbackSignals: 'off'
+    Interpolate: 'on'
+    InputConnect: ''
+    DataMode: inherit
+    MessageQueueUseDefaultAttributes: 'on'
+    MessageQueueCapacity: '1'
+    MessageQueueType: LIFO
+    MessageQueueOverwriting: 'on'
+    EventTriggers: '[]'
   Clock:
     DisplayTime: 'off'
     Decimation: '10'
@@ -438,31 +831,6 @@ sub2_model_20210419:
     ReferencedSubsystem: ''
     Latency: '0'
     AutoFrameSizeCalculation: 'off'
-  In1:
-    Port: '1'
-    IconDisplay: Port number
-    OutputFunctionCall: 'off'
-    OutMin: '[]'
-    OutMax: '[]'
-    OutDataTypeStr: 'Inherit: auto'
-    LockScale: 'off'
-    BusOutputAsStruct: 'off'
-    BusVirtuality: inherit
-    Unit: inherit
-    PortDimensions: '-1'
-    VarSizeSig: Inherit
-    SampleTime: '-1'
-    SignalType: auto
-    LatchByDelayingOutsideSignal: 'off'
-    LatchInputForFeedbackSignals: 'off'
-    Interpolate: 'on'
-    InputConnect: ''
-    DataMode: inherit
-    MessageQueueUseDefaultAttributes: 'on'
-    MessageQueueCapacity: '1'
-    MessageQueueType: LIFO
-    MessageQueueOverwriting: 'on'
-    EventTriggers: '[]'
   In2:
     Port: '2'
     IconDisplay: Port number
@@ -549,7 +917,7 @@ sub2_model_20210419:
     DataLoggingDecimateData: 'on'
     DataLoggingDecimation: '4'
     DataLogging: 'off'
-    DataLoggingVariableName: ScopeData
+    DataLoggingVariableName: ScopeData1
     DataLoggingSaveFormat: Structure With Time
   Switch1:
     Criteria: u2 >= Threshold
@@ -564,32 +932,6 @@ sub2_model_20210419:
     ZeroCross: 'on'
     SampleTime: '-1'
     AllowDiffInputSizes: 'off'
-  Out1:
-    Port: '1'
-    SignalName: ''
-    SignalObject: '[]'
-    StorageClass: Auto
-    IconDisplay: Port number
-    OutputFunctionCall: 'off'
-    OutMin: '[]'
-    OutMax: '[]'
-    OutDataTypeStr: 'Inherit: auto'
-    LockScale: 'off'
-    BusOutputAsStruct: 'off'
-    BusVirtuality: inherit
-    DataMode: inherit
-    Unit: inherit
-    PortDimensions: '-1'
-    VarSizeSig: Inherit
-    SampleTime: '-1'
-    SignalType: auto
-    EnsureOutportIsVirtual: 'off'
-    OutputWhenDisabled: held
-    InitialOutput: '[]'
-    MustResolveToSignalObject: 'off'
-    OutputWhenUnConnected: 'off'
-    OutputWhenUnconnectedValue: '0'
-    VectorParamsAs1DForOutWhenUnconnected: 'off'
   F0:
     Value: fn
     VectorParams1D: 'on'
@@ -599,9 +941,6 @@ sub2_model_20210419:
     LockScale: 'off'
     SampleTime: inf
     FramePeriod: inf
-  From6:
-    GotoTag: XUD1
-    IconDisplay: Tag
   Gain2:
     Gain: '2'
     Multiplication: Element-wise(K.*u)
@@ -618,7 +957,7 @@ sub2_model_20210419:
   Goto:
     GotoTag: Motor_measure
     IconDisplay: Tag
-    TagVisibility: local
+    TagVisibility: global
   Llr:
     Value: Llr
     VectorParams1D: 'on'
@@ -647,9 +986,6 @@ sub2_model_20210419:
     SampleTime: inf
     FramePeriod: inf
   Mux1:
-    Inputs: '2'
-    DisplayOption: bar
-  Mux3:
     Inputs: '2'
     DisplayOption: bar
   N_gei:
@@ -747,8 +1083,8 @@ sub2_model_20210419:
   Scope6:
     OpenAtSimulationStart: 'off'
     DisplayFullPath: 'off'
-    NumInputPorts: '3'
-    LayoutDimensionsString: '[3 1]'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
     SampleTime: '-1'
     FrameBasedProcessingString: Elements as channels (sample based)
     MaximizeAxes: 'Off'
@@ -765,8 +1101,8 @@ sub2_model_20210419:
     ShowLegend: 'off'
     ShowGrid: 'on'
     PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '-5652.8779'
-    ActiveDisplayYMaximum: '1461.4309'
+    ActiveDisplayYMinimum: '-106.1756'
+    ActiveDisplayYMaximum: '955.58'
     YLabel: ''
     DataLoggingLimitDataPoints: 'off'
     DataLoggingMaxPoints: '5000'
@@ -1449,8 +1785,8 @@ sub2_model_20210419:
   Scope1:
     OpenAtSimulationStart: 'off'
     DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
+    NumInputPorts: '4'
+    LayoutDimensionsString: '[4 1]'
     SampleTime: '-1'
     FrameBasedProcessingString: Elements as channels (sample based)
     MaximizeAxes: 'Off'
@@ -1467,46 +1803,15 @@ sub2_model_20210419:
     ShowLegend: 'off'
     ShowGrid: 'on'
     PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '1365.341'
-    ActiveDisplayYMaximum: '1632.5692'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'on'
-    DataLoggingVariableName: ScopeData1
-    DataLoggingSaveFormat: Structure With Time
-  Scope2:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '328.0116'
-    ActiveDisplayYMaximum: '455.2106'
+    ActiveDisplayYMinimum: '-506.75'
+    ActiveDisplayYMaximum: '4560.75'
     YLabel: ''
     DataLoggingLimitDataPoints: 'off'
     DataLoggingMaxPoints: '5000'
     DataLoggingDecimateData: 'off'
     DataLoggingDecimation: '2'
     DataLogging: 'off'
-    DataLoggingVariableName: ScopeData1
+    DataLoggingVariableName: ScopeData3
     DataLoggingSaveFormat: Dataset
   Tg:
     Port: '2'
@@ -1575,9 +1880,6 @@ sub2_model_20210419:
     ZeroCross: 'on'
     SampleTime: '-1'
     AllowDiffInputSizes: 'off'
-  Timer1:
-    t: '[ 0  0.05]'
-    e: '[0 1]'
   Timer2:
     t: '[ 0  T_inv_start+1]'
     e: '[0 1]'
@@ -1606,45 +1908,23 @@ sub2_model_20210419:
     Phase: '0'
     Frequency: '0'
     Measurements: None
-  Current Measurement:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Current Measurement1:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Current Measurement2:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Current Measurement6:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
   Demux2:
     Outputs: '2'
     DisplayOption: bar
-  From:
-    GotoTag: Tg
-    IconDisplay: Tag
   From1:
     GotoTag: motor_wm
     IconDisplay: Tag
   From15:
     GotoTag: motor_Iabc
     IconDisplay: Tag
-  From17:
+  From2:
     GotoTag: Motor_measure
-    IconDisplay: Tag
-  From18:
-    GotoTag: XUD1
-    IconDisplay: Tag
-  From3:
-    GotoTag: Pulse_in
     IconDisplay: Tag
   From4:
     GotoTag: motor_wm
+    IconDisplay: Tag
+  From5:
+    GotoTag: XUD1
     IconDisplay: Tag
   From8:
     GotoTag: motor_Te
@@ -1675,108 +1955,28 @@ sub2_model_20210419:
     RndMeth: Floor
     SaturateOnIntegerOverflow: 'on'
     SampleTime: '-1'
-  Goto1:
-    GotoTag: XUD1
-    IconDisplay: Tag
-    TagVisibility: global
-  Goto11:
-    GotoTag: IF
-    IconDisplay: Tag
-    TagVisibility: global
-  Goto15:
-    GotoTag: motor_Te
-    IconDisplay: Tag
-    TagVisibility: local
   Goto18:
     GotoTag: Tg
-    IconDisplay: Tag
-    TagVisibility: local
-  Goto2:
-    GotoTag: Udc_1
     IconDisplay: Tag
     TagVisibility: global
   Goto23:
     GotoTag: Motor_I
     IconDisplay: Tag
-    TagVisibility: local
+    TagVisibility: global
   Goto5:
     GotoTag: Pulse_in
     IconDisplay: Tag
-    TagVisibility: local
-  Goto6:
-    GotoTag: motor_Iabc
-    IconDisplay: Tag
-    TagVisibility: local
-  Goto7:
-    GotoTag: motor_wm
-    IconDisplay: Tag
-    TagVisibility: local
+    TagVisibility: global
   Goto8:
     GotoTag: wm
     IconDisplay: Tag
-    TagVisibility: local
-  Goto9:
-    GotoTag: Vabc_1
-    IconDisplay: Tag
-    TagVisibility: local
-  IGBT Inverter:
-    Arms: '3'
-    SnubberResistance: '1000'
-    SnubberCapacitance: inf
-    Device: IGBT / Diodes
-    Ron: 1e-5
-    Lon: '0'
-    ForwardVoltages: '[  0.0  0.0  ]'
-    ForwardVoltage: '.8'
-    GTOparameters: '[ 1e-6 , 1e-6 ]'
-    IGBTparameters: '[ 0e-6 , 0e-6 ]'
-    Measurements: None
-    Measurements_2: None
-    converterType: Rectifier
-  IGBT Inverter1:
-    Arms: '3'
-    SnubberResistance: '1000'
-    SnubberCapacitance: inf
-    Device: IGBT / Diodes
-    Ron: 1e-5
-    Lon: '0'
-    ForwardVoltages: '[  0.0  0.0  ]'
-    ForwardVoltage: '.8'
-    GTOparameters: '[ 1e-6 , 1e-6 ]'
-    IGBTparameters: '[ 0e-6 , 0e-6 ]'
-    Measurements: None
-    Measurements_2: None
-    converterType: Rectifier
-  Ideal Switch:
-    Ron: '0.001'
-    Lon: '0'
-    IC: '0'
-    Rs: 1e5
-    Cs: inf
-    Measurements: 'off'
-  Ideal Switch1:
-    Ron: '0.001'
-    Lon: '0'
-    IC: '0'
-    Rs: 1e5
-    Cs: inf
-    Measurements: 'off'
+    TagVisibility: global
   Mean Value1:
-    Period: 1/20
-  Mean Value2:
-    Period: '6'
-  Mean Value3:
     Period: 1/20
   Mux2:
     Inputs: '2'
     DisplayOption: bar
   Mux4:
-    Inputs: '2'
-    DisplayOption: bar
-  Mux5:
-    Inputs: '2'
-    DisplayOption: bar
-  Mux6:
     Inputs: '2'
     DisplayOption: bar
   Off Delay:
@@ -2099,10 +2299,6 @@ sub2_model_20210419:
     OutputWhenUnConnected: 'off'
     OutputWhenUnconnectedValue: '0'
     VectorParamsAs1DForOutWhenUnconnected: 'off'
-  RMS1:
-    f1: '20'
-  RMS2:
-    f1: '20'
   RMS6:
     f1: '20'
   Rate Limiter1:
@@ -2156,193 +2352,7 @@ sub2_model_20210419:
     DataLoggingDecimateData: 'off'
     DataLoggingDecimation: '2'
     DataLogging: 'off'
-    DataLoggingVariableName: ScopeData1
-    DataLoggingSaveFormat: Dataset
-  Scope13:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '-189.5509'
-    ActiveDisplayYMaximum: '1691.0557'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
-    DataLoggingVariableName: ScopeData1
-    DataLoggingSaveFormat: Dataset
-  Scope14:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '719.9822'
-    ActiveDisplayYMaximum: '853.4667'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
     DataLoggingVariableName: ScopeData2
-    DataLoggingSaveFormat: Dataset
-  Scope16:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '-106.2076'
-    ActiveDisplayYMaximum: '955.8681'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
-    DataLoggingVariableName: ScopeData3
-    DataLoggingSaveFormat: Dataset
-  Scope3:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '2'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '585.5558'
-    ActiveDisplayYMaximum: '801.835'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
-    DataLoggingVariableName: ScopeData2
-    DataLoggingSaveFormat: Dataset
-  Scope4:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '1'
-    LayoutDimensionsString: '[1 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '23.125'
-    ActiveDisplayYMaximum: '31.875'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
-    DataLoggingVariableName: ScopeData4
-    DataLoggingSaveFormat: Dataset
-  Scope5:
-    OpenAtSimulationStart: 'off'
-    DisplayFullPath: 'off'
-    NumInputPorts: '2'
-    LayoutDimensionsString: '[2 1]'
-    SampleTime: '-1'
-    FrameBasedProcessingString: Elements as channels (sample based)
-    MaximizeAxes: 'Off'
-    AxesScaling: Manual
-    AxesScalingNumUpdates: '10'
-    TimeSpan: Auto
-    TimeSpanOverrunAction: Wrap
-    TimeUnits: None
-    TimeDisplayOffset: '0'
-    TimeAxisLabels: Bottom displays only
-    ShowTimeAxisLabel: 'off'
-    ActiveDisplayString: '1'
-    Title: '%<SignalLabel>'
-    ShowLegend: 'off'
-    ShowGrid: 'on'
-    PlotAsMagnitudePhase: 'off'
-    ActiveDisplayYMinimum: '-1318.6635'
-    ActiveDisplayYMaximum: '1187.6289'
-    YLabel: ''
-    DataLoggingLimitDataPoints: 'off'
-    DataLoggingMaxPoints: '5000'
-    DataLoggingDecimateData: 'off'
-    DataLoggingDecimation: '2'
-    DataLogging: 'off'
-    DataLoggingVariableName: ScopeData1
     DataLoggingSaveFormat: Dataset
   Scope7:
     OpenAtSimulationStart: 'off'
@@ -2373,7 +2383,7 @@ sub2_model_20210419:
     DataLoggingDecimateData: 'off'
     DataLoggingDecimation: '2'
     DataLogging: 'off'
-    DataLoggingVariableName: ScopeData2
+    DataLoggingVariableName: ScopeData4
     DataLoggingSaveFormat: Dataset
   Selector:
     NumberOfDimensions: '1'
@@ -2387,46 +2397,6 @@ sub2_model_20210419:
     Indices: '[1]'
     OutputSizes: '1'
     RuntimeRangeChecks: 'off'
-  Series RLC Branch1:
-    BranchType: RC
-    Resistance: Rc
-    Inductance: '0'
-    SetiL0: 'off'
-    InitialCurrent: '0'
-    Capacitance: Cd
-    Setx0: 'off'
-    InitialVoltage: '3000'
-    Measurements: None
-  Series RLC Branch12:
-    BranchType: RC
-    Resistance: Rc
-    Inductance: '0'
-    SetiL0: 'off'
-    InitialCurrent: '0'
-    Capacitance: Cd
-    Setx0: 'off'
-    InitialVoltage: '3000'
-    Measurements: None
-  Series RLC Branch2:
-    BranchType: R
-    Resistance: R_charge
-    Inductance: Lf
-    SetiL0: 'off'
-    InitialCurrent: '0'
-    Capacitance: inf
-    Setx0: 'off'
-    InitialVoltage: '0'
-    Measurements: None
-  Series RLC Branch6:
-    BranchType: RL
-    Resistance: '0.002'
-    Inductance: Lf
-    SetiL0: 'off'
-    InitialCurrent: '0'
-    Capacitance: inf
-    Setx0: 'off'
-    InitialVoltage: '0'
-    Measurements: None
   PV:
     Port: '1'
     IconDisplay: Port number
@@ -2988,40 +2958,6 @@ sub2_model_20210419:
     t: '[0 T_inv_start+1.5]'
     e: '[0 6000]'
   Terminator3: {}
-  Three-Phase V-I Measurement1:
-    VoltageMeasurement: phase-to-phase
-    SetLabelV: 'off'
-    LabelV: Vabc
-    Vpu: 'off'
-    VpuLL: 'off'
-    CurrentMeasurement: 'no'
-    SetLabelI: 'off'
-    LabelI: Iabc
-    Ipu: 'off'
-    Pbase: 100e6
-    Vbase: 500e3
-    OutputType: Complex
-    PhasorSimulation: 'off'
-    PSBequivalent: '0'
-  Timer:
-    t: '[ 0  0.8]'
-    e: '[0 1]'
-  Voltage Measurement1:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Voltage Measurement2:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Voltage Measurement6:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
-  Voltage Measurement8:
-    PhasorSimulation: 'off'
-    OutputType: Complex
-    PSBequivalent: '0'
   s)1:
     t: '[0 T_inv_start+1.5]'
     e: '[0 max(xx_t)/9.55]'
@@ -3079,3 +3015,156 @@ sub2_model_20210419:
     frequencyindicesteady: '1'
     RmsSteady: '1'
     display: 'off'
+  validation:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
+  ? 'Bus
+
+    Selector1'
+  : OutputSignals: Mechanical.Rotor speed (wm)
+    OutputAsBus: 'on'
+  ? 'Bus
+
+    Selector2'
+  : OutputSignals: Stator measurements.Stator current is_a (A),Stator measurements.Stator
+      current is_b (A),Stator measurements.Stator current is_c (A)
+    OutputAsBus: 'on'
+  ? 'Bus
+
+    Selector3'
+  : OutputSignals: Mechanical.Electromagnetic torque Te (N*m)
+    OutputAsBus: 'on'
+  Goto15:
+    GotoTag: motor_Te
+    IconDisplay: Tag
+    TagVisibility: global
+  Goto6:
+    GotoTag: motor_Iabc
+    IconDisplay: Tag
+    TagVisibility: global
+  Goto7:
+    GotoTag: motor_wm
+    IconDisplay: Tag
+    TagVisibility: global
+  voltage_sensor1:
+    ShowPortLabels: FromPortIcon
+    BlockChoice: ''
+    TemplateBlock: ''
+    MemberBlocks: ''
+    Permissions: ReadWrite
+    ErrorFcn: ''
+    PermitHierarchicalResolution: All
+    TreatAsAtomicUnit: 'off'
+    ShowSubsystemReinitializePorts: 'off'
+    MinAlgLoopOccurrences: 'off'
+    ScheduleAs: Sample time
+    PartitionName: ''
+    SystemSampleTime: '-1'
+    SetExecutionDomain: 'off'
+    ExecutionDomainType: Deduce
+    RTWSystemCode: Auto
+    RTWFcnNameOpts: Auto
+    RTWFcnName: ''
+    RTWFileNameOpts: Auto
+    RTWFileName: ''
+    FunctionInterfaceSpec: void_void
+    FunctionWithSeparateData: 'off'
+    RTWMemSecFuncInitTerm: Inherit from model
+    RTWMemSecFuncExecute: Inherit from model
+    RTWMemSecDataConstants: Inherit from model
+    RTWMemSecDataInternal: Inherit from model
+    RTWMemSecDataParameters: Inherit from model
+    Variant: 'off'
+    VariantChoicesSpecifier: ''
+    VariantChoicesEnumeration: ''
+    VariantControlVariable: ''
+    VariantControlMode: expression
+    VariantControl: ''
+    LabelModeActiveChoice: ''
+    VariantActivationTime: update diagram
+    AllowZeroVariantControls: 'off'
+    PropagateVariantConditions: 'off'
+    AllowFlexibleInterface: 'on'
+    TreatAsGroupedWhenPropagatingVariantConditions: 'on'
+    ReferencedSubsystem: ''
+    Latency: '0'
+    AutoFrameSizeCalculation: 'off'
+  Goto1:
+    GotoTag: XUD1
+    IconDisplay: Tag
+    TagVisibility: global
+  Scope13:
+    OpenAtSimulationStart: 'off'
+    DisplayFullPath: 'off'
+    NumInputPorts: '1'
+    LayoutDimensionsString: '[1 1]'
+    SampleTime: '-1'
+    FrameBasedProcessingString: Elements as channels (sample based)
+    MaximizeAxes: 'Off'
+    AxesScaling: Manual
+    AxesScalingNumUpdates: '10'
+    TimeSpan: Auto
+    TimeSpanOverrunAction: Wrap
+    TimeUnits: None
+    TimeDisplayOffset: '0'
+    TimeAxisLabels: Bottom displays only
+    ShowTimeAxisLabel: 'off'
+    ActiveDisplayString: '1'
+    Title: ''
+    ShowLegend: 'off'
+    ShowGrid: 'on'
+    PlotAsMagnitudePhase: 'off'
+    ActiveDisplayYMinimum: '-10'
+    ActiveDisplayYMaximum: '10'
+    YLabel: Amplitude
+    DataLoggingLimitDataPoints: 'off'
+    DataLoggingMaxPoints: '5000'
+    DataLoggingDecimateData: 'off'
+    DataLoggingDecimation: '2'
+    DataLogging: 'off'
+    DataLoggingVariableName: ScopeData6
+    DataLoggingSaveFormat: Dataset
+  Voltage Measurement8:
+    PhasorSimulation: 'off'
+    OutputType: Complex
+    PSBequivalent: '0'

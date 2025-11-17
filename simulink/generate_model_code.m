@@ -1,6 +1,6 @@
 
     % 打开文件准备写入代码
-    model_name = Sub2_model_20210419;
+    model_name = testgen;
 
   
     

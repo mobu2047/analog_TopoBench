@@ -1,29 +1,29 @@
 version: 2
 model:
-  path: simulink/北京2电气仿真/Sub2_model_20210419.slx
+  path: simulink/testgen.slx
 sim:
   step: 1.0e-06
   stop_time: 0.1
   mode:
-    start_in_accelerator: false
+    start_in_accelerator: true
     external_mode: false
 matlab:
   output_map:
-    Scope: Scope
+    tout: tout
 parameters:
   auto:
     file: auto_params.yaml
 action_space:
-- key: 'Asynchronous Machine SI Units1.VoltageRatio'
+- key: charging_circuit_filtering1.SystemSampleTime
   dtype: float
   bounds:
     min: 0.0
     max: 10.0
-- key: 'Asynchronous Machine SI Units1.LoadFlowParameters'
+- key: charging_circuit_filtering1.Latency
   dtype: float
   bounds:
     min: 0.0
-    max: 2984000.0
+    max: 1.0
 metrics:
   evaluation_window: by_step
   definitions:
@@ -47,15 +47,9 @@ presets:
 experiments:
   grid: false
   cases:
-  - name: 'case_Asynchronous Machine SI Units1_VoltageRatio_base'
+  - name: case_charging_circuit_filtering1_SystemSampleTime_base
     action:
-     'Asynchronous Machine SI Units1.VoltageRatio' : 1.0
-     'Asynchronous Machine SI Units1.IterativeModel': Trapezoidal iterative
-     'Asynchronous Machine SI Units2.IterativeModel': 'Trapezoidal iterative'
-     'Asynchronous Machine SI Units3.IterativeModel': Trapezoidal non iterative
-     'Asynchronous Machine SI Units4.IterativeModel': 'Trapezoidal non iterative'
-
-  # - name: 'case_Asynchronous Machine SI Units1_VoltageRatio_x2'
-  #   action:
-  #     'Asynchronous Machine SI Units1.VoltageRatio' : 2.0
-  #     'Asynchronous Machine SI Units1.IterativeModel': Trapezoidal
+      charging_circuit_filtering1.SystemSampleTime: -1.0
+  - name: case_charging_circuit_filtering1_SystemSampleTime_x2
+    action:
+      charging_circuit_filtering1.SystemSampleTime: -2.0
